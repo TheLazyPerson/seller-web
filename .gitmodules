@@ -1,0 +1,3 @@
+[submodule "src/seller-core"]
+	path = src/seller-core
+	url = git@github.com:TheLazyPerson/seller-core.git
