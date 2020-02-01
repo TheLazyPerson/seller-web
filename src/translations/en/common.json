@@ -1,1 +1,24 @@
-{}
+{
+  "footer": {
+    "experience": "EXPERIENCE MA3RATH APP ON MOBILE",
+    "faq": "Faq",
+    "helpcenter": "HelpCenter",
+    "home": "Home",
+    "keep_in_touch": "KEEP IN TOUCH",
+    "privacy_policy": "Privacy Policy",
+    "profile": "Profile",
+    "settings": "Settings",
+    "shipping": "Shipping and Returns",
+    "terms": "Terms and Condition",
+    "title_app": "APP",
+    "title_link": "USEFUL LINKS",
+    "wishlist": "Wishlist"
+  },
+  "header": {
+    "login": "Login",
+    "register": "Register",
+    "search": "Search",
+    "search_exhibition": "Search Exhibitions",
+    "search_products": "Search Products"
+  }
+}
