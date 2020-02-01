@@ -1,0 +1,14 @@
+@import '~Styles/colors.module';
+
+.title {
+  font-family: PlayfairDisplay;
+  font-size: 50px;
+  font-weight: bold;
+  color: $primary-text-color;
+}
+
+.message {
+  font-size: 16px;
+  color: $primary-text-color;
+  margin-top: 20px;
+}

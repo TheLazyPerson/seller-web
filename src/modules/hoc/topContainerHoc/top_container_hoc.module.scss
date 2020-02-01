@@ -1,0 +1,65 @@
+.top_container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  
+  .loader_container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0; 
+    right: 0;
+    z-index: 99;
+    background: rgba(white,0.6);
+
+    .loader {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  .flash_message_container {
+    position: absolute;
+    bottom: 50px;
+    visibility: visible;
+    opacity: 1;
+    
+    min-width: 200px;
+    align-self: center;
+    font-size: 14px;
+    background: white;
+    border-radius: 50px;
+    padding: 10px 20px;
+    box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.5);
+    transition: bottom 0.5s, opacity 0.5s, visibility 0.5s ease;
+  }
+
+  .flash_message_hidden {
+    bottom: 0;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+
+
+  .flash_message_type_ERROR {
+    background: #f8d7da;
+    color: #721c24;
+  }
+
+  .flash_message_type_SUCCESS {
+    background: #d4edda;
+    color: #155724;  
+  }
+
+  .flash_message_type_INFO {
+    color: #0c5460;
+    background-color: #d1ecf1;
+  }
+
+  .flash_message_type_WARNING {
+    color: #856404;
+    background-color: #fff3cd;
+  }
+
+}

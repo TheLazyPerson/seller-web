@@ -1,0 +1,22 @@
+@import '~Styles/colors.module';
+
+.loader {
+  width: 50px;
+  height: 50px;
+}
+
+.error_container {
+  color: $primary-text-color;
+
+  .error_title_text {
+    font-family: PlayfairDisplay;
+    font-size: 50px;
+    font-weight: bold;
+
+  }
+
+  .error_message_text {
+    font-size: 16px;
+  }
+
+}

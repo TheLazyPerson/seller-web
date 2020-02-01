@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="36" height="36" viewBox="0 0 36 36">
+    <defs>
+        <circle id="a" cx="18" cy="18" r="18"/>
+        <path id="b" d="M24.222 13.111a1.333 1.333 0 1 1-2.667 0 1.333 1.333 0 0 1 2.667 0zm1.778 0a3.111 3.111 0 0 1-5.195 2.31L16.935 18l3.87 2.58a3.111 3.111 0 1 1-.926 1.52l-4.004-2.67a3.11 3.11 0 1 1 0-2.86l4.004-2.669a3.111 3.111 0 1 1 6.121-.79zm-3.111 11.111a1.333 1.333 0 1 0 0-2.667 1.333 1.333 0 0 0 0 2.667zM14.444 18a1.333 1.333 0 1 1-2.666 0 1.333 1.333 0 0 1 2.666 0z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <use fill="#EFEBE7" opacity=".5" xlink:href="#a"/>
+        <use fill="#30384C" xlink:href="#b"/>
+    </g>
+</svg>

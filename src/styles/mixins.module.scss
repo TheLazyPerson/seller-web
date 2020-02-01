@@ -1,0 +1,32 @@
+$mobile-width: "only screen and (max-width : 450px)";
+$tablet-width: "only screen and (max-width : 870px)";
+$desktop-width: "only screen and (max-width : 1024px)";
+
+@mixin small {
+  @media #{$mobile-width}{
+    @content;
+  }
+}
+
+@mixin medium {
+  @media #{$tablet-width}{
+    @content;
+  }
+}
+
+@mixin large {
+  @media #{$desktop-width}{
+    @content;
+  }
+}
+
+
+@mixin on_click_button {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.03);
+    opacity: 0.9;
+  }
+}

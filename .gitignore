@@ -8,8 +8,6 @@
 # testing
 /coverage
 
-# production
-/build
 
 # misc
 .DS_Store
@@ -17,6 +15,9 @@
 .env.development.local
 .env.test.local
 .env.production.local
+yarn.lock
+
+/build
 
 npm-debug.log*
 yarn-debug.log*

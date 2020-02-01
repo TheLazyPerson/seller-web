@@ -1,0 +1,132 @@
+@import '~Styles/colors.module';
+@import '~Styles/mixins.module';
+
+.drawer_container {
+  background: $primary-color;
+}
+
+.header_container {
+  height: 84px;
+  align-items: center;
+  justify-content: center;      
+
+  .app_icon {
+    height: 20px;
+    cursor: pointer;
+  }
+}
+
+.side_content_container {
+  flex: 1;
+  overflow-y: scroll;
+}
+
+.side_footer_container {
+  padding: 36px 0px;
+}
+
+
+.page_container {
+  height: 100%;
+  width: 100%;
+  // padding: 14px;
+  background: $primary-color;
+  box-shadow: 0 60px 80px 0 rgba(0, 0, 0, 0.05);
+  position: relative;
+
+  .left_container {
+    width: 25%;
+  }
+
+  .right_container {
+    flex: 1;
+    background: white;
+
+    .search_bar_container {
+      align-self: stretch;
+      margin-top: 16px;
+      display: none;
+    }
+
+    .top_header_container {
+      padding: 18px 60px;
+
+      .header_container {
+        // height: 84px;
+      
+        .hamburger_menu_icon {
+          display: none;
+          margin-right: 16px;
+  
+          @include on_click_button;
+        }
+      }
+    }
+
+    .content_container {
+      overflow-y: scroll;
+    }
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////
+
+
+@include medium {
+  .page_container {
+    .left_container {
+      display: none;
+    }
+
+    .right_container {
+  
+      .top_header_container {
+        padding: 10px 28px;
+
+        .header_container {
+          // height: 60px;
+    
+          .hamburger_menu_icon {
+            display: block;
+            height: 16px;
+            width: 16px;
+          }
+        }
+      }  
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////
+
+
+@include small {
+  .header_container {
+    height: unset;
+  }
+
+  .page_container {
+
+    .right_container {
+
+      .search_bar_container {
+        display: flex;
+      }
+
+      .top_header_container {
+        padding: 8px 20px;
+
+        .header_container {
+          //height: 50px;
+      
+          .hamburger_menu_icon {
+            display: block;
+            height: 12px;
+            width: 12px;
+          }
+        }
+      }
+    }
+  }
+}
+
