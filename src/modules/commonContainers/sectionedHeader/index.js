@@ -16,7 +16,7 @@ import profileIconWhite from "Icons/profile-icon-white.svg";
 import HorizontalBorder from "CommonComponents/horizontalBorder";
 import { searchTypes } from "Constants/searchConstants";
 import { connect } from "react-redux";
-import translatorHoc from 'Hoc/translatorHoc';
+import translatorHoc from "Hoc/translatorHoc";
 import SearchBar from "../searchBar";
 
 class SectionedHeader extends Component {
@@ -47,34 +47,7 @@ class SectionedHeader extends Component {
 
     return (
       <DivRow className={styles.header_container}>
-        <SearchBar
-          className={styles.search_bar_container}
-          whiteColor={whiteColor}
-        />
-        
         <DivRow verticalCenter>
-          <DivRow
-            className={styles.header_item_container}
-            verticalCenter
-            onClick={this.onClickBag}
-          >
-            <img
-              src={whiteColor ? bagIconWhite : bagIcon}
-              className={styles.header_icon}
-            />
-            <DivRow
-              verticalCenter
-              horizontalCenter
-              className={styles.bag_count}
-            >
-              {bagCount != null ? bagCount : 0}
-            </DivRow>
-          </DivRow>
-          <img
-            className={`${styles.header_icon} ${styles.header_item_container}`}
-            src={whiteColor ? bookmarkIconWhite : bookmarkIcon}
-            onClick={this.onClickWishlist}
-          />
           {isUserSignedIn ? (
             <div
               style={{ height: "unset" }}
@@ -94,7 +67,7 @@ class SectionedHeader extends Component {
               } ${whiteColor ? styles.is_white : ""}`}
               href="/signin"
             >
-              {translate('header.login')}
+              {translate("header.login")}
             </a>
           )}
           {!isUserSignedIn && (
@@ -104,7 +77,7 @@ class SectionedHeader extends Component {
               } ${whiteColor ? styles.is_white : ""}`}
               href="/signup"
             >
-              {translate('header.register')}
+              {translate("header.register")}
             </a>
           )}
           {/* <img src={hamburgerMenuIcon} className={`${styles.hamburger_icon} ${styles.header_item_container}`} /> */}
@@ -117,8 +90,11 @@ class SectionedHeader extends Component {
 const mapStateToProps = state => {
   return {
     isUserSignedIn: false, // state.signInReducer.isUserSignedIn,
-    bagCount: 0//state.bagReducer.bagCount
+    bagCount: 0 //state.bagReducer.bagCount
   };
 };
 
-export default connect(mapStateToProps, null)(translatorHoc(navigatorHoc(SectionedHeader)));
+export default connect(
+  mapStateToProps,
+  null
+)(translatorHoc(navigatorHoc(SectionedHeader)));

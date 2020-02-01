@@ -1,5 +1,5 @@
-@import '~Styles/colors.module';
-@import '~Styles/mixins.module';
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
 
 $bag-count-background: $color-pale;
 
@@ -33,35 +33,25 @@ $bag-count-background: $color-pale;
   //   height: 19px;
   // }
 
-  .bag_count {
-    width: 24px;
-    height: 24px;
-    font-size: 12px;
-    margin-left: 10px;
-    color: $primary-text-color;
-    border-radius: 100px;
-    background: rgba($bag-count-background, 0.5);
-  }
-
   .profile_pic {
     border-radius: 100px;
     width: 32px;
     height: 32px;
     object-fit: contain;
   }
-  
-  // .arrow_down_icon {
-  //   width: 10px;
-  //   height: 5.7px;
-  //   object-fit: contain;
-  //   margin-left: 10px;
-  // }
+
+  .arrow_down_icon {
+    width: 10px;
+    height: 5.7px;
+    object-fit: contain;
+    margin-left: 10px;
+  }
 }
 
 @include medium {
   .header_container {
     justify-content: flex-end;
-    
+
     .header_item_container {
       margin-left: 20px;
     }
@@ -101,6 +91,6 @@ $bag-count-background: $color-pale;
 
     .search_bar_container {
       display: none;
-   }
+    }
   }
 }
