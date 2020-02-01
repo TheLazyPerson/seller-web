@@ -20,10 +20,10 @@ class LanguageSelect extends Component {
   render() {
     const {
       blackColor,
-      languageReducer: { languageCode }
+      // languageReducer: { languageCode }
     } = this.props;
-    const arSelected = languageCode == "ar";
-    const enSelected = languageCode == "en";
+    const arSelected = false //languageCode == "ar";
+    const enSelected = true //languageCode == "en";
 
     return (
       <DivRow

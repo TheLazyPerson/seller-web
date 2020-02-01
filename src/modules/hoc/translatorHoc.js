@@ -12,16 +12,14 @@ const translatorHoc = WrappedComponent => {
 
     render() {
       const {
-        languageReducer: {
-          languageCode,
-        }
+        languageReducer //{languageCode,}
       } = this.props;
 
       return (
         <WrappedComponent
           {...this.props}
           translate={this.translate}
-          isRTL={languageCode == 'ar'}
+          isRTL={false}//languageCode == 'ar'}
         />
       );
     }

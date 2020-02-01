@@ -17,7 +17,7 @@ const App = ({ isUserSignedIn }) => {
 
 const mapStateToProps = state => {
   return {
-    isUserSignedIn: state.signInReducer.isUserSignedIn
+    // isUserSignedIn: state.signInReducer.isUserSignedIn
   };
 };
 

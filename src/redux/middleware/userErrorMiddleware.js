@@ -27,7 +27,6 @@ export default store => next => action => {
     const {dispatch} = store;
     apiErrorAction(dispatch, payload.message);
   }
-   
 
   return next(action)
 }
