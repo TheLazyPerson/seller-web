@@ -1,0 +1,367 @@
+@import '~Styles/colors.module';
+@import '~Styles/mixins.module';
+
+.page_container {
+  position: relative;
+
+  .header_background {
+    background-color: $primary-text-color;
+  }
+
+  .header_container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    transition: background-color 0.5s ease;
+  }
+
+
+  .hero_section_container {
+    min-height: 100vh;
+    position: relative;
+    background: $primary-text-color;
+    background-position: center;
+    background-size: cover;
+
+    .top_gradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+
+      height: 98px;
+      background-image: linear-gradient(to bottom, rgba(#141414, 0.6), rgba(20, 20, 20, 0));
+    }
+    
+    .overlay_gradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba($primary-text-color, 0.15);
+    }
+    
+    .bottom_gradient {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      height: 210px;
+      background-image: linear-gradient(to bottom, rgba(20, 20, 20, 0), rgba(#141414, 0.6));
+    }
+
+    .hero_main_content {
+      position: relative;
+      justify-content: center;
+      
+      .social_container {
+        position: absolute;
+        left: 0;
+      }
+
+      .details_container {
+        color: white;
+        max-width: 600px;
+
+        .view_exhibition_button {
+          width: 208px;
+          height: 54px;
+          border-radius: 28px;
+          background-color: $color-gold;
+
+          font-size: 18px;
+          font-weight: 900;
+          color: white;
+          margin-top: 20px;
+
+          @include on_click_button;
+        }
+      }
+    }
+  }
+}
+
+.hero_bottom_content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 120px;
+}
+
+.social_container {
+  margin-left: 9%;
+  margin-right: 61px;
+  align-items: center;
+  justify-content: center;
+
+  .social_item_container {
+    background: rgba(white,0.1);
+    border-radius: 50px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+
+    .social_image {
+      width: 20px;
+      height: 20px;
+    }
+
+  }
+
+  .social_item_container:first-child {
+    margin-top: 0px;
+  }
+}
+
+
+
+
+  .non_clickable {
+    opacity: 0.23;
+  }
+
+  .arrow_text {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.33;
+    color: white;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    
+    .arrow_left {
+      margin-right: 9.5px;
+      transform: scaleX(-1);
+      width: 7px;
+    }
+
+    .arrow_right {
+      margin-left: 9.5px;
+      width: 7px;
+    }
+  }      
+
+  .arrow_text:first-child {
+    margin-right: 40px;
+  }
+
+
+  .pagination_count_container {      
+    margin-left: 67px;  
+    margin-top: -6px;
+
+    .pagination_current_count {
+      font-size: 32px;
+      line-height: 1.94;
+      color: white;
+    }
+
+    .pagination_total_count {
+      font-size: 18px;
+      line-height: 1.33;
+      color: white;  
+    }
+  }
+
+  .share_icon {
+    margin-right: 50px;
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+  }
+
+
+.swiper_container {
+  min-height: 315px;
+  flex: 1;
+  overflow: hidden;
+}
+  
+.swiper_item {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:global {
+  .custom_container {
+    flex: 1;
+    align-self: stretch;
+  }
+
+  .swiper-wrapper {
+    align-items: center;
+  }
+}
+
+.header_title {
+  opacity: 0.7;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  color: $color-gold;
+  margin: 77px 0px 50px;
+}
+
+.section_container {
+  margin-bottom: 50px;
+}
+
+.seller_container {
+
+  .description {
+    font-size: 25px;
+    margin-bottom: 20px;
+  }
+
+  .seller_button {
+    font-size: 14px;
+    @include on_click_button;
+  }
+}
+
+/////////////////////////////////////////////////////////////////////////
+
+@include medium {
+  .share_icon {
+    margin-right: 30px;
+    width: 28px;
+    height: 28px;
+  }
+  .arrow_text {
+    font-size: 16px;
+    line-height: 0.9;
+    .arrow_left {
+      margin-right: 6px;
+      width: 5px;
+    }
+    .arrow_right {
+      margin-left: 6px;
+      width: 5px;
+    }
+  }
+  .arrow_text:first-child {
+    margin-right: 30px;
+  }
+
+  .pagination_count_container {
+    margin-left: 50px;
+
+    .pagination_current_count {
+      font-size: 30px;
+    }
+    .pagination_total_count {
+      font-size: 16px;
+    }
+  }
+
+  
+  .hero_bottom_content {
+    height: 100px;
+  }
+
+
+  .page_container {
+    .hero_section_container {
+      .top_gradient {
+        //height: 98px;
+      }
+      .bottom_gradient {
+        //height: 210px;
+      }  
+      .hero_main_content {  
+        .details_container {
+          .view_exhibition_button {
+            width: 156px;
+            height: 48px;
+  
+            font-size: 16px;
+            margin-top: 16px;
+          }
+        }
+      }
+    }
+  }
+
+
+  .header_title {
+    font-size: 34px;
+    margin: 60px 0px 45px;
+  }
+
+}
+ /////////////////////////////////////////////////////////////
+@include small {
+  .share_icon {
+    margin-right: 25px;
+    width: 24px;
+    height: 24px;
+  }
+  .arrow_text {
+    font-size: 14px;
+    .arrow_left {
+      margin-right: 4px;
+    }
+    .arrow_right {
+      margin-left: 4px;
+    }
+  }
+  .arrow_text:first-child {
+    margin-right: 25px;
+  }
+  .pagination_count_container {      
+    margin-left: 40px;
+    .pagination_current_count {
+      font-size: 28px;
+    }
+    .pagination_total_count {
+      font-size: 14px;
+    }
+  }
+
+  .hero_bottom_content {
+    height: 80px;
+  }
+
+  .page_container {
+    .hero_section_container {
+      .top_gradient {
+        //height: 98px;
+      }  
+      .bottom_gradient {
+        //height: 210px;
+      }
+
+      .hero_main_content {  
+        .details_container {
+          .view_exhibition_button {
+            width: 132px;
+            height: 38px;
+  
+            font-size: 14px;
+            margin-top: 14px;
+          }
+        }
+      }
+    }
+  }
+
+  .social_container {
+    display: none;
+  }
+
+  .header_title {
+    font-size: 26px;
+    margin: 40px 0px 30px;
+  }
+}

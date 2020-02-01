@@ -1,0 +1,18 @@
+@import '~Styles/colors.module';
+@import '~Styles/mixins.module';
+
+.capsule_button {
+  min-width: 143px;
+  font-size: 10px;
+  color: white;
+  padding: 8px 25px;
+  border-radius: 50px;
+  text-align: center;
+  background: $capsule-button-color;
+
+  text-transform: uppercase;
+  border: none;
+  text-decoration: none;
+  
+  @include on_click_button;
+}
