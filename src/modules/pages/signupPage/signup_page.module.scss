@@ -1,0 +1,83 @@
+@import "~Styles/colors.module";
+
+$submit-button-background: $color-gold;
+
+.page_container {
+  flex: 1;
+  align-self: stretch;
+
+  .form_container {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    .name_container {
+      margin-bottom: 18px;
+      min-width: 393px;
+
+      .input_text {
+        flex: 1;
+        margin-bottom: unset;
+        min-width: unset;
+        width: 30px;
+      }
+      
+      .input_text:first-child {
+        margin-right: 17px;
+      }
+    }
+
+    .input_text {
+      margin-bottom: 18px;
+      min-width: 393px;
+    }
+
+    .input_submit {
+      border-radius: 28px;
+      min-height: 56px;
+      box-shadow: 0 18px 24px 0 rgba(0, 0, 0, 0.12);
+      background-color: var(--gold);
+      min-width: 219px;
+      margin: 30px 0px 34px 0px;
+      border: none;
+
+      font-size: 18px;
+      font-weight: 900;
+      color: white;
+      background: $submit-button-background;
+
+      &:disabled {
+        background: grey;
+      }
+    }
+  }
+
+  .signin_title_text {
+    font-family: PlayfairDisplay;
+    font-size: 50px;
+    font-weight: bold;
+
+    margin-bottom: 47px;
+  }
+
+  .hyper_link {
+    text-decoration: underline !important;
+    color: $primary-text-color;
+    text-transform: uppercase;
+    
+    opacity: 0.6;
+    font-size: 14px;
+  }
+
+  .create_account_container {
+    margin-top: 15px;
+    font-size: 14px;
+    color: $primary-text-color;
+  }
+
+  .new_description_text {
+    opacity: 0.6;
+  }
+}

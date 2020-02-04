@@ -31,7 +31,7 @@ class FullwidthHeader extends Component {
             >
               MA3RATH
           </div>
-            <LanguageSelect blackColor={!whiteColor} />
+            {/* <LanguageSelect blackColor={!whiteColor} /> */}
           </DivRow>
           <SectionedHeader whiteColor={whiteColor} />
         </DivRow>

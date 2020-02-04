@@ -6,12 +6,26 @@ import HomePage from "./pages/homePage";
 
 import topContainerHoc from "Hoc/topContainerHoc";
 import ProtectedRoute from "CommonContainers/protectedRoute";
+import SignInPage from './pages/signinPage';
+import SignUpPage from './pages/signupPage';
 import { connect } from "react-redux";
 
 const App = ({ isUserSignedIn }) => {
   return (
     <Switch>
       <Route exact path="/" component={HomePage} />
+      <ProtectedRoute
+        exact
+        path="/signin"
+        component={SignInPage}
+        validator={() => !isUserSignedIn}
+      />
+      <ProtectedRoute
+        exact
+        path="/signup"
+        component={SignUpPage}
+        validator={() => !isUserSignedIn}
+      />
       <Route component={PageNotFound} />
     </Switch>
   );
@@ -19,8 +33,11 @@ const App = ({ isUserSignedIn }) => {
 
 const mapStateToProps = state => {
   return {
-    // isUserSignedIn: state.signInReducer.isUserSignedIn
+    isUserSignedIn: false,//state.signInReducer.isUserSignedIn
   };
 };
 
-export default connect(mapStateToProps, null)(App);
+export default connect(
+  mapStateToProps,
+  null
+)(App);

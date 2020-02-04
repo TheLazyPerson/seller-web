@@ -7,7 +7,7 @@ import InputCheckbox from "CommonComponents/InputCheckbox";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { postSigninAction } from "Core/modules/signin/actions/signinActions";
+import { postSigninAction } from "Core/modules/signin/signinActions";
 import { CookieService } from "Utils/cookieService";
 import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import translatorHoc from 'Hoc/translatorHoc';

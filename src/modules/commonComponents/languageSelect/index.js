@@ -9,13 +9,14 @@ import { bindActionCreators } from "redux";
 // import { setLanguageAction } from "Core/modules/language/languageActions";
 
 class LanguageSelect extends Component {
-  // changeLanguage = languageCode => {
-  //   const { i18n, setLanguageAction } = this.props;
-
-  //   i18n.changeLanguage(languageCode);
-  //   setLanguageAction(languageCode);
-  //   CookieService.set(LANG, languageCode);
-  // };
+  changeLanguage = languageCode => {
+    const { i18n } = this.props;
+    // setLanguageAction
+    
+    i18n.changeLanguage(languageCode);
+    // setLanguageAction(languageCode);
+    CookieService.set(LANG, languageCode);
+  };
 
   render() {
     const {
