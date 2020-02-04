@@ -38,7 +38,7 @@ class SectionedContainer extends Component {
 
     const sideContainer = (
       <Fragment>
-        <DivRow className={styles.header_container}>
+        <DivRow verticalCenter horizontalCenter className={styles.header_container}>
           <img
             src={appIcon}
             className={styles.app_icon}
@@ -90,18 +90,18 @@ class SectionedContainer extends Component {
             <DivRow verticalCenter className={styles.header_container}>
 
               {/* only Visible on responive */}
-              <img
+              {/* <img
                 src={hamburgerIconBlack}
                 className={styles.hamburger_menu_icon}
                 onClick={this.onClickHamburgerMenu}
-              />
+              /> */}
 
               <SectionedHeader />
             </DivRow>
-            <SearchBar          
+            {/* <SearchBar
              className={styles.search_bar_container}
              // whiteColor={whiteColor}
-            />
+            /> */}
           </DivColumn>
           {/* children/content */}
           <DivColumn fillParent className={styles.content_container}>

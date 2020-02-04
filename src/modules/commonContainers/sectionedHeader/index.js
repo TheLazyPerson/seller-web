@@ -47,7 +47,7 @@ class SectionedHeader extends Component {
 
     return (
       <DivRow className={styles.header_container}>
-        <DivRow verticalCenter>
+        <DivRow>
           {isUserSignedIn ? (
             <div
               style={{ height: "unset" }}

@@ -7,8 +7,6 @@
 
 .header_container {
   height: 84px;
-  align-items: center;
-  justify-content: center;      
 
   .app_icon {
     height: 20px;
@@ -52,7 +50,8 @@
       padding: 18px 60px;
 
       .header_container {
-        // height: 84px;
+        height: 48px;
+        justify-content: flex-end;
       
         .hamburger_menu_icon {
           display: none;
@@ -84,7 +83,7 @@
         padding: 10px 28px;
 
         .header_container {
-          // height: 60px;
+          height: unset;
     
           .hamburger_menu_icon {
             display: block;

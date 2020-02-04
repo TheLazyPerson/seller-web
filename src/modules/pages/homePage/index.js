@@ -20,7 +20,6 @@ import appIcon from "Images/logo-image.png";
 import navigatorHoc from "Hoc/navigatorHoc";
 import PageFooter from "CommonComponents/pageFooter";
 import translatorHoc from "Hoc/translatorHoc";
-import FullWidthContainer from "CommonContainers/fullwidthContainer";
 import CapsuleButton from "CommonComponents/capsuleButton";
 
 class HomePage extends Component {
@@ -55,8 +54,9 @@ class HomePage extends Component {
     } = this.props;
 
     return (
-      <FullWidthContainer>
-      </FullWidthContainer>
+      <SectionedContainer>
+        
+      </SectionedContainer>
   );
   }
 }
