@@ -1,77 +1,85 @@
-import React, { Component, Fragment } from "react";
-import styles from "./new_home_page.module.scss";
+import React, { Component } from "react";
 import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivColumn from "CommonComponents/divColumn";
 import DivRow from "CommonComponents/divRow";
-import socialFacebookIcon from "Icons/social-facebook-icon-white.svg";
-import socialInstagramIcon from "Icons/social-instagram-icon-white.svg";
-import socialTwitterIcon from "Icons/social-twitter-icon-white.svg";
-import arrowRightIcon from "Icons/arrow-right-icon-white.svg";
-import shareIcon from "Icons/share-icon-black.svg";
-import LanguageSelect from "CommonComponents/languageSelect";
-import Swiper from "react-id-swiper";
+import map from "lodash/map";
+import styles from "./homepage.module.scss";
+import { profileListItem } from "Constants/profileConstants";
+import SideNav from "./components/sideNav";
+import navigatorHoc from "Hoc/navigatorHoc";
+import { logoutAction } from "Core/modules/signin/signinActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import "swiper/css/swiper.css";
-import InitialPageLoader from "CommonContainers/initialPageLoader";
-import map from "lodash/map";
-import SectionedHeader from "CommonContainers/sectionedHeader";
-import appIcon from "Images/logo-image.png";
-import navigatorHoc from "Hoc/navigatorHoc";
-import PageFooter from "CommonComponents/pageFooter";
-import translatorHoc from "Hoc/translatorHoc";
-import CapsuleButton from "CommonComponents/capsuleButton";
+import { CookieService } from "Utils/cookieService";
+import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 
 class HomePage extends Component {
-  state = {
-    currentSlide: 0
-  };
+  onClickNavItemClick = slug => {
+    const { navigateTo, logoutAction } = this.props;
 
-  onClickExhibitionItem = id => {
-    const { navigateTo } = this.props;
-    navigateTo("plp", {
-      id
-    });
-  };
-
-  onClickSellerButton = () => {
-    window.location.href =
-      "http://ec2-15-206-82-110.ap-south-1.compute.amazonaws.com/";
+    if (slug === "overview") {
+      navigateTo("profile");
+    } else if (slug === "profile") {
+      navigateTo("profile-details");
+    } else if (slug === "logout") {
+      logoutAction().then(() => {
+        CookieService.delete(USER_DATA_COOKIE);
+        CookieService.delete('BAG_COUNT');
+        navigateTo(""); // ToHomePage
+      });
+    } else {
+      navigateTo(slug);
+    }
   };
 
   render() {
-    const params = {
-      containerClass: "custom_container",
-      on: {
-        slideChange: () =>
-          this.setState({ currentSlide: this.swiper.realIndex })
-      }
-    };
-
-    const {
-      homePageReducer: {},
-      translate
-    } = this.props;
-
     return (
-      <SectionedContainer>
-        
+      <SectionedContainer sideBarContainer={<SideNav />}>
+        <DivColumn className={styles.profile_overview_container}>
+          <DivColumn
+            verticalCenter
+            horizontalCenter
+            className={styles.header_container}
+          >
+            <div className={styles.header_title}>MY ACCOUNT</div>
+            <div className={styles.header_message}>Welcome, Omar.</div>
+          </DivColumn>
+
+          <DivRow className={styles.items_container}>
+            {map(profileListItem, listItem => {
+              if (listItem.title !== "Overview") {
+                return (
+                  <DivColumn
+                    verticalCenter
+                    horizontalCenter
+                    className={styles.grid_item}
+                    onClick={() => this.onClickNavItemClick(listItem.slug)}
+                  >
+                    <img
+                      className={styles.item_image}
+                      src={listItem.blackImage}
+                      alt="item"
+                    />
+                    <div className={styles.item_title}>{listItem.title}</div>
+                    <div className={styles.item_description}>
+                      {listItem.description}
+                    </div>
+                  </DivColumn>
+                );
+              }
+              return null;
+            })}
+          </DivRow>
+        </DivColumn>
       </SectionedContainer>
-  );
+    );
   }
 }
 
-const mapStateToProps = state => {
+const mapDispathToProps = dispatch => {
   return {
-    homePageReducer: {}
+    logoutAction: bindActionCreators(logoutAction, dispatch)
   };
 };
 
-const mapDispathToProps = dispatch => {
-  return {};
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispathToProps
-)(translatorHoc(navigatorHoc(HomePage)));
+export default connect(null, mapDispathToProps)(navigatorHoc(HomePage));

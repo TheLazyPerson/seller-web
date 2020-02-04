@@ -60,7 +60,7 @@ class SectionedContainer extends Component {
           horizontalCenter
           className={styles.side_footer_container}
         >
-          <LanguageSelect />
+          {/* <LanguageSelect /> */}
         </DivRow>
       </Fragment>
     );
