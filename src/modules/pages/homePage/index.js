@@ -20,7 +20,7 @@ import appIcon from "Images/logo-image.png";
 import navigatorHoc from "Hoc/navigatorHoc";
 import PageFooter from "CommonComponents/pageFooter";
 import translatorHoc from "Hoc/translatorHoc";
-import FullwidthHeader from "CommonContainers/fullwidthHeader";
+import FullWidthContainer from "CommonContainers/fullwidthContainer";
 import CapsuleButton from "CommonComponents/capsuleButton";
 
 class HomePage extends Component {
@@ -55,14 +55,9 @@ class HomePage extends Component {
     } = this.props;
 
     return (
-      <DivColumn fillParent className={styles.page_container}>
-        <FullwidthHeader />
-
-        <PageFooter />
-
-        {/* Absolute position */}
-      </DivColumn>
-    );
+      <FullWidthContainer>
+      </FullWidthContainer>
+  );
   }
 }
 

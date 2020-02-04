@@ -35,10 +35,10 @@ class FullwidthHeader extends Component {
           </DivRow>
           <SectionedHeader whiteColor={whiteColor} />
         </DivRow>
-        <SearchBar
+        {/* <SearchBar
           className={styles.search_bar_container}
           whiteColor={whiteColor}
-        />
+        /> */}
       </DivColumn>
     )
   }
