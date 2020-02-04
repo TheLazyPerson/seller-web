@@ -29,7 +29,8 @@ class SignUpPage extends Component {
       "last_name": form.lastName,
       "email": form.email,
       "password": form.password,
-      "password_confirmation": form.confirmPassword
+      "password_confirmation": form.confirmPassword,
+      "plan_id": 1
 
     }).then(({payload}) => {
       if (payload.code == 200 ||payload.code == 201) {

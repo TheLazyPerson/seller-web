@@ -2,16 +2,16 @@ import { combineReducers } from "redux";
 import { connectRouter } from "connected-react-router";
 import loaderReducer from "./loaderReducer";
 import flashMessageReducer from "./flashMessageReducer";
-import siginReducer from 'Core/modules/signin/signinReducer';
-import signupReducer from 'Core/modules/signup/signupReducer';
+import signInReducer from 'Core/modules/signin/signinReducer';
+import signUpReducer from 'Core/modules/signup/signupReducer';
 
 const appReducer = history =>
   combineReducers({
     router: connectRouter(history),
     loaderReducer,
     flashMessageReducer,
-    siginReducer,
-    signupReducer
+    signInReducer,
+    signUpReducer
   });
 
 /* const rootReducer = ( state, action ) => {
