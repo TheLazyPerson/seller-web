@@ -21,6 +21,9 @@ const navigatorHoc = WrappedComponent => {
 
     navigateScreen = (navigationFunction, pageName, data) => {
       switch (pageName) {
+        case 'home':
+          return navigationFunction('/home');
+
         case "plp":
           return navigationFunction(`/product-listing/?id=${data.id}`);
 

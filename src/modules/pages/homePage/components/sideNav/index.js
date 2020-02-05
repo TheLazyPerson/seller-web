@@ -73,38 +73,52 @@ class SideNav extends Component {
     }
   };
 
+  getListItem = (isSelected, listItem) => {
+    return (
+      <DivRow
+        className={`${styles.nav_item} ${isSelected ? styles.is_selected : ""}`}
+        onClick={() => this.onClickNavItemClick(listItem.slug)}
+      >
+        <img
+          className={styles.nav_image}
+          src={isSelected ? listItem.blackImage : listItem.whiteImage}
+          alt="nav"
+        />
+        <DivColumn>
+          <div className={styles.nav_title}>{listItem.title}</div>
+          <div className={styles.nav_description}>{listItem.description}</div>
+        </DivColumn>
+        <div className={styles.nav_indicator}>></div>
+      </DivRow>
+    );
+  };
+
   render() {
     const { selectedRoute } = this.state;
 
     return (
       <DivColumn verticalCenter className={styles.side_nav_container}>
         {map(profileListItem, listItem => {
-          if (listItem.title !== "Logout") {
-            const isSelected = selectedRoute === listItem.slug;
+          const { type, name, items: subProfileList } = listItem;
 
-            return (
-              <DivRow
-                className={`${styles.nav_item} ${
-                  isSelected ? styles.is_selected : ""
-                }`}
-                onClick={() => this.onClickNavItemClick(listItem.slug)}
-              >
-                <img
-                  className={styles.nav_image}
-                  src={isSelected ? listItem.blackImage : listItem.whiteImage}
-                  alt="nav"
-                />
-                <DivColumn>
-                  <div className={styles.nav_title}>{listItem.title}</div>
-                  <div className={styles.nav_description}>
-                    {listItem.description}
-                  </div>
-                </DivColumn>
-                <div className={styles.nav_indicator}>></div>
-              </DivRow>
-            );
+          if (type == "no-header") {
+            return map(subProfileList, subProfileListItem => {
+              const isSelected = selectedRoute === subProfileListItem.slug;
+              return this.getListItem(isSelected, subProfileListItem);
+            });
           }
-          return null;
+
+          return (
+            <DivColumn className={styles.list_container}>
+              <div className={styles.list_header}>{name}</div>
+              <DivColumn className={styles.list_container}>
+                {map(subProfileList, subProfileListItem => {
+                  const isSelected = selectedRoute === subProfileListItem.slug;
+                  return this.getListItem(isSelected, subProfileListItem);
+                })}
+              </DivColumn>
+            </DivColumn>
+          );
         })}
       </DivColumn>
     );

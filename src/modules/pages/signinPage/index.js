@@ -31,7 +31,7 @@ class SignInPage extends Component {
         const { data, code } = response.payload;
         if (code === 200 || code === 201) {
           CookieService.set(USER_DATA_COOKIE, data);
-          navigateTo("");
+          navigateTo('home');
         }
       });
     }

@@ -89,7 +89,7 @@ class SectionedHeader extends Component {
 
 const mapStateToProps = state => {
   return {
-    isUserSignedIn: false, // state.signInReducer.isUserSignedIn,
+    isUserSignedIn: state.signInReducer.isUserSignedIn,
     bagCount: 0 //state.bagReducer.bagCount
   };
 };

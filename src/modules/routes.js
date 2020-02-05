@@ -3,18 +3,24 @@ import { Switch, Route } from "react-router-dom";
 
 import PageNotFound from "CommonComponents/pageNotFound";
 import LandingPage from "./pages/landingPage";
-import HomePage from './pages/homePage';
+import HomePage from "./pages/homePage";
 
 import topContainerHoc from "Hoc/topContainerHoc";
 import ProtectedRoute from "CommonContainers/protectedRoute";
-import SignInPage from './pages/signinPage';
-import SignUpPage from './pages/signupPage';
+import SignInPage from "./pages/signinPage";
+import SignUpPage from "./pages/signupPage";
 import { connect } from "react-redux";
 
 const App = ({ isUserSignedIn }) => {
   return (
     <Switch>
       <Route exact path="/" component={LandingPage} />
+      <ProtectedRoute
+        exact
+        path="/home"
+        component={HomePage}
+        validator={() => isUserSignedIn}
+      />
       <ProtectedRoute
         exact
         path="/signin"
