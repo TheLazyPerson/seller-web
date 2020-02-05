@@ -27,7 +27,6 @@ const ProtectedRoute = ({
 );
 
 ProtectedRoute.propTypes = {
-  component: PropTypes.func.isRequired,
   validator: PropTypes.func.isRequired,
   replaceTo: PropTypes.func.isRequired,
 };

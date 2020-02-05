@@ -34,11 +34,11 @@ const App = ({ isUserSignedIn }) => {
 
 const mapStateToProps = state => {
   return {
-    isUserSignedIn: false,//state.signInReducer.isUserSignedIn
+    isUserSignedIn: state.signInReducer.isUserSignedIn
   };
 };
 
 export default connect(
   mapStateToProps,
   null
-)(App);
+)(topContainerHoc(App));

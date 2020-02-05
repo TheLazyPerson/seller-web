@@ -11,23 +11,23 @@ const translatorHoc = WrappedComponent => {
     }
 
     render() {
-      const {
-        languageReducer //{languageCode,}
-      } = this.props;
+      // const {
+      //   languageReducer //{languageCode,}
+      // } = this.props;
 
       return (
         <WrappedComponent
           {...this.props}
           translate={this.translate}
-          isRTL={false}//languageCode == 'ar'}
+          isRTL={false}
         />
-      );
+      );//languageCode == 'ar'}
     }
   }
 
   const mapStateToProps = (state) => {
     return {
-      languageReducer: state.languageReducer,
+       // languageReducer: state.languageReducer,
     }
   }
 
