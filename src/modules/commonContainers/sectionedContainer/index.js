@@ -55,13 +55,13 @@ class SectionedContainer extends Component {
         <DivColumn className={styles.side_content_container}>
           {sideBarContainer}
         </DivColumn>
-        <DivRow
+        {/* <DivRow
           verticalCenter
           horizontalCenter
           className={styles.side_footer_container}
         >
-          {/* <LanguageSelect /> */}
-        </DivRow>
+          <LanguageSelect />
+        </DivRow> */}
       </Fragment>
     );
 
