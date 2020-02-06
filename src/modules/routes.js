@@ -9,6 +9,7 @@ import topContainerHoc from "Hoc/topContainerHoc";
 import ProtectedRoute from "CommonContainers/protectedRoute";
 import SignInPage from "./pages/signinPage";
 import SignUpPage from "./pages/signupPage";
+import ExhibitionPage from './pages/exhibitionPage';
 import { connect } from "react-redux";
 
 const App = ({ isUserSignedIn }) => {
@@ -32,6 +33,12 @@ const App = ({ isUserSignedIn }) => {
         path="/signup"
         component={SignUpPage}
         validator={() => !isUserSignedIn}
+      />
+      <ProtectedRoute
+        exact
+        path='/exhibitions'
+        component={ExhibitionPage}
+        validator={() => isUserSignedIn}
       />
       <Route component={PageNotFound} />
     </Switch>
