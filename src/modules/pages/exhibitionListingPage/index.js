@@ -15,12 +15,14 @@ import { bindActionCreators } from "redux";
 import { CookieService } from "Utils/cookieService";
 import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 
-class HomePage extends Component {
+class ExhibitionListingPage extends Component {
   render() {
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.exhibition_page_container}>
-          <NavHeader title="Exhibitions" />
+          <NavHeader title="Exhibitions">
+            <CapsuleButton>Your Exhibitions</CapsuleButton>
+          </NavHeader>
           <DivColumn fillParent className={styles.content_container}>
             <DivRow className={styles.item}>
               {/* listItem */}
@@ -67,4 +69,4 @@ const mapDispathToProps = dispatch => {
 export default connect(
   null,
   mapDispathToProps
-)(navigatorHoc(HomePage));
+)(navigatorHoc(ExhibitionListingPage));

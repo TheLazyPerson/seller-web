@@ -9,7 +9,8 @@ import topContainerHoc from "Hoc/topContainerHoc";
 import ProtectedRoute from "CommonContainers/protectedRoute";
 import SignInPage from "./pages/signinPage";
 import SignUpPage from "./pages/signupPage";
-import ExhibitionPage from './pages/exhibitionPage';
+import ExhibitionListingPage from './pages/exhibitionListingPage';
+import ExhibitionDetailsPage from './pages/exhibitionDetailsPage';
 import { connect } from "react-redux";
 
 const App = ({ isUserSignedIn }) => {
@@ -37,7 +38,13 @@ const App = ({ isUserSignedIn }) => {
       <ProtectedRoute
         exact
         path='/exhibitions'
-        component={ExhibitionPage}
+        component={ExhibitionListingPage}
+        validator={() => isUserSignedIn}
+      />
+      <ProtectedRoute
+        exact
+        path='/exhibition-details/:exhibitionId?'
+        component={ExhibitionDetailsPage}
         validator={() => isUserSignedIn}
       />
       <Route component={PageNotFound} />
