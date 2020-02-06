@@ -22,30 +22,31 @@ class HomePage extends Component {
         <DivColumn fillParent className={styles.exhibition_page_container}>
           <NavHeader title="Exhibitions" />
           <DivColumn fillParent className={styles.content_container}>
-            <DivRow>
+            <DivRow className={styles.item}>
               {/* listItem */}
-              <img />
-              <DivColumn>
-                <div>Header</div>
-                <div>description</div>
+              <img className={styles.image}/>
+
+              <DivColumn className={styles.item_content}>
+                <div className={styles.title}>Header</div>
+                <div className={styles.description}>description</div>
 
                 <DivRow>
-                  <div>Category:</div>
-                  <div>values mentioned here</div>
+                  <div className={styles.category_header}>Category:</div>
+                  <div className={styles.category_value}>values mentioned here</div>
                 </DivRow>
 
-                <DivRow>
-                  <div>Starts At:</div>
-                  <div>values mentioned here</div>
+                <DivRow className={styles.date_container}>
+                  <div className={styles.date_title}>Starts At:</div>
+                  <div className={styles.date_value}>values mentioned here</div>
                 </DivRow>
 
-                <DivRow>
-                  <div>Ends On:</div>
-                  <div>values mentioned here</div>
+                <DivRow className={styles.date_container}>
+                  <div className={styles.date_title}>Ends On:</div>
+                  <div className={styles.date_value}>values mentioned here</div>
                 </DivRow>
 
-                <DivRow>
-                  <div>LAST 21 DAYS LEFT TO ENROLL</div>
+                <DivRow className={styles.action_container}>
+                  <div className={styles.last_date}>LAST 21 DAYS LEFT TO ENROLL</div>
                   <CapsuleButton>values mentioned here</CapsuleButton>
                 </DivRow>
               </DivColumn>
