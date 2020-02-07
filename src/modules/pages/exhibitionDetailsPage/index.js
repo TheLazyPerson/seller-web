@@ -23,7 +23,11 @@ class ExhibitionDetailsPage extends Component {
         <DivColumn fillParent className={styles.exhibition_page_container}>
           <NavHeader title="Exhibition"></NavHeader>
 
-          <DivColumn fillParent horizontalCenter className={styles.exhibition_details_container}>
+          <DivColumn
+            fillParent
+            horizontalCenter
+            className={styles.exhibition_details_container}
+          >
             <DivRow
               className={styles.exhibition_banner_container}
               style={{
@@ -31,7 +35,7 @@ class ExhibitionDetailsPage extends Component {
                 backgroundSize: "cover"
               }}
             >
-            <div className={styles.overlay_gradient}></div>
+              <div className={styles.overlay_gradient}></div>
 
               <DivColumn className={styles.banner_content}>
                 <div className={styles.exhibition_name}>Watches</div>
@@ -40,9 +44,30 @@ class ExhibitionDetailsPage extends Component {
                   doubled in size since last year. They integrated Stripe to
                   deliver seamless
                 </div>
-                <div className={styles.exhibition_date}>LAST 21 DAYS LEFT TO ENROLL</div>
+                <div className={styles.exhibition_date}>
+                  LAST 21 DAYS LEFT TO ENROLL
+                </div>
               </DivColumn>
-              <CapsuleButton style={{zIndex: 1}}>Enroll</CapsuleButton>
+              <CapsuleButton style={{ zIndex: 1 }}>Enroll</CapsuleButton>
+            </DivRow>
+
+            <NavHeader title="BASIC DETAILS"></NavHeader>
+            <DivRow className={styles.full_description_container}>
+              <DivColumn className={styles.left_container}>
+                <div className={styles.title}>DESCRIPTION:</div>
+                <div className={styles.description}>
+                  Missguided is a UK-based fashion retailer that has nearly
+                  doubled in size since last year. They integrated Stripe to
+                  deliver seamless checkout across mobile and web for customers
+                  in 100+ countries, all while automatically combating fraud.
+                </div>
+              </DivColumn>
+
+              <DivColumn className={styles.right_container}>
+                <div className={styles.title}>DATES:</div>
+                <div className={styles.date}><b>STARTS AT:</b> 16 Nov 2020</div>
+                <div className={styles.date}><b>STARTS AT:</b> 16 Nov 2020</div>
+              </DivColumn>
             </DivRow>
           </DivColumn>
         </DivColumn>
