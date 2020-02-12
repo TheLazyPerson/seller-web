@@ -15,6 +15,7 @@ import { bindActionCreators } from "redux";
 import { CookieService } from "Utils/cookieService";
 import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import exhibitionImage from "Images/exhibition-item-3.png";
+import ProductListItem from 'CommonComponents/productListItem';
 
 class ExhibitionDetailsPage extends Component {
   render() {
@@ -69,6 +70,16 @@ class ExhibitionDetailsPage extends Component {
                 <div className={styles.date}><b>STARTS AT:</b> 16 Nov 2020</div>
               </DivColumn>
             </DivRow>
+
+            <NavHeader title="PRODUCT DETAILS"></NavHeader>
+            <DivRow className={styles.product_list_container}>
+              <ProductListItem />
+              <ProductListItem />
+              <ProductListItem />
+              <ProductListItem />
+              <ProductListItem />
+            </DivRow>
+
           </DivColumn>
         </DivColumn>
       </SectionedContainer>
