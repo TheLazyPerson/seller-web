@@ -42,6 +42,9 @@ class SideNav extends Component {
       case "/profile/settings":
         setRoute = "settings";
         break;
+      case "/marketplace":
+        setRoute = "marketplace";
+        break;
       case "/profile/details":
       case "/profile/details/change-password":
       case "/profile/details/edit-profile":
@@ -65,9 +68,10 @@ class SideNav extends Component {
   onClickNavItemClick = slug => {
     const { navigateTo } = this.props;
     if (slug === "overview") {
-      navigateTo("profile");
+      navigateTo("home");
     } else if (slug === "profile") {
-      navigateTo("profile-details");
+    } else if (slug === "marketplace-profile") {
+      navigateTo("marketplace");
     } else {
       navigateTo(slug);
     }

@@ -1,0 +1,67 @@
+@import '~Styles/colors.module';
+@import '~Styles/mixins.module';
+
+.profile_overview_container {
+  flex: 1;
+  align-self: stretch;
+  padding: 34px;
+  overflow: scroll;
+
+  .header_container {
+    height: 200px;
+    min-height: 200px;
+    align-self: stretch;
+    background: rgba($color-very-light-blue, 0.9);
+    border: solid 0.5px rgba($primary-text-color, 0.1);
+
+    .header_title {
+      opacity: 0.5;
+      font-size: 18px;
+      font-weight: 300;
+      color: $primary-text-color;
+    }
+
+    .header_message {
+      font-family: PlayfairDisplay;
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: 0.75px;
+      color: $primary-text-color;
+    }
+  }
+
+  .items_container {
+    flex-flow: wrap;
+    margin-top: 20px;
+
+    .grid_item {
+      width: 207px;
+      height: 165px;
+      margin: 5px;
+      border-radius: 2px;
+      border: solid 1px rgba($color-light-blue-grey, 0.5);
+
+      @include on_click_button;
+
+      .item_image {
+        width: 42px;
+        height: 42px;
+        opacity: 0.7;
+      }
+
+      .item_title {
+        font-size: 16px;
+        font-weight: bold;
+        color: $primary-text-color;
+        margin-top: 16px;
+      }
+
+      .item_description {
+        font-size: 12px;
+        font-weight: 300;
+        text-align: center;
+        color: $primary-text-color;
+      }
+    }
+  }
+}

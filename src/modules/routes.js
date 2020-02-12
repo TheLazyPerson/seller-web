@@ -4,13 +4,14 @@ import { Switch, Route } from "react-router-dom";
 import PageNotFound from "CommonComponents/pageNotFound";
 import LandingPage from "./pages/landingPage";
 import HomePage from "./pages/homePage";
+import MarketPlace from "./pages/marketPlace";
 
 import topContainerHoc from "Hoc/topContainerHoc";
 import ProtectedRoute from "CommonContainers/protectedRoute";
 import SignInPage from "./pages/signinPage";
 import SignUpPage from "./pages/signupPage";
-import ExhibitionListingPage from './pages/exhibitionListingPage';
-import ExhibitionDetailsPage from './pages/exhibitionDetailsPage';
+import ExhibitionListingPage from "./pages/exhibitionListingPage";
+import ExhibitionDetailsPage from "./pages/exhibitionDetailsPage";
 import { connect } from "react-redux";
 
 const App = ({ isUserSignedIn }) => {
@@ -37,14 +38,20 @@ const App = ({ isUserSignedIn }) => {
       />
       <ProtectedRoute
         exact
-        path='/exhibitions'
+        path="/exhibitions"
         component={ExhibitionListingPage}
         validator={() => isUserSignedIn}
       />
       <ProtectedRoute
         exact
-        path='/exhibition-details/:exhibitionId?'
+        path="/exhibition-details/:exhibitionId?"
         component={ExhibitionDetailsPage}
+        validator={() => isUserSignedIn}
+      />
+      <Route
+        exact
+        path="/marketplace"
+        component={MarketPlace}
         validator={() => isUserSignedIn}
       />
       <Route component={PageNotFound} />
@@ -58,7 +65,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(topContainerHoc(App));
+export default connect(mapStateToProps, null)(topContainerHoc(App));
