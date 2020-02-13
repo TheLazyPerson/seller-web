@@ -1,0 +1,73 @@
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
+
+.header_background {
+  background-color: $primary-text-color;
+}
+
+.header_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  transition: background-color 0.5s ease;
+}
+
+.hero_section_container {
+  min-height: 80vh;
+  position: relative;
+  background-image: linear-gradient(225deg, #37445b 0%, #19202c 92%);
+  background-position: center;
+  background-size: cover;
+  padding: 55px;
+  padding-top: 10vh;
+
+  .primary_header {
+    width: 450px;
+    font-family: Lato;
+    font-size: 50px;
+    font-weight: 900;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+  }
+  .secondary_header {
+    width: 450px;
+
+    font-family: Lato;
+    font-size: 25px;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+  }
+  .start_selling_button {
+    width: 285px;
+    height: 61px;
+    border-radius: 28px;
+    background-color: $color-gold;
+
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: 900;
+    color: white;
+    margin-top: 20px;
+    text-transform: uppercase;
+
+    @include on_click_button;
+  }
+  .hero_main_content {
+    position: relative;
+    justify-content: center;
+
+    .social_container {
+      position: absolute;
+      left: 0;
+    }
+  }
+}
