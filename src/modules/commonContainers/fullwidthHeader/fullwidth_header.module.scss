@@ -1,5 +1,5 @@
-@import '~Styles/colors.module';
-@import '~Styles/mixins.module';
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
 
 .top_header {
   padding: 18px 60px;
@@ -15,7 +15,7 @@
     align-items: center;
 
     .app_icon {
-      height: 20px;
+      height: 16px;
       cursor: pointer;
     }
 
@@ -33,7 +33,6 @@
   margin-top: 8px;
 }
 
-
 @include medium {
   .top_header {
     padding: 10px 28px;
@@ -41,10 +40,10 @@
 
   .header_container {
     // height: 60px;
-  
+
     .header_icon_container {
       width: 30%;
-  
+
       .app_icon {
         height: 15px;
       }
@@ -58,7 +57,6 @@
   }
 }
 
-
 @include small {
   .top_header {
     padding: 8px 20px 12px;
@@ -66,10 +64,10 @@
 
   .header_container {
     // height: 50px;
-  
+
     .header_icon_container {
       width: unset;
-  
+
       .app_icon {
         height: 12px;
       }
@@ -86,4 +84,3 @@
     display: flex;
   }
 }
-

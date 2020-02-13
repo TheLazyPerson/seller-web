@@ -1,36 +1,35 @@
-
-import React, { Component } from 'react';
-import SectionedHeader from 'CommonContainers/sectionedHeader';
-import DivRow from 'CommonComponents/divRow';
-import DivColumn from 'CommonComponents/divColumn';
-import styles from './fullwidth_header.module.scss';
-import LanguageSelect from 'CommonComponents/languageSelect';
-import appIcon from 'Images/logo-image.png';
-import navigatorHoc from 'Hoc/navigatorHoc';
-import SearchBar from 'CommonContainers/searchBar';
+import React, { Component } from "react";
+import SectionedHeader from "CommonContainers/sectionedHeader";
+import DivRow from "CommonComponents/divRow";
+import DivColumn from "CommonComponents/divColumn";
+import styles from "./fullwidth_header.module.scss";
+import LanguageSelect from "CommonComponents/languageSelect";
+import appIcon from "Icons/app-icon-black.svg";
+//import appIcon from "Icons/logo-image.png";
+import navigatorHoc from "Hoc/navigatorHoc";
+import SearchBar from "CommonContainers/searchBar";
 
 class FullwidthHeader extends Component {
-
   onClickAppIcon = () => {
     const { navigateTo } = this.props;
-    navigateTo('');
-  }
+    navigateTo("");
+  };
 
   render() {
     const { children, whiteColor, className } = this.props;
 
     return (
-      <DivColumn fillSelfHorizontal className={`${styles.top_header} ${className}`}>
+      <DivColumn
+        fillSelfHorizontal
+        className={`${styles.top_header} ${className}`}
+      >
         <DivRow className={`${styles.header_container}`}>
           <DivRow className={styles.header_icon_container}>
-            <img src={appIcon} className={styles.app_icon} onClick={this.onClickAppIcon} />
-            <div
-              style={whiteColor ? { color: 'white' } : null}
-              className={styles.app_name}
+            <img
+              src={appIcon}
+              className={styles.app_icon}
               onClick={this.onClickAppIcon}
-            >
-              MA3RATH
-          </div>
+            />
             {/* <LanguageSelect blackColor={!whiteColor} /> */}
           </DivRow>
           <SectionedHeader whiteColor={whiteColor} />
@@ -40,7 +39,7 @@ class FullwidthHeader extends Component {
           whiteColor={whiteColor}
         /> */}
       </DivColumn>
-    )
+    );
   }
 }
 
