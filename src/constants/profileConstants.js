@@ -1,4 +1,4 @@
-import orderBlackIcon from "Icons/orders-icon-black.svg";
+import orderBlackIcon from "Icons/order-icon-black.svg";
 import helpCenterBlackIcon from "Icons/help-center-icon-black.svg";
 import wishlistBlackIcon from "Icons/wishlist-icon-black.svg";
 import addressBlackIcon from "Icons/address-icon-black.svg";
@@ -14,11 +14,16 @@ import addressWhiteIcon from "Icons/address-icon-white.svg";
 import profileWhiteIcon from "Icons/profile-icon-white.svg";
 import settingsWhiteIcon from "Icons/settings-icon-white.svg";
 import overviewWhiteIcon from "Icons/overview-icon-white.svg";
+import exhibitionBlackIcon from "Icons/exhibition-icon-black.svg";
 import exhibitionWhiteIcon from "Icons/exhibition-icon-white.svg";
 import productWhiteIcon from "Icons/product-icon-white.svg";
+import productBlackIcon from "Icons/product-icon-black.svg";
 import salesWhiteIcon from "Icons/sales-icon-white.svg";
+import salesBlackIcon from "Icons/sales-icon-black.svg";
 import marketplaceProfileWhiteIcon from "Icons/marketplace-profile-icon-white.svg";
+import marketplaceProfileBlackIcon from "Icons/marketplace-profile-icon-black.svg";
 import subscriptionWhiteIcon from "Icons/subscription-icon-white.svg";
+import subscriptionBlackIcon from "Icons/subscription-icon-black.svg";
 
 export const profileListItem = [
   {
@@ -38,7 +43,7 @@ export const profileListItem = [
     name: "MarketPlace",
     items: [
       {
-        blackImage: orderBlackIcon,
+        blackImage: exhibitionBlackIcon,
         whiteImage: exhibitionWhiteIcon,
         title: "Exhibitions",
         slug: "exhibitions",
@@ -52,21 +57,21 @@ export const profileListItem = [
         description: "Check your order status"
       },
       {
-        blackImage: orderBlackIcon,
+        blackImage: salesBlackIcon,
         whiteImage: salesWhiteIcon,
         title: "Sales",
         slug: "sales",
         description: "See your sales overview"
       },
       {
-        blackImage: orderBlackIcon,
+        blackImage: marketplaceProfileBlackIcon,
         whiteImage: marketplaceProfileWhiteIcon,
         title: "Marketplace Profile",
         slug: "marketplace-profile",
         description: "See your marketplace profile"
       },
       {
-        blackImage: orderBlackIcon,
+        blackImage: productBlackIcon,
         whiteImage: productWhiteIcon,
         title: "Products",
         slug: "products",
@@ -83,7 +88,7 @@ export const profileListItem = [
         whiteImage: addressWhiteIcon,
         title: "Address",
         slug: "address",
-        description: "Save addresses for hassle free checkout"
+        description: "See all your addresses"
       },
       {
         blackImage: profileBlackIcon,
@@ -93,7 +98,7 @@ export const profileListItem = [
         description: "Change your personal details and password"
       },
       {
-        blackImage: settingsBlackIcon,
+        blackImage: subscriptionBlackIcon,
         whiteImage: subscriptionWhiteIcon,
         title: "Subscription",
         slug: "subsciption",
@@ -117,7 +122,7 @@ export const profileListItem = [
         whiteImage: helpCenterWhiteIcon,
         title: "Help Center",
         slug: "help-center",
-        description: "Help regarding your recent purchases"
+        description: "All in one stop for any help"
       }
     ]
   }

@@ -2,60 +2,97 @@ import React, { Component } from "react";
 import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivColumn from "CommonComponents/divColumn";
 import DivRow from "CommonComponents/divRow";
-import map from "lodash/map";
-import styles from "./marketPlace.module.scss";
-import { profileListItem } from "Constants/profileConstants";
 import SideNav from "CommonComponents/sideNav";
-import navigatorHoc from "Hoc/navigatorHoc";
-import { logoutAction } from "Core/modules/signin/signinActions";
+import styles from "./marketPlace.module.scss";
+import NavHeader from "CommonComponents/navHeader";
+
+import map from "lodash/map";
+import CapsuleButton from "CommonComponents/capsuleButton";
+import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
+import { getMarketplaceProfileAction } from "Core/modules/marketplaceprofile/marketplaceProfileActions";
+import InitialPageLoader from "CommonContainers/initialPageLoader";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { CookieService } from "Utils/cookieService";
-import { USER_DATA_COOKIE } from "Constants/cookieConstants";
+import navigatorHoc from "Hoc/navigatorHoc";
+import translatorHoc from "Hoc/translatorHoc";
 
 class MarketPlace extends Component {
-  onClickNavItemClick = slug => {
-    const { navigateTo, logoutAction } = this.props;
-
-    if (slug === "overview") {
-      navigateTo("profile");
-    } else if (slug === "profile") {
-      navigateTo("profile-details");
-    } else if (slug === "logout") {
-      logoutAction().then(() => {
-        CookieService.delete(USER_DATA_COOKIE);
-        CookieService.delete("BAG_COUNT");
-        navigateTo(""); // ToHomePage
-      });
-    } else {
-      navigateTo(slug);
-    }
+  navigateToMarketplaceEditProfile = () => {
+    const { navigateTo } = this.props;
+    navigateTo("edit-marketplace-profile");
   };
 
   render() {
+    const {
+      marketplaceProfileReducer: { profile },
+      getMarketplaceProfileAction,
+      isRTL
+    } = this.props;
+
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <DivColumn className={styles.profile_overview_container}>
-          <DivColumn
-            verticalCenter
-            horizontalCenter
-            className={styles.header_container}
-          >
-            <div className={styles.header_title}>MY ACCOUNT</div>
-            <div className={styles.header_message}>Welcome, Omar.</div>
-          </DivColumn>
-
-          <DivRow className={styles.items_container}></DivRow>
+        <DivColumn
+          className={`${styles.details_container} ${isRTL ? styles.rtl : ""}`}
+        >
+          <NavHeader title="Marketplace Profile details">
+            <DivRow className={styles.header_button_container}>
+              <CapsuleButton onClick={this.navigateToMarketplaceEditProfile}>
+                Edit Marketplace Profile
+              </CapsuleButton>
+            </DivRow>
+          </NavHeader>
+          <InitialPageLoader initialPageApi={getMarketplaceProfileAction}>
+            <DivColumn fillParent>
+              <DivColumn className={styles.field_container}>
+                <div className={styles.title}>Shop Name</div>
+                <div className={styles.value}>
+                  {profile.shop_name ? profile.shop_name : "Not Available"}
+                </div>
+              </DivColumn>
+              <DivColumn className={styles.field_container}>
+                <div className={styles.title}>Contact Number</div>
+                <div className={styles.value}>
+                  {profile.contact_number
+                    ? profile.contact_number
+                    : "Not Available"}
+                </div>
+              </DivColumn>
+              <DivColumn className={styles.field_container}>
+                <div className={styles.title}>Email Address</div>
+                <div className={styles.value}>
+                  {profile.shop_email ? profile.shop_email : "Not Available"}
+                </div>
+              </DivColumn>
+              <DivColumn className={styles.field_container}>
+                <div className={styles.title}>Address</div>
+                <div className={styles.value}>
+                  {/* {profile.phone ? profile.phone : "Not Available"} */}
+                </div>
+              </DivColumn>
+            </DivColumn>
+          </InitialPageLoader>
         </DivColumn>
       </SectionedContainer>
     );
   }
 }
 
-const mapDispathToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    logoutAction: bindActionCreators(logoutAction, dispatch)
+    marketplaceProfileReducer: state.marketplaceProfileReducer
   };
 };
 
-export default connect(null, mapDispathToProps)(navigatorHoc(MarketPlace));
+const mapDispathToProps = dispatch => {
+  return {
+    getMarketplaceProfileAction: bindActionCreators(
+      getMarketplaceProfileAction,
+      dispatch
+    )
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispathToProps
+)(navigatorHoc(translatorHoc(MarketPlace)));

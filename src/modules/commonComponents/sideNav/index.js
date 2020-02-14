@@ -43,7 +43,8 @@ class SideNav extends Component {
         setRoute = "settings";
         break;
       case "/marketplace":
-        setRoute = "marketplace";
+      case "/marketplace/edit-marketplace-profile":
+        setRoute = "marketplace-profile";
         break;
       case "/profile/details":
       case "/profile/details/change-password":
@@ -72,6 +73,8 @@ class SideNav extends Component {
     } else if (slug === "profile") {
     } else if (slug === "marketplace-profile") {
       navigateTo("marketplace");
+    } else if (slug === "profile-details") {
+      navigateTo("profile-details");
     } else {
       navigateTo(slug);
     }

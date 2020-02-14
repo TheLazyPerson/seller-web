@@ -1,0 +1,15 @@
+@import "~Styles/colors.module";
+
+.address_container {
+ //  overflow-y: scroll;
+
+  .section_container:first-child {
+    .header_container {
+      border-top: none;
+    }
+  }
+
+  .section_container {
+    margin-top: 32px;
+  }
+}
