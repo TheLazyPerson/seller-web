@@ -49,7 +49,7 @@ const App = ({ isUserSignedIn }) => {
         component={ExhibitionDetailsPage}
         validator={() => isUserSignedIn}
       />
-      <Route
+      <ProtectedRoute
         exact
         path="/marketplace"
         component={MarketPlace}
@@ -58,7 +58,7 @@ const App = ({ isUserSignedIn }) => {
 
       <ProtectedRoute
         exact
-        path="/profile"
+        path="/profile/details"
         component={ProfileDetails}
         validator={() => isUserSignedIn}
       />
