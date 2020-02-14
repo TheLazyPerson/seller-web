@@ -62,6 +62,7 @@ const App = ({ isUserSignedIn }) => {
         exact
         path="/profile/details"
         component={ProfileDetails}
+        redirectTo="signin"
         validator={() => isUserSignedIn}
       />
       {/* <ProtectedRoute
