@@ -1,0 +1,36 @@
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
+
+.benefits {
+  padding: 55px;
+  .list_item {
+    margin-right: 30px;
+    .title {
+      width: 327px;
+      font-family: Lato;
+      font-size: 36px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #000000;
+      margin-top: 20px;
+    }
+    .description {
+      font-family: Lato;
+      font-size: 18px;
+      font-weight: 300;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #000000;
+      margin-top: 10px;
+    }
+    .image {
+      height: 214px;
+      margin-right: auto;
+    }
+  }
+}
