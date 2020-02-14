@@ -15,6 +15,9 @@ import ExhibitionDetailsPage from "./pages/exhibitionDetailsPage";
 import ProfileDetails from "./pages/profileDetails";
 import Settings from "./pages/settings";
 import HelpCenter from "./pages/helpCenter";
+import TermsAndConditionPage from "./pages/termsAndConditionPage";
+import PrivacyPolicyPage from "./pages/privacyPolicyPage";
+import FAQPage from "./pages/FAQPage";
 import { connect } from "react-redux";
 
 const App = ({ isUserSignedIn }) => {
@@ -93,6 +96,14 @@ const App = ({ isUserSignedIn }) => {
         redirectTo="signin"
         validator={() => isUserSignedIn}
       />
+      <Route
+        exact
+        path="/terms-and-condition"
+        component={TermsAndConditionPage}
+      />
+
+      <Route exact path="/privacy-policy" component={PrivacyPolicyPage} />
+      <Route exact path="/faq" component={FAQPage} />
 
       <Route component={PageNotFound} />
     </Switch>

@@ -1,0 +1,48 @@
+.page_container {
+  padding: 80px 44px 0px 70px;
+  overflow: scroll;
+
+  .sub_title {
+    font-size: 14px;
+    font-weight: 300;
+    color: black;
+    margin-bottom: 5px;
+  }
+
+  .qna_container {
+    margin-bottom: 45px;
+
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      color: black;
+      margin-bottom: 17px;
+    }
+
+    .description_text {
+      font-size: 16px;
+      line-height: 1.63;
+      color: black;
+      margin-top: 21px;
+    }
+
+    .description_text:first-child {
+      margin-top: 0px;
+    }
+
+    .points_container {
+      margin-top: 9px;
+      margin-left: 50px;
+
+      .points_text {
+        font-size: 16px;
+        color: black;
+        margin-top: 5px;
+      }
+
+      .points_text:first-child {
+        margin-top: 0px;
+      }
+    }
+  }
+}
