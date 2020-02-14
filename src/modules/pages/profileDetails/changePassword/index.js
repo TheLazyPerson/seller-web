@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivRow from "CommonComponents/divRow";
-import SideNav from "../../components/sideNav";
+import SideNav from "CommonComponents/sideNav";
 import styles from "./change_password.module.scss";
-import NavHeader from "../../components/navHeader";
+import NavHeader from "CommonComponents/navHeader";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
 import InputTextComponent from "CommonComponents/InputTextComponent";

@@ -15,6 +15,11 @@ import ExhibitionDetailsPage from "./pages/exhibitionDetailsPage";
 import ProfileDetails from "./pages/profileDetails";
 import Settings from "./pages/settings";
 import HelpCenter from "./pages/helpCenter";
+import ChangePassword from "./pages/profileDetails/changePassword";
+import EditProfile from "./pages/profileDetails/editProfile";
+import ProfileAddress from "./pages/address";
+import AddAddress from "./pages/address/addAddress";
+import EditAddress from "./pages/address/editAddress";
 import TermsAndConditionPage from "./pages/termsAndConditionPage";
 import PrivacyPolicyPage from "./pages/privacyPolicyPage";
 import FAQPage from "./pages/FAQPage";
@@ -68,7 +73,7 @@ const App = ({ isUserSignedIn }) => {
         redirectTo="signin"
         validator={() => isUserSignedIn}
       />
-      {/* <ProtectedRoute
+      <ProtectedRoute
         exact
         path="/profile/details/change-password"
         component={ChangePassword}
@@ -81,7 +86,29 @@ const App = ({ isUserSignedIn }) => {
         component={EditProfile}
         redirectTo="signin"
         validator={() => isUserSignedIn}
-      /> */}
+      />
+
+      <ProtectedRoute
+        exact
+        path="/profile/address"
+        component={ProfileAddress}
+        redirectTo="signin"
+        validator={() => isUserSignedIn}
+      />
+      <ProtectedRoute
+        exact
+        path="/profile/address/add"
+        component={AddAddress}
+        redirectTo="signin"
+        validator={() => isUserSignedIn}
+      />
+      <ProtectedRoute
+        exact
+        path="/profile/address/edit"
+        component={EditAddress}
+        redirectTo="signin"
+        validator={() => isUserSignedIn}
+      />
       <ProtectedRoute
         exact
         path="/profile/helpcenter"

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivRow from "CommonComponents/divRow";
-import SideNav from "../../components/sideNav";
+import SideNav from "CommonComponents/sideNav";
 import styles from "./edit_profile.module.scss";
-import NavHeader from "../../components/navHeader";
+import NavHeader from "CommonComponents/navHeader";
 import { Form, Field } from "react-final-form";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
@@ -24,8 +24,8 @@ import {
 } from "Utils/validators";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Select from 'react-select';
-import DivColumn from 'CommonComponents/divColumn';
+import Select from "react-select";
+import DivColumn from "CommonComponents/divColumn";
 
 class EditProfile extends Component {
   state = {
@@ -103,16 +103,14 @@ class EditProfile extends Component {
     }
 
     const genderOptions = [
-      { value: 'male', label: 'Male' },
-      { value: 'female', label: 'Female' }
+      { value: "male", label: "Male" },
+      { value: "female", label: "Female" }
     ];
     let defaultGender = null;
 
     if (userDetails.gender) {
-      if(userDetails.gender == 'male')
-        defaultGender = genderOptions[0];
-      else
-        defaultGender = genderOptions[1];
+      if (userDetails.gender == "male") defaultGender = genderOptions[0];
+      else defaultGender = genderOptions[1];
     }
 
     const CustomRenderInput = ({ input, value, onClick, meta }) => {
@@ -151,94 +149,96 @@ class EditProfile extends Component {
             pristine,
             values
           }) => (
-              <form className={styles.form_container} onSubmit={handleSubmit}>
-                <Field name="firstName">
-                  {({ input, meta }) => (
-                    <InputTextComponent
-                      meta={meta}
-                      {...input}
-                      placeholder="First Name"
-                      className={styles.input_text}
-                    />
-                  )}
-                </Field>
-                <Field name="lastName">
-                  {({ input, meta }) => (
-                    <InputTextComponent
-                      meta={meta}
-                      {...input}
-                      placeholder="Last Name"
-                      className={styles.input_text}
-                    />
-                  )}
-                </Field>
+            <form className={styles.form_container} onSubmit={handleSubmit}>
+              <Field name="firstName">
+                {({ input, meta }) => (
+                  <InputTextComponent
+                    meta={meta}
+                    {...input}
+                    placeholder="First Name"
+                    className={styles.input_text}
+                  />
+                )}
+              </Field>
+              <Field name="lastName">
+                {({ input, meta }) => (
+                  <InputTextComponent
+                    meta={meta}
+                    {...input}
+                    placeholder="Last Name"
+                    className={styles.input_text}
+                  />
+                )}
+              </Field>
 
-                <Field name="gender">
-                  {({ input, meta }) => (
-                    <DivColumn className='input_select_container'>
-                      <Select
-                        options={genderOptions}
-                        onChange={value => {
-                          input.onChange(value.value)
-                        }}
-                        className='react-select-container'
-                        classNamePrefix="react-select"
-                        placeholder="Gender"
-                        defaultValue={defaultGender}
-                      />
-                      {meta.error && meta.touched && <span className='error_text'>{meta.error}</span>}
-                    </DivColumn>
-                  )}
-                </Field>
-
-                <Field name="mobileNumber">
-                  {({ input, meta }) => (
-                    <InputTextComponent
-                      meta={meta}
-                      {...input}
-                      placeholder="Mobile Number"
-                      className={styles.input_text}
-                    />
-                  )}
-                </Field>
-
-                <Field name="email">
-                  {({ input, meta }) => (
-                    <InputTextComponent
-                      meta={meta}
-                      {...input}
-                      placeholder="Email Address"
-                      className={styles.input_text}
-                    />
-                  )}
-                </Field>
-
-                <Field name="birthday">
-                  {({ input, meta }) => (
-                    <DatePicker
-                      selected={startDate}
-                      onChange={date => {
-                        this.setState({ startDate: date })
-                        input.onChange(date.valueOf());
+              <Field name="gender">
+                {({ input, meta }) => (
+                  <DivColumn className="input_select_container">
+                    <Select
+                      options={genderOptions}
+                      onChange={value => {
+                        input.onChange(value.value);
                       }}
-                      maxDate={new Date()}
-                      customInput={
-                        <CustomRenderInput meta={meta} input={input} />
-                      }
+                      className="react-select-container"
+                      classNamePrefix="react-select"
+                      placeholder="Gender"
+                      defaultValue={defaultGender}
                     />
-                  )}
-                </Field>
+                    {meta.error && meta.touched && (
+                      <span className="error_text">{meta.error}</span>
+                    )}
+                  </DivColumn>
+                )}
+              </Field>
 
-                <DivRow className={styles.form_button_container}>
-                  <SecondaryCapsuleButton onClick={this.onClickCancel}>
-                    Cancel
+              <Field name="mobileNumber">
+                {({ input, meta }) => (
+                  <InputTextComponent
+                    meta={meta}
+                    {...input}
+                    placeholder="Mobile Number"
+                    className={styles.input_text}
+                  />
+                )}
+              </Field>
+
+              <Field name="email">
+                {({ input, meta }) => (
+                  <InputTextComponent
+                    meta={meta}
+                    {...input}
+                    placeholder="Email Address"
+                    className={styles.input_text}
+                  />
+                )}
+              </Field>
+
+              <Field name="birthday">
+                {({ input, meta }) => (
+                  <DatePicker
+                    selected={startDate}
+                    onChange={date => {
+                      this.setState({ startDate: date });
+                      input.onChange(date.valueOf());
+                    }}
+                    maxDate={new Date()}
+                    customInput={
+                      <CustomRenderInput meta={meta} input={input} />
+                    }
+                  />
+                )}
+              </Field>
+
+              <DivRow className={styles.form_button_container}>
+                <SecondaryCapsuleButton onClick={this.onClickCancel}>
+                  Cancel
                 </SecondaryCapsuleButton>
-                  <CapsuleButton type="submit" disabled={submitting}>
-                    Save Details
+                <CapsuleButton type="submit" disabled={submitting}>
+                  Save Details
                 </CapsuleButton>
-                </DivRow>
-              </form>
-            )}
+              </DivRow>
+            </form>
+          )}
         />
       </SectionedContainer>
     );
