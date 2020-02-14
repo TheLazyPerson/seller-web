@@ -4,6 +4,8 @@ import DivColumn from "CommonComponents/divColumn";
 import DivRow from "CommonComponents/divRow";
 import SideNav from "CommonComponents/sideNav";
 import styles from "./profile_details.module.scss";
+import NavHeader from "CommonComponents/navHeader";
+
 import map from "lodash/map";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
@@ -37,19 +39,19 @@ class ProfileDetails extends Component {
         <DivColumn
           className={`${styles.details_container} ${isRTL ? styles.rtl : ""}`}
         >
-          <DivColumn className={styles.profile_overview_container}>
-            <DivColumn
-              verticalCenter
-              horizontalCenter
-              className={styles.header_container}
-            >
-              <div className={styles.header_title}>MY ACCOUNT</div>
-              <div className={styles.header_message}>Welcome, Omar.</div>
-            </DivColumn>
-
-            <DivRow className={styles.items_container}></DivRow>
-          </DivColumn>
-
+          <NavHeader title="profile details">
+            <DivRow className={styles.header_button_container}>
+              <SecondaryCapsuleButton
+                className={styles.reset_password_button}
+                onClick={this.navigateToChangePass}
+              >
+                Change Password
+              </SecondaryCapsuleButton>
+              <CapsuleButton onClick={this.navigateToEditProfile}>
+                Edit Profile
+              </CapsuleButton>
+            </DivRow>
+          </NavHeader>
           <InitialPageLoader initialPageApi={getProfileDetailsAction}>
             <DivColumn fillParent>
               <DivColumn className={styles.field_container}>
