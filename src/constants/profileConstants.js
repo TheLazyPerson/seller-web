@@ -1,4 +1,4 @@
-import orderBlackIcon from "Icons/orders-icon-black.svg";
+import orderBlackIcon from "Icons/order-icon-black.svg";
 import helpCenterBlackIcon from "Icons/help-center-icon-black.svg";
 import wishlistBlackIcon from "Icons/wishlist-icon-black.svg";
 import addressBlackIcon from "Icons/address-icon-black.svg";
