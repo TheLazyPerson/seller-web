@@ -7,6 +7,7 @@ import signUpReducer from "Core/modules/signup/signupReducer";
 import profileDetailsReducer from "Core/modules/profiledetails/profileDetailsReducer";
 import addressReducer from "Core/modules/address/addressReducer";
 import basicReducer from "Core/modules/basic/basicReducer";
+import marketplaceProfileReducer from "Core/modules/marketplaceprofile/marketplaceProfileReducer";
 
 const appReducer = history =>
   combineReducers({
@@ -16,6 +17,7 @@ const appReducer = history =>
     signInReducer,
     signUpReducer,
     profileDetailsReducer,
+    marketplaceProfileReducer,
     addressReducer,
     basicReducer
   });

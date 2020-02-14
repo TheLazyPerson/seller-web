@@ -17,6 +17,7 @@ import Settings from "./pages/settings";
 import HelpCenter from "./pages/helpCenter";
 import ChangePassword from "./pages/profileDetails/changePassword";
 import EditProfile from "./pages/profileDetails/editProfile";
+import EditMarketplaceProfile from "./pages/marketPlace/editMarketplaceProfile";
 import ProfileAddress from "./pages/address";
 import AddAddress from "./pages/address/addAddress";
 import EditAddress from "./pages/address/editAddress";
@@ -62,7 +63,16 @@ const App = ({ isUserSignedIn }) => {
       <ProtectedRoute
         exact
         path="/marketplace"
+        redirectTo="signin"
         component={MarketPlace}
+        validator={() => isUserSignedIn}
+      />
+
+      <ProtectedRoute
+        exact
+        path="/marketplace/edit-marketplace-profile"
+        component={EditMarketplaceProfile}
+        redirectTo="signin"
         validator={() => isUserSignedIn}
       />
 
