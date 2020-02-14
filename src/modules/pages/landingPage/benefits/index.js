@@ -11,7 +11,7 @@ class Benefits extends Component {
     return (
       <DivColumn fillParent className={styles.list_item}>
         <img className={styles.image} src={listItem.heroImage} />
-        <DivColumn>
+        <DivColumn className={styles.title_group}>
           <div className={styles.title}>{listItem.title}</div>
           <div className={styles.description}>{listItem.description}</div>
         </DivColumn>
