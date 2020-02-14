@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import SectionedHeader from "CommonContainers/sectionedHeader";
 import DivRow from "CommonComponents/divRow";
 import DivColumn from "CommonComponents/divColumn";
-import styles from "./fullwidth_header.module.scss";
+import styles from "./seller_proposition.module.scss";
 import LanguageSelect from "CommonComponents/languageSelect";
 import appIcon from "Icons/app-icon-black.svg";
 //import appIcon from "Icons/logo-image.png";
 import navigatorHoc from "Hoc/navigatorHoc";
 import SearchBar from "CommonContainers/searchBar";
 
-class FullwidthHeader extends Component {
+class SellerProposition extends Component {
   onClickAppIcon = () => {
     const { navigateTo } = this.props;
     navigateTo("");
@@ -32,7 +32,7 @@ class FullwidthHeader extends Component {
             />
             {/* <LanguageSelect blackColor={!whiteColor} /> */}
           </DivRow>
-          <SectionedHeader whiteColor={whiteColor} />
+          <SectionedHeader />
         </DivRow>
         {/* <SearchBar
           className={styles.search_bar_container}
@@ -43,8 +43,8 @@ class FullwidthHeader extends Component {
   }
 }
 
-FullwidthHeader.defaultProps = {
+SellerProposition.defaultProps = {
   whiteColor: false
 };
 
-export default navigatorHoc(FullwidthHeader);
+export default navigatorHoc(SellerProposition);

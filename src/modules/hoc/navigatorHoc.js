@@ -21,11 +21,11 @@ const navigatorHoc = WrappedComponent => {
 
     navigateScreen = (navigationFunction, pageName, data) => {
       switch (pageName) {
-        case 'home':
-          return navigationFunction('/home');
+        case "home":
+          return navigationFunction("/home");
 
-        case 'exhibitions':
-          return navigationFunction('/exhibitions');
+        case "exhibitions":
+          return navigationFunction("/exhibitions");
 
         case "plp":
           return navigationFunction(`/product-listing/?id=${data.id}`);
@@ -82,7 +82,7 @@ const navigatorHoc = WrappedComponent => {
 
         case "edit-profile":
           return navigationFunction("/profile/details/edit-profile");
-        
+
         case "trending-exhibitions":
           return navigationFunction("/trending-exhibitions");
 
@@ -93,6 +93,9 @@ const navigatorHoc = WrappedComponent => {
           return navigationFunction(
             `/search/${data.searchType.toLowerCase()}?query=${data.searchText}`
           );
+
+        case "marketplace":
+          return navigationFunction("/marketplace");
 
         default:
           return navigationFunction("/");

@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import PageNotFound from "CommonComponents/pageNotFound";
 import LandingPage from "./pages/landingPage";
 import HomePage from "./pages/homePage";
+import MarketPlace from "./pages/marketPlace";
 
 import topContainerHoc from "Hoc/topContainerHoc";
 import ProtectedRoute from "CommonContainers/protectedRoute";
@@ -55,6 +56,12 @@ const App = ({ isUserSignedIn }) => {
         validator={() => isUserSignedIn}
       />
 
+      <Route
+        exact
+        path="/marketplace"
+        component={MarketPlace}
+        validator={() => isUserSignedIn}
+      />
       <Route component={PageNotFound} />
     </Switch>
   );
@@ -66,7 +73,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(topContainerHoc(App));
+export default connect(mapStateToProps, null)(topContainerHoc(App));
