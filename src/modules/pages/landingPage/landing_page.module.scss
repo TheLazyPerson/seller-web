@@ -1,6 +1,8 @@
 @import "~Styles/colors.module";
 @import "~Styles/mixins.module";
-
+.page_container {
+  position: relative;
+}
 .header_background {
   background-color: $primary-text-color;
 }
@@ -70,4 +72,8 @@
       left: 0;
     }
   }
+}
+
+.seller_proposition {
+  border: solid 1px #979797;
 }

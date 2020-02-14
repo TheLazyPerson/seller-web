@@ -9,11 +9,13 @@ import navigatorHoc from "Hoc/navigatorHoc";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import heroImage from "Images/delivering-success.svg";
+import SellerProposition from "./sellerProposition";
+import Benefits from "./benefits";
 
 class LandingPage extends Component {
   render() {
     return (
-      <FullWidthContainer>
+      <FullWidthContainer whiteColor>
         <DivRow fillParent className={styles.hero_section_container}>
           <DivRow fillParent horizontalCenter verticalCenter>
             <DivColumn fillParent>
@@ -41,6 +43,7 @@ class LandingPage extends Component {
             </DivColumn>
           </DivRow>
         </DivRow>
+        <Benefits />
       </FullWidthContainer>
     );
   }
