@@ -1,0 +1,47 @@
+@import '~Styles/colors.module';
+@import '~Styles/mixins.module';
+
+.header {
+  border-bottom: 0.5px solid #ededed;
+  padding: 10px 37px;
+
+  .header_text {
+    font-size: 15px;
+    color: $primary-text-color ;
+  }
+}
+
+.settings_item_container {
+  width: 426px;
+  background-color: rgba($color-very-light-blue, 0.9);
+  padding: 26px 17px;
+  justify-content: space-between;
+  margin: 36px;
+  
+  .item_title {
+    font-size: 12px;
+    font-weight: bold;
+    color: $primary-text-color;
+    margin-bottom: 11px;
+  }
+
+  .item_description {
+    font-size: 8px;
+    font-weight: 300;
+    color: $primary-text-color;
+  }
+}
+
+
+@include medium {
+  .settings_item_container {
+    margin: 28px;
+  }
+}
+
+@include small {
+  .settings_item_container {
+    width: unset;
+    margin: 20px;
+  }
+}

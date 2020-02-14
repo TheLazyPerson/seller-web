@@ -13,6 +13,8 @@ import SignUpPage from "./pages/signupPage";
 import ExhibitionListingPage from "./pages/exhibitionListingPage";
 import ExhibitionDetailsPage from "./pages/exhibitionDetailsPage";
 import ProfileDetails from "./pages/profileDetails";
+import Settings from "./pages/settings";
+import HelpCenter from "./pages/helpCenter";
 import { connect } from "react-redux";
 
 const App = ({ isUserSignedIn }) => {
@@ -60,6 +62,34 @@ const App = ({ isUserSignedIn }) => {
         exact
         path="/profile/details"
         component={ProfileDetails}
+        validator={() => isUserSignedIn}
+      />
+      {/* <ProtectedRoute
+        exact
+        path="/profile/details/change-password"
+        component={ChangePassword}
+        redirectTo="signin"
+        validator={() => isUserSignedIn}
+      />
+      <ProtectedRoute
+        exact
+        path="/profile/details/edit-profile"
+        component={EditProfile}
+        redirectTo="signin"
+        validator={() => isUserSignedIn}
+      /> */}
+      <ProtectedRoute
+        exact
+        path="/profile/helpcenter"
+        component={HelpCenter}
+        redirectTo="signin"
+        validator={() => isUserSignedIn}
+      />
+      <ProtectedRoute
+        exact
+        path="/profile/settings"
+        component={Settings}
+        redirectTo="signin"
         validator={() => isUserSignedIn}
       />
 
