@@ -12,6 +12,7 @@ import SignInPage from "./pages/signinPage";
 import SignUpPage from "./pages/signupPage";
 import ExhibitionListingPage from "./pages/exhibitionListingPage";
 import ExhibitionDetailsPage from "./pages/exhibitionDetailsPage";
+import ProfileDetails from "./pages/profileDetails";
 import { connect } from "react-redux";
 
 const App = ({ isUserSignedIn }) => {
@@ -54,6 +55,14 @@ const App = ({ isUserSignedIn }) => {
         component={MarketPlace}
         validator={() => isUserSignedIn}
       />
+
+      <ProtectedRoute
+        exact
+        path="/profile"
+        component={ProfileDetails}
+        validator={() => isUserSignedIn}
+      />
+
       <Route component={PageNotFound} />
     </Switch>
   );

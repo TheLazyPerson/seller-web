@@ -72,6 +72,8 @@ class SideNav extends Component {
     } else if (slug === "profile") {
     } else if (slug === "marketplace-profile") {
       navigateTo("marketplace");
+    } else if (slug === "profile-details") {
+      navigateTo("profile");
     } else {
       navigateTo(slug);
     }

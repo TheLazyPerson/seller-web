@@ -1,0 +1,92 @@
+@import '~Styles/colors.module';
+@import '~Styles/mixins.module';
+
+.rtl {
+  .field_container {
+    .title {
+      text-align: right;
+    }
+
+    .value {
+      text-align: right;
+    }
+  }
+}
+
+.details_container {
+  overflow: scroll;
+
+  .header_button_container {
+    .reset_password_button {
+      margin-right: 16px;
+    }  
+  }
+
+  .field_container:first-child {
+    border-top: none;
+  }
+
+  .field_container {
+    padding: 17px 46px;
+    border-top: 0.5px solid #ededed;
+
+    .title {
+      opacity: 0.8;
+      font-size: 18px;
+      font-weight: 300;
+      color: $primary-text-color;
+    }
+
+    .value {
+      opacity: 0.8;
+      font-size: 18px;
+      font-weight: bold;
+      color: $primary-text-color;
+    }
+  }
+}
+
+
+@include medium {
+  .details_container {  
+    .field_container {
+      padding: 15px 35px;
+  
+      .title {
+        font-size: 16px;
+      }
+  
+      .value {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@include small {
+  .details_container {
+    .header_button_container {
+      flex-direction: column;
+      
+      .reset_password_button{
+        margin-right: 0px;
+      }
+
+      .reset_password_button:first-child {
+        margin-bottom: 10px;
+      }
+    }
+  
+    .field_container {
+      padding: 13px 30px;
+  
+      .title {
+        font-size: 14px;
+      }
+  
+      .value {
+        font-size: 14px;
+      }
+    }
+  }
+}
