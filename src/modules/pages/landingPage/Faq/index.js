@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import navigatorHoc from "Hoc/navigatorHoc";
 import DivColumn from "CommonComponents/divColumn";
 import DivRow from "CommonComponents/divRow";
-import { benefitsListItems } from "Constants/benefitsConstants";
 import map from "lodash/map";
 import styles from "./faq.module.scss";
 import { faq } from "Constants/faqConstants";

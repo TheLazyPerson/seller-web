@@ -1,0 +1,90 @@
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
+.subscription_container {
+  padding: 55px;
+
+  .subscription:first-child {
+    margin-right: 21px;
+  }
+  .subscription:last-child {
+    margin-left: 21px;
+  }
+
+  .subscription {
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    .subscription_title {
+      font-family: Lato;
+      font-size: 24px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #19202c;
+      margin-bottom: 25px;
+    }
+    .subscription_price {
+      font-family: Lato;
+      font-size: 24px;
+      font-weight: 300;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #19202c;
+      margin-bottom: 22px;
+    }
+    .subtitle {
+      opacity: 0.6;
+      font-family: Lato;
+      font-size: 14px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.71;
+      letter-spacing: normal;
+      color: #19202c;
+      margin-bottom: 20px;
+    }
+
+    .features {
+      .feature {
+        margin-bottom: 40px;
+        .feature_icon {
+          width: 33px;
+          height: 33px;
+          object-fit: contain;
+        }
+        .feature_details {
+          margin-left: 10px;
+          .feature_title {
+            font-family: Lato;
+            font-size: 14px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #19202c;
+            margin-bottom: 4px;
+          }
+          .feature_description {
+            font-family: Lato;
+            font-size: 10px;
+            font-weight: 300;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #19202c;
+          }
+        }
+      }
+    }
+  }
+
+  .is_selected {
+  }
+}

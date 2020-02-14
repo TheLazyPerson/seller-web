@@ -12,6 +12,7 @@ import heroImage from "Images/delivering-success.svg";
 import SellerProposition from "./sellerProposition";
 import Benefits from "./benefits";
 import FAQ from "./Faq";
+import Pricing from "./Pricing";
 
 class LandingPage extends Component {
   render() {
@@ -46,6 +47,7 @@ class LandingPage extends Component {
         </DivRow>
         {/* <Benefits /> */}
         {/* <FAQ /> */}
+        <Pricing />
       </FullWidthContainer>
     );
   }
