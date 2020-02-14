@@ -2,8 +2,9 @@ import { combineReducers } from "redux";
 import { connectRouter } from "connected-react-router";
 import loaderReducer from "./loaderReducer";
 import flashMessageReducer from "./flashMessageReducer";
-import signInReducer from 'Core/modules/signin/signinReducer';
-import signUpReducer from 'Core/modules/signup/signupReducer';
+import signInReducer from "Core/modules/signin/signinReducer";
+import signUpReducer from "Core/modules/signup/signupReducer";
+import profileDetailsReducer from "Core/modules/profiledetails/profileDetailsReducer";
 
 const appReducer = history =>
   combineReducers({
@@ -11,7 +12,8 @@ const appReducer = history =>
     loaderReducer,
     flashMessageReducer,
     signInReducer,
-    signUpReducer
+    signUpReducer,
+    profileDetailsReducer
   });
 
 /* const rootReducer = ( state, action ) => {
