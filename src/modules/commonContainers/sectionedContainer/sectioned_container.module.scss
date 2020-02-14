@@ -1,5 +1,5 @@
-@import '~Styles/colors.module';
-@import '~Styles/mixins.module';
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
 
 .drawer_container {
   background: $primary-color;
@@ -9,7 +9,7 @@
   height: 84px;
 
   .app_icon {
-    height: 20px;
+    height: 16px;
     cursor: pointer;
   }
 }
@@ -22,7 +22,6 @@
 .side_footer_container {
   padding: 36px 0px;
 }
-
 
 .page_container {
   height: 100%;
@@ -52,11 +51,11 @@
       .header_container {
         height: 48px;
         justify-content: flex-end;
-      
+
         .hamburger_menu_icon {
           display: none;
           margin-right: 16px;
-  
+
           @include on_click_button;
         }
       }
@@ -70,7 +69,6 @@
 
 //////////////////////////////////////////////////////////////////////////
 
-
 @include medium {
   .page_container {
     .left_container {
@@ -78,26 +76,24 @@
     }
 
     .right_container {
-  
       .top_header_container {
         padding: 10px 28px;
 
         .header_container {
           height: unset;
-    
+
           .hamburger_menu_icon {
             display: block;
             height: 16px;
             width: 16px;
           }
         }
-      }  
+      }
     }
   }
 }
 
 ////////////////////////////////////////////////////////////////////////
-
 
 @include small {
   .header_container {
@@ -105,9 +101,7 @@
   }
 
   .page_container {
-
     .right_container {
-
       .search_bar_container {
         display: flex;
       }
@@ -117,7 +111,7 @@
 
         .header_container {
           //height: 50px;
-      
+
           .hamburger_menu_icon {
             display: block;
             height: 12px;
@@ -128,4 +122,3 @@
     }
   }
 }
-
