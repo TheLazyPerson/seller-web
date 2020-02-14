@@ -11,6 +11,7 @@ import { bindActionCreators } from "redux";
 import heroImage from "Images/delivering-success.svg";
 import SellerProposition from "./sellerProposition";
 import Benefits from "./benefits";
+import FAQ from "./Faq";
 
 class LandingPage extends Component {
   render() {
@@ -43,7 +44,8 @@ class LandingPage extends Component {
             </DivColumn>
           </DivRow>
         </DivRow>
-        <Benefits />
+        {/* <Benefits /> */}
+        {/* <FAQ /> */}
       </FullWidthContainer>
     );
   }

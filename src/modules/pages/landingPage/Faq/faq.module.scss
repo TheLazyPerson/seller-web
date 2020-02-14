@@ -1,0 +1,55 @@
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
+.faq_landing_container {
+  padding: 55px;
+
+  .faq_container:first-child {
+    border-top: 1px solid rgba(black, 0.2);
+  }
+
+  .faq_container {
+    border-bottom: 1px solid rgba(black, 0.2);
+
+    .faq_title_container {
+      padding: 17px 0px;
+      cursor: pointer;
+
+      .faq_title {
+        flex: 1;
+
+        font-size: 20px;
+        font-weight: normal;
+        color: black;
+      }
+
+      .title_close_icon {
+        height: 14px;
+        visibility: hidden;
+      }
+    }
+
+    .faq_description {
+      margin-bottom: 31px;
+      font-size: 20px;
+      font-weight: 300;
+      color: black;
+      display: none;
+    }
+  }
+
+  .is_selected {
+    .faq_title_container {
+      .faq_title {
+        font-weight: 300;
+      }
+
+      .title_close_icon {
+        visibility: visible;
+      }
+    }
+
+    .faq_description {
+      display: unset;
+    }
+  }
+}
