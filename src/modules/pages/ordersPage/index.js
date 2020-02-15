@@ -13,18 +13,72 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { CookieService } from "Utils/cookieService";
 import { USER_DATA_COOKIE } from "Constants/cookieConstants";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import Checkbox from "@material-ui/core/Checkbox";
+import DataTable, { createTheme } from 'react-data-table-component';
+import differenceBy from 'lodash/differenceBy';
+import Card from '@material-ui/core/Card';
+import IconButton from '@material-ui/core/IconButton';
+import Checkbox from '@material-ui/core/Checkbox';
+import ArrowDownward from '@material-ui/icons/ArrowDownward';
+import Delete from '@material-ui/icons/Delete';
+import Add from '@material-ui/icons/Add';
+import memoize from 'memoize-one';
+
+const sortIcon = <ArrowDownward />;
+const selectProps = { indeterminate: isIndeterminate => isIndeterminate };
+const actions = (
+  <IconButton
+    color="primary"
+  >
+    <Add />
+  </IconButton>
+);
+const contextActions = memoize(deleteHandler => (
+  <IconButton
+    color="secondary"
+    onClick={deleteHandler}
+  >
+    <Delete />
+  </IconButton>
+));
+
+const columns = memoize(() => [
+  {
+    name: 'ID',
+    selector: 'id',
+    sortable: true,
+  },
+  {
+    name: 'ORDER DATE',
+    selector: 'order_date',
+    sortable: true,
+  },
+  {
+    name: 'EXHIBITION NAME',
+    selector: 'exhibition_name',
+    sortable: true,
+    grow: 2,
+  },
+  {
+    name: 'GRAND TOTAL',
+    selector: 'grand_total',
+    sortable: true,
+  },
+  {
+    name: 'TOTAL ITEMS',
+    selector: 'total_items',
+    sortable: true,
+  },
+  {
+    name: 'STATUS',
+    selector: 'status',
+    sortable: true,
+  }
+]);
+
 
 class OrdersPage extends Component {
   state = {
-    rows: [
+    selectedRows: [], toggleCleared: false, data: [
       {
         id: 20,
         order_date: "16 Nov 2020",
@@ -44,13 +98,33 @@ class OrdersPage extends Component {
     ]
   };
 
+  handleChange = state => {
+    this.setState({ selectedRows: state.selectedRows });
+  };
+
+  handleRowClicked = row => {
+
+    console.log(`${row.name} was clicked!`);
+  }
+
+  deleteAll = () => {
+    const { selectedRows } = this.state;
+    const rows = selectedRows.map(r => r.name);
+
+    if (window.confirm(`Are you sure you want to delete:\r ${rows}?`)) {
+      this.setState(state => ({ toggleCleared: !state.toggleCleared, data: differenceBy(state.data, state.selectedRows, 'name') }));
+    }
+  }
+
   render() {
-    const { rows } = this.state;
+    const { data, toggleCleared } = this.state;
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.orders_page_container}>
-          <TableContainer component={Paper}>
+
+
+          {/* <TableContainer component={Paper}>
             <Table aria-label="simple table">
               <TableHead>
                 <TableRow>
@@ -88,7 +162,30 @@ class OrdersPage extends Component {
                 ))}
               </TableBody>
             </Table>
-          </TableContainer>
+          </TableContainer> */}
+
+          <Card style={{ height: '100%' }}>
+            <DataTable
+              title="Desserts"
+              columns={columns()}
+              data={data}
+              selectableRows
+              highlightOnHover
+              defaultSortField="name"
+              actions={actions}
+              contextActions={contextActions(this.deleteAll)}
+              sortIcon={sortIcon}
+              selectableRowsComponent={Checkbox}
+              selectableRowsComponentProps={selectProps}
+              onSelectedRowsChange={this.handleChange}
+              clearSelectedRows={toggleCleared}
+              onRowClicked={this.handleRowClicked}
+              pagination
+              expandableRows
+            />
+          </Card>
+
+
         </DivColumn>
       </SectionedContainer>
     );
