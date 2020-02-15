@@ -13,9 +13,15 @@ import SellerProposition from "./sellerProposition";
 import Benefits from "./benefits";
 import FAQ from "./Faq";
 import Pricing from "./Pricing";
+import { getPlanListAction } from "Core/modules/subscription/subscriptionActions";
+import InitialPageLoader from "CommonContainers/initialPageLoader";
 
 class LandingPage extends Component {
   render() {
+    const {
+      subscriptionReducer: { subscriptionPlanList },
+      getPlanListAction
+    } = this.props;
     return (
       <FullWidthContainer whiteColor>
         <DivRow fillParent className={styles.hero_section_container}>
@@ -47,14 +53,27 @@ class LandingPage extends Component {
         </DivRow>
         {/* <Benefits /> */}
         {/* <FAQ /> */}
-        <Pricing />
+        <InitialPageLoader initialPageApi={getPlanListAction}>
+          <Pricing subscriptionPlanList={subscriptionPlanList} />
+        </InitialPageLoader>
       </FullWidthContainer>
     );
   }
 }
 
-const mapDispathToProps = dispatch => {
-  return {};
+const mapStateToProps = state => {
+  return {
+    subscriptionReducer: state.subscriptionReducer
+  };
 };
 
-export default connect(null, mapDispathToProps)(navigatorHoc(LandingPage));
+const mapDispathToProps = dispatch => {
+  return {
+    getPlanListAction: bindActionCreators(getPlanListAction, dispatch)
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispathToProps
+)(navigatorHoc(LandingPage));
