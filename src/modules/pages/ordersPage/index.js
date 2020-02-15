@@ -26,13 +26,7 @@ import SearchBarComponent from 'CommonComponents/searchBarComponent';
 
 const sortIcon = <ArrowDownward />;
 const selectProps = { indeterminate: isIndeterminate => isIndeterminate };
-const actions = (
-  <IconButton
-    color="primary"
-  >
-    <Add />
-  </IconButton>
-);
+
 const contextActions = memoize(deleteHandler => (
   <IconButton
     color="secondary"
@@ -123,9 +117,34 @@ class OrdersPage extends Component {
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.orders_page_container}>
+          
+          <DivRow className={styles.box_container}>
+            <DivColumn verticalCenter horizontalCenter className={styles.box}>
+              <div className={styles.title}>20</div>
+              <div className={styles.description}>NEW ORDERS</div>
+            </DivColumn>
 
-          <SearchBarComponent />
+            <DivColumn verticalCenter horizontalCenter className={styles.box}>
+              <div className={styles.title}>20</div>
+              <div className={styles.description}>INCOMPLETE ORDERS</div>
+            </DivColumn>
 
+            <DivColumn verticalCenter horizontalCenter className={styles.box}>
+              <div className={styles.title}>200</div>
+              <div className={styles.description}>AVERAGE ORDER SALE</div>
+            </DivColumn>
+
+            <DivColumn verticalCenter horizontalCenter className={styles.box}>
+              <div className={styles.title}>30</div>
+              <div className={styles.description}>TOTAL ORDERS</div>
+            </DivColumn>
+
+          </DivRow>
+
+          <div style={{marginBottom: 20}}>
+            <SearchBarComponent />
+          </div>
+          
           <Card>
             <DataTable
               title="Desserts"
@@ -134,7 +153,6 @@ class OrdersPage extends Component {
               selectableRows
               highlightOnHover
               defaultSortField="name"
-              actions={actions}
               contextActions={contextActions(this.deleteAll)}
               sortIcon={sortIcon}
               selectableRowsComponent={Checkbox}
