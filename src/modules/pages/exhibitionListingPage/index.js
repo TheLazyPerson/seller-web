@@ -31,12 +31,12 @@ class ExhibitionListingPage extends Component {
 
           <DivRow className={styles.date_container}>
             <div className={styles.date_title}>Starts At:</div>
-            <div className={styles.date_value}>{listItem.starts_from}</div>
+            <div className={styles.date_value}> {listItem.starts_from}</div>
           </DivRow>
 
           <DivRow className={styles.date_container}>
             <div className={styles.date_title}>Ends On:</div>
-            <div className={styles.date_value}>{listItem.ends_till}</div>
+            <div className={styles.date_value}> {listItem.ends_till}</div>
           </DivRow>
 
           <DivRow className={styles.action_container}>
