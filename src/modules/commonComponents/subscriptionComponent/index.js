@@ -12,7 +12,7 @@ import rocketIconBlack from "Icons/rocket-black.svg";
 
 class Subscription extends Component {
   render() {
-    const { subscription, isRTL, features, isSelected } = this.props;
+    const { subscription, isRTL, features } = this.props;
 
     const exhibitionFeature = features.filter(
       feature => feature.name === "exhibition_listing"
@@ -24,7 +24,7 @@ class Subscription extends Component {
       <DivColumn
         fillParent
         className={`${styles.subscription} ${
-          isSelected ? styles.is_selected : ""
+          subscription.isSelected ? styles.is_selected : ""
         }`}
       >
         <div className={styles.subscription_title}>{subscription.name}</div>
@@ -36,7 +36,11 @@ class Subscription extends Component {
           <DivRow className={styles.feature}>
             <img
               alt="nav"
-              src={isSelected ? exhibitionIconBlack : exhibitionIconWhite}
+              src={
+                subscription.isSelected
+                  ? exhibitionIconWhite
+                  : exhibitionIconBlack
+              }
               className={styles.feature_icon}
             />
             <DivColumn className={styles.feature_details}>
@@ -52,7 +56,7 @@ class Subscription extends Component {
           <DivRow className={styles.feature}>
             <img
               alt="nav"
-              src={isSelected ? growthIconBlack : growthIconWhite}
+              src={subscription.isSelected ? growthIconWhite : growthIconBlack}
               className={styles.feature_icon}
             />
             <DivColumn className={styles.feature_details}>
@@ -67,7 +71,7 @@ class Subscription extends Component {
           <DivRow className={styles.feature}>
             <img
               alt="nav"
-              src={isSelected ? rocketIconBlack : rocketIconWhite}
+              src={subscription.isSelected ? rocketIconWhite : rocketIconBlack}
               className={styles.feature_icon}
             />
             <DivColumn className={styles.feature_details}>

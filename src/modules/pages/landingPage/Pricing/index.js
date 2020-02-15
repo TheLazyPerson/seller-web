@@ -17,6 +17,7 @@ class Pricing extends Component {
             <Subscription
               subscription={subscription}
               features={subscription.features}
+              isSelected={subscription.isSelected}
             />
           );
         })}

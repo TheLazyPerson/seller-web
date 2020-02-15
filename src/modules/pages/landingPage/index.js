@@ -22,6 +22,12 @@ class LandingPage extends Component {
       subscriptionReducer: { subscriptionPlanList },
       getPlanListAction
     } = this.props;
+    {
+      map(subscriptionPlanList, (subscription, index) => {
+        return (subscription.isSelected = false);
+      });
+    }
+
     return (
       <FullWidthContainer whiteColor>
         <DivRow fillParent className={styles.hero_section_container}>
