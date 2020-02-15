@@ -18,11 +18,18 @@ import exhibitionImage from "Images/exhibition-item-3.png";
 import ProductListItem from "CommonComponents/productListItem";
 
 class ExhibitionDetailsPage extends Component {
+  onBackPress = () => {
+    const { pop } = this.props;
+    pop();
+  };
   render() {
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.exhibition_page_container}>
-          <NavHeader title="Exhibition"></NavHeader>
+          <NavHeader
+            title="Exhibition"
+            onBackClick={this.onBackPress}
+          ></NavHeader>
 
           <DivColumn
             fillParent
