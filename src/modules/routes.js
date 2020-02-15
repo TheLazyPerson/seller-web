@@ -29,6 +29,7 @@ import ProductsPage from "./pages/productsPage";
 import SalesPage from "./pages/salesPage";
 import SubscriptionPage from "./pages/subscriptionPage";
 import YourExhibitionListingPage from "./pages/yourExhibitionListingPage";
+import AddProduct from "./pages/productsPage/addProduct";
 import { connect } from "react-redux";
 
 const App = ({ isUserSignedIn }) => {
@@ -84,6 +85,14 @@ const App = ({ isUserSignedIn }) => {
         exact
         path="/products"
         component={ProductsPage}
+        validator={() => isUserSignedIn}
+      />
+
+      <ProtectedRoute
+        exact
+        path="/product/add"
+        component={AddProduct}
+        redirectTo="signin"
         validator={() => isUserSignedIn}
       />
 

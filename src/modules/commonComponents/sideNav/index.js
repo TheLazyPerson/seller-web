@@ -36,7 +36,7 @@ class SideNav extends Component {
         setRoute = "orders";
         break;
       case "/products":
-      case "/products/details":
+      case "/product/add":
         setRoute = "products";
         break;
       case "/sales":

@@ -72,6 +72,11 @@ const columns = memoize(() => [
 ]);
 
 class ProductsPage extends Component {
+  onClickNewProduct = () => {
+    const { navigateTo } = this.props;
+    navigateTo("add-product");
+  };
+
   state = {
     selectedRows: [],
     toggleCleared: false,
@@ -122,7 +127,9 @@ class ProductsPage extends Component {
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.products_page_container}>
           <NavHeader title="Products">
-            <CapsuleButton>ADD NEW PRODUCT</CapsuleButton>
+            <CapsuleButton onClick={() => this.onClickNewProduct()}>
+              ADD NEW PRODUCT
+            </CapsuleButton>
           </NavHeader>
 
           <DivColumn fillParent className={styles.content_container}>
