@@ -11,18 +11,21 @@ import growthIconBlack from "Icons/growth-black.svg";
 import rocketIconBlack from "Icons/rocket-black.svg";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { setSelectedSubscription } from 'Core/modules/subscription/subscriptionActions';
-
+import { setSelectedSubscription } from "Core/modules/subscription/subscriptionActions";
 
 class Subscription extends Component {
-
   selectSubscription = () => {
     const { setSelectedSubscription, subscription } = this.props;
-    setSelectedSubscription(subscription)
-  }
+    setSelectedSubscription(subscription);
+  };
 
   render() {
-    const { subscription, isRTL, features, subscriptionReducer: { selectedSubscription } } = this.props;
+    const {
+      subscription,
+      isRTL,
+      features,
+      subscriptionReducer: { selectedSubscription }
+    } = this.props;
 
     const exhibitionFeature = features.filter(
       feature => feature.name === "exhibition_listing"
@@ -35,7 +38,7 @@ class Subscription extends Component {
         fillParent
         className={`${styles.subscription} ${
           selectedSubscription.id == subscription.id ? styles.is_selected : ""
-          }`}
+        }`}
         onClick={this.selectSubscription}
       >
         <div className={styles.subscription_title}>{subscription.name}</div>
@@ -48,7 +51,7 @@ class Subscription extends Component {
             <img
               alt="nav"
               src={
-                subscription.isSelected
+                selectedSubscription.id == subscription.id
                   ? exhibitionIconWhite
                   : exhibitionIconBlack
               }
@@ -67,7 +70,11 @@ class Subscription extends Component {
           <DivRow className={styles.feature}>
             <img
               alt="nav"
-              src={subscription.isSelected ? growthIconWhite : growthIconBlack}
+              src={
+                selectedSubscription.id == subscription.id
+                  ? growthIconWhite
+                  : growthIconBlack
+              }
               className={styles.feature_icon}
             />
             <DivColumn className={styles.feature_details}>
@@ -82,7 +89,11 @@ class Subscription extends Component {
           <DivRow className={styles.feature}>
             <img
               alt="nav"
-              src={subscription.isSelected ? rocketIconWhite : rocketIconBlack}
+              src={
+                selectedSubscription.id == subscription.id
+                  ? rocketIconWhite
+                  : rocketIconBlack
+              }
               className={styles.feature_icon}
             />
             <DivColumn className={styles.feature_details}>
@@ -105,7 +116,10 @@ const mapStateToProps = state => {
 
 const mapDispathToProps = dispatch => {
   return {
-    setSelectedSubscription: bindActionCreators(setSelectedSubscription, dispatch)
+    setSelectedSubscription: bindActionCreators(
+      setSelectedSubscription,
+      dispatch
+    )
   };
 };
 
