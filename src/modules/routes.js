@@ -25,6 +25,7 @@ import TermsAndConditionPage from "./pages/termsAndConditionPage";
 import PrivacyPolicyPage from "./pages/privacyPolicyPage";
 import FAQPage from "./pages/FAQPage";
 import OrdersPage from "./pages/ordersPage";
+import YourExhibitionListingPage from "./pages/yourExhibitionListingPage";
 import { connect } from "react-redux";
 
 const App = ({ isUserSignedIn }) => {
@@ -60,6 +61,14 @@ const App = ({ isUserSignedIn }) => {
         exact
         path="/exhibition-details/:exhibitionId?"
         component={ExhibitionDetailsPage}
+        validator={() => isUserSignedIn}
+      />
+
+      <ProtectedRoute
+        exact
+        path="/exhibition/enrolled"
+        redirectTo="signin"
+        component={YourExhibitionListingPage}
         validator={() => isUserSignedIn}
       />
       <ProtectedRoute

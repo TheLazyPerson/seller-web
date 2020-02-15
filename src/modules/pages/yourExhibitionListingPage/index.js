@@ -11,18 +11,19 @@ import SideNav from "CommonComponents/sideNav";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getExhibitionAction } from "Core/modules/exhibition/exhibitionActions";
+import { getEnrolledExhibitionAction } from "Core/modules/exhibition/exhibitionActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 
-class ExhibitionListingPage extends Component {
+class YourExhibitionListingPage extends Component {
   onClickViewExhibitionDetail = exhibition => {
     const { navigateTo } = this.props;
     navigateTo("exhibition-details", exhibition);
   };
-  onClickViewEnrolledExhibitions() {
-    const { navigateTo } = this.props;
-    navigateTo("your-exhibitions");
-  }
+
+  onBackPress = () => {
+    const { pop } = this.props;
+    pop();
+  };
 
   getListItem = listItem => {
     return (
@@ -64,22 +65,19 @@ class ExhibitionListingPage extends Component {
   };
   render() {
     const {
-      exhibitionReducer: { exhibitionList },
-      getExhibitionAction
+      exhibitionReducer: { subscribedExhibitionList },
+      getEnrolledExhibitionAction
     } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.exhibition_page_container}>
-          <NavHeader title="Exhibitions">
-            <CapsuleButton
-              onClick={() => this.onClickViewEnrolledExhibitions()}
-            >
-              Your Exhibitions
-            </CapsuleButton>
-          </NavHeader>
+          <NavHeader
+            title="Your Exhibitions"
+            onBackClick={this.onBackPress}
+          ></NavHeader>
           <DivColumn fillParent className={styles.content_container}>
-            <InitialPageLoader initialPageApi={getExhibitionAction}>
-              {map(exhibitionList, exhibition => {
+            <InitialPageLoader initialPageApi={getEnrolledExhibitionAction}>
+              {map(subscribedExhibitionList, exhibition => {
                 return this.getListItem(exhibition);
               })}
             </InitialPageLoader>
@@ -98,11 +96,14 @@ const mapStateToProps = state => {
 
 const mapDispathToProps = dispatch => {
   return {
-    getExhibitionAction: bindActionCreators(getExhibitionAction, dispatch)
+    getEnrolledExhibitionAction: bindActionCreators(
+      getEnrolledExhibitionAction,
+      dispatch
+    )
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(ExhibitionListingPage));
+)(navigatorHoc(YourExhibitionListingPage));
