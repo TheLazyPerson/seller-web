@@ -12,6 +12,7 @@ import navigatorHoc from "Hoc/navigatorHoc";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getExhibitionAction } from "Core/modules/exhibition/exhibitionActions";
+import InitialPageLoader from "CommonContainers/initialPageLoader";
 
 class ExhibitionListingPage extends Component {
   getListItem = listItem => {
@@ -50,7 +51,8 @@ class ExhibitionListingPage extends Component {
   };
   render() {
     const {
-      exhibitionReducer: { exhibitionList }
+      exhibitionReducer: { exhibitionList },
+      getExhibitionAction
     } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
@@ -59,9 +61,11 @@ class ExhibitionListingPage extends Component {
             <CapsuleButton>Your Exhibitions</CapsuleButton>
           </NavHeader>
           <DivColumn fillParent className={styles.content_container}>
-            {map(exhibitionList, exhibition => {
-              return this.getListItem(exhibition);
-            })}
+            <InitialPageLoader initialPageApi={getExhibitionAction}>
+              {map(exhibitionList, exhibition => {
+                return this.getListItem(exhibition);
+              })}
+            </InitialPageLoader>
           </DivColumn>
         </DivColumn>
       </SectionedContainer>
