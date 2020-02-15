@@ -25,6 +25,7 @@ import TermsAndConditionPage from "./pages/termsAndConditionPage";
 import PrivacyPolicyPage from "./pages/privacyPolicyPage";
 import FAQPage from "./pages/FAQPage";
 import OrdersPage from "./pages/ordersPage";
+import ProductsPage from "./pages/productsPage";
 import YourExhibitionListingPage from "./pages/yourExhibitionListingPage";
 import { connect } from "react-redux";
 
@@ -59,7 +60,7 @@ const App = ({ isUserSignedIn }) => {
       />
       <ProtectedRoute
         exact
-        path="/exhibition/details/:exhibitionId?"        
+        path="/exhibition/details/:exhibitionId?"
         component={ExhibitionDetailsPage}
         validator={() => isUserSignedIn}
       />
@@ -77,7 +78,12 @@ const App = ({ isUserSignedIn }) => {
         component={OrdersPage}
         validator={() => isUserSignedIn}
       />
-
+      <ProtectedRoute
+        exact
+        path="/products"
+        component={ProductsPage}
+        validator={() => isUserSignedIn}
+      />
       <Route
         exact
         path="/marketplace"

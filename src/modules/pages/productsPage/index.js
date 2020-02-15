@@ -5,7 +5,7 @@ import DivRow from "CommonComponents/divRow";
 import NavHeader from "CommonComponents/navHeader";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import map from "lodash/map";
-import styles from "./orders.module.scss";
+import styles from "./products.module.scss";
 import SideNav from "CommonComponents/sideNav";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { logoutAction } from "Core/modules/signin/signinActions";
@@ -71,7 +71,7 @@ const columns = memoize(() => [
   }
 ]);
 
-class OrdersPage extends Component {
+class ProductsPage extends Component {
   state = {
     selectedRows: [],
     toggleCleared: false,
@@ -120,29 +120,34 @@ class OrdersPage extends Component {
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <DivColumn fillParent className={styles.orders_page_container}>
-          <SearchBarComponent />
+        <DivColumn fillParent className={styles.products_page_container}>
+          <NavHeader title="Products">
+            <CapsuleButton>ADD NEW PRODUCT</CapsuleButton>
+          </NavHeader>
 
-          <Card>
-            <DataTable
-              title="Desserts"
-              columns={columns()}
-              data={data}
-              selectableRows
-              highlightOnHover
-              defaultSortField="name"
-              actions={actions}
-              contextActions={contextActions(this.deleteAll)}
-              sortIcon={sortIcon}
-              selectableRowsComponent={Checkbox}
-              selectableRowsComponentProps={selectProps}
-              onSelectedRowsChange={this.handleChange}
-              clearSelectedRows={toggleCleared}
-              onRowClicked={this.handleRowClicked}
-              pagination
-              expandableRows
-            />
-          </Card>
+          <DivColumn fillParent className={styles.content_container}>
+            <SearchBarComponent />
+            <Card>
+              <DataTable
+                title="Desserts"
+                columns={columns()}
+                data={data}
+                selectableRows
+                highlightOnHover
+                defaultSortField="name"
+                actions={actions}
+                contextActions={contextActions(this.deleteAll)}
+                sortIcon={sortIcon}
+                selectableRowsComponent={Checkbox}
+                selectableRowsComponentProps={selectProps}
+                onSelectedRowsChange={this.handleChange}
+                clearSelectedRows={toggleCleared}
+                onRowClicked={this.handleRowClicked}
+                pagination
+                expandableRows
+              />
+            </Card>
+          </DivColumn>
         </DivColumn>
       </SectionedContainer>
     );
@@ -155,4 +160,4 @@ const mapDispathToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispathToProps)(navigatorHoc(OrdersPage));
+export default connect(null, mapDispathToProps)(navigatorHoc(ProductsPage));
