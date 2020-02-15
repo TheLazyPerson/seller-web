@@ -28,7 +28,7 @@ const navigatorHoc = WrappedComponent => {
           return navigationFunction("/exhibitions");
 
         case "exhibition-details":
-          return navigationFunction(`/exhibition/details?id=${data.id}`);
+          return navigationFunction(`/exhibition/details/${data.id}`);
 
         case "your-exhibitions":
           return navigationFunction("/exhibition/enrolled");

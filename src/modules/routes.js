@@ -59,7 +59,7 @@ const App = ({ isUserSignedIn }) => {
       />
       <ProtectedRoute
         exact
-        path="/exhibition-details/:exhibitionId?"
+        path="/exhibition/details/:exhibitionId?"        
         component={ExhibitionDetailsPage}
         validator={() => isUserSignedIn}
       />
