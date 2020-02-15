@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import FullWidthContainer from 'CommonContainers/fullwidthContainer';
 import DivColumn from 'CommonComponents/divColumn';
 import { connect } from 'react-redux';
@@ -18,48 +18,60 @@ import {
   isEmptyValidator
 } from 'Utils/validators';
 import translatorHoc from 'Hoc/translatorHoc';
+import InitialPageLoader from "CommonContainers/initialPageLoader";
+import { getPlanListAction } from "Core/modules/subscription/subscriptionActions";
+import Pricing from "../landingPage/Pricing";
 
 class SignUpPage extends Component {
 
+  state = {
+    showSubscription: false,
+  }
+
   onSubmit = (form) => {
-    const { postSignupAction, navigateTo, showSuccessFlashMessage } = this.props;
+    const { postSignupAction, navigateTo, showSuccessFlashMessage, subscriptionReducer: { selectedSubscription } } = this.props;
+    if (selectedSubscription.id) {
+      postSignupAction({
+        "first_name": form.firstName,
+        "last_name": form.lastName,
+        "email": form.email,
+        "password": form.password,
+        "password_confirmation": form.confirmPassword,
+        "plan_id": selectedSubscription.id
 
-    postSignupAction({
-      "first_name": form.firstName,
-      "last_name": form.lastName,
-      "email": form.email,
-      "password": form.password,
-      "password_confirmation": form.confirmPassword,
-      "plan_id": 1
-
-    }).then(({payload}) => {
-      if (payload.code == 200 ||payload.code == 201) {
-        navigateTo('signin');
-        showSuccessFlashMessage('Signed up successfuly');  
-      }
-    });
+      }).then(({ payload }) => {
+        if (payload.code == 200 || payload.code == 201) {
+          navigateTo('signin');
+          showSuccessFlashMessage('Signed up successfuly');
+        }
+      });
+    }
+    else {
+      this.setState({ showSubscription: true })
+    }
   }
 
   validate = (values) => {
     const errors = {};
     const validators = {
       firstName: nameValidator(values.firstName),
-      lastName:  nameValidator(values.lastName),
-      email:  emailValidator(values.email),
+      lastName: nameValidator(values.lastName),
+      email: emailValidator(values.email),
       password: isEmptyValidator(values.password),
       confirmPassword: passwordValidator(values.password, values.confirmPassword)
     }
 
-    Object.keys(validators).forEach(key=>{
+    Object.keys(validators).forEach(key => {
       if (!validators[key].result)
         errors[key] = validators[key].error;
-   });
+    });
 
     return errors;
   }
 
   render() {
-    const { translate } = this.props;
+    const { translate, subscriptionReducer: { subscriptionPlanList }, getPlanListAction } = this.props;
+    const { showSubscription } = this.state;
 
     return (
       <FullWidthContainer>
@@ -70,74 +82,84 @@ class SignUpPage extends Component {
             validate={this.validate}
             render={({ handleSubmit, form, submitting, pristine, values }) => (
               <form className={styles.form_container} onSubmit={handleSubmit}>
-                <DivRow className={styles.name_container}>
-                  <Field name="firstName">
-                    {
-                      ({ input, meta }) => (
-                        <InputTextComponent 
-                          meta={meta}
-                          {...input}
-                          placeholder={translate('signup_page.firstname')}
-                          className={styles.input_text}
-                        />
-                      )
-                    }
-                  </Field>
-                  <Field name="lastName">
-                    {
-                      ({ input, meta }) => (
-                        <InputTextComponent
-                         meta={meta}
-                         {...input}
-                         placeholder={translate('signup_page.lastname')}
-                         className={styles.input_text}
-                        />
-                      )
-                    }
-                  </Field>
-                </DivRow>
-                <Field name="email">
-                    {
-                      ({ input, meta }) => (
-                        <InputTextComponent
-                         meta={meta}
-                         {...input}
-                         placeholder={translate('signup_page.email')}
-                         className={styles.input_text}
-                        />
-                      )
-                    }
-                </Field>
+                {
+                  showSubscription ? (
+                    <InitialPageLoader initialPageApi={getPlanListAction}>
+                      <Pricing subscriptionPlanList={subscriptionPlanList} />
+                    </InitialPageLoader>
+                  ) : (
+                      <Fragment>
+                        <DivRow className={styles.name_container}>
+                          <Field name="firstName">
+                            {
+                              ({ input, meta }) => (
+                                <InputTextComponent
+                                  meta={meta}
+                                  {...input}
+                                  placeholder={translate('signup_page.firstname')}
+                                  className={styles.input_text}
+                                />
+                              )
+                            }
+                          </Field>
+                          <Field name="lastName">
+                            {
+                              ({ input, meta }) => (
+                                <InputTextComponent
+                                  meta={meta}
+                                  {...input}
+                                  placeholder={translate('signup_page.lastname')}
+                                  className={styles.input_text}
+                                />
+                              )
+                            }
+                          </Field>
+                        </DivRow>
+                        <Field name="email">
+                          {
+                            ({ input, meta }) => (
+                              <InputTextComponent
+                                meta={meta}
+                                {...input}
+                                placeholder={translate('signup_page.email')}
+                                className={styles.input_text}
+                              />
+                            )
+                          }
+                        </Field>
 
-                
-                <Field name="password">
-                    {
-                      ({ input, meta }) => (
-                        <InputTextComponent
-                         meta={meta}
-                         type="password"
-                         {...input}
-                         placeholder={translate('signup_page.password')}
-                         className={styles.input_text}
-                        />
-                      )
-                    }
-                </Field>
 
-                <Field name="confirmPassword">
-                    {
-                      ({ input, meta }) => (
-                        <InputTextComponent
-                         meta={meta}
-                         type="password"
-                         {...input}
-                         placeholder={translate('signup_page.confirm_password')}
-                         className={styles.input_text}
-                        />
-                      )
-                    }
-                </Field>
-                <input 
+                        <Field name="password">
+                          {
+                            ({ input, meta }) => (
+                              <InputTextComponent
+                                meta={meta}
+                                type="password"
+                                {...input}
+                                placeholder={translate('signup_page.password')}
+                                className={styles.input_text}
+                              />
+                            )
+                          }
+                        </Field>
+
+                        <Field name="confirmPassword">
+                          {
+                            ({ input, meta }) => (
+                              <InputTextComponent
+                                meta={meta}
+                                type="password"
+                                {...input}
+                                placeholder={translate('signup_page.confirm_password')}
+                                className={styles.input_text}
+                              />
+                            )
+                          }
+                        </Field>
+                      </Fragment>
+                    )
+                }
+                <input
                   type='submit'
                   value={translate('signup_page.create')}
                   className={styles.input_submit}
@@ -161,6 +183,7 @@ const mapStateToProps = state => {
   return {
     signupReducer: state.signupReducer,
     signInReducer: state.signInReducer,
+    subscriptionReducer: state.subscriptionReducer,
   }
 }
 
@@ -168,6 +191,7 @@ const mapDispathToProps = dispatch => {
   return {
     postSignupAction: bindActionCreators(postSignupAction, dispatch),
     showSuccessFlashMessage: bindActionCreators(showSuccessFlashMessage, dispatch),
+    getPlanListAction: bindActionCreators(getPlanListAction, dispatch),
   }
 }
 

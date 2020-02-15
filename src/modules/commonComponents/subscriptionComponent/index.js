@@ -9,10 +9,20 @@ import rocketIconWhite from "Icons/rocket-white.svg";
 import exhibitionIconBlack from "Icons/exhibition-black.svg";
 import growthIconBlack from "Icons/growth-black.svg";
 import rocketIconBlack from "Icons/rocket-black.svg";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { setSelectedSubscription } from 'Core/modules/subscription/subscriptionActions';
+
 
 class Subscription extends Component {
+
+  selectSubscription = () => {
+    const { setSelectedSubscription, subscription } = this.props;
+    setSelectedSubscription(subscription)
+  }
+
   render() {
-    const { subscription, isRTL, features } = this.props;
+    const { subscription, isRTL, features, subscriptionReducer: { selectedSubscription } } = this.props;
 
     const exhibitionFeature = features.filter(
       feature => feature.name === "exhibition_listing"
@@ -24,8 +34,9 @@ class Subscription extends Component {
       <DivColumn
         fillParent
         className={`${styles.subscription} ${
-          subscription.isSelected ? styles.is_selected : ""
-        }`}
+          selectedSubscription.id == subscription.id ? styles.is_selected : ""
+          }`}
+        onClick={this.selectSubscription}
       >
         <div className={styles.subscription_title}>{subscription.name}</div>
         <div className={styles.subscription_price}>
@@ -86,5 +97,19 @@ class Subscription extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    subscriptionReducer: state.subscriptionReducer
+  };
+};
 
-export default translatorHoc(Subscription);
+const mapDispathToProps = dispatch => {
+  return {
+    setSelectedSubscription: bindActionCreators(setSelectedSubscription, dispatch)
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispathToProps
+)(translatorHoc(Subscription));

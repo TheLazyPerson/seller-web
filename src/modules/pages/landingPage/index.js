@@ -17,6 +17,15 @@ import { getPlanListAction } from "Core/modules/subscription/subscriptionActions
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 
 class LandingPage extends Component {
+
+  onClickStartSelling = () => {
+    const { subscriptionReducer: {selectedSubscription}, navigateTo } = this.props;
+
+    if (selectedSubscription.id) {
+      navigateTo('signup');
+    }
+  }
+
   render() {
     const {
       subscriptionReducer: { subscriptionPlanList },
@@ -44,6 +53,7 @@ class LandingPage extends Component {
                 verticalCenter
                 horizontalCenter
                 className={styles.start_selling_button}
+                onClick={this.onClickStartSelling}
               >
                 Start Selling
               </DivRow>
