@@ -9,6 +9,7 @@ import addressReducer from "Core/modules/address/addressReducer";
 import basicReducer from "Core/modules/basic/basicReducer";
 import marketplaceProfileReducer from "Core/modules/marketplaceprofile/marketplaceProfileReducer";
 import subscriptionReducer from "Core/modules/subscription/subscriptionReducer";
+import exhibitionReducer from "Core/modules/exhibition/exhibitionReducer";
 
 const appReducer = history =>
   combineReducers({
@@ -21,7 +22,8 @@ const appReducer = history =>
     marketplaceProfileReducer,
     addressReducer,
     basicReducer,
-    subscriptionReducer
+    subscriptionReducer,
+    exhibitionReducer
   });
 
 /* const rootReducer = ( state, action ) => {

@@ -24,7 +24,7 @@ import EditAddress from "./pages/address/editAddress";
 import TermsAndConditionPage from "./pages/termsAndConditionPage";
 import PrivacyPolicyPage from "./pages/privacyPolicyPage";
 import FAQPage from "./pages/FAQPage";
-import OrdersPage from './pages/ordersPage';
+import OrdersPage from "./pages/ordersPage";
 import { connect } from "react-redux";
 
 const App = ({ isUserSignedIn }) => {
@@ -52,6 +52,7 @@ const App = ({ isUserSignedIn }) => {
       <ProtectedRoute
         exact
         path="/exhibitions"
+        redirectTo="signin"
         component={ExhibitionListingPage}
         validator={() => isUserSignedIn}
       />
