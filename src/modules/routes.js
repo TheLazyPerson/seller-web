@@ -26,6 +26,7 @@ import PrivacyPolicyPage from "./pages/privacyPolicyPage";
 import FAQPage from "./pages/FAQPage";
 import OrdersPage from "./pages/ordersPage";
 import ProductsPage from "./pages/productsPage";
+import SalesPage from "./pages/salesPage";
 import YourExhibitionListingPage from "./pages/yourExhibitionListingPage";
 import { connect } from "react-redux";
 
@@ -82,6 +83,13 @@ const App = ({ isUserSignedIn }) => {
         exact
         path="/products"
         component={ProductsPage}
+        validator={() => isUserSignedIn}
+      />
+
+      <ProtectedRoute
+        exact
+        path="/sales"
+        component={SalesPage}
         validator={() => isUserSignedIn}
       />
       <Route
