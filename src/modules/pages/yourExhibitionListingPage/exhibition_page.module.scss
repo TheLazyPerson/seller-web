@@ -1,0 +1,73 @@
+@import "~Styles/colors.module";
+
+.exhibition_page_container {
+  .content_container {
+    overflow: scroll;
+    padding: 25px 50px 0px;
+
+    .item {
+      height: 290px;
+      align-self: stretch;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+      margin-bottom: 25px;
+
+      .image {
+        align-self: stretch;
+        width: 345px;
+      }
+
+      .item_content {
+        flex: 1;
+        color: $color-dark;
+        padding: 19px 19px 13px 15px;
+
+        .title {
+          font-size: 20px;
+          font-weight: bold;
+        }
+
+        .description {
+          font-size: 14px;
+          font-weight: 300;
+          margin: 11px 0px 20px;
+        }
+
+        .category_header {
+          font-size: 14px;
+          font-weight: bold;
+        }
+
+        .category_value {
+          font-size: 14px;
+          font-weight: 300;
+        }
+
+        .date_container {
+          opacity: 0.9;
+          font-size: 10px;
+          margin-top: 11px;
+
+          .date_title {
+            font-weight: bold;
+            margin-bottom: 7px;
+          }
+
+          .date_value {
+            color: $color-dark;
+          }
+        }
+
+        .action_container {
+          margin-top: auto;
+
+          .last_date {
+            font-size: 12px;
+            color: $color-green-apple;
+            margin-right: auto;
+            text-transform: uppercase;
+          }
+        }
+      }
+    }
+  }
+}
