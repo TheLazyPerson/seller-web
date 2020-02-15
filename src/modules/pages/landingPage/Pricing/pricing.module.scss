@@ -86,5 +86,32 @@
   }
 
   .is_selected {
+    background-image: linear-gradient(225deg, #37445b 0%, #19202c 92%);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+
+    .subscription_title {
+      color: #ffffff;
+    }
+
+    .subscription_price {
+      color: #ffffff;
+    }
+    .subtitle {
+      color: #ffffff;
+    }
+
+    .features {
+      .feature {
+        .feature_details {
+          .feature_title {
+            color: #ffffff;
+          }
+          .feature_description {
+            color: #ffffff;
+          }
+        }
+      }
+    }
   }
 }
