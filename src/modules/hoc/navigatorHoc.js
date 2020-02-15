@@ -89,6 +89,9 @@ const navigatorHoc = WrappedComponent => {
         case "profile-details":
           return navigationFunction("/profile/details");
 
+        case "subscription":
+          return navigationFunction("/subscription");
+
         case "settings":
           return navigationFunction("/profile/settings");
 

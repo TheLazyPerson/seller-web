@@ -27,6 +27,7 @@ import FAQPage from "./pages/FAQPage";
 import OrdersPage from "./pages/ordersPage";
 import ProductsPage from "./pages/productsPage";
 import SalesPage from "./pages/salesPage";
+import SubscriptionPage from "./pages/subscriptionPage";
 import YourExhibitionListingPage from "./pages/yourExhibitionListingPage";
 import { connect } from "react-redux";
 
@@ -151,6 +152,15 @@ const App = ({ isUserSignedIn }) => {
         redirectTo="signin"
         validator={() => isUserSignedIn}
       />
+
+      <ProtectedRoute
+        exact
+        path="/subscription"
+        component={SubscriptionPage}
+        redirectTo="signin"
+        validator={() => isUserSignedIn}
+      />
+
       <ProtectedRoute
         exact
         path="/profile/helpcenter"

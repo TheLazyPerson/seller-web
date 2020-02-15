@@ -101,7 +101,7 @@ export const profileListItem = [
         blackImage: subscriptionBlackIcon,
         whiteImage: subscriptionWhiteIcon,
         title: "Subscription",
-        slug: "subsciption",
+        slug: "subscription",
         description: "Check your subscription details"
       },
       {
