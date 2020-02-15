@@ -40,7 +40,9 @@ class AddProduct extends Component {
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.page_container}>
-          <NavHeader title="Add Address" onBackClick={this.onBackPress} />
+          <NavHeader title="Add Product" onBackClick={this.onBackPress}>
+            <CapsuleButton>Save</CapsuleButton>
+          </NavHeader>
         </DivColumn>
       </SectionedContainer>
     );
