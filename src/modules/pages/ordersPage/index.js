@@ -126,7 +126,7 @@ class OrdersPage extends Component {
 
           <SearchBarComponent />
 
-          <Card style={{ height: '100%' }}>
+          <Card>
             <DataTable
               title="Desserts"
               columns={columns()}
