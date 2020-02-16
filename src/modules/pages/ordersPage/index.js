@@ -14,7 +14,41 @@ import { bindActionCreators } from "redux";
 import { CookieService } from "Utils/cookieService";
 import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import DataTable, { createTheme } from "react-data-table-component";
-import DataTableContainer from 'CommonContainers/dataTableContainer';
+import memoize from "memoize-one";
+import DataTableContainer from "CommonContainers/dataTableContainer";
+const columns = memoize(() => [
+  {
+    name: "ID",
+    selector: "id",
+    sortable: true
+  },
+  {
+    name: "ORDER DATE",
+    selector: "order_date",
+    sortable: true
+  },
+  {
+    name: "EXHIBITION NAME",
+    selector: "exhibition_name",
+    sortable: true,
+    grow: 2
+  },
+  {
+    name: "GRAND TOTAL",
+    selector: "grand_total",
+    sortable: true
+  },
+  {
+    name: "TOTAL ITEMS",
+    selector: "total_items",
+    sortable: true
+  },
+  {
+    name: "STATUS",
+    selector: "status",
+    sortable: true
+  }
+]);
 
 class OrdersPage extends Component {
   state = {
@@ -44,7 +78,6 @@ class OrdersPage extends Component {
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.orders_page_container}>
-          
           <DivRow className={styles.box_container}>
             <DivColumn verticalCenter horizontalCenter className={styles.box}>
               <div className={styles.title}>20</div>
@@ -65,14 +98,9 @@ class OrdersPage extends Component {
               <div className={styles.title}>30</div>
               <div className={styles.description}>TOTAL ORDERS</div>
             </DivColumn>
-
           </DivRow>
 
-          <DataTableContainer 
-            data={data}
-          />
-
-
+          <DataTableContainer data={data} columns={columns()} />
         </DivColumn>
       </SectionedContainer>
     );
