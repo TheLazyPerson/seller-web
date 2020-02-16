@@ -24,7 +24,7 @@ class HomePage extends Component {
     } else if (slug === "logout") {
       logoutAction().then(() => {
         CookieService.delete(USER_DATA_COOKIE);
-        CookieService.delete('BAG_COUNT');
+        CookieService.delete("BAG_COUNT");
         navigateTo(""); // ToHomePage
       });
     } else {
@@ -45,30 +45,26 @@ class HomePage extends Component {
             <div className={styles.header_message}>Welcome, Omar.</div>
           </DivColumn>
 
-          <DivRow className={styles.items_container}>
-            {map(profileListItem, listItem => {
-              if (listItem.title !== "Overview") {
-                return (
-                  <DivColumn
-                    verticalCenter
-                    horizontalCenter
-                    className={styles.grid_item}
-                    onClick={() => this.onClickNavItemClick(listItem.slug)}
-                  >
-                    <img
-                      className={styles.item_image}
-                      src={listItem.blackImage}
-                      alt="item"
-                    />
-                    <div className={styles.item_title}>{listItem.title}</div>
-                    <div className={styles.item_description}>
-                      {listItem.description}
-                    </div>
-                  </DivColumn>
-                );
-              }
-              return null;
-            })}
+          <DivRow className={styles.box_container}>
+            <DivColumn verticalCenter horizontalCenter className={styles.box}>
+              <div className={styles.title}>20</div>
+              <div className={styles.description}>NEW ORDERS</div>
+            </DivColumn>
+
+            <DivColumn verticalCenter horizontalCenter className={styles.box}>
+              <div className={styles.title}>20</div>
+              <div className={styles.description}>INCOMPLETE ORDERS</div>
+            </DivColumn>
+
+            <DivColumn verticalCenter horizontalCenter className={styles.box}>
+              <div className={styles.title}>200</div>
+              <div className={styles.description}>AVERAGE ORDER SALE</div>
+            </DivColumn>
+
+            <DivColumn verticalCenter horizontalCenter className={styles.box}>
+              <div className={styles.title}>30</div>
+              <div className={styles.description}>TOTAL ORDERS</div>
+            </DivColumn>
           </DivRow>
         </DivColumn>
       </SectionedContainer>
