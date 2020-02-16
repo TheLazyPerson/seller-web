@@ -11,31 +11,14 @@ import navigatorHoc from "Hoc/navigatorHoc";
 import { logoutAction } from "Core/modules/signin/signinActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { CookieService } from "Utils/cookieService";
-import { USER_DATA_COOKIE } from "Constants/cookieConstants";
-import DataTable, { createTheme } from "react-data-table-component";
-import differenceBy from "lodash/differenceBy";
-import Card from "@material-ui/core/Card";
-import IconButton from "@material-ui/core/IconButton";
-import Checkbox from "@material-ui/core/Checkbox";
-import ArrowDownward from "@material-ui/icons/ArrowDownward";
-import Delete from "@material-ui/icons/Delete";
-import Add from "@material-ui/icons/Add";
 import memoize from "memoize-one";
-import SearchBarComponent from "CommonComponents/searchBarComponent";
-
-const sortIcon = <ArrowDownward />;
-const selectProps = { indeterminate: isIndeterminate => isIndeterminate };
-const actions = (
-  <IconButton color="primary">
-    <Add />
-  </IconButton>
-);
-const contextActions = memoize(deleteHandler => (
-  <IconButton color="secondary" onClick={deleteHandler}>
-    <Delete />
-  </IconButton>
-));
+import DataTableContainer from "CommonContainers/dataTableContainer";
+import {
+  getProductListAction,
+  removeProductAction
+} from "Core/modules/product/productActions";
+import InitialPageLoader from "CommonContainers/initialPageLoader";
+import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 
 const columns = memoize(() => [
   {
@@ -44,29 +27,29 @@ const columns = memoize(() => [
     sortable: true
   },
   {
-    name: "ORDER DATE",
-    selector: "order_date",
+    name: "SKU",
+    selector: "sku",
     sortable: true
   },
   {
-    name: "EXHIBITION NAME",
-    selector: "exhibition_name",
+    name: "NAME",
+    selector: "name",
     sortable: true,
     grow: 2
   },
   {
-    name: "GRAND TOTAL",
-    selector: "grand_total",
+    name: "PRICE",
+    selector: "price",
     sortable: true
   },
   {
-    name: "TOTAL ITEMS",
-    selector: "total_items",
+    name: "QUANTITY",
+    selector: "qty",
     sortable: true
   },
   {
-    name: "STATUS",
-    selector: "status",
+    name: "APPROVAL",
+    selector: "is_saved",
     sortable: true
   }
 ]);
@@ -78,8 +61,6 @@ class ProductsPage extends Component {
   };
 
   state = {
-    selectedRows: [],
-    toggleCleared: false,
     data: [
       {
         id: 20,
@@ -100,29 +81,12 @@ class ProductsPage extends Component {
     ]
   };
 
-  handleChange = state => {
-    this.setState({ selectedRows: state.selectedRows });
-  };
-
-  handleRowClicked = row => {
-    console.log(`${row.name} was clicked!`);
-  };
-
-  deleteAll = () => {
-    const { selectedRows } = this.state;
-    const rows = selectedRows.map(r => r.name);
-
-    if (window.confirm(`Are you sure you want to delete:\r ${rows}?`)) {
-      this.setState(state => ({
-        toggleCleared: !state.toggleCleared,
-        data: differenceBy(state.data, state.selectedRows, "name")
-      }));
-    }
-  };
-
   render() {
     const { data, toggleCleared } = this.state;
-
+    const {
+      productReducer: { productList },
+      getProductListAction
+    } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.products_page_container}>
@@ -131,29 +95,14 @@ class ProductsPage extends Component {
               ADD NEW PRODUCT
             </CapsuleButton>
           </NavHeader>
-
           <DivColumn fillParent className={styles.content_container}>
-            <SearchBarComponent />
-            <Card>
-              <DataTable
-                title="Desserts"
+            <InitialPageLoader initialPageApi={getProductListAction}>
+              <DataTableContainer
+                data={productList}
+                title="Products"
                 columns={columns()}
-                data={data}
-                selectableRows
-                highlightOnHover
-                defaultSortField="name"
-                actions={actions}
-                contextActions={contextActions(this.deleteAll)}
-                sortIcon={sortIcon}
-                selectableRowsComponent={Checkbox}
-                selectableRowsComponentProps={selectProps}
-                onSelectedRowsChange={this.handleChange}
-                clearSelectedRows={toggleCleared}
-                onRowClicked={this.handleRowClicked}
-                pagination
-                expandableRows
               />
-            </Card>
+            </InitialPageLoader>
           </DivColumn>
         </DivColumn>
       </SectionedContainer>
@@ -161,10 +110,24 @@ class ProductsPage extends Component {
   }
 }
 
-const mapDispathToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    logoutAction: bindActionCreators(logoutAction, dispatch)
+    productReducer: state.productReducer
   };
 };
 
-export default connect(null, mapDispathToProps)(navigatorHoc(ProductsPage));
+const mapDispathToProps = dispatch => {
+  return {
+    getProductListAction: bindActionCreators(getProductListAction, dispatch),
+    removeProductAction: bindActionCreators(removeProductAction, dispatch),
+    showSuccessFlashMessage: bindActionCreators(
+      showSuccessFlashMessage,
+      dispatch
+    )
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispathToProps
+)(navigatorHoc(ProductsPage));
