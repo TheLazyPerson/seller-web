@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { CookieService } from "Utils/cookieService";
 import { USER_DATA_COOKIE } from "Constants/cookieConstants";
+import DataTable, { createTheme } from "react-data-table-component";
 import DataTableContainer from 'CommonContainers/dataTableContainer';
 
 class OrdersPage extends Component {
@@ -84,7 +85,4 @@ const mapDispathToProps = dispatch => {
   };
 };
 
-export default connect(
-  null,
-  mapDispathToProps
-)(navigatorHoc(OrdersPage));
+export default connect(null, mapDispathToProps)(navigatorHoc(OrdersPage));

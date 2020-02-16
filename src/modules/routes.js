@@ -25,7 +25,11 @@ import TermsAndConditionPage from "./pages/termsAndConditionPage";
 import PrivacyPolicyPage from "./pages/privacyPolicyPage";
 import FAQPage from "./pages/FAQPage";
 import OrdersPage from "./pages/ordersPage";
+import ProductsPage from "./pages/productsPage";
+import SalesPage from "./pages/salesPage";
+import SubscriptionPage from "./pages/subscriptionPage";
 import YourExhibitionListingPage from "./pages/yourExhibitionListingPage";
+import AddProduct from "./pages/productsPage/addProduct";
 import { connect } from "react-redux";
 
 const App = ({ isUserSignedIn }) => {
@@ -59,7 +63,7 @@ const App = ({ isUserSignedIn }) => {
       />
       <ProtectedRoute
         exact
-        path="/exhibition/details/:exhibitionId?"        
+        path="/exhibition/details/:exhibitionId?"
         component={ExhibitionDetailsPage}
         validator={() => isUserSignedIn}
       />
@@ -77,7 +81,27 @@ const App = ({ isUserSignedIn }) => {
         component={OrdersPage}
         validator={() => isUserSignedIn}
       />
+      <ProtectedRoute
+        exact
+        path="/products"
+        component={ProductsPage}
+        validator={() => isUserSignedIn}
+      />
 
+      <ProtectedRoute
+        exact
+        path="/product/add"
+        component={AddProduct}
+        redirectTo="signin"
+        validator={() => isUserSignedIn}
+      />
+
+      <ProtectedRoute
+        exact
+        path="/sales"
+        component={SalesPage}
+        validator={() => isUserSignedIn}
+      />
       <Route
         exact
         path="/marketplace"
@@ -137,6 +161,15 @@ const App = ({ isUserSignedIn }) => {
         redirectTo="signin"
         validator={() => isUserSignedIn}
       />
+
+      <ProtectedRoute
+        exact
+        path="/subscription"
+        component={SubscriptionPage}
+        redirectTo="signin"
+        validator={() => isUserSignedIn}
+      />
+
       <ProtectedRoute
         exact
         path="/profile/helpcenter"

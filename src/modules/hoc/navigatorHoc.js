@@ -33,6 +33,15 @@ const navigatorHoc = WrappedComponent => {
         case "your-exhibitions":
           return navigationFunction("/exhibition/enrolled");
 
+        case "products":
+          return navigationFunction("/products");
+
+        case "add-product":
+          return navigationFunction("/product/add");
+
+        case "sales":
+          return navigationFunction("/sales");
+
         case "plp":
           return navigationFunction(`/product-listing/?id=${data.id}`);
 
@@ -52,9 +61,9 @@ const navigatorHoc = WrappedComponent => {
 
         case "signin":
           return navigationFunction("/signin");
-          
-        case 'signup':
-          return navigationFunction('/signup');
+
+        case "signup":
+          return navigationFunction("/signup");
 
         case "profile":
           return navigationFunction("/profile");
@@ -82,6 +91,9 @@ const navigatorHoc = WrappedComponent => {
 
         case "profile-details":
           return navigationFunction("/profile/details");
+
+        case "subscription":
+          return navigationFunction("/subscription");
 
         case "settings":
           return navigationFunction("/profile/settings");

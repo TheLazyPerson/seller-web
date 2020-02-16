@@ -35,6 +35,14 @@ class SideNav extends Component {
       case "/orders/details":
         setRoute = "orders";
         break;
+      case "/products":
+      case "/product/add":
+        setRoute = "products";
+        break;
+      case "/sales":
+      case "/sales/details":
+        setRoute = "sales";
+        break;
       case "/exhibitions":
       case "/exhibition/details":
       case "/exhibition/enrolled":
@@ -56,6 +64,10 @@ class SideNav extends Component {
       case "/profile/details/edit-profile":
         setRoute = "profile-details";
         break;
+      case "/subscription":
+        setRoute = "subscription";
+        break;
+
       case "/profile/helpcenter":
         setRoute = "help-center";
         break;

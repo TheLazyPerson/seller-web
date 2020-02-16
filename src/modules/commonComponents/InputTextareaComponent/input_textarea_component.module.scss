@@ -1,0 +1,63 @@
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
+
+$input-text-background: $color-very-light-blue;
+
+.rtl {
+  .input_text_area {
+    text-align: right;
+  }
+
+  .error_text {
+    text-align: right;
+  }
+}
+
+.input_text_area {
+  border: none;
+  background: rgba($input-text-background, 0.4);
+  border-radius: 24px;
+  padding: 16px 28px;
+  align-self: stretch;
+
+  line-height: 1.33;
+  font-size: 18px;
+  color: $primary-text-color;
+}
+
+.input_text_area::placeholder {
+  color: rgba($primary-text-color, 0.3);
+}
+
+.input_text_area:focus {
+  outline: none;
+}
+
+.error_text {
+  font-size: 16px;
+  color: red;
+}
+
+@include medium {
+  .input_text_area {
+    padding: 14px 24px;
+
+    font-size: 16px;
+  }
+
+  .error_text {
+    font-size: 14px;
+  }
+}
+
+@include small {
+  .input_text_area {
+    padding: 12px 20px;
+
+    font-size: 14px;
+  }
+
+  .error_text {
+    font-size: 12px;
+  }
+}
