@@ -13,67 +13,11 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { CookieService } from "Utils/cookieService";
 import { USER_DATA_COOKIE } from "Constants/cookieConstants";
-import DataTable, { createTheme } from 'react-data-table-component';
-import differenceBy from 'lodash/differenceBy';
-import Card from '@material-ui/core/Card';
-import IconButton from '@material-ui/core/IconButton';
-import Checkbox from '@material-ui/core/Checkbox';
-import ArrowDownward from '@material-ui/icons/ArrowDownward';
-import Delete from '@material-ui/icons/Delete';
-import Add from '@material-ui/icons/Add';
-import memoize from 'memoize-one';
-import SearchBarComponent from 'CommonComponents/searchBarComponent';
-
-const sortIcon = <ArrowDownward />;
-const selectProps = { indeterminate: isIndeterminate => isIndeterminate };
-
-const contextActions = memoize(deleteHandler => (
-  <IconButton
-    color="secondary"
-    onClick={deleteHandler}
-  >
-    <Delete />
-  </IconButton>
-));
-
-const columns = memoize(() => [
-  {
-    name: 'ID',
-    selector: 'id',
-    sortable: true,
-  },
-  {
-    name: 'ORDER DATE',
-    selector: 'order_date',
-    sortable: true,
-  },
-  {
-    name: 'EXHIBITION NAME',
-    selector: 'exhibition_name',
-    sortable: true,
-    grow: 2,
-  },
-  {
-    name: 'GRAND TOTAL',
-    selector: 'grand_total',
-    sortable: true,
-  },
-  {
-    name: 'TOTAL ITEMS',
-    selector: 'total_items',
-    sortable: true,
-  },
-  {
-    name: 'STATUS',
-    selector: 'status',
-    sortable: true,
-  }
-]);
-
+import DataTableContainer from 'CommonContainers/dataTableContainer';
 
 class OrdersPage extends Component {
   state = {
-    selectedRows: [], toggleCleared: false, data: [
+    data: [
       {
         id: 20,
         order_date: "16 Nov 2020",
@@ -93,26 +37,8 @@ class OrdersPage extends Component {
     ]
   };
 
-  handleChange = state => {
-    this.setState({ selectedRows: state.selectedRows });
-  };
-
-  handleRowClicked = row => {
-
-    console.log(`${row.name} was clicked!`);
-  }
-
-  deleteAll = () => {
-    const { selectedRows } = this.state;
-    const rows = selectedRows.map(r => r.name);
-
-    if (window.confirm(`Are you sure you want to delete:\r ${rows}?`)) {
-      this.setState(state => ({ toggleCleared: !state.toggleCleared, data: differenceBy(state.data, state.selectedRows, 'name') }));
-    }
-  }
-
   render() {
-    const { data, toggleCleared } = this.state;
+    const { data } = this.state;
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
@@ -141,29 +67,9 @@ class OrdersPage extends Component {
 
           </DivRow>
 
-          <div style={{marginBottom: 20}}>
-            <SearchBarComponent />
-          </div>
-          
-          <Card>
-            <DataTable
-              title="Desserts"
-              columns={columns()}
-              data={data}
-              selectableRows
-              highlightOnHover
-              defaultSortField="name"
-              contextActions={contextActions(this.deleteAll)}
-              sortIcon={sortIcon}
-              selectableRowsComponent={Checkbox}
-              selectableRowsComponentProps={selectProps}
-              onSelectedRowsChange={this.handleChange}
-              clearSelectedRows={toggleCleared}
-              onRowClicked={this.handleRowClicked}
-              pagination
-              expandableRows
-            />
-          </Card>
+          <DataTableContainer 
+            data={data}
+          />
 
 
         </DivColumn>
