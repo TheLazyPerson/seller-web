@@ -1,8 +1,7 @@
-@import '~Styles/colors.module';
+@import "~Styles/colors.module";
 
 .exhibition_details_container {
-  padding: 25px 53px 0px 40px;
-
+  padding: 25px 0px 30px 0px;
   .exhibition_banner_container {
     align-self: center;
     width: 997px;
@@ -48,7 +47,6 @@
     }
   }
 
-
   .full_description_container {
     align-self: stretch;
     min-height: 205px;
@@ -66,6 +64,7 @@
       flex: 1;
       border-right: solid 1px #ededed;
       padding: 14px;
+      padding-left: 43px;
 
       .description {
         font-size: 14px;
@@ -79,12 +78,13 @@
 
       .date {
         opacity: 0.9;
-        font-size: 10px;  
+        font-size: 10px;
       }
     }
   }
 
   .product_list_container {
     flex-flow: wrap;
+    padding-left: 35px;
   }
 }
