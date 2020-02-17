@@ -7,6 +7,7 @@ import DivRow from 'CommonComponents/divRow';
 class OverlayContainer extends Component {
 
   render() {
+    const { onClickLogout, onClickBilling } = this.props;
     const ProgressItem = ({ title, value, progress }) => (
       <DivColumn className={`${styles.item_container} ${styles.click}`}>
         <DivRow className={styles.display_container}>
@@ -42,12 +43,18 @@ class OverlayContainer extends Component {
         />
         <HorizontalBorder />
 
-        <div className={`${styles.item_container} ${styles.click}`}>
+        <div
+          className={`${styles.item_container} ${styles.click}`}
+          onClick={onClickBilling}
+        >
           Billing
         </div>
         <HorizontalBorder />
 
-        <div className={`${styles.item_container} ${styles.click}`}>
+        <div
+          className={`${styles.item_container} ${styles.click}`}
+          onClick={onClickLogout}
+        >
           Logout
         </div>
         <HorizontalBorder />

@@ -16,16 +16,20 @@ import profileIconWhite from "Icons/profile-icon-white.svg";
 import HorizontalBorder from "CommonComponents/horizontalBorder";
 import { searchTypes } from "Constants/searchConstants";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import translatorHoc from "Hoc/translatorHoc";
 import SearchBar from "../searchBar";
+import { CookieService } from "Utils/cookieService";
 import OverlayContainer from './overlayContainer';
+import { logoutAction } from "Core/modules/signin/signinActions";
+import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 
 class SectionedHeader extends Component {
   clickedOnSearchItem = false;
 
   state = {
     searchText: "",
-    showOverlayComponent: true,
+    showOverlayComponent: false,
   };
 
   onClickProfile = () => {
@@ -36,8 +40,17 @@ class SectionedHeader extends Component {
     });
   };
 
+  onClickLogout = () => {
+    const { logoutAction, navigateTo } = this.props;
+
+    logoutAction().then(() => {
+      CookieService.delete(USER_DATA_COOKIE);
+      navigateTo(""); // ToHomePage
+    });
+  }
+
   render() {
-    const { isUserSignedIn, bagCount, whiteColor, translate } = this.props;
+    const { isUserSignedIn, whiteColor, translate } = this.props;
     const { showOverlayComponent } = this.state;
 
     return (
@@ -57,7 +70,9 @@ class SectionedHeader extends Component {
               />
               {
                 showOverlayComponent ? (
-                  <OverlayContainer />
+                  <OverlayContainer
+                    onClickLogout={this.onClickLogout}
+                  />
                 ) : null
               }
             </div>
@@ -95,7 +110,13 @@ const mapStateToProps = state => {
   };
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logoutAction: bindActionCreators(logoutAction, dispatch)
+  }
+}
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(translatorHoc(navigatorHoc(SectionedHeader)));
