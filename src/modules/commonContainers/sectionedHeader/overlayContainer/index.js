@@ -1,13 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import styles from './overlay_container.module.scss';
 import HorizontalBorder from 'CommonComponents/horizontalBorder';
 import DivColumn from 'CommonComponents/divColumn';
 import DivRow from 'CommonComponents/divRow';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import map from 'lodash/map';
 
 class OverlayContainer extends Component {
 
   render() {
-    const { onClickLogout, onClickBilling } = this.props;
+    const { onClickLogout, onClickBilling, subscriptionReducer: { isSubscriptionLoading, isSubscriptionError, featuresData } } = this.props;
     const ProgressItem = ({ title, value, progress }) => (
       <DivColumn className={`${styles.item_container} ${styles.click}`}>
         <DivRow className={styles.display_container}>
@@ -28,39 +31,51 @@ class OverlayContainer extends Component {
         </div>
         <HorizontalBorder />
 
-        <ProgressItem
-          title="EXHIBITIONS USED"
-          value="4/5"
-          progress={50}
-        />
+        {
+          (!isSubscriptionLoading && !isSubscriptionError) && (
+            <Fragment>
+              {
+                map(featuresData, feature => (
+                  <Fragment>
+                    <ProgressItem
+                      title="EXHIBITIONS USED"
+                      value="4/5"
+                      progress={50}
+                    />
 
-        <HorizontalBorder />
+                    <HorizontalBorder />
+                  </Fragment>
+                ))
+              }
 
-        <ProgressItem
-          title="PRODUCTS USED"
-          value="4/5"
-          progress={50}
-        />
-        <HorizontalBorder />
+              <div
+                className={`${styles.item_container} ${styles.click}`}
+                onClick={onClickBilling}
+              >
+                Billing
+            </div>
+              <HorizontalBorder />
 
-        <div
-          className={`${styles.item_container} ${styles.click}`}
-          onClick={onClickBilling}
-        >
-          Billing
-        </div>
-        <HorizontalBorder />
+              <div
+                className={`${styles.item_container} ${styles.click}`}
+                onClick={onClickLogout}
+              >
+                Logout
+            </div>
+              <HorizontalBorder />
+            </Fragment>
+          )
+        }
 
-        <div
-          className={`${styles.item_container} ${styles.click}`}
-          onClick={onClickLogout}
-        >
-          Logout
-        </div>
-        <HorizontalBorder />
       </DivColumn>
     )
   }
 }
 
-export default OverlayContainer;
+const mapStateToProps = state => {
+  return {
+    subscriptionReducer: state.subscriptionReducer,
+  }
+}
+
+export default connect(mapStateToProps, null)(OverlayContainer);
