@@ -1,0 +1,30 @@
+@import "~Styles/colors.module";
+
+.category_list_item_container {
+  width: 218px;
+  color: $color-dark;
+  border-radius: 2px;
+  border: solid 1px rgba(212, 213, 217, 0.5);
+  background-color: white;
+  margin-top: 10px;
+  margin-left: 10px;
+
+  .title {
+    font-family: Lato;
+    font-size: 24px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+    text-align: left;
+    opacity: 1;
+  }
+  .inner_container {
+    background-color: rgba(#2f3744, 0.3);
+    padding-left: 10px;
+    padding-top: 100px;
+    padding-bottom: 10px;
+  }
+}

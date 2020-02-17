@@ -16,7 +16,8 @@ import { CookieService } from "Utils/cookieService";
 import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import exhibitionImage from "Images/exhibition-item-3.png";
 import ProductListItem from "CommonComponents/productListItem";
-import Modal from '@material-ui/core/Modal';
+import CategoryListItem from "CommonComponents/categoryListItem";
+import Modal from "@material-ui/core/Modal";
 
 class ExhibitionDetailsPage extends Component {
   onBackPress = () => {
@@ -78,9 +79,16 @@ class ExhibitionDetailsPage extends Component {
                   <b>STARTS AT:</b> 16 Nov 2020
                 </div>
                 <div className={styles.date}>
-                  <b>STARTS AT:</b> 16 Nov 2020
+                  <b>ENDS ON:</b> 16 Nov 2020
                 </div>
               </DivColumn>
+            </DivRow>
+            <NavHeader title="CATEGORIES"></NavHeader>
+            <DivRow className={styles.category_list_container}>
+              <CategoryListItem />
+              <CategoryListItem />
+              <CategoryListItem />
+              <CategoryListItem />
             </DivRow>
 
             <NavHeader title="PRODUCT DETAILS"></NavHeader>
@@ -93,7 +101,7 @@ class ExhibitionDetailsPage extends Component {
             </DivRow>
           </DivColumn>
 
-          <Modal
+          {/* <Modal
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
             open={true}
@@ -102,7 +110,7 @@ class ExhibitionDetailsPage extends Component {
             <div style={{height: 500, width: 500, background: 'black'}}>
               
             </div>
-          </Modal>
+          </Modal> */}
         </DivColumn>
       </SectionedContainer>
     );
