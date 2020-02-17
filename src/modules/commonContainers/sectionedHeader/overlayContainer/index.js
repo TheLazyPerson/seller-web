@@ -8,7 +8,7 @@ class OverlayContainer extends Component {
 
   render() {
     const ProgressItem = ({ title, value, progress }) => (
-      <DivColumn className={styles.item_container}>
+      <DivColumn className={`${styles.item_container} ${styles.click}`}>
         <DivRow className={styles.display_container}>
           <div className={styles.title}>{title}</div>
           <div className={styles.value}>{value}</div>
@@ -22,7 +22,7 @@ class OverlayContainer extends Component {
     return (
       <DivColumn className={styles.overlay_container}>
 
-        <div className={`${styles.item_container} ${styles.title}`}>
+        <div className={`${styles.item_container} ${styles.title}`} style={{ cursor: 'default' }}>
           USAGE
         </div>
         <HorizontalBorder />
@@ -42,12 +42,12 @@ class OverlayContainer extends Component {
         />
         <HorizontalBorder />
 
-        <div className={styles.item_container}>
+        <div className={`${styles.item_container} ${styles.click}`}>
           Billing
         </div>
         <HorizontalBorder />
 
-        <div className={styles.item_container}>
+        <div className={`${styles.item_container} ${styles.click}`}>
           Logout
         </div>
         <HorizontalBorder />

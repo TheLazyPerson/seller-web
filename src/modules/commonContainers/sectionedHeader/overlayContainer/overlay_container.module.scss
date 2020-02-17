@@ -29,6 +29,9 @@
     font-size: 10px;
     font-weight: bold;
     color: #7c858e;
+  }
+
+  .click {
     @include on_click_button;
   }
 
