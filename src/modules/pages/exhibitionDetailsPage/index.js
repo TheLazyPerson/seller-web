@@ -100,6 +100,7 @@ class ExhibitionDetailsPage extends Component {
             onClose={()=>{}}
           >
             <div style={{height: 500, width: 500, background: 'black'}}>
+              
             </div>
           </Modal>
         </DivColumn>
