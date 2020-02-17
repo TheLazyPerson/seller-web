@@ -1,0 +1,83 @@
+@import '~Styles/colors.module';
+
+//     SKU
+// NANME
+// EXHIBITION NAME
+// STATUS
+// PRICE
+// QUANTITY
+// COMMISSION
+// GRAND TOTAL
+
+.order_page_container {
+  overflow-y: scroll;
+}
+
+.header {
+  font-size: 12px;
+  color: $color-dark;
+  padding: 17px 0px 17px 54px;
+}
+
+
+.order_container {
+  padding: 17px 0px 9px 54px;
+
+  .order_id {
+    opacity: 0.9;
+    font-size: 16px;
+    font-weight: 300;
+    color: $color-dark;
+  }
+  .placed_on {
+    opacity: 0.9;
+    font-size: 16px;
+    font-weight: 300;
+    color: $color-dark;
+  }
+  .status {
+    font-size: 12px;
+    color: $color-green-apple;
+  }
+}
+
+.header {
+  font-size: 12px;
+  color: $color-dark;
+  padding: 17px 0px 17px 54px;
+
+  border-top: 1px solid #ededed;
+  border-bottom: 1px solid #ededed;
+}
+
+.normal_container {
+  padding: 18px 0px 18px 54px;
+  opacity: 0.8;
+  font-size: 14px;
+  color: $color-dark;
+
+  .value {
+    margin-left: 10px;
+  }
+}
+
+.address_container {
+  padding: 54px;
+  align-self: stretch;
+
+  .address_item_container {
+    margin-right: 16px;
+    .title {
+      font-size: 12px;
+      font-weight: bold;
+      color: $color-dark;
+    }
+
+    .description {
+      font-size: 14px;
+      color: $color-dark;
+      margin-top: 14px;
+      max-width: 250px;
+    }
+  }
+}

@@ -33,39 +33,34 @@ class OverlayContainer extends Component {
 
         {
           (!isSubscriptionLoading && !isSubscriptionError) && (
-            <Fragment>
-              {
-                map(featuresData, feature => (
-                  <Fragment>
-                    <ProgressItem
-                      title="EXHIBITIONS USED"
-                      value="4/5"
-                      progress={50}
-                    />
+            map(featuresData, feature => (
+              <Fragment>
+                <ProgressItem
+                  title={feature.title}
+                  value={`${feature.used}/${feature.total}`}
+                  progress={feature.percentage}
+                />
 
-                    <HorizontalBorder />
-                  </Fragment>
-                ))
-              }
-
-              <div
-                className={`${styles.item_container} ${styles.click}`}
-                onClick={onClickBilling}
-              >
-                Billing
-            </div>
-              <HorizontalBorder />
-
-              <div
-                className={`${styles.item_container} ${styles.click}`}
-                onClick={onClickLogout}
-              >
-                Logout
-            </div>
-              <HorizontalBorder />
-            </Fragment>
+                <HorizontalBorder />
+              </Fragment>
+            ))
           )
         }
+        <div
+          className={`${styles.item_container} ${styles.click}`}
+          onClick={onClickBilling}
+        >
+          Billing
+            </div>
+        <HorizontalBorder />
+
+        <div
+          className={`${styles.item_container} ${styles.click}`}
+          onClick={onClickLogout}
+        >
+          Logout
+            </div>
+        <HorizontalBorder />
 
       </DivColumn>
     )

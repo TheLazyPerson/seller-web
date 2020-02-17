@@ -30,6 +30,7 @@ import SalesPage from "./pages/salesPage";
 import SubscriptionPage from "./pages/subscriptionPage";
 import YourExhibitionListingPage from "./pages/yourExhibitionListingPage";
 import AddProduct from "./pages/productsPage/addProduct";
+import OrderDetailsPage from './pages/orderDetailsPage';
 import { connect } from "react-redux";
 
 const App = ({ isUserSignedIn }) => {
@@ -67,7 +68,12 @@ const App = ({ isUserSignedIn }) => {
         component={ExhibitionDetailsPage}
         validator={() => isUserSignedIn}
       />
-
+      <ProtectedRoute
+        exact
+        path="/order/details/:orderId?"
+        component={OrderDetailsPage}
+        validator={() => isUserSignedIn}
+      />      
       <ProtectedRoute
         exact
         path="/exhibition/enrolled"
