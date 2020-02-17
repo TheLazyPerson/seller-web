@@ -1,0 +1,52 @@
+@import '~Styles/colors.module';
+@import '~Styles/mixins.module';
+
+.overlay_container {
+  position: absolute;
+  min-height: 175px;
+  width: 213px;
+  z-index: 2;
+  right: 0;
+  top: 40px;
+
+  box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.22);
+  background-color: #f4f7fa;
+
+  .item_header_container {
+    padding: 12px 15px 9px 12px;
+
+    .title {
+      font-size: 12px;
+      font-weight: bold;
+      color: #7c858e;
+    }
+
+  }
+  
+  .item_container {
+    padding: 9px 15px 10px 12px;
+
+    font-size: 10px;
+    font-weight: bold;
+    color: #7c858e;
+    @include on_click_button;
+  }
+
+  .display_container {
+    justify-content: space-between;
+  }
+
+  .progress_bar_container {
+    border-radius: 1.5px;
+    border: 0.5px solid rgba($color-dark, 0.2);
+    background-color: #e6eaee;
+    height: 4px;
+    align-self: stretch;
+    margin-top: 7px;
+
+    .progress_bar_filled {
+      background-color: $color-dark;
+      align-self: stretch; 
+    }
+  }
+}
