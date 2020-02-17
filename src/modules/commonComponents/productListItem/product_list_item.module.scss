@@ -1,4 +1,4 @@
-@import '~Styles/colors.module';
+@import "~Styles/colors.module";
 
 .product_list_item_container {
   width: 314px;
@@ -20,6 +20,7 @@
   .description {
     font-size: 12px;
     font-weight: 300;
+    margin-bottom: 10px;
   }
 
   .image {
