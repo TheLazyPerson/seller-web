@@ -1,4 +1,87 @@
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
+
 .page_container {
-  overflow: scroll;
-  padding-bottom: 30px;
+  .form_container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 22px;
+    margin-bottom: 30px;
+
+    .text_input_container {
+      max-width: 393px;
+      margin-left: 33px;
+
+      .input_text {
+        margin-bottom: 10px;
+      }
+      .input_text_area {
+        margin-bottom: 10px;
+      }
+    }
+
+    .button_divider {
+      margin: 16px 0px;
+      background: #ededed;
+    }
+
+    .checkbox_container {
+      max-width: 393px;
+      margin-left: 33px;
+
+      .checkbox_text {
+        font-size: 12px;
+        color: $primary-text-color;
+      }
+    }
+
+    .form_button_container {
+      margin-top: 13px;
+      margin-left: 33px;
+      justify-content: space-between;
+      max-width: 393px;
+    }
+
+    .address_divider {
+      margin: 22px 0px 26px;
+      background: #ededed;
+    }
+  }
+}
+
+@include small {
+  .page_container {
+    // overflow: scroll;
+
+    .form_container {
+      margin-top: 22px;
+
+      .text_input_container {
+        margin-left: 0px;
+
+        .input_text {
+          margin-bottom: 10px;
+        }
+      }
+
+      .button_divider {
+        margin: 14px 0px;
+        background: #ededed;
+      }
+
+      .checkbox_container {
+        max-width: 393px;
+        margin-left: 0px;
+
+        .checkbox_text {
+          font-size: 12px;
+        }
+      }
+
+      .form_button_container {
+        margin-left: 0px;
+        max-width: 393px;
+      }
+    }
+  }
 }
