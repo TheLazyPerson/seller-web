@@ -16,6 +16,7 @@ import { CookieService } from "Utils/cookieService";
 import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import exhibitionImage from "Images/exhibition-item-3.png";
 import ProductListItem from "CommonComponents/productListItem";
+import Modal from '@material-ui/core/Modal';
 
 class ExhibitionDetailsPage extends Component {
   onBackPress = () => {
@@ -91,6 +92,16 @@ class ExhibitionDetailsPage extends Component {
               <ProductListItem />
             </DivRow>
           </DivColumn>
+
+          <Modal
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+            open={true}
+            onClose={()=>{}}
+          >
+            <div style={{height: 500, width: 500, background: 'black'}}>
+            </div>
+          </Modal>
         </DivColumn>
       </SectionedContainer>
     );
