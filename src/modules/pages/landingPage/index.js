@@ -17,14 +17,16 @@ import { getPlanListAction } from "Core/modules/subscription/subscriptionActions
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 
 class LandingPage extends Component {
-
   onClickStartSelling = () => {
-    const { subscriptionReducer: {selectedSubscription}, navigateTo } = this.props;
+    const {
+      subscriptionReducer: { selectedSubscription },
+      navigateTo
+    } = this.props;
 
     if (selectedSubscription.id) {
-      navigateTo('signup');
+      navigateTo("signup");
     }
-  }
+  };
 
   render() {
     const {
@@ -67,8 +69,8 @@ class LandingPage extends Component {
             </DivColumn>
           </DivRow>
         </DivRow>
-        {/* <Benefits /> */}
-        {/* <FAQ /> */}
+        <Benefits />
+        <FAQ />
         <InitialPageLoader initialPageApi={getPlanListAction}>
           <Pricing subscriptionPlanList={subscriptionPlanList} />
         </InitialPageLoader>
