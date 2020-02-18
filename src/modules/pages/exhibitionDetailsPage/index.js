@@ -26,6 +26,10 @@ class ExhibitionDetailsPage extends Component {
     const { pop } = this.props;
     pop();
   };
+  onClickSubscribe = exhibitionId => {
+    const { navigateTo } = this.props;
+    navigateTo("exhibition-subscribe", { id: exhibitionId });
+  };
 
   render() {
     const {
@@ -72,7 +76,12 @@ class ExhibitionDetailsPage extends Component {
                     ENROLL
                   </div>
                 </DivColumn>
-                <CapsuleButton style={{ zIndex: 1 }}>Enroll</CapsuleButton>
+                <CapsuleButton
+                  onClick={() => this.onClickSubscribe(exhibitionDetail.id)}
+                  style={{ zIndex: 1 }}
+                >
+                  Enroll
+                </CapsuleButton>
               </DivRow>
               <NavHeader title="BASIC DETAILS"></NavHeader>
               <DivRow className={styles.full_description_container}>
