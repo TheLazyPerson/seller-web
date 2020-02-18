@@ -29,8 +29,10 @@ class ExhibitionDetailsPage extends Component {
   render() {
     const {
       exhibitionReducer: { exhibitionDetail },
+      match: { params },
       getExhibitionDetailAction
     } = this.props;
+
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.exhibition_page_container}>
@@ -38,7 +40,7 @@ class ExhibitionDetailsPage extends Component {
             title="Exhibition"
             onBackClick={this.onBackPress}
           ></NavHeader>
-          <InitialPageLoader initialPageApi={getExhibitionDetailAction}>
+          <InitialPageLoader initialPageApi={()=>getExhibitionDetailAction(params.exhibitionId)}>
             <DivColumn
               fillParent
               horizontalCenter
