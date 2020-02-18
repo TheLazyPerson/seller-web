@@ -15,6 +15,8 @@ import FAQ from "./Faq";
 import Pricing from "./Pricing";
 import { getPlanListAction } from "Core/modules/subscription/subscriptionActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
+import FullwidthSecondaryHeader from "CommonContainers/fullwidthSecondaryHeader";
+import { landingPageHeaderItems } from "Constants/landingPageHeaderConstants";
 
 class LandingPage extends Component {
   onClickStartSelling = () => {
@@ -27,17 +29,29 @@ class LandingPage extends Component {
       navigateTo("signup");
     }
   };
+  state = {
+    activeTab: "benefits"
+  };
+
+  handleNavItemClicked = slug => {
+    this.setState({
+      activeTab: slug
+    });
+  };
 
   render() {
     const {
       subscriptionReducer: { subscriptionPlanList },
       getPlanListAction
     } = this.props;
+
     {
       map(subscriptionPlanList, (subscription, index) => {
         return (subscription.isSelected = false);
       });
     }
+
+    const { activeTab } = this.state;
 
     return (
       <FullWidthContainer whiteColor>
@@ -69,11 +83,20 @@ class LandingPage extends Component {
             </DivColumn>
           </DivRow>
         </DivRow>
-        <Benefits />
-        <FAQ />
-        <InitialPageLoader initialPageApi={getPlanListAction}>
-          <Pricing subscriptionPlanList={subscriptionPlanList} />
-        </InitialPageLoader>
+        <FullwidthSecondaryHeader
+          navItems={landingPageHeaderItems}
+          onClickNavItem={this.handleNavItemClicked}
+        />
+
+        {activeTab == "benefits" ? <Benefits /> : ""}
+        {activeTab == "faq" ? <FAQ /> : ""}
+        {activeTab == "pricing" ? (
+          <InitialPageLoader initialPageApi={getPlanListAction}>
+            <Pricing subscriptionPlanList={subscriptionPlanList} />
+          </InitialPageLoader>
+        ) : (
+          ""
+        )}
       </FullWidthContainer>
     );
   }
