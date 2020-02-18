@@ -1,0 +1,68 @@
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
+
+.subscription_option {
+  text-align: center;
+  margin-left: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+
+  width: 169px;
+  height: 163px;
+
+  .subscription_option_title {
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: bold;
+
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #19202c;
+    margin-bottom: 5px;
+  }
+  .subscription_option_price {
+    font-family: Lato;
+    font-family: Lato;
+    font-size: 30px;
+    font-weight: bold;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #19202c;
+    margin-bottom: 25px;
+  }
+  .subscription_option_subtitle {
+    font-family: Lato;
+    font-size: 10px;
+    font-weight: 300;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    color: #19202c;
+    margin-bottom: 20px;
+  }
+}
+
+.subscription_option:first-child {
+  margin-left: 0px;
+}
+.is_selected {
+  background-image: linear-gradient(225deg, #37445b 0%, #19202c 92%);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+
+  .subscription_option_title {
+    color: #ffffff;
+  }
+
+  .subscription_option_price {
+    color: #ffffff;
+  }
+  .subscription_option_subtitle {
+    color: #ffffff;
+  }
+}
