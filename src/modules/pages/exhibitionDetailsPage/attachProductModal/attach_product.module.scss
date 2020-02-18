@@ -1,0 +1,27 @@
+@import '~Styles/colors.module';
+
+.modal_container {
+  width: 70%;
+  height: 80%;
+  background-color: white;
+
+  .header_container {
+    padding: 13px 13px 13px 28px;
+    justify-content: space-between;
+
+    .header_title {
+      font-size: 16px;
+      color: $color-dark;
+    }
+  }
+
+  .content_container {
+    overflow: scroll;
+
+    .item_container {
+      overflow: scroll;
+      flex-wrap: wrap;  
+      justify-content: center;
+    }
+  }
+}

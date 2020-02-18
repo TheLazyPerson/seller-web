@@ -17,21 +17,33 @@ import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import exhibitionImage from "Images/exhibition-item-3.png";
 import ProductListItem from "CommonComponents/productListItem";
 import CategoryListItem from "CommonComponents/categoryListItem";
-import Modal from "@material-ui/core/Modal";
 import { getExhibitionDetailAction } from "Core/modules/exhibition/exhibitionActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
+import AttachProductModal from './attachProductModal';
 
 class ExhibitionDetailsPage extends Component {
+  state = {
+    showModal: true,
+  }
+
   onBackPress = () => {
     const { pop } = this.props;
     pop();
   };
+
+  onCloseModal = () => {
+    this.setState({ 
+      showModal: false,
+    });
+  }
+
   render() {
     const {
       exhibitionReducer: { exhibitionDetail },
       match: { params },
       getExhibitionDetailAction
     } = this.props;
+    const { showModal } = this.state;
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
@@ -40,7 +52,7 @@ class ExhibitionDetailsPage extends Component {
             title="Exhibition"
             onBackClick={this.onBackPress}
           ></NavHeader>
-          <InitialPageLoader initialPageApi={()=>getExhibitionDetailAction(params.exhibitionId)}>
+          <InitialPageLoader initialPageApi={() => getExhibitionDetailAction(params.exhibitionId)}>
             <DivColumn
               fillParent
               horizontalCenter
@@ -110,16 +122,12 @@ class ExhibitionDetailsPage extends Component {
               </DivRow>
             </DivColumn>
           </InitialPageLoader>
-          {/* <Modal
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-            open={true}
-            onClose={()=>{}}
-          >
-            <div style={{height: 500, width: 500, background: 'black'}}>
-              
-            </div>
-          </Modal> */}
+
+          <AttachProductModal 
+            open={showModal}
+            onClose={this.onCloseModal}
+          />
+
         </DivColumn>
       </SectionedContainer>
     );
