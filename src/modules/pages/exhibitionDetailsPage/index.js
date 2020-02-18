@@ -18,6 +18,8 @@ import exhibitionImage from "Images/exhibition-item-3.png";
 import ProductListItem from "CommonComponents/productListItem";
 import CategoryListItem from "CommonComponents/categoryListItem";
 import Modal from "@material-ui/core/Modal";
+import { getExhibitionDetailAction } from "Core/modules/exhibition/exhibitionActions";
+import InitialPageLoader from "CommonContainers/initialPageLoader";
 
 class ExhibitionDetailsPage extends Component {
   onBackPress = () => {
@@ -25,6 +27,10 @@ class ExhibitionDetailsPage extends Component {
     pop();
   };
   render() {
+    const {
+      exhibitionReducer: { exhibitionDetail },
+      getExhibitionDetailAction
+    } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.exhibition_page_container}>
@@ -32,75 +38,76 @@ class ExhibitionDetailsPage extends Component {
             title="Exhibition"
             onBackClick={this.onBackPress}
           ></NavHeader>
-
-          <DivColumn
-            fillParent
-            horizontalCenter
-            className={styles.exhibition_details_container}
-          >
-            <DivRow
-              className={styles.exhibition_banner_container}
-              style={{
-                background: `url(${exhibitionImage}) center no-repeat`,
-                backgroundSize: "cover"
-              }}
+          <InitialPageLoader initialPageApi={getExhibitionDetailAction}>
+            <DivColumn
+              fillParent
+              horizontalCenter
+              className={styles.exhibition_details_container}
             >
-              <div className={styles.overlay_gradient}></div>
+              <DivRow
+                className={styles.exhibition_banner_container}
+                style={{
+                  background: `url(${exhibitionImage}) center no-repeat`,
+                  backgroundSize: "cover"
+                }}
+              >
+                <div className={styles.overlay_gradient}></div>
 
-              <DivColumn className={styles.banner_content}>
-                <div className={styles.exhibition_name}>Watches</div>
-                <div className={styles.exhibition_description}>
-                  Missguided is a UK-based fashion retailer that has nearly
-                  doubled in size since last year. They integrated Stripe to
-                  deliver seamless
-                </div>
-                <div className={styles.exhibition_date}>
-                  LAST 21 DAYS LEFT TO ENROLL
-                </div>
-              </DivColumn>
-              <CapsuleButton style={{ zIndex: 1 }}>Enroll</CapsuleButton>
-            </DivRow>
+                <DivColumn className={styles.banner_content}>
+                  <div className={styles.exhibition_name}>Watches</div>
+                  <div className={styles.exhibition_description}>
+                    Missguided is a UK-based fashion retailer that has nearly
+                    doubled in size since last year. They integrated Stripe to
+                    deliver seamless
+                  </div>
+                  <div className={styles.exhibition_date}>
+                    LAST 21 DAYS LEFT TO ENROLL
+                  </div>
+                </DivColumn>
+                <CapsuleButton style={{ zIndex: 1 }}>Enroll</CapsuleButton>
+              </DivRow>
 
-            <NavHeader title="BASIC DETAILS"></NavHeader>
-            <DivRow className={styles.full_description_container}>
-              <DivColumn className={styles.left_container}>
-                <div className={styles.title}>DESCRIPTION:</div>
-                <div className={styles.description}>
-                  Missguided is a UK-based fashion retailer that has nearly
-                  doubled in size since last year. They integrated Stripe to
-                  deliver seamless checkout across mobile and web for customers
-                  in 100+ countries, all while automatically combating fraud.
-                </div>
-              </DivColumn>
+              <NavHeader title="BASIC DETAILS"></NavHeader>
+              <DivRow className={styles.full_description_container}>
+                <DivColumn className={styles.left_container}>
+                  <div className={styles.title}>DESCRIPTION:</div>
+                  <div className={styles.description}>
+                    Missguided is a UK-based fashion retailer that has nearly
+                    doubled in size since last year. They integrated Stripe to
+                    deliver seamless checkout across mobile and web for
+                    customers in 100+ countries, all while automatically
+                    combating fraud.
+                  </div>
+                </DivColumn>
 
-              <DivColumn className={styles.right_container}>
-                <div className={styles.title}>DATES:</div>
-                <div className={styles.date}>
-                  <b>STARTS AT:</b> 16 Nov 2020
-                </div>
-                <div className={styles.date}>
-                  <b>ENDS ON:</b> 16 Nov 2020
-                </div>
-              </DivColumn>
-            </DivRow>
-            <NavHeader title="CATEGORIES"></NavHeader>
-            <DivRow className={styles.category_list_container}>
-              <CategoryListItem />
-              <CategoryListItem />
-              <CategoryListItem />
-              <CategoryListItem />
-            </DivRow>
+                <DivColumn className={styles.right_container}>
+                  <div className={styles.title}>DATES:</div>
+                  <div className={styles.date}>
+                    <b>STARTS AT:</b> 16 Nov 2020
+                  </div>
+                  <div className={styles.date}>
+                    <b>ENDS ON:</b> 16 Nov 2020
+                  </div>
+                </DivColumn>
+              </DivRow>
+              <NavHeader title="CATEGORIES"></NavHeader>
+              <DivRow className={styles.category_list_container}>
+                <CategoryListItem />
+                <CategoryListItem />
+                <CategoryListItem />
+                <CategoryListItem />
+              </DivRow>
 
-            <NavHeader title="PRODUCT DETAILS"></NavHeader>
-            <DivRow className={styles.product_list_container}>
-              <ProductListItem />
-              <ProductListItem />
-              <ProductListItem />
-              <ProductListItem />
-              <ProductListItem />
-            </DivRow>
-          </DivColumn>
-
+              <NavHeader title="PRODUCT DETAILS"></NavHeader>
+              <DivRow className={styles.product_list_container}>
+                <ProductListItem />
+                <ProductListItem />
+                <ProductListItem />
+                <ProductListItem />
+                <ProductListItem />
+              </DivRow>
+            </DivColumn>
+          </InitialPageLoader>
           {/* <Modal
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
@@ -117,13 +124,23 @@ class ExhibitionDetailsPage extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    exhibitionReducer: state.exhibitionReducer
+  };
+};
+
 const mapDispathToProps = dispatch => {
   return {
+    getExhibitionDetailAction: bindActionCreators(
+      getExhibitionDetailAction,
+      dispatch
+    ),
     logoutAction: bindActionCreators(logoutAction, dispatch)
   };
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispathToProps
 )(navigatorHoc(ExhibitionDetailsPage));
