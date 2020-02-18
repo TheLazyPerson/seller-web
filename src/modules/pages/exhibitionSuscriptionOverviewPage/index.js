@@ -25,20 +25,6 @@ class ExhibitionSubscriptionOverviewPage extends Component {
     pop();
   };
 
-  renderSubscriptionOptions(subscriptionType, subscriptionOptions) {
-    switch (subscriptionType) {
-      case "both":
-        return map(subscriptionOptions, option => {
-          return <SubscriptionOption option={option} />;
-        });
-      case "flat_fee":
-        return "bar";
-      case "commission":
-        return "fas";
-      default:
-        return "foo";
-    }
-  }
   render() {
     const {
       exhibitionReducer: { subscriptionOverview },
