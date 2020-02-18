@@ -18,7 +18,7 @@ export default class AttachProductModal extends Component {
         onClose={onClose}
       >
         <DivColumn
-          style={{ width: '100%', height: '100%' ,overflow: 'scroll'}}
+          style={{ width: '100%', height: '100%'}}
           verticalCenter
           horizontalCenter
           onClick={onClose}
