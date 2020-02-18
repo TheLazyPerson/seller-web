@@ -26,6 +26,7 @@ class ExhibitionDetailsPage extends Component {
     const { pop } = this.props;
     pop();
   };
+
   render() {
     const {
       exhibitionReducer: { exhibitionDetail },
@@ -40,7 +41,11 @@ class ExhibitionDetailsPage extends Component {
             title="Exhibition"
             onBackClick={this.onBackPress}
           ></NavHeader>
-          <InitialPageLoader initialPageApi={()=>getExhibitionDetailAction(params.exhibitionId)}>
+          <InitialPageLoader
+            initialPageApi={() =>
+              getExhibitionDetailAction(params.exhibitionId)
+            }
+          >
             <DivColumn
               fillParent
               horizontalCenter
@@ -49,46 +54,42 @@ class ExhibitionDetailsPage extends Component {
               <DivRow
                 className={styles.exhibition_banner_container}
                 style={{
-                  background: `url(${exhibitionImage}) center no-repeat`,
+                  background: `url(${exhibitionDetail.base_image}) center no-repeat`,
                   backgroundSize: "cover"
                 }}
               >
                 <div className={styles.overlay_gradient}></div>
 
                 <DivColumn className={styles.banner_content}>
-                  <div className={styles.exhibition_name}>Watches</div>
+                  <div className={styles.exhibition_name}>
+                    {exhibitionDetail.title}
+                  </div>
                   <div className={styles.exhibition_description}>
-                    Missguided is a UK-based fashion retailer that has nearly
-                    doubled in size since last year. They integrated Stripe to
-                    deliver seamless
+                    {exhibitionDetail.short_description}
                   </div>
                   <div className={styles.exhibition_date}>
-                    LAST 21 DAYS LEFT TO ENROLL
+                    LAST {exhibitionDetail.last_date_of_enrollment} LEFT TO
+                    ENROLL
                   </div>
                 </DivColumn>
                 <CapsuleButton style={{ zIndex: 1 }}>Enroll</CapsuleButton>
               </DivRow>
-
               <NavHeader title="BASIC DETAILS"></NavHeader>
               <DivRow className={styles.full_description_container}>
                 <DivColumn className={styles.left_container}>
                   <div className={styles.title}>DESCRIPTION:</div>
                   <div className={styles.description}>
-                    Missguided is a UK-based fashion retailer that has nearly
-                    doubled in size since last year. They integrated Stripe to
-                    deliver seamless checkout across mobile and web for
-                    customers in 100+ countries, all while automatically
-                    combating fraud.
+                    {exhibitionDetail.description}
                   </div>
                 </DivColumn>
 
                 <DivColumn className={styles.right_container}>
                   <div className={styles.title}>DATES:</div>
                   <div className={styles.date}>
-                    <b>STARTS AT:</b> 16 Nov 2020
+                    <b>STARTS AT:</b> {exhibitionDetail.starts_from}
                   </div>
                   <div className={styles.date}>
-                    <b>ENDS ON:</b> 16 Nov 2020
+                    <b>ENDS ON:</b> {exhibitionDetail.ends_till}
                   </div>
                 </DivColumn>
               </DivRow>
@@ -99,7 +100,6 @@ class ExhibitionDetailsPage extends Component {
                 <CategoryListItem />
                 <CategoryListItem />
               </DivRow>
-
               <NavHeader title="PRODUCT DETAILS"></NavHeader>
               <DivRow className={styles.product_list_container}>
                 <ProductListItem />
