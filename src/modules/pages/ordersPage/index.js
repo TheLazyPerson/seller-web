@@ -14,6 +14,7 @@ import { bindActionCreators } from "redux";
 import { CookieService } from "Utils/cookieService";
 import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import DataTable, { createTheme } from "react-data-table-component";
+import Button from "@material-ui/core/Button";
 import memoize from "memoize-one";
 import DataTableContainer from "CommonContainers/dataTableContainer";
 import { getOrderListAction } from "Core/modules/order/orderActions";
@@ -49,6 +50,14 @@ const columns = memoize(() => [
     name: "STATUS",
     selector: "status",
     sortable: true
+  },
+  {
+    cell: () => (
+      <Button variant="contained" color="primary">
+        View
+      </Button>
+    ),
+    button: true
   }
 ]);
 
