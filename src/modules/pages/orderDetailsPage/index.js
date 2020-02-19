@@ -105,7 +105,7 @@ class OrdersDetailsPage extends Component {
             <CapsuleButton className={styles.print_invoice_button}>
               Print Invoice
             </CapsuleButton>
-            <CapsuleButton>SHIP</CapsuleButton>
+            <CapsuleButton>Ship Order</CapsuleButton>
           </DivRow>
         </NavHeader>
         <InitialPageLoader
