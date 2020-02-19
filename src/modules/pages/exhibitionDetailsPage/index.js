@@ -20,6 +20,7 @@ import CategoryListItem from "CommonComponents/categoryListItem";
 import { getExhibitionDetailAction } from "Core/modules/exhibition/exhibitionActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import AttachProductModal from './attachProductModal';
+import BoxComponent from 'CommonComponents/boxComponent';
 
 const exhibitionState = {
   UPCOMING: 'upcoming',
@@ -27,14 +28,14 @@ const exhibitionState = {
   ENROLLED_LIVE: 'enrolled_live'
 }
 
-const ProductDescription = ({exhibitionDetail}) => (
+const ProductDescription = ({ exhibitionDetail }) => (
   <Fragment>
     <div className={styles.title}>DESCRIPTION:</div>
     <div className={styles.description}>
       {exhibitionDetail.description}
     </div>
   </Fragment>
-)
+);
 
 class ExhibitionDetailsPage extends Component {
   state = {
@@ -51,7 +52,7 @@ class ExhibitionDetailsPage extends Component {
       showModal: false,
     });
   }
-  
+
   onClickSubscribe = exhibitionId => {
     const { navigateTo } = this.props;
     navigateTo("exhibition-subscribe", { id: exhibitionId });
@@ -122,7 +123,60 @@ class ExhibitionDetailsPage extends Component {
                 <DivColumn className={styles.left_container}>
                   {
                     exhibitionState.ENROLLED_LIVE == exhibitionDetail.state ? (
-                      <div>overview component</div>
+                      <Fragment>
+                        <div className={styles.overview}>Overview :</div>
+                        <DivRow>
+                          <BoxComponent
+                            containerStyle={{
+                              width: 142,
+                              height: 113,
+                              marginRight: 10
+                            }}
+                            titleStyle={{
+                              fontSize: 20
+                            }}
+                            descriptionStyle={{
+                              fontSize: 12
+                            }}
+                            title="Some"
+                            description="Thing"
+                          />
+
+                          <BoxComponent
+                            containerStyle={{
+                              width: 142,
+                              height: 113,
+                              marginRight: 10
+                            }}
+                            titleStyle={{
+                              fontSize: 20
+                            }}
+                            descriptionStyle={{
+                              fontSize: 12
+                            }}
+                            title="Some"
+                            description="Thing"
+                          />
+
+
+
+                          <BoxComponent
+                            containerStyle={{
+                              width: 142,
+                              height: 113,
+                              marginRight: 10
+                            }}
+                            titleStyle={{
+                              fontSize: 20
+                            }}
+                            descriptionStyle={{
+                              fontSize: 12
+                            }}
+                            title="Some"
+                            description="Thing"
+                          />
+                        </DivRow>
+                      </Fragment>
                     )
                       : <ProductDescription exhibitionDetail={exhibitionDetail} />
                   }
