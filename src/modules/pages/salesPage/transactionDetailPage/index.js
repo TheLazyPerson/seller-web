@@ -5,7 +5,7 @@ import DivRow from "CommonComponents/divRow";
 import NavHeader from "CommonComponents/navHeader";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import map from "lodash/map";
-import styles from "./order_details.module.scss";
+import styles from "./transaction_details.module.scss";
 import SideNav from "CommonComponents/sideNav";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { logoutAction } from "Core/modules/signin/signinActions";
