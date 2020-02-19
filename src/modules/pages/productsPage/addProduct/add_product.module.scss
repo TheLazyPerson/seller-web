@@ -47,6 +47,20 @@
       background: #ededed;
     }
   }
+
+  .header {
+    font-size: 12px;
+    color: $color-dark;
+    padding: 17px 0px 17px 54px;
+  }
+  .header {
+    font-size: 12px;
+    color: $color-dark;
+    padding: 17px 0px 17px 54px;
+    margin-bottom: 10px;
+    border-top: 1px solid #ededed;
+    border-bottom: 1px solid #ededed;
+  }
 }
 
 @include small {

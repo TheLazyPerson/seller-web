@@ -30,10 +30,12 @@ class ProductDetailsPage extends Component {
       match: { params },
       getProductDetailsAction
     } = this.props;
+
     const rowStyle = {
       fontSize: 12,
       color: "#19202c"
     };
+
     const columns = [
       {
         name: "SKU",

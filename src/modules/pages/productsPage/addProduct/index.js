@@ -28,8 +28,14 @@ import {
 import find from "lodash/find";
 import Select from "react-select";
 import map from "lodash/map";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 class AddProduct extends Component {
+  state = {
+    startDate: null
+  };
+
   onSubmitComplete = () => {
     this.onBackPress();
   };
@@ -76,21 +82,70 @@ class AddProduct extends Component {
       productId,
       editProductAction
     } = this.props;
+    // "type": "simple",
+    // "sku": "sample",
+    // "name": "Mya Hermann PhD",
+    // "attribute_family_id": 1, --
+    // "short_description": "Numquam maxime ut.",
+    // "price": 1322.22,
+    // "cost": 1322.22,
+    // "description" : "Numquam maxime ut.",
+    // "status" : "draft",
+    // "special_price": 1300,
+    // "special_price_from": "",
+    // "special_price_to": "",
+    // "min_price": 1000,
+    // "max_price": 1500,
+    // "shipping": {
+    //   "width": "14",
+    //     "height": "14",
+    //       "depth": "14",
+    //         "weight": "14"
+    // },
+    // "meta_data": {
+    //   "meta_title": "Sample",
+    //     "meta_description": "Sample",
+    //       "meta_keywords": "Sample"
+    // },
 
+    // "inventory": {
+    //   "inventory_source_id": 1,
+    //     "qty": 10
+    // },
+    // "category_id": 1,
+    // "locale" : "en"
     const formData = {
       type: form.type,
       sku: form.sku,
       name: form.name,
       short_description: form.shortDescription,
       description: form.description,
-      meta_title: form.metaTitle,
-      meta_description: form.metaDescription,
-      meta_keywords: form.metaKeywords,
-      width: form.width,
-      height: form.height,
-      depth: form.depth,
-      weight: form.weight,
-      qty: form.qty
+      price: form.price,
+      cost: form.cost,
+      status: form.status,
+      min_price: form.minPrice,
+      max_price: form.maxPrice,
+      attribute_family_id: 1,
+      special_price: 1000,
+      special_price_from: "",
+      special_price_from: "",
+      meta_data: {
+        meta_title: form.metaTitle,
+        meta_description: form.metaDescription,
+        meta_keywords: form.metaKeywords
+      },
+      shipping: {
+        width: form.width,
+        height: form.height,
+        depth: form.depth,
+        weight: form.weight
+      },
+      inventory: {
+        inventory_source_id: 1,
+        qty: form.qty
+      },
+      category_id: 1,
+      locale: "en"
     };
 
     if (productId) {
@@ -122,6 +177,8 @@ class AddProduct extends Component {
       metaTitle: product.meta_title ? product.meta_title : "",
       metaDescription: product.meta_description ? product.meta_description : "",
       metaKeywords: product.meta_keywords ? product.meta_keywords : "",
+      price: product.price ? product.price : "",
+      cost: product.cost ? product.cost : "",
       width: product.width ? product.width : "",
       height: product.height ? product.height : "",
       depth: product.depth ? product.depth : "",
@@ -136,12 +193,32 @@ class AddProduct extends Component {
   };
 
   render() {
+    const CustomRenderInput = ({ input, name, value, onClick, meta }) => {
+      return (
+        <InputTextComponent
+          {...input}
+          meta={meta}
+          placeholder={name}
+          value={value}
+          className={styles.input_text}
+          onClick={onClick}
+        />
+      );
+    };
     const {
       onClickCancel,
-      productReducer: { productList },
+      productReducer: { productList, product },
       productId,
       basicReducer: { basicData }
     } = this.props;
+
+    let startDate = null;
+
+    if (this.state.startDate) {
+      startDate = this.state.startDate;
+    } else if (product.specialPriceFrom) {
+      startDate = new Date(product.specialPriceFrom);
+    }
 
     const productTypes = [
       {
@@ -172,9 +249,10 @@ class AddProduct extends Component {
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.page_container}>
-          <NavHeader title="Add Product" onBackClick={this.onBackPress}>
-            <CapsuleButton>Save</CapsuleButton>
-          </NavHeader>
+          <NavHeader
+            title="Add Product"
+            onBackClick={this.onBackPress}
+          ></NavHeader>
         </DivColumn>
 
         <DivColumn fillParent className={styles.page_container}>
@@ -186,6 +264,7 @@ class AddProduct extends Component {
             // }
             render={({ handleSubmit, form, submitting, pristine, values }) => (
               <form className={styles.form_container} onSubmit={handleSubmit}>
+                <div className={styles.header}>BASIC DETAILS</div>
                 <DivColumn className={styles.text_input_container}>
                   <Field name="type">
                     {({ input, meta }) => (
@@ -247,8 +326,7 @@ class AddProduct extends Component {
                   </Field>
                 </DivColumn>
 
-                <HorizontalBorder className={styles.address_divider} />
-
+                <div className={styles.header}>DESCRIPTION</div>
                 <DivColumn className={styles.text_input_container}>
                   <Field name="shortDescription">
                     {({ input, meta }) => (
@@ -273,44 +351,50 @@ class AddProduct extends Component {
                   </Field>
                 </DivColumn>
 
-                <HorizontalBorder className={styles.button_divider} />
-
+                <div className={styles.header}>PRICING DETAILS</div>
                 <DivColumn className={styles.text_input_container}>
-                  <Field name="metaTitle">
+                  <Field name="price">
                     {({ input, meta }) => (
                       <InputTextComponent
                         meta={meta}
                         {...input}
-                        placeholder="Meta Title"
+                        placeholder="Price"
                         className={styles.input_text}
                       />
                     )}
                   </Field>
-
-                  <Field name="metaKeywords">
+                  <Field name="cost">
                     {({ input, meta }) => (
                       <InputTextComponent
                         meta={meta}
                         {...input}
-                        placeholder="Meta Keywords"
+                        placeholder="Cost"
                         className={styles.input_text}
                       />
                     )}
                   </Field>
-
-                  <Field name="metaDescription">
+                  <Field name="minPrice">
                     {({ input, meta }) => (
-                      <InputTextareaComponent
+                      <InputTextComponent
                         meta={meta}
                         {...input}
-                        placeholder="Meta Description"
-                        className={styles.input_text_area}
+                        placeholder="Min Price"
+                        className={styles.input_text}
+                      />
+                    )}
+                  </Field>
+                  <Field name="maxPrice">
+                    {({ input, meta }) => (
+                      <InputTextComponent
+                        meta={meta}
+                        {...input}
+                        placeholder="Max Price"
+                        className={styles.input_text}
                       />
                     )}
                   </Field>
                 </DivColumn>
-
-                <HorizontalBorder className={styles.button_divider} />
+                <div className={styles.header}>SHIPPING DETAILS</div>
 
                 <DivColumn className={styles.text_input_container}>
                   <Field name="width">
@@ -357,7 +441,8 @@ class AddProduct extends Component {
                   </Field>
                 </DivColumn>
 
-                <HorizontalBorder className={styles.button_divider} />
+                <div className={styles.header}>INVENTORY DETAILS</div>
+
                 <DivColumn className={styles.text_input_container}>
                   <Field name="qty">
                     {({ input, meta }) => (
@@ -366,6 +451,43 @@ class AddProduct extends Component {
                         {...input}
                         placeholder="How much inventory is in store?"
                         className={styles.input_text}
+                      />
+                    )}
+                  </Field>
+                </DivColumn>
+
+                <div className={styles.header}>META DATA</div>
+
+                <DivColumn className={styles.text_input_container}>
+                  <Field name="metaTitle">
+                    {({ input, meta }) => (
+                      <InputTextComponent
+                        meta={meta}
+                        {...input}
+                        placeholder="Meta Title"
+                        className={styles.input_text}
+                      />
+                    )}
+                  </Field>
+
+                  <Field name="metaKeywords">
+                    {({ input, meta }) => (
+                      <InputTextComponent
+                        meta={meta}
+                        {...input}
+                        placeholder="Meta Keywords"
+                        className={styles.input_text}
+                      />
+                    )}
+                  </Field>
+
+                  <Field name="metaDescription">
+                    {({ input, meta }) => (
+                      <InputTextareaComponent
+                        meta={meta}
+                        {...input}
+                        placeholder="Meta Description"
+                        className={styles.input_text_area}
                       />
                     )}
                   </Field>
