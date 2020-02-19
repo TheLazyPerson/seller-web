@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivColumn from "CommonComponents/divColumn";
 import DivRow from "CommonComponents/divRow";
@@ -21,9 +21,24 @@ import { getExhibitionDetailAction } from "Core/modules/exhibition/exhibitionAct
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import AttachProductModal from './attachProductModal';
 
+const exhibitionState = {
+  UPCOMING: 'upcoming',
+  UPCOMING_ENROLLED: 'upcoming_enrolled',
+  ENROLLED_LIVE: 'enrolled_live'
+}
+
+const ProductDescription = ({exhibitionDetail}) => (
+  <Fragment>
+    <div className={styles.title}>DESCRIPTION:</div>
+    <div className={styles.description}>
+      {exhibitionDetail.description}
+    </div>
+  </Fragment>
+)
+
 class ExhibitionDetailsPage extends Component {
   state = {
-    showModal: true,
+    showModal: false,
   }
 
   onBackPress = () => {
@@ -36,7 +51,7 @@ class ExhibitionDetailsPage extends Component {
       showModal: false,
     });
   }
-
+  
   onClickSubscribe = exhibitionId => {
     const { navigateTo } = this.props;
     navigateTo("exhibition-subscribe", { id: exhibitionId });
@@ -49,6 +64,13 @@ class ExhibitionDetailsPage extends Component {
       getExhibitionDetailAction
     } = this.props;
     const { showModal } = this.state;
+    let headerTitle = 'ENROLL';
+
+    if (exhibitionState.UPCOMING_ENROLLED == exhibitionDetail.state) {
+      headerTitle = 'LIST YOUR PRODUCTS';
+    } else if (exhibitionState.ENROLLED_LIVE == exhibitionDetail.state) {
+      headerTitle = 'VIEW LISTED PRODUCTS';
+    }
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
@@ -92,43 +114,76 @@ class ExhibitionDetailsPage extends Component {
                   onClick={() => this.onClickSubscribe(exhibitionDetail.id)}
                   style={{ zIndex: 1 }}
                 >
-                  Enroll
+                  {headerTitle}
                 </CapsuleButton>
               </DivRow>
               <NavHeader title="BASIC DETAILS"></NavHeader>
               <DivRow className={styles.full_description_container}>
                 <DivColumn className={styles.left_container}>
-                  <div className={styles.title}>DESCRIPTION:</div>
-                  <div className={styles.description}>
-                    {exhibitionDetail.description}
-                  </div>
+                  {
+                    exhibitionState.ENROLLED_LIVE == exhibitionDetail.state ? (
+                      <div>overview component</div>
+                    )
+                      : <ProductDescription exhibitionDetail={exhibitionDetail} />
+                  }
                 </DivColumn>
 
                 <DivColumn className={styles.right_container}>
-                  <div className={styles.title}>DATES:</div>
-                  <div className={styles.date}>
-                    <b>STARTS AT:</b> {exhibitionDetail.starts_from}
-                  </div>
-                  <div className={styles.date}>
-                    <b>ENDS ON:</b> {exhibitionDetail.ends_till}
-                  </div>
+
+                  {
+                    exhibitionState.ENROLLED_LIVE == exhibitionDetail.state ? (
+                      <ProductDescription exhibitionDetail={exhibitionDetail} />
+                    ) : (
+                        <Fragment>
+                          <div className={styles.title}>DATES:</div>
+                          <div className={styles.date}>
+                            <b>STARTS AT:</b> {exhibitionDetail.starts_from}
+                          </div>
+                          <div className={styles.date}>
+                            <b>ENDS ON:</b> {exhibitionDetail.ends_till}
+                          </div>
+                        </Fragment>
+
+                      )
+                  }
+
                 </DivColumn>
               </DivRow>
-              <NavHeader title="CATEGORIES"></NavHeader>
-              <DivRow className={styles.category_list_container}>
-                <CategoryListItem />
-                <CategoryListItem />
-                <CategoryListItem />
-                <CategoryListItem />
-              </DivRow>
-              <NavHeader title="PRODUCT DETAILS"></NavHeader>
-              <DivRow className={styles.product_list_container}>
-                <ProductListItem />
-                <ProductListItem />
-                <ProductListItem />
-                <ProductListItem />
-                <ProductListItem />
-              </DivRow>
+              {
+                exhibitionState.UPCOMING != exhibitionDetail.state && (
+                  <Fragment>
+                    <NavHeader title="CATEGORIES"></NavHeader>
+                    <DivRow className={styles.category_list_container}>
+                      {
+                        map(exhibitionDetail.categories, category => (
+                          <CategoryListItem />
+                        ))
+                      }
+                    </DivRow>
+                  </Fragment>
+                )
+              }
+              {
+                exhibitionState.UPCOMING != exhibitionDetail.state && (
+                  <Fragment>
+                    <NavHeader title="PRODUCT DETAILS">
+                      {
+                        exhibitionState.UPCOMING_ENROLLED == exhibitionDetail.state && (
+                          <CapsuleButton>ADD YOUR PRODUCTS</CapsuleButton>
+                        )
+                      }
+                    </NavHeader>
+                    <DivRow className={styles.product_list_container}>
+                      {
+                        map(exhibitionDetail.products, product => (
+                          <ProductListItem />
+                        ))
+                      }
+                    </DivRow>
+                  </Fragment>
+                )
+              }
+
             </DivColumn>
           </InitialPageLoader>
 
