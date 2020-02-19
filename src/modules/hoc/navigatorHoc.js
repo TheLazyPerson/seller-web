@@ -45,6 +45,9 @@ const navigatorHoc = WrappedComponent => {
         case "sales":
           return navigationFunction("/sales");
 
+        case "sales-details":
+          return navigationFunction(`/sales/details/${data.transactionId}`);
+
         case "plp":
           return navigationFunction(`/product-listing/?id=${data.id}`);
 

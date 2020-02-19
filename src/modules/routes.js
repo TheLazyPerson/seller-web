@@ -31,6 +31,7 @@ import SubscriptionPage from "./pages/subscriptionPage";
 import YourExhibitionListingPage from "./pages/yourExhibitionListingPage";
 import AddProduct from "./pages/productsPage/addProduct";
 import OrderDetailsPage from "./pages/orderDetailsPage";
+import TransactionDetailsPage from "./pages/salesPage/transactionDetailPage";
 import ExhibitionSubscriptionOverviewPage from "./pages/exhibitionSuscriptionOverviewPage";
 import { connect } from "react-redux";
 
@@ -115,6 +116,12 @@ const App = ({ isUserSignedIn }) => {
         path="/sales"
         redirectTo="signin"
         component={SalesPage}
+        validator={() => isUserSignedIn}
+      />
+      <ProtectedRoute
+        exact
+        path="/sales/details/:transactionId?"
+        component={TransactionDetailsPage}
         validator={() => isUserSignedIn}
       />
       <Route
