@@ -44,12 +44,7 @@ const columns = memoize(() => [
   },
   {
     name: "QUANTITY",
-    selector: "qty",
-    sortable: true
-  },
-  {
-    name: "APPROVAL",
-    selector: "is_saved",
+    selector: "inventory.qty",
     sortable: true
   }
 ]);
@@ -60,29 +55,7 @@ class ProductsPage extends Component {
     navigateTo("add-product");
   };
 
-  state = {
-    data: [
-      {
-        id: 20,
-        order_date: "16 Nov 2020",
-        exhibtion_name: "Sample Name",
-        grand_total: "KD 76 ",
-        total_items: "7",
-        status: "Pending"
-      },
-      {
-        id: 20,
-        order_date: "16 Nov 2020",
-        exhibtion_name: "Sample Name",
-        grand_total: "KD 76 ",
-        total_items: "7",
-        status: "Pending"
-      }
-    ]
-  };
-
   render() {
-    const { data, toggleCleared } = this.state;
     const {
       productReducer: { productList },
       getProductListAction
