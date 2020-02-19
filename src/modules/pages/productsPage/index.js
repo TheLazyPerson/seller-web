@@ -19,6 +19,7 @@ import {
 } from "Core/modules/product/productActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
+import Button from "@material-ui/core/Button";
 
 const columns = memoize(() => [
   {
@@ -46,6 +47,15 @@ const columns = memoize(() => [
     name: "QUANTITY",
     selector: "inventory.qty",
     sortable: true
+  },
+
+  {
+    cell: () => (
+      <Button variant="contained" color="primary">
+        View
+      </Button>
+    ),
+    button: true
   }
 ]);
 
