@@ -4,7 +4,7 @@ import DivColumn from "CommonComponents/divColumn";
 import DivRow from "CommonComponents/divRow";
 import NavHeader from "CommonComponents/navHeader";
 import CapsuleButton from "CommonComponents/capsuleButton";
-import map from "lodash/map";
+import isEmpty from "lodash/isEmpty";
 import styles from "./order_details.module.scss";
 import SideNav from "CommonComponents/sideNav";
 import navigatorHoc from "Hoc/navigatorHoc";
@@ -13,180 +13,189 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import DataTableContainer from "CommonContainers/dataTableContainer";
 import DataTable from "react-data-table-component";
+import { getOrderDetailsAction } from "Core/modules/order/orderActions";
+import InitialPageLoader from "CommonContainers/initialPageLoader";
 
 class OrdersDetailsPage extends Component {
-
-  state = {
-    data: [
-      {
-        sku: 'sku',
-        name: 'name',
-        exhibition_name: 'exhibition_name',
-        status: 'status',
-        price: 'price',
-        quantity: 'quantity',
-        commission: 'commission',
-        grand_total: 'grand_total'
-      },
-      {
-        sku: 'sku',
-        name: 'name',
-        exhibition_name: 'exhibition_name',
-        status: 'status',
-        price: 'price',
-        quantity: 'quantity',
-        commission: 'commission',
-        grand_total: 'grand_total'
-      },
-      {
-        commission: <div>aslkdjalksdj</div>,
-        grand_total: <div>aslkdjaasdaslksdj</div>,
-      }
-    ]
-  };
-
   render() {
-    const { data } = this.state;
+    const {
+      orderReducer: { order },
+      match: { params },
+      getOrderDetailsAction
+    } = this.props;
     const rowStyle = {
       fontSize: 12,
-      color: '#19202c',
+      color: "#19202c"
     };
     const columns = [
       {
-        name: 'SKU',
-        selector: 'sku',
-        style: rowStyle,
+        name: "SKU",
+        selector: "sku",
+        style: rowStyle
       },
       {
-        name: 'NAME',
-        selector: 'name',
-        style: rowStyle,
+        name: "NAME",
+        selector: "name",
+        style: rowStyle
       },
       {
-        name: 'EXHIBITION NAME',
-        selector: 'exhibition_name',
+        name: "EXHIBITION NAME",
+        selector: "exhibition_name",
         grow: 2,
-        style: rowStyle,
+        style: rowStyle
       },
       {
-        name: 'STATUS',
-        selector: 'status',
-        style: rowStyle,
+        name: "STATUS",
+        selector: "status",
+        style: rowStyle
       },
       {
-        name: 'PRICE',
-        selector: 'price',
-        style: rowStyle,
+        name: "PRICE",
+        selector: "price",
+        style: rowStyle
       },
       {
-        name: 'QUANTITY',
-        selector: 'quantity',
-        style: rowStyle,
+        name: "QUANTITY",
+        selector: "qty_ordered",
+        style: rowStyle
       },
       {
-        name: 'COMMISSION',
-        selector: 'commission',
-        style: rowStyle,
+        name: "COMMISSION",
+        selector: "commission",
+        style: rowStyle
       },
       {
-        name: 'GRAND TOTAL',
-        selector: 'grand_total',
-        style: rowStyle,
-      },
+        name: "GRAND TOTAL",
+        selector: "formated_base_total",
+        style: rowStyle
+      }
     ];
 
     const customStyles = {
       headRow: {
         style: {
-          borderTop: '1px solid #ededed',
-          borderBottom: '1px solid #ededed',
-          backgroundColor: '#f4f7fa',
-        },
+          borderTop: "1px solid #ededed",
+          borderBottom: "1px solid #ededed",
+          backgroundColor: "#f4f7fa"
+        }
       },
       headCells: {
         style: {
-          color: '#202124',
+          color: "#202124",
           fontSize: 12,
-          fontWeight: 'bold',
-          color: '#7c858e',
-        },
-      },
+          fontWeight: "bold",
+          color: "#7c858e"
+        }
+      }
     };
-
+    const { shipping_address, billing_address } = order;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <NavHeader
-          title="Order Detail"
-        >
-
+        <NavHeader title="Order Detail">
           <DivRow>
-            <CapsuleButton>
-              Cancel
-            </CapsuleButton>
-            <CapsuleButton>
-              Print Invoice
-            </CapsuleButton>
-            <CapsuleButton>
-              SHIP
-            </CapsuleButton>
+            <CapsuleButton>Cancel</CapsuleButton>
+            <CapsuleButton>Print Invoice</CapsuleButton>
+            <CapsuleButton>SHIP</CapsuleButton>
           </DivRow>
-
         </NavHeader>
-        <DivColumn fillParent className={styles.order_page_container}>
+        <InitialPageLoader
+          initialPageApi={() => getOrderDetailsAction(params.orderId)}
+        >
+          <DivColumn fillParent className={styles.order_page_container}>
+            <DivColumn className={styles.order_container}>
+              <div className={styles.order_id}>
+                Order ID: <b>{order.id}</b>
+              </div>
+              <div className={styles.placed_on}>
+                Placed On: {order.created_at}
+              </div>
+              <div className={styles.status}>Delivered</div>
+            </DivColumn>
 
-          <DivColumn className={styles.order_container}>
-            <div className={styles.order_id}>Order ID: <b>123123</b></div>
-            <div className={styles.placed_on}>Placed On:  </div>
-            <div className={styles.status}>Delivered</div>
+            <div className={styles.header}>Customer Details</div>
+
+            <DivColumn className={styles.normal_container}>
+              <DivRow className={styles.title}>
+                Name:{" "}
+                <div className={styles.value}>
+                  {order.customer_first_name} {order.customer_last_name}
+                </div>
+              </DivRow>
+              <DivRow className={styles.title}>
+                Email:{" "}
+                <div className={styles.value}>{order.customer_email}</div>
+              </DivRow>
+            </DivColumn>
+
+            <div className={styles.header}>Products Details</div>
+
+            <DataTable
+              columns={columns}
+              customStyles={customStyles}
+              data={order.items}
+              style={{ minHeight: 200 }}
+            />
+            <DivRow className={styles.address_container}>
+              <DivColumn className={styles.address_item_container}>
+                <div className={styles.title}>SHIPPING ADDRESS</div>
+                <div className={styles.description}>
+                  {!isEmpty(order.shipping_address) && (
+                    <span>
+                      {order.shipping_address.address1},
+                      {order.shipping_address.city},{" "}
+                      {order.shipping_address.state},
+                      {order.shipping_address.country} -{" "}
+                      {order.shipping_address.postcode}
+                    </span>
+                  )}
+                </div>
+              </DivColumn>
+
+              <DivColumn className={styles.address_item_container}>
+                <div className={styles.title}>BILLING ADDRESS</div>
+                <div className={styles.description}>
+                  {!isEmpty(order.billing_address) && (
+                    <span>
+                      {order.billing_address.address1},
+                      {order.billing_address.city},{" "}
+                      {order.billing_address.state},
+                      {order.billing_address.country} -{" "}
+                      {order.billing_address.postcode}
+                    </span>
+                  )}
+                </div>
+              </DivColumn>
+
+              <DivColumn className={styles.address_item_container}>
+                <div className={styles.title}>SHIPPING METHOD</div>
+                <div className={styles.description}>{order.shipping_title}</div>
+              </DivColumn>
+
+              <DivColumn className={styles.address_item_container}>
+                <div className={styles.title}>PAYMENT METHOD</div>
+                <div className={styles.description}>{order.payment_title}</div>
+              </DivColumn>
+            </DivRow>
           </DivColumn>
-
-          <div className={styles.header}>
-            Customer Details
-        </div>
-
-          <DivColumn className={styles.normal_container}>
-            <DivRow className={styles.title}>Name: <div className={styles.value}>value</div></DivRow>
-            <DivRow className={styles.title}>Email: <div className={styles.value}>value</div></DivRow>
-          </DivColumn>
-
-
-          <div className={styles.header}>
-            Products Details
-        </div>
-
-          <DataTable
-            columns={columns}
-            customStyles={customStyles}
-            data={data}
-            style={{minHeight: 200}}
-          />
-          <DivRow className={styles.address_container}>
-            <DivColumn className={styles.address_item_container}>
-              <div className={styles.title}>SHIPPING ADDRESS</div>
-              <div className={styles.description}>Building 43B 4th Floor, Suite 402 Street Number 3 P.O. Box 593 Kuwait Safat 13006</div>
-            </DivColumn>
-
-            <DivColumn className={styles.address_item_container}>
-              <div className={styles.title}>SHIPPING ADDRESS</div>
-              <div className={styles.description}>Building 43B 4th Floor, Suite 402 Street Number 3 P.O. Box 593 Kuwait Safat 13006</div>
-            </DivColumn>
-
-            <DivColumn className={styles.address_item_container}>
-              <div className={styles.title}>SHIPPING ADDRESS</div>
-              <div className={styles.description}>Building 43B 4th Floor, Suite 402 Street Number 3 P.O. Box 593 Kuwait Safat 13006</div>
-            </DivColumn>
-          </DivRow>
-        </DivColumn>
-
+        </InitialPageLoader>
       </SectionedContainer>
     );
   }
 }
 
-const mapDispathToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    logoutAction: bindActionCreators(logoutAction, dispatch)
+    orderReducer: state.orderReducer
   };
 };
 
-export default connect(null, mapDispathToProps)(navigatorHoc(OrdersDetailsPage));
+const mapDispathToProps = dispatch => {
+  return {
+    getOrderDetailsAction: bindActionCreators(getOrderDetailsAction, dispatch)
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispathToProps
+)(navigatorHoc(OrdersDetailsPage));
