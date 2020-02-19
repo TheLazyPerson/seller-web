@@ -33,6 +33,7 @@ import AddProduct from "./pages/productsPage/addProduct";
 import OrderDetailsPage from "./pages/orderDetailsPage";
 import TransactionDetailsPage from "./pages/salesPage/transactionDetailPage";
 import ExhibitionSubscriptionOverviewPage from "./pages/exhibitionSuscriptionOverviewPage";
+import ProductDetailsPage from "./pages/productDetailsPage";
 import { connect } from "react-redux";
 
 const App = ({ isUserSignedIn }) => {
@@ -107,6 +108,13 @@ const App = ({ isUserSignedIn }) => {
         exact
         path="/product/add"
         component={AddProduct}
+        redirectTo="signin"
+        validator={() => isUserSignedIn}
+      />
+      <ProtectedRoute
+        exact
+        path="/product/details/:productId?"
+        component={ProductDetailsPage}
         redirectTo="signin"
         validator={() => isUserSignedIn}
       />

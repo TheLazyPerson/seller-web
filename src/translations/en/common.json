@@ -1,126 +1,126 @@
 {
-	"address_item_component": {
-		"edit": "Edit",
-		"phone_number": "Phone Number:",
-		"remove": "Remove"
-	},
-	"checkout_page": {
-		"apply_discount": "Apply Coupon",
-		"bag_total": "Bag Total",
-		"coupon_discount": "Coupon Discount",
-		"delivery_speed": "Choose Delivery Speed",
-		"empty_description": "There is nothing in your bag. Let’s add some items.",
-		"empty_title": "Hey, it feels so light!",
-		"express_delivery": "Express Delivery",
-		"free_delivery": "Free Delivery",
-		"get_by": "Get it by",
-		"go_to_wishlist": "ADD ITEMS FROM WISHLIST",
-		"header_exhibition": "Exhibition",
-		"header_price": "Price",
-		"header_product": "Product",
-		"header_quantity": "Quantity",
-		"header_total_price": "Total Price",
-		"order_summary": "Order Summary",
-		"order_total": "Order Total",
-		"paid_delivery": "Paid Delivery",
-		"price_details": "Price Details",
-		"select_delivery_address": "Select Delivery Address",
-		"standard_delivery": "Standard Delivery",
-		"total": "Total"
-	},
-	"common": {
-		"add_to_bag": "Add to Bag",
-		"added_to_bag": "Added to Bag",
-		"added_to_wishlist": "Product added to Wishlist",
-		"address_deleted": "Address Deleted",
-		"explore_button": "Explore",
-		"next_button": "Next",
-		"prev_button": "Prev",
-		"removed_from_bag": "Item Removed from Bag",
-		"removed_from_wishlist": "Product removed from Wishlist",
-		"wishlist": "Wishlist"
-	},
-	"filters": {
-		"categories": "CATEGORIES",
-		"clear_all": "CLEAR ALL",
-		"filters": "FILTERS",
-		"prices": "PRICES"
-	},
-	"footer": {
-		"experience": "EXPERIENCE MA3RATH APP ON MOBILE",
-		"faq": "Faq",
-		"helpcenter": "HelpCenter",
-		"home": "Home",
-		"keep_in_touch": "KEEP IN TOUCH",
-		"privacy_policy": "Privacy Policy",
-		"profile": "Profile",
-		"settings": "Settings",
-		"shipping": "Shipping and Returns",
-		"terms": "Terms and Condition",
-		"title_app": "APP",
-		"title_link": "USEFUL LINKS",
-		"wishlist": "Wishlist"
-	},
-	"header": {
-		"login": "Login",
-		"register": "Register",
-		"search": "Search",
-		"search_exhibition": "Search Exhibitions",
-		"search_products": "Search Products"
-	},
-	"home_page": {
-		"trending_now_title": "TRENDING NOW",
-		"upcoming_title": "KEEP AN EYE ON THESE EXHIBITIONS"
-	},
-	"masonry_grid": {
-		"show_more": "SHOW MORE"
-	},
-	"place_order_page": {
-		"add_address": "+ ADD NEW ADDRESS",
-		"place_order": "PLACE ORDER",
-		"select_address": "Please select delivery Address",
-		"shipping_method": "Please select shipping Method",
-		"title_add_address": "ADD ADDRESS",
-		"title_edit_address": "EDIT ADDRESS",
-		"title_select_address": "SELECT ADDRESS"
-	},
-	"quantity_container": {
-		"delivery_time": "Standard delivery in 2-4 day’s",
-		"quantity": "Quantity"
-	},
-	"select_payment": {
-		"choose_payment_method": "CHOOSE PAYMENT METHOD",
-		"cod_description": "Pay cash during delivery",
-		"cod_selected": "Cash on delivery selected",
-		"cod_title": "Cash on delivery",
-		"order_placed": "Your Order has been successfuly placed",
-		"place_order_button": "Place Order"
-	},
-	"signin_page": {
-		"create": "Create an account",
-		"new": "New to MA3RATH?",
-		"page_title": "SignIn",
-		"password": "Password",
-		"remember_me": "Remember Me",
-		"sign_in_button": "Sign In",
-		"username": "Username"
-	},
-	"signup_page": {
-		"confirm_password": "Confirm Password",
-		"create": "Create",
-		"email": "Email",
-		"firstname": "First Name",
-		"have_account": "Already have an account?",
-		"lastname": "Last Name",
-		"page_title": "Sign Up",
-		"password": "Password",
-		"sign_in": "Sign In"
-	},
-	"wishlist_page": {
-		"empty_message": "Oh Snap! You have no product in your wishlist.",
-		"exhibition": "EXHIBITION",
-		"move_bag": "MOVE TO BAG",
-		"my_wishlist": "My Wishlist",
-		"start_shopping": "START SHOPPING"
-	}
+  "address_item_component": {
+    "edit": "Edit",
+    "phone_number": "Phone Number:",
+    "remove": "Remove"
+  },
+  "checkout_page": {
+    "apply_discount": "Apply Coupon",
+    "bag_total": "Bag Total",
+    "coupon_discount": "Coupon Discount",
+    "delivery_speed": "Choose Delivery Speed",
+    "empty_description": "There is nothing in your bag. Let’s add some items.",
+    "empty_title": "Hey, it feels so light!",
+    "express_delivery": "Express Delivery",
+    "free_delivery": "Free Delivery",
+    "get_by": "Get it by",
+    "go_to_wishlist": "ADD ITEMS FROM WISHLIST",
+    "header_exhibition": "Exhibition",
+    "header_price": "Price",
+    "header_product": "Product",
+    "header_quantity": "Quantity",
+    "header_total_price": "Total Price",
+    "order_summary": "Order Summary",
+    "order_total": "Order Total",
+    "paid_delivery": "Paid Delivery",
+    "price_details": "Price Details",
+    "select_delivery_address": "Select Delivery Address",
+    "standard_delivery": "Standard Delivery",
+    "total": "Total"
+  },
+  "common": {
+    "add_to_bag": "Add to Bag",
+    "added_to_bag": "Added to Bag",
+    "added_to_wishlist": "Product added to Wishlist",
+    "address_deleted": "Address Deleted",
+    "explore_button": "Explore",
+    "next_button": "Next",
+    "prev_button": "Prev",
+    "removed_from_bag": "Item Removed from Bag",
+    "removed_from_wishlist": "Product removed from Wishlist",
+    "wishlist": "Wishlist"
+  },
+  "filters": {
+    "categories": "CATEGORIES",
+    "clear_all": "CLEAR ALL",
+    "filters": "FILTERS",
+    "prices": "PRICES"
+  },
+  "footer": {
+    "experience": "EXPERIENCE Home Expo APP ON MOBILE",
+    "faq": "Faq",
+    "helpcenter": "HelpCenter",
+    "home": "Home",
+    "keep_in_touch": "KEEP IN TOUCH",
+    "privacy_policy": "Privacy Policy",
+    "profile": "Profile",
+    "settings": "Settings",
+    "shipping": "Shipping and Returns",
+    "terms": "Terms and Condition",
+    "title_app": "APP",
+    "title_link": "USEFUL LINKS",
+    "wishlist": "Wishlist"
+  },
+  "header": {
+    "login": "Login",
+    "register": "Register",
+    "search": "Search",
+    "search_exhibition": "Search Exhibitions",
+    "search_products": "Search Products"
+  },
+  "home_page": {
+    "trending_now_title": "TRENDING NOW",
+    "upcoming_title": "KEEP AN EYE ON THESE EXHIBITIONS"
+  },
+  "masonry_grid": {
+    "show_more": "SHOW MORE"
+  },
+  "place_order_page": {
+    "add_address": "+ ADD NEW ADDRESS",
+    "place_order": "PLACE ORDER",
+    "select_address": "Please select delivery Address",
+    "shipping_method": "Please select shipping Method",
+    "title_add_address": "ADD ADDRESS",
+    "title_edit_address": "EDIT ADDRESS",
+    "title_select_address": "SELECT ADDRESS"
+  },
+  "quantity_container": {
+    "delivery_time": "Standard delivery in 2-4 day’s",
+    "quantity": "Quantity"
+  },
+  "select_payment": {
+    "choose_payment_method": "CHOOSE PAYMENT METHOD",
+    "cod_description": "Pay cash during delivery",
+    "cod_selected": "Cash on delivery selected",
+    "cod_title": "Cash on delivery",
+    "order_placed": "Your Order has been successfuly placed",
+    "place_order_button": "Place Order"
+  },
+  "signin_page": {
+    "create": "Create an account",
+    "new": "New to Home Expo?",
+    "page_title": "SignIn",
+    "password": "Password",
+    "remember_me": "Remember Me",
+    "sign_in_button": "Sign In",
+    "username": "Username"
+  },
+  "signup_page": {
+    "confirm_password": "Confirm Password",
+    "create": "Create",
+    "email": "Email",
+    "firstname": "First Name",
+    "have_account": "Already have an account?",
+    "lastname": "Last Name",
+    "page_title": "Sign Up",
+    "password": "Password",
+    "sign_in": "Sign In"
+  },
+  "wishlist_page": {
+    "empty_message": "Oh Snap! You have no product in your wishlist.",
+    "exhibition": "EXHIBITION",
+    "move_bag": "MOVE TO BAG",
+    "my_wishlist": "My Wishlist",
+    "start_shopping": "START SHOPPING"
+  }
 }

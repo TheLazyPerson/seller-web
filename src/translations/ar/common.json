@@ -1,126 +1,126 @@
 {
-	"address_item_component": {
-		"edit": "تصحيح",
-		"phone_number": "رقم الهاتف:",
-		"remove": "إزالة"
-	},
-	"checkout_page": {
-		"apply_discount": "تطبيق القسيمة",
-		"bag_total": "حقيبة المجموع",
-		"coupon_discount": "خصم القسيمة",
-		"delivery_speed": "اختيار سرعة التسليم",
-		"empty_description": "لا يوجد شيء في حقيبتك. دعنا نضيف بعض العناصر.",
-		"empty_title": "مهلا ، إنه شعور خفيف جدا!",
-		"express_delivery": "تسليم سريع",
-		"free_delivery": "توصيل مجاني",
-		"get_by": "الحصول عليها من قبل",
-		"go_to_wishlist": "أضف عناصر من قائمة أمنيات",
-		"header_exhibition": "معرض",
-		"header_price": "السعر",
-		"header_product": "المنتج",
-		"header_quantity": "كمية",
-		"header_total_price": "السعر الكلي",
-		"order_summary": "ملخص الطلب",
-		"order_total": "الطلب الكلي",
-		"paid_delivery": "التسليم المدفوع",
-		"price_details": "تفاصيل السعر",
-		"select_delivery_address": "حدد عنوان التسليم",
-		"standard_delivery": "التسليم القياسية",
-		"total": "مجموع"
-	},
-	"common": {
-		"add_to_bag": "أضف الى الحقيبة",
-		"added_to_bag": "أضيفت إلى الحقيبة",
-		"added_to_wishlist": "تم اضافة المنتج الى قائمة الامنيات",
-		"address_deleted": "تم حذف العنوان",
-		"explore_button": "يكتشف",
-		"next_button": "التالى",
-		"prev_button": "السابق",
-		"removed_from_bag": "تمت إزالة العنصر من الحقيبة",
-		"removed_from_wishlist": "تمت إزالة المنتج من قائمة الأمنيات",
-		"wishlist": "الأماني"
-	},
-	"filters": {
-		"categories": "الاقسام",
-		"clear_all": "امسح الكل",
-		"filters": "مرشحات",
-		"prices": "الأسعار"
-	},
-	"footer": {
-		"experience": "تجربة MA3RATH APP على الهاتف المحمول",
-		"faq": "التعليمات",
-		"helpcenter": "مركز المساعدة",
-		"home": "الصفحة الرئيسية",
-		"keep_in_touch": "أبق على اتصال",
-		"privacy_policy": "سياسة خاصة",
-		"profile": "الملف الشخصي",
-		"settings": "الإعدادات",
-		"shipping": "الشحن والإرجاع",
-		"terms": "أحكام وشروط",
-		"title_app": "تطبيق",
-		"title_link": "روابط مفيدة",
-		"wishlist": "الأماني"
-	},
-	"header": {
-		"login": "تسجيل الدخول",
-		"register": "تسجيل",
-		"search": "بحث",
-		"search_exhibition": "بحث المعارض",
-		"search_products": "البحث عن المنتجات"
-	},
-	"home_page": {
-		"trending_now_title": "تتجه الآن",
-		"upcoming_title": "تبقي عين على هذه المعارض"
-	},
-	"masonry_grid": {
-		"show_more": "أظهر المزيد"
-	},
-	"place_order_page": {
-		"add_address": "+ إضافة عنوان جديد",
-		"place_order": "مكان الامر",
-		"select_address": "يرجى اختيار عنوان التسليم",
-		"shipping_method": "يرجى اختيار طريقة الشحن",
-		"title_add_address": "اضف عنوان",
-		"title_edit_address": "تعديل العنوان",
-		"title_select_address": "اختر العنوان"
-	},
-	"quantity_container": {
-		"delivery_time": "تسليم قياسي في 2-4 يوم",
-		"quantity": "كمية"
-	},
-	"select_payment": {
-		"choose_payment_method": "اختر وسيلة الدفع",
-		"cod_description": "دفع نقدا أثناء الولادة",
-		"cod_selected": "نقدا عند التسليم المحدد",
-		"cod_title": "الدفع عن الاستلام",
-		"order_placed": "تم وضع طلبك بنجاح",
-		"place_order_button": "مكان الامر"
-	},
-	"signin_page": {
-		"create": "انشئ حساب",
-		"new": "جديد على MA3RATH؟",
-		"page_title": "تسجيل الدخول",
-		"password": "كلمه السر",
-		"remember_me": "تذكرنى",
-		"sign_in_button": "تسجيل الدخول",
-		"username": "اسم المستخدم"
-	},
-	"signup_page": {
-		"confirm_password": "تأكيد كلمة المرور",
-		"create": "خلق",
-		"email": "البريد الإلكتروني",
-		"firstname": "الاسم الاول",
-		"have_account": "هل لديك حساب؟",
-		"lastname": "الكنية",
-		"page_title": "سجل",
-		"password": "كلمه السر",
-		"sign_in": "تسجيل الدخول"
-	},
-	"wishlist_page": {
-		"empty_message": "يا سناب! ليس لديك منتج في قائمة أمنياتك.",
-		"exhibition": "معرض",
-		"move_bag": "الانتقال إلى حقيبة",
-		"my_wishlist": "قائمة امنياتي",
-		"start_shopping": "ابدأ التسوق"
-	}
+  "address_item_component": {
+    "edit": "تصحيح",
+    "phone_number": "رقم الهاتف:",
+    "remove": "إزالة"
+  },
+  "checkout_page": {
+    "apply_discount": "تطبيق القسيمة",
+    "bag_total": "حقيبة المجموع",
+    "coupon_discount": "خصم القسيمة",
+    "delivery_speed": "اختيار سرعة التسليم",
+    "empty_description": "لا يوجد شيء في حقيبتك. دعنا نضيف بعض العناصر.",
+    "empty_title": "مهلا ، إنه شعور خفيف جدا!",
+    "express_delivery": "تسليم سريع",
+    "free_delivery": "توصيل مجاني",
+    "get_by": "الحصول عليها من قبل",
+    "go_to_wishlist": "أضف عناصر من قائمة أمنيات",
+    "header_exhibition": "معرض",
+    "header_price": "السعر",
+    "header_product": "المنتج",
+    "header_quantity": "كمية",
+    "header_total_price": "السعر الكلي",
+    "order_summary": "ملخص الطلب",
+    "order_total": "الطلب الكلي",
+    "paid_delivery": "التسليم المدفوع",
+    "price_details": "تفاصيل السعر",
+    "select_delivery_address": "حدد عنوان التسليم",
+    "standard_delivery": "التسليم القياسية",
+    "total": "مجموع"
+  },
+  "common": {
+    "add_to_bag": "أضف الى الحقيبة",
+    "added_to_bag": "أضيفت إلى الحقيبة",
+    "added_to_wishlist": "تم اضافة المنتج الى قائمة الامنيات",
+    "address_deleted": "تم حذف العنوان",
+    "explore_button": "يكتشف",
+    "next_button": "التالى",
+    "prev_button": "السابق",
+    "removed_from_bag": "تمت إزالة العنصر من الحقيبة",
+    "removed_from_wishlist": "تمت إزالة المنتج من قائمة الأمنيات",
+    "wishlist": "الأماني"
+  },
+  "filters": {
+    "categories": "الاقسام",
+    "clear_all": "امسح الكل",
+    "filters": "مرشحات",
+    "prices": "الأسعار"
+  },
+  "footer": {
+    "experience": "تجربة Home Expo APP على الهاتف المحمول",
+    "faq": "التعليمات",
+    "helpcenter": "مركز المساعدة",
+    "home": "الصفحة الرئيسية",
+    "keep_in_touch": "أبق على اتصال",
+    "privacy_policy": "سياسة خاصة",
+    "profile": "الملف الشخصي",
+    "settings": "الإعدادات",
+    "shipping": "الشحن والإرجاع",
+    "terms": "أحكام وشروط",
+    "title_app": "تطبيق",
+    "title_link": "روابط مفيدة",
+    "wishlist": "الأماني"
+  },
+  "header": {
+    "login": "تسجيل الدخول",
+    "register": "تسجيل",
+    "search": "بحث",
+    "search_exhibition": "بحث المعارض",
+    "search_products": "البحث عن المنتجات"
+  },
+  "home_page": {
+    "trending_now_title": "تتجه الآن",
+    "upcoming_title": "تبقي عين على هذه المعارض"
+  },
+  "masonry_grid": {
+    "show_more": "أظهر المزيد"
+  },
+  "place_order_page": {
+    "add_address": "+ إضافة عنوان جديد",
+    "place_order": "مكان الامر",
+    "select_address": "يرجى اختيار عنوان التسليم",
+    "shipping_method": "يرجى اختيار طريقة الشحن",
+    "title_add_address": "اضف عنوان",
+    "title_edit_address": "تعديل العنوان",
+    "title_select_address": "اختر العنوان"
+  },
+  "quantity_container": {
+    "delivery_time": "تسليم قياسي في 2-4 يوم",
+    "quantity": "كمية"
+  },
+  "select_payment": {
+    "choose_payment_method": "اختر وسيلة الدفع",
+    "cod_description": "دفع نقدا أثناء الولادة",
+    "cod_selected": "نقدا عند التسليم المحدد",
+    "cod_title": "الدفع عن الاستلام",
+    "order_placed": "تم وضع طلبك بنجاح",
+    "place_order_button": "مكان الامر"
+  },
+  "signin_page": {
+    "create": "انشئ حساب",
+    "new": "جديد على Home Expo؟",
+    "page_title": "تسجيل الدخول",
+    "password": "كلمه السر",
+    "remember_me": "تذكرنى",
+    "sign_in_button": "تسجيل الدخول",
+    "username": "اسم المستخدم"
+  },
+  "signup_page": {
+    "confirm_password": "تأكيد كلمة المرور",
+    "create": "خلق",
+    "email": "البريد الإلكتروني",
+    "firstname": "الاسم الاول",
+    "have_account": "هل لديك حساب؟",
+    "lastname": "الكنية",
+    "page_title": "سجل",
+    "password": "كلمه السر",
+    "sign_in": "تسجيل الدخول"
+  },
+  "wishlist_page": {
+    "empty_message": "يا سناب! ليس لديك منتج في قائمة أمنياتك.",
+    "exhibition": "معرض",
+    "move_bag": "الانتقال إلى حقيبة",
+    "my_wishlist": "قائمة امنياتي",
+    "start_shopping": "ابدأ التسوق"
+  }
 }

@@ -21,45 +21,50 @@ import InitialPageLoader from "CommonContainers/initialPageLoader";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import Button from "@material-ui/core/Button";
 
-const columns = memoize(() => [
-  {
-    name: "ID",
-    selector: "id",
-    sortable: true
-  },
-  {
-    name: "SKU",
-    selector: "sku",
-    sortable: true
-  },
-  {
-    name: "NAME",
-    selector: "name",
-    sortable: true,
-    grow: 2
-  },
-  {
-    name: "PRICE",
-    selector: "price",
-    sortable: true
-  },
-  {
-    name: "QUANTITY",
-    selector: "inventory.qty",
-    sortable: true
-  },
-
-  {
-    cell: () => (
-      <Button variant="contained" color="primary">
-        View
-      </Button>
-    ),
-    button: true
-  }
-]);
-
 class ProductsPage extends Component {
+  columns = memoize(() => [
+    {
+      name: "ID",
+      selector: "id",
+      sortable: true
+    },
+    {
+      name: "SKU",
+      selector: "sku",
+      sortable: true
+    },
+    {
+      name: "NAME",
+      selector: "name",
+      sortable: true,
+      grow: 2
+    },
+    {
+      name: "PRICE",
+      selector: "price",
+      sortable: true
+    },
+    {
+      name: "QUANTITY",
+      selector: "inventory.qty",
+      sortable: true
+    },
+    {
+      cell: value => (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            const { navigateTo } = this.props;
+            navigateTo("product-details", { productId: value.id });
+          }}
+        >
+          View
+        </Button>
+      ),
+      button: true
+    }
+  ]);
   onClickNewProduct = () => {
     const { navigateTo } = this.props;
     navigateTo("add-product");
@@ -83,7 +88,7 @@ class ProductsPage extends Component {
               <DataTableContainer
                 data={productList}
                 title="Products"
-                columns={columns()}
+                columns={this.columns()}
               />
             </InitialPageLoader>
           </DivColumn>

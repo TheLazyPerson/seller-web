@@ -1,5 +1,5 @@
-.subscription_page_container {
-  .content_container {
-    padding: 40px 40px 0px;
-  }
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
+.content_container {
+  padding: 17px 15px 9px 54px;
 }

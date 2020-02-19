@@ -1,6 +1,6 @@
 @import "~Styles/colors.module";
 
-.order_page_container {
+.product_page_container {
   overflow-y: scroll;
 }
 
@@ -41,7 +41,18 @@
     color: $color-green-apple;
   }
 }
+.image_container {
+  padding: 17px 0px 17px 54px;
+  flex-wrap: wrap;
 
+  .image_contain {
+    margin-left: 15px;
+    margin-top: 15px;
+  }
+  .image {
+    object-fit: contain;
+  }
+}
 .header {
   font-size: 12px;
   color: $color-dark;

@@ -13,33 +13,59 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { CookieService } from "Utils/cookieService";
 import { USER_DATA_COOKIE } from "Constants/cookieConstants";
-import DataTable, { createTheme } from "react-data-table-component";
-import differenceBy from "lodash/differenceBy";
-import SearchBarComponent from "CommonComponents/searchBarComponent";
+import InitialPageLoader from "CommonContainers/initialPageLoader";
+import { getPlanListAction } from "Core/modules/subscription/subscriptionActions";
+import Pricing from "../landingPage/Pricing";
+import Subscription from "CommonComponents/subscriptionComponent";
 
 class SubscriptionPage extends Component {
-  state = {};
-
   render() {
+    const {
+      translate,
+      subscriptionReducer: { subscriptionPlanList, activeSubscription },
+      getPlanListAction
+    } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.subscription_page_container}>
           <NavHeader title="Subscription Details"></NavHeader>
 
-          <DivColumn
-            fillParent
-            className={styles.content_container}
-          ></DivColumn>
+          <DivColumn fillParent className={styles.content_container}>
+            <InitialPageLoader initialPageApi={getPlanListAction}>
+              <DivRow>
+                {map(subscriptionPlanList, (subscription, index) => {
+                  return (
+                    <Subscription
+                      subscription={subscription}
+                      features={subscription.features}
+                      isSelected={
+                        subscription.id == activeSubscription.id ? true : false
+                      }
+                    />
+                  );
+                })}
+              </DivRow>
+            </InitialPageLoader>
+          </DivColumn>
         </DivColumn>
       </SectionedContainer>
     );
   }
 }
 
-const mapDispathToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    logoutAction: bindActionCreators(logoutAction, dispatch)
+    subscriptionReducer: state.subscriptionReducer
   };
 };
 
-export default connect(null, mapDispathToProps)(navigatorHoc(SubscriptionPage));
+const mapDispathToProps = dispatch => {
+  return {
+    getPlanListAction: bindActionCreators(getPlanListAction, dispatch)
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispathToProps
+)(navigatorHoc(SubscriptionPage));
