@@ -11,6 +11,7 @@ import marketplaceProfileReducer from "Core/modules/marketplaceprofile/marketpla
 import subscriptionReducer from "Core/modules/subscription/subscriptionReducer";
 import exhibitionReducer from "Core/modules/exhibition/exhibitionReducer";
 import productReducer from "Core/modules/product/productReducer";
+import orderReducer from "Core/modules/order/orderReducer";
 
 const appReducer = history =>
   combineReducers({
@@ -25,7 +26,8 @@ const appReducer = history =>
     basicReducer,
     subscriptionReducer,
     exhibitionReducer,
-    productReducer
+    productReducer,
+    orderReducer
   });
 
 /* const rootReducer = ( state, action ) => {
