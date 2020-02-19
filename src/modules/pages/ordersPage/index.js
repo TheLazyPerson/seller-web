@@ -16,6 +16,8 @@ import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import DataTable, { createTheme } from "react-data-table-component";
 import memoize from "memoize-one";
 import DataTableContainer from "CommonContainers/dataTableContainer";
+import { getOrderListAction } from "Core/modules/order/orderActions";
+import InitialPageLoader from "CommonContainers/initialPageLoader";
 const columns = memoize(() => [
   {
     name: "ID",
@@ -24,7 +26,7 @@ const columns = memoize(() => [
   },
   {
     name: "ORDER DATE",
-    selector: "order_date",
+    selector: "created_at",
     sortable: true
   },
   {
@@ -40,7 +42,7 @@ const columns = memoize(() => [
   },
   {
     name: "TOTAL ITEMS",
-    selector: "total_items",
+    selector: "total_item_count",
     sortable: true
   },
   {
@@ -51,29 +53,11 @@ const columns = memoize(() => [
 ]);
 
 class OrdersPage extends Component {
-  state = {
-    data: [
-      {
-        id: 20,
-        order_date: "16 Nov 2020",
-        exhibtion_name: "Sample Name",
-        grand_total: "KD 76 ",
-        total_items: "7",
-        status: "Pending"
-      },
-      {
-        id: 20,
-        order_date: "16 Nov 2020",
-        exhibtion_name: "Sample Name",
-        grand_total: "KD 76 ",
-        total_items: "7",
-        status: "Pending"
-      }
-    ]
-  };
-
   render() {
-    const { data } = this.state;
+    const {
+      orderReducer: { orderList },
+      getOrderListAction
+    } = this.props;
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
@@ -99,18 +83,32 @@ class OrdersPage extends Component {
               <div className={styles.description}>TOTAL ORDERS</div>
             </DivColumn>
           </DivRow>
-
-          <DataTableContainer data={data} columns={columns()} />
+          <InitialPageLoader initialPageApi={getOrderListAction}>
+            <DataTableContainer
+              data={orderList}
+              title="Orders"
+              columns={columns()}
+            />
+          </InitialPageLoader>
         </DivColumn>
       </SectionedContainer>
     );
   }
 }
 
-const mapDispathToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    logoutAction: bindActionCreators(logoutAction, dispatch)
+    orderReducer: state.orderReducer
   };
 };
 
-export default connect(null, mapDispathToProps)(navigatorHoc(OrdersPage));
+const mapDispathToProps = dispatch => {
+  return {
+    getOrderListAction: bindActionCreators(getOrderListAction, dispatch)
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispathToProps
+)(navigatorHoc(OrdersPage));
