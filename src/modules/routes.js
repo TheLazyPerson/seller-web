@@ -113,6 +113,7 @@ const App = ({ isUserSignedIn }) => {
       <ProtectedRoute
         exact
         path="/sales"
+        redirectTo="signin"
         component={SalesPage}
         validator={() => isUserSignedIn}
       />
