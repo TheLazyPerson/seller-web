@@ -14,20 +14,40 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { CookieService } from "Utils/cookieService";
 import { USER_DATA_COOKIE } from "Constants/cookieConstants";
-import { getExhibitionSubscriptionOverview } from "Core/modules/exhibition/exhibitionActions";
+import {
+  getExhibitionSubscriptionOverview,
+  subscribeToExhibition
+} from "Core/modules/exhibition/exhibitionActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import HorizontalBorder from "CommonComponents/horizontalBorder";
 import SubscriptionOption from "CommonComponents/subscriptionOptionComponent";
+import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 
 class ExhibitionSubscriptionOverviewPage extends Component {
   onBackPress = () => {
     const { pop } = this.props;
     pop();
   };
-
+  onClickEnroll = (exhibitionId, subscriptionOption) => {
+    const {
+      subscribeToExhibition,
+      showSuccessFlashMessage,
+      navigateTo
+    } = this.props;
+    subscribeToExhibition(exhibitionId, {
+      type: subscriptionOption.type
+    }).then(({ payload }) => {
+      if (payload.code == 200 || payload.code == 201) {
+        navigateTo("your-exhibitions");
+        showSuccessFlashMessage("Subscribed to exhibition successfuly");
+      } else {
+        showSuccessFlashMessage(payload.message);
+      }
+    });
+  };
   render() {
     const {
-      exhibitionReducer: { subscriptionOverview },
+      exhibitionReducer: { subscriptionOverview, selectedSubscriptionOption },
       match: { params },
       getExhibitionSubscriptionOverview
     } = this.props;
@@ -88,13 +108,22 @@ class ExhibitionSubscriptionOverviewPage extends Component {
                 </div>
               </DivColumn>
             </DivRow>
+
             <DivRow className={styles.options_wrapper}>
               {map(subscriptionOverview.subscription_options, option => {
                 return <SubscriptionOption option={option} />;
               })}
             </DivRow>
             <DivRow className={styles.options_wrapper}>
-              <CapsuleButton className={styles.enroll_button}>
+              <CapsuleButton
+                onClick={() =>
+                  this.onClickEnroll(
+                    params.exhibitionId,
+                    selectedSubscriptionOption
+                  )
+                }
+                className={styles.enroll_button}
+              >
                 ENROLL
               </CapsuleButton>
             </DivRow>
@@ -115,6 +144,12 @@ const mapDispathToProps = dispatch => {
   return {
     getExhibitionSubscriptionOverview: bindActionCreators(
       getExhibitionSubscriptionOverview,
+      dispatch
+    ),
+    subscribeToExhibition: bindActionCreators(subscribeToExhibition, dispatch),
+
+    showSuccessFlashMessage: bindActionCreators(
+      showSuccessFlashMessage,
       dispatch
     ),
     logoutAction: bindActionCreators(logoutAction, dispatch)
