@@ -16,6 +16,7 @@ import DataTable from "react-data-table-component";
 import { getOrderDetailsAction } from "Core/modules/order/orderActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import HorizontalBorder from "CommonComponents/horizontalBorder";
+import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
 
 class OrdersDetailsPage extends Component {
   onBackPress = () => {
@@ -98,8 +99,12 @@ class OrdersDetailsPage extends Component {
       <SectionedContainer sideBarContainer={<SideNav />}>
         <NavHeader title="Order Detail" onBackClick={this.onBackPress}>
           <DivRow>
-            <CapsuleButton>Cancel</CapsuleButton>
-            <CapsuleButton>Print Invoice</CapsuleButton>
+            <SecondaryCapsuleButton className={styles.cancel_button}>
+              Cancel Order
+            </SecondaryCapsuleButton>
+            <CapsuleButton className={styles.print_invoice_button}>
+              Print Invoice
+            </CapsuleButton>
             <CapsuleButton>SHIP</CapsuleButton>
           </DivRow>
         </NavHeader>

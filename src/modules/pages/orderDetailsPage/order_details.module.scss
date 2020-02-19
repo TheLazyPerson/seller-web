@@ -1,4 +1,4 @@
-@import '~Styles/colors.module';
+@import "~Styles/colors.module";
 
 .order_page_container {
   overflow-y: scroll;
@@ -9,8 +9,18 @@
   color: $color-dark;
   padding: 17px 0px 17px 54px;
 }
+.cancel_button {
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-right: 5px;
+}
 
-
+.print_invoice_button {
+  border: solid 1px #22292f;
+  background-color: #f4f7fa;
+  color: #19202c;
+  margin-right: 5px;
+}
 .order_container {
   padding: 17px 0px 9px 54px;
 
