@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getEnrolledExhibitionAction } from "Core/modules/exhibition/exhibitionActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
+import isEmpty from 'lodash/isEmpty';
 
 class YourExhibitionListingPage extends Component {
   onClickViewExhibitionDetail = exhibition => {
@@ -76,7 +77,10 @@ class YourExhibitionListingPage extends Component {
             onBackClick={this.onBackPress}
           ></NavHeader>
           <DivColumn fillParent className={styles.content_container}>
-            <InitialPageLoader initialPageApi={getEnrolledExhibitionAction}>
+            <InitialPageLoader
+              initialPageApi={getEnrolledExhibitionAction}
+              isEmpty={isEmpty(subscribedExhibitionList)}
+            >
               {map(subscribedExhibitionList, exhibition => {
                 return this.getListItem(exhibition);
               })}
