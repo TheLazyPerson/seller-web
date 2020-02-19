@@ -5,6 +5,7 @@ import DivRow from "CommonComponents/divRow";
 import NavHeader from "CommonComponents/navHeader";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import isEmpty from "lodash/isEmpty";
+import map from "lodash/map";
 import styles from "./product_details.module.scss";
 import SideNav from "CommonComponents/sideNav";
 import navigatorHoc from "Hoc/navigatorHoc";
@@ -108,10 +109,130 @@ class ProductDetailsPage extends Component {
         <InitialPageLoader
           initialPageApi={() => getProductDetailsAction(params.productId)}
         >
-          <DivColumn
-            fillParent
-            className={styles.product_page_container}
-          ></DivColumn>
+          <DivColumn fillParent className={styles.product_page_container}>
+            <DivColumn className={styles.order_container}>
+              <div className={styles.order_id}>
+                Product Name: <b>{product.name}</b>
+              </div>
+            </DivColumn>
+
+            <div className={styles.header}>BASIC DETAILS</div>
+            <DivColumn className={styles.normal_container}>
+              <DivRow className={styles.title}>
+                Name: <div className={styles.value}>{product.name}</div>
+              </DivRow>
+              <DivRow className={styles.title}>
+                SKU: <div className={styles.value}>{product.sku}</div>
+              </DivRow>
+            </DivColumn>
+            <DivRow className={styles.normal_container}>
+              <DivColumn>
+                <div className={styles.title}>SHORT DESCRIPTION:</div>
+                <div className={styles.description}>
+                  {product.short_description}
+                </div>
+              </DivColumn>
+            </DivRow>
+            <DivRow className={styles.normal_container}>
+              <DivColumn>
+                <div className={styles.title}>DESCRIPTION:</div>
+                <div className={styles.description}>{product.description}</div>
+              </DivColumn>
+            </DivRow>
+
+            <div className={styles.header}>PRICING DETAILS</div>
+            <DivColumn className={styles.normal_container}>
+              <DivRow className={styles.title}>
+                Price:{" "}
+                <div className={styles.value}>{product.formatted_price}</div>
+              </DivRow>
+              <DivRow className={styles.title}>
+                Cost:{" "}
+                <div className={styles.value}>{product.formatted_cost}</div>
+              </DivRow>
+            </DivColumn>
+
+            <div className={styles.header}>PRODUCT IMAGES</div>
+            <DivRow className={styles.image_container}>
+              {!isEmpty(product.images) &&
+                map(product.images, image => {
+                  return (
+                    <DivColumn className={styles.image_contain}>
+                      <img src={image.path} className={styles.image} />
+                    </DivColumn>
+                  );
+                })}
+            </DivRow>
+
+            <div className={styles.header}>THUMBNAIL</div>
+            <DivRow className={styles.normal_container}>
+              <DivColumn className={styles.image_contain}>
+                <img src={product.thumbnail} className={styles.image} />
+              </DivColumn>
+            </DivRow>
+
+            <div className={styles.header}>INVENTORY</div>
+            <DivRow className={styles.normal_container}>
+              <DivColumn>
+                <div className={styles.title}>Quantity Available:</div>
+                <div className={styles.description}>
+                  {!isEmpty(product.inventory) && product.inventory.qty}
+                </div>
+              </DivColumn>
+            </DivRow>
+
+            <div className={styles.header}>SHIPPING DETAILS</div>
+            <DivColumn className={styles.normal_container}>
+              <DivRow className={styles.title}>
+                Weight:{" "}
+                <div className={styles.value}>
+                  {!isEmpty(product.shipping) && product.shipping.weight}
+                </div>
+              </DivRow>
+              <DivRow className={styles.title}>
+                Height:{" "}
+                <div className={styles.value}>
+                  {!isEmpty(product.shipping) && product.shipping.height}
+                </div>
+              </DivRow>
+              <DivRow className={styles.title}>
+                Depth:{" "}
+                <div className={styles.value}>
+                  {!isEmpty(product.shipping) && product.shipping.depth}
+                </div>
+              </DivRow>
+              <DivRow className={styles.title}>
+                Width:{" "}
+                <div className={styles.value}>
+                  {!isEmpty(product.shipping) && product.shipping.width}
+                </div>
+              </DivRow>
+            </DivColumn>
+
+            <div className={styles.header}>META DATA</div>
+            <DivColumn className={styles.normal_container}>
+              <DivRow className={styles.title}>
+                Meta Title:{" "}
+                <div className={styles.value}>
+                  {!isEmpty(product.meta) && product.meta.meta_title}
+                </div>
+              </DivRow>
+              <DivRow className={styles.title}>
+                Meta Keywords:{" "}
+                <div className={styles.value}>
+                  {!isEmpty(product.meta) && product.meta.meta_keywords}
+                </div>
+              </DivRow>
+            </DivColumn>
+            <DivRow className={styles.normal_container}>
+              <DivColumn>
+                <div className={styles.title}>META DESCRIPTION:</div>
+                <div className={styles.description}>
+                  {!isEmpty(product.meta) && product.meta.meta_description}
+                </div>
+              </DivColumn>
+            </DivRow>
+          </DivColumn>
         </InitialPageLoader>
       </SectionedContainer>
     );
