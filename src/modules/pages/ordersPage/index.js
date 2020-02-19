@@ -19,49 +19,53 @@ import memoize from "memoize-one";
 import DataTableContainer from "CommonContainers/dataTableContainer";
 import { getOrderListAction } from "Core/modules/order/orderActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
-const columns = memoize(() => [
-  {
-    name: "ID",
-    selector: "id",
-    sortable: true
-  },
-  {
-    name: "ORDER DATE",
-    selector: "created_at",
-    sortable: true
-  },
-  {
-    name: "EXHIBITION NAME",
-    selector: "exhibition_name",
-    sortable: true,
-    grow: 2
-  },
-  {
-    name: "GRAND TOTAL",
-    selector: "grand_total",
-    sortable: true
-  },
-  {
-    name: "TOTAL ITEMS",
-    selector: "total_item_count",
-    sortable: true
-  },
-  {
-    name: "STATUS",
-    selector: "status",
-    sortable: true
-  },
-  {
-    cell: () => (
-      <Button variant="contained" color="primary">
-        View
-      </Button>
-    ),
-    button: true
-  }
-]);
 
 class OrdersPage extends Component {
+  columns = memoize(() => [
+    {
+      name: "ID",
+      selector: "id",
+      sortable: true
+    },
+    {
+      name: "ORDER DATE",
+      selector: "created_at",
+      sortable: true
+    },
+    {
+      name: "EXHIBITION NAME",
+      selector: "exhibition_name",
+      sortable: true,
+      grow: 2
+    },
+    {
+      name: "GRAND TOTAL",
+      selector: "grand_total",
+      sortable: true
+    },
+    {
+      name: "TOTAL ITEMS",
+      selector: "total_item_count",
+      sortable: true
+    },
+    {
+      name: "STATUS",
+      selector: "status",
+      sortable: true
+    },
+    {
+      cell: (value) => (
+        <Button variant="contained" color="primary" onClick={()=> {
+          const { navigateTo } = this.props;
+          navigateTo('order-details', {orderId: value.id})
+        }}>
+          View
+        </Button>
+      ),
+      button: true
+    }
+  ]);
+
   render() {
     const {
       orderReducer: { orderList },
@@ -96,7 +100,7 @@ class OrdersPage extends Component {
             <DataTableContainer
               data={orderList}
               title="Orders"
-              columns={columns()}
+              columns={this.columns()}
             />
           </InitialPageLoader>
         </DivColumn>
