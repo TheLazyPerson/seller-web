@@ -15,8 +15,13 @@ import DataTableContainer from "CommonContainers/dataTableContainer";
 import DataTable from "react-data-table-component";
 import { getOrderDetailsAction } from "Core/modules/order/orderActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
+import HorizontalBorder from "CommonComponents/horizontalBorder";
 
 class OrdersDetailsPage extends Component {
+  onBackPress = () => {
+    const { pop } = this.props;
+    pop();
+  };
   render() {
     const {
       orderReducer: { order },
@@ -91,7 +96,7 @@ class OrdersDetailsPage extends Component {
     const { shipping_address, billing_address } = order;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <NavHeader title="Order Detail">
+        <NavHeader title="Order Detail" onBackClick={this.onBackPress}>
           <DivRow>
             <CapsuleButton>Cancel</CapsuleButton>
             <CapsuleButton>Print Invoice</CapsuleButton>
@@ -112,7 +117,7 @@ class OrdersDetailsPage extends Component {
               <div className={styles.status}>Delivered</div>
             </DivColumn>
 
-            <div className={styles.header}>Customer Details</div>
+            <div className={styles.header}>CUSTOMER DETAILS</div>
 
             <DivColumn className={styles.normal_container}>
               <DivRow className={styles.title}>
@@ -127,7 +132,7 @@ class OrdersDetailsPage extends Component {
               </DivRow>
             </DivColumn>
 
-            <div className={styles.header}>Products Details</div>
+            <div className={styles.header}>PRODUCT LIST</div>
 
             <DataTable
               columns={columns}
@@ -135,6 +140,7 @@ class OrdersDetailsPage extends Component {
               data={order.items}
               style={{ minHeight: 200 }}
             />
+            <HorizontalBorder />
             <DivRow className={styles.address_container}>
               <DivColumn className={styles.address_item_container}>
                 <div className={styles.title}>SHIPPING ADDRESS</div>
