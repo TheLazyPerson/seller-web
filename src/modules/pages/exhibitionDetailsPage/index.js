@@ -56,6 +56,12 @@ class ExhibitionDetailsPage extends Component {
     navigateTo("exhibition-subscribe", { id: exhibitionId });
   };
 
+  handleAttachProduct = exhibitionId => {
+    this.setState({
+      showModal: true
+    });
+  };
+
   render() {
     const {
       exhibitionReducer: { exhibitionDetail },
@@ -63,6 +69,7 @@ class ExhibitionDetailsPage extends Component {
       getExhibitionDetailAction
     } = this.props;
     const { showModal } = this.state;
+
     let headerTitle = "ENROLL";
 
     if (exhibitionState.UPCOMING_ENROLLED == exhibitionDetail.state) {
@@ -208,7 +215,13 @@ class ExhibitionDetailsPage extends Component {
                   <NavHeader title="PRODUCT DETAILS">
                     {exhibitionState.UPCOMING_ENROLLED ==
                       exhibitionDetail.state && (
-                      <CapsuleButton>ADD YOUR PRODUCTS</CapsuleButton>
+                      <CapsuleButton
+                        onClick={() =>
+                          this.handleAttachProduct(exhibitionDetail.id)
+                        }
+                      >
+                        ADD YOUR PRODUCTS
+                      </CapsuleButton>
                     )}
                   </NavHeader>
                   <DivRow className={styles.product_list_container}>
