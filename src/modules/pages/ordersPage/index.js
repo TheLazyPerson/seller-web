@@ -19,6 +19,7 @@ import memoize from "memoize-one";
 import DataTableContainer from "CommonContainers/dataTableContainer";
 import { getOrderListAction } from "Core/modules/order/orderActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
+import isEmpty from "lodash/isEmpty";
 
 class OrdersPage extends Component {
   columns = memoize(() => [
@@ -54,11 +55,15 @@ class OrdersPage extends Component {
       sortable: true
     },
     {
-      cell: (value) => (
-        <Button variant="contained" color="primary" onClick={()=> {
-          const { navigateTo } = this.props;
-          navigateTo('order-details', {orderId: value.id})
-        }}>
+      cell: value => (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            const { navigateTo } = this.props;
+            navigateTo("order-details", { orderId: value.id });
+          }}
+        >
           View
         </Button>
       ),
@@ -96,7 +101,10 @@ class OrdersPage extends Component {
               <div className={styles.description}>TOTAL ORDERS</div>
             </DivColumn>
           </DivRow>
-          <InitialPageLoader initialPageApi={getOrderListAction}>
+          <InitialPageLoader
+            initialPageApi={getOrderListAction}
+            isEmpty={isEmpty(orderList)}
+          >
             <DataTableContainer
               data={orderList}
               title="Orders"
