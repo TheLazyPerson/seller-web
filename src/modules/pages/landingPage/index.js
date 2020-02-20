@@ -86,6 +86,7 @@ class LandingPage extends Component {
         <FullwidthSecondaryHeader
           navItems={landingPageHeaderItems}
           onClickNavItem={this.handleNavItemClicked}
+          selectedTab={activeTab}
         />
 
         {activeTab == "benefits" ? <Benefits /> : ""}

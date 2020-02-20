@@ -47,6 +47,10 @@
   .nav_item:first-child {
     margin-left: 0px;
   }
+
+  .is_selected {
+    color: #e2a515;
+  }
 }
 
 @include medium {
