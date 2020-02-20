@@ -50,6 +50,11 @@ class SectionedHeader extends Component {
     });
   };
 
+  onClickSignup = () => {
+    const { navigateTo } = this.props;
+    navigateTo("signup");
+  };
+
   render() {
     const { isUserSignedIn, whiteColor, translate } = this.props;
     const { showOverlayComponent } = this.state;
@@ -89,6 +94,7 @@ class SectionedHeader extends Component {
           {!isUserSignedIn && (
             <CapsuleButton
               className={` ${styles.sign_up_button} ${styles.header_item_container} `}
+              onClick={this.onClickSignup}
             >
               {translate("header.register")}
             </CapsuleButton>
