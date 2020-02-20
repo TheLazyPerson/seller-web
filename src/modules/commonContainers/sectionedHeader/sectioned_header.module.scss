@@ -5,7 +5,7 @@ $bag-count-background: $color-pale;
 
 .header_container {
   justify-content: flex-end;
-  
+
   .profile_header_container {
     position: relative;
   }
@@ -26,8 +26,20 @@ $bag-count-background: $color-pale;
   .sigin_link {
     color: $primary-text-color;
     font-size: 18px;
+    text-transform: uppercase;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .sigin_link:hover {
+    color: $color-gold;
+    text-decoration: none;
   }
 
+  .sign_up_button {
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 900;
+  }
   .is_white {
     color: white;
   }

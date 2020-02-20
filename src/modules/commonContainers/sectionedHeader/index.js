@@ -20,16 +20,17 @@ import { bindActionCreators } from "redux";
 import translatorHoc from "Hoc/translatorHoc";
 import SearchBar from "../searchBar";
 import { CookieService } from "Utils/cookieService";
-import OverlayContainer from './overlayContainer';
+import OverlayContainer from "./overlayContainer";
 import { logoutAction } from "Core/modules/signin/signinActions";
 import { USER_DATA_COOKIE } from "Constants/cookieConstants";
+import CapsuleButton from "CommonComponents/capsuleButton";
 
 class SectionedHeader extends Component {
   clickedOnSearchItem = false;
 
   state = {
     searchText: "",
-    showOverlayComponent: false,
+    showOverlayComponent: false
   };
 
   onClickProfile = () => {
@@ -47,7 +48,7 @@ class SectionedHeader extends Component {
       CookieService.delete(USER_DATA_COOKIE);
       navigateTo(""); // ToHomePage
     });
-  }
+  };
 
   render() {
     const { isUserSignedIn, whiteColor, translate } = this.props;
@@ -66,35 +67,39 @@ class SectionedHeader extends Component {
                 src={whiteColor ? profileIconWhite : profileIconBlack}
                 onClick={this.onClickProfile}
               />
-              <img src={arrowDownIcon} className={styles.arrow_down_icon} onClick={this.onClickProfile}
+              <img
+                src={arrowDownIcon}
+                className={styles.arrow_down_icon}
+                onClick={this.onClickProfile}
               />
-              {
-                showOverlayComponent ? (
-                  <OverlayContainer
-                    onClickLogout={this.onClickLogout}
-                  />
-                ) : null
-              }
+              {showOverlayComponent ? (
+                <OverlayContainer onClickLogout={this.onClickLogout} />
+              ) : null}
             </div>
           ) : (
-              <a
-                className={`${styles.sigin_link} ${
-                  styles.header_item_container
-                  } ${whiteColor ? styles.is_white : ""}`}
-                href="/signin"
-              >
-                {translate("header.login")}
-              </a>
-            )}
-          {!isUserSignedIn && (
             <a
               className={`${styles.sigin_link} ${
                 styles.header_item_container
-                } ${whiteColor ? styles.is_white : ""}`}
-              href="/signup"
+              } ${whiteColor ? styles.is_white : ""}`}
+              href="/signin"
+            >
+              {translate("header.login")}
+            </a>
+          )}
+          {!isUserSignedIn && (
+            <CapsuleButton
+              className={` ${styles.sign_up_button} ${styles.header_item_container} `}
             >
               {translate("header.register")}
-            </a>
+            </CapsuleButton>
+            // <a
+            //   className={`${styles.sign_up_button} ${
+            //     styles.header_item_container
+            //   } ${whiteColor ? styles.is_white : ""}`}
+            //   href="/signup"
+            // >
+
+            // </a>
           )}
           {/* <img src={hamburgerMenuIcon} className={`${styles.hamburger_icon} ${styles.header_item_container}`} /> */}
         </DivRow>
@@ -110,11 +115,11 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     logoutAction: bindActionCreators(logoutAction, dispatch)
-  }
-}
+  };
+};
 
 export default connect(
   mapStateToProps,
