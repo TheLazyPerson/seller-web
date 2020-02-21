@@ -53,8 +53,8 @@ class ExhibitionDetailsPage extends Component {
     } = this.props;
     attachProductsToExhibition(exhibitionId, {
       products: [productId]
-    }).then(({ exhibitionDetail }) => {
-      getProductListAction();
+    }).then(() => {
+      getProductListAction(exhibitionId);
       console.log("attachment successful");
     });
   };
@@ -66,8 +66,8 @@ class ExhibitionDetailsPage extends Component {
     } = this.props;
     removeProductFromExhibition(exhibitionId, {
       product: productId
-    }).then(({ exhibitionDetail }) => {
-      getProductListAction();
+    }).then(() => {
+      getProductListAction(exhibitionId);
       console.log("removal successful");
     });
   };
@@ -250,7 +250,9 @@ class ExhibitionDetailsPage extends Component {
               )}
             </DivColumn>
           </InitialPageLoader>
-          <InitialPageLoader initialPageApi={getProductListAction}>
+          <InitialPageLoader
+            initialPageApi={() => getProductListAction(exhibitionDetail.id)}
+          >
             <AttachProductModal
               open={showModal}
               onClose={this.onCloseModal}
