@@ -209,7 +209,11 @@ class ExhibitionDetailsPage extends Component {
             </DivColumn>
           </InitialPageLoader>
 
-          <AttachProductModal open={showModal} onClose={this.onCloseModal} />
+          <AttachProductModal
+            open={showModal}
+            onClose={this.onCloseModal}
+            exhibitionId={exhibitionDetail.id}
+          />
         </DivColumn>
       </SectionedContainer>
     );
