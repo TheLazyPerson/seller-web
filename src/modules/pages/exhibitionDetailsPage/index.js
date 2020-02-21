@@ -48,22 +48,26 @@ class ExhibitionDetailsPage extends Component {
   onClickAttachProduct = (exhibitionId, productId) => {
     const {
       attachProductsToExhibition,
+      getProductListAction,
       exhibitionReducer: { exhibitionDetail }
     } = this.props;
     attachProductsToExhibition(exhibitionId, {
       products: [productId]
     }).then(({ exhibitionDetail }) => {
+      getProductListAction();
       console.log("attachment successful");
     });
   };
   onClickRemoveProduct = (exhibitionId, productId) => {
     const {
       removeProductFromExhibition,
+      getProductListAction,
       exhibitionReducer: { exhibitionDetail }
     } = this.props;
     removeProductFromExhibition(exhibitionId, {
       product: productId
     }).then(({ exhibitionDetail }) => {
+      getProductListAction();
       console.log("removal successful");
     });
   };
