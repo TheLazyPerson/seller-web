@@ -21,6 +21,7 @@ import { getExhibitionDetailAction } from "Core/modules/exhibition/exhibitionAct
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import AttachProductModal from "./attachProductModal";
 import BoxComponent from "CommonComponents/boxComponent";
+import isEmpty from "lodash/isEmpty";
 
 const exhibitionState = {
   UPCOMING: "upcoming",
@@ -129,55 +130,29 @@ class ExhibitionDetailsPage extends Component {
                   {exhibitionState.ENROLLED_LIVE == exhibitionDetail.state ? (
                     <Fragment>
                       <div className={styles.overview}>Overview :</div>
-                      <DivRow>
-                        <BoxComponent
-                          containerStyle={{
-                            width: 142,
-                            height: 113,
-                            marginRight: 10
-                          }}
-                          titleStyle={{
-                            fontSize: 20
-                          }}
-                          descriptionStyle={{
-                            fontSize: 12
-                          }}
-                          title="Some"
-                          description="Thing"
-                        />
-
-                        <BoxComponent
-                          containerStyle={{
-                            width: 142,
-                            height: 113,
-                            marginRight: 10
-                          }}
-                          titleStyle={{
-                            fontSize: 20
-                          }}
-                          descriptionStyle={{
-                            fontSize: 12
-                          }}
-                          title="Some"
-                          description="Thing"
-                        />
-
-                        <BoxComponent
-                          containerStyle={{
-                            width: 142,
-                            height: 113,
-                            marginRight: 10
-                          }}
-                          titleStyle={{
-                            fontSize: 20
-                          }}
-                          descriptionStyle={{
-                            fontSize: 12
-                          }}
-                          title="Some"
-                          description="Thing"
-                        />
-                      </DivRow>
+                      {!isEmpty(exhibitionDetail.overview.card) && (
+                        <DivRow>
+                          {map(exhibitionDetail.overview.card, card => {
+                            return (
+                              <BoxComponent
+                                containerStyle={{
+                                  width: 142,
+                                  height: 113,
+                                  marginRight: 10
+                                }}
+                                titleStyle={{
+                                  fontSize: 20
+                                }}
+                                descriptionStyle={{
+                                  fontSize: 12
+                                }}
+                                title={card.value}
+                                description={card.title}
+                              />
+                            );
+                          })}
+                        </DivRow>
+                      )}
                     </Fragment>
                   ) : (
                     <ProductDescription exhibitionDetail={exhibitionDetail} />
@@ -224,9 +199,9 @@ class ExhibitionDetailsPage extends Component {
                       </CapsuleButton>
                     )}
                   </NavHeader>
-                  <DivRow className={styles.product_list_container}>
+                  <DivRow fillParent className={styles.product_list_container}>
                     {map(exhibitionDetail.products, product => (
-                      <ProductListItem />
+                      <ProductListItem product={product} />
                     ))}
                   </DivRow>
                 </Fragment>
