@@ -200,12 +200,12 @@ class ExhibitionDetailsPage extends Component {
                   )}
                 </DivColumn>
               </DivRow>
-              {exhibitionState.UPCOMING != exhibitionDetail.state && (
+              {exhibitionState.UPCOMING == exhibitionDetail.state && (
                 <Fragment>
                   <NavHeader title="CATEGORIES"></NavHeader>
-                  <DivRow className={styles.category_list_container}>
+                  <DivRow fillParent className={styles.category_list_container}>
                     {map(exhibitionDetail.categories, category => (
-                      <CategoryListItem />
+                      <CategoryListItem name={category.name} />
                     ))}
                   </DivRow>
                 </Fragment>

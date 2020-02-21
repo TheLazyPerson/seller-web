@@ -5,16 +5,19 @@ import exhibitionImage from "Images/exhibition-item-2.jpg";
 
 class CategoryListItem extends Component {
   render() {
+    const { name } = this.props;
+    const image = "https://source.unsplash.com/400x300/?" + name;
+    console.log(image);
     return (
       <DivColumn
         className={styles.category_list_item_container}
         style={{
-          background: `url(${exhibitionImage}) center no-repeat`,
+          background: `url(${image}) center no-repeat`,
           backgroundSize: "cover"
         }}
       >
         <DivColumn fillParent className={styles.inner_container}>
-          <div className={styles.title}>Adidas Red Shoes</div>
+          <div className={styles.title}>{name}</div>
         </DivColumn>
       </DivColumn>
     );
