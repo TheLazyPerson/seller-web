@@ -20,7 +20,8 @@ class AttachProductModal extends Component {
     const { open, onClose } = this.props;
     const {
       productReducer: { productList },
-      getProductListAction
+      getProductListAction,
+      exhibitionId
     } = this.props;
     return (
       <Modal
@@ -50,7 +51,11 @@ class AttachProductModal extends Component {
               <DivColumn fillParent className={styles.content_container}>
                 <DivRow fillParent className={styles.item_container}>
                   {map(productList, product => (
-                    <ProductListItem product={product} />
+                    <ProductListItem
+                      product={product}
+                      actionType={"attach_product"}
+                      exhibitionId={exhibitionId}
+                    />
                   ))}
                 </DivRow>
               </DivColumn>
