@@ -1,4 +1,4 @@
-@import '~Styles/colors.module';
+@import "~Styles/colors.module";
 
 .modal_container {
   width: 70%;
@@ -20,8 +20,11 @@
 
     .item_container {
       overflow: scroll;
-      flex-wrap: wrap;  
+      flex-wrap: wrap;
       justify-content: center;
     }
+  }
+  .product_loader {
+    overflow: scroll;
   }
 }

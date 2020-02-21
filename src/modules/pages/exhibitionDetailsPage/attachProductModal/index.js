@@ -5,11 +5,23 @@ import styles from "./attach_product.module.scss";
 import SearchBarComponent from "CommonComponents/searchBarComponent";
 import DivRow from "CommonComponents/divRow";
 import ProductListItem from "CommonComponents/productListItem";
+import map from "lodash/map";
+import {
+  getProductListAction,
+  removeProductAction
+} from "Core/modules/product/productActions";
+import InitialPageLoader from "CommonContainers/initialPageLoader";
+import navigatorHoc from "Hoc/navigatorHoc";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-export default class AttachProductModal extends Component {
+class AttachProductModal extends Component {
   render() {
-    const { open, onClose, productList } = this.props;
-
+    const { open, onClose } = this.props;
+    const {
+      productReducer: { productList },
+      getProductListAction
+    } = this.props;
     return (
       <Modal
         aria-labelledby="simple-modal-title"
@@ -31,19 +43,39 @@ export default class AttachProductModal extends Component {
               <div className={styles.header_title}>ATTACH PRODUCTS</div>
               <SearchBarComponent />
             </DivRow>
-
-            <DivColumn fillParent className={styles.content_container}>
-              <DivRow fillParent className={styles.item_container}>
-                <ProductListItem />
-                <ProductListItem />
-                <ProductListItem />
-                <ProductListItem />
-                <ProductListItem />
-              </DivRow>
-            </DivColumn>
+            <InitialPageLoader
+              className={styles.product_loader}
+              initialPageApi={getProductListAction}
+            >
+              <DivColumn fillParent className={styles.content_container}>
+                <DivRow fillParent className={styles.item_container}>
+                  {map(productList, product => (
+                    <ProductListItem product={product} />
+                  ))}
+                </DivRow>
+              </DivColumn>
+            </InitialPageLoader>
           </DivColumn>
         </DivColumn>
       </Modal>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    productReducer: state.productReducer
+  };
+};
+
+const mapDispathToProps = dispatch => {
+  return {
+    getProductListAction: bindActionCreators(getProductListAction, dispatch),
+    removeProductAction: bindActionCreators(removeProductAction, dispatch)
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispathToProps
+)(navigatorHoc(AttachProductModal));
