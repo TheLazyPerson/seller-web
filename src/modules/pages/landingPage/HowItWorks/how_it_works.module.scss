@@ -1,0 +1,48 @@
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
+
+.how_it_works {
+  padding: 55px;
+  .list_item {
+    margin-bottom: 20px;
+    padding: 30px;
+    .title_group {
+      margin-left: 30px;
+      padding: 30px;
+      .title {
+        font-family: Lato;
+        font-size: 36px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #000000;
+        margin-top: 20px;
+      }
+      .description {
+        font-family: Lato;
+        font-size: 18px;
+        font-weight: 300;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #000000;
+        margin-top: 10px;
+      }
+    }
+
+    .image {
+      padding: 10px;
+      margin-right: auto;
+    }
+    .image_container {
+      height: 316px;
+    }
+  }
+}
+.reverse_directions {
+  flex-direction: row-reverse;
+  background-color: #f8f8f6;
+}
