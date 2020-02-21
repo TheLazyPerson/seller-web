@@ -17,12 +17,20 @@ import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import exhibitionImage from "Images/exhibition-item-3.png";
 import ProductListItem from "CommonComponents/productListItem";
 import CategoryListItem from "CommonComponents/categoryListItem";
-import { getExhibitionDetailAction } from "Core/modules/exhibition/exhibitionActions";
+import {
+  getExhibitionDetailAction,
+  attachProductsToExhibition,
+  removeProductFromExhibition
+} from "Core/modules/exhibition/exhibitionActions";
+
+import {
+  getProductListAction,
+  removeProductAction
+} from "Core/modules/product/productActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import AttachProductModal from "./attachProductModal";
 import BoxComponent from "CommonComponents/boxComponent";
 import isEmpty from "lodash/isEmpty";
-
 const exhibitionState = {
   UPCOMING: "upcoming",
   UPCOMING_ENROLLED: "subscribed",
@@ -37,6 +45,28 @@ const ProductDescription = ({ exhibitionDetail }) => (
 );
 
 class ExhibitionDetailsPage extends Component {
+  onClickAttachProduct = (exhibitionId, productId) => {
+    const {
+      attachProductsToExhibition,
+      exhibitionReducer: { exhibitionDetail }
+    } = this.props;
+    attachProductsToExhibition(exhibitionId, {
+      products: [productId]
+    }).then(({ exhibitionDetail }) => {
+      console.log("attachment successful");
+    });
+  };
+  onClickRemoveProduct = (exhibitionId, productId) => {
+    const {
+      removeProductFromExhibition,
+      exhibitionReducer: { exhibitionDetail }
+    } = this.props;
+    removeProductFromExhibition(exhibitionId, {
+      product: productId
+    }).then(({ exhibitionDetail }) => {
+      console.log("removal successful");
+    });
+  };
   state = {
     showModal: false
   };
@@ -66,6 +96,8 @@ class ExhibitionDetailsPage extends Component {
   render() {
     const {
       exhibitionReducer: { exhibitionDetail },
+      productReducer: { productList },
+      getProductListAction,
       match: { params },
       getExhibitionDetailAction
     } = this.props;
@@ -203,7 +235,10 @@ class ExhibitionDetailsPage extends Component {
                     {map(exhibitionDetail.products, product => (
                       <ProductListItem
                         product={product}
-                        actionType={"mark_product_out_of_stock"}
+                        actionType={"remove_product"}
+                        onClickAttachProduct={this.onClickAttachProduct}
+                        onClickRemoveProduct={this.onClickRemoveProduct}
+                        exhibitionId={exhibitionDetail.id}
                       />
                     ))}
                   </DivRow>
@@ -211,12 +246,16 @@ class ExhibitionDetailsPage extends Component {
               )}
             </DivColumn>
           </InitialPageLoader>
-
-          <AttachProductModal
-            open={showModal}
-            onClose={this.onCloseModal}
-            exhibitionId={exhibitionDetail.id}
-          />
+          <InitialPageLoader initialPageApi={getProductListAction}>
+            <AttachProductModal
+              open={showModal}
+              onClose={this.onCloseModal}
+              exhibitionId={exhibitionDetail.id}
+              onClickAttachProduct={this.onClickAttachProduct}
+              onClickRemoveProduct={this.onClickRemoveProduct}
+              productList={productList}
+            />
+          </InitialPageLoader>
         </DivColumn>
       </SectionedContainer>
     );
@@ -225,7 +264,8 @@ class ExhibitionDetailsPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    exhibitionReducer: state.exhibitionReducer
+    exhibitionReducer: state.exhibitionReducer,
+    productReducer: state.productReducer
   };
 };
 
@@ -235,7 +275,16 @@ const mapDispathToProps = dispatch => {
       getExhibitionDetailAction,
       dispatch
     ),
-    logoutAction: bindActionCreators(logoutAction, dispatch)
+    logoutAction: bindActionCreators(logoutAction, dispatch),
+    attachProductsToExhibition: bindActionCreators(
+      attachProductsToExhibition,
+      dispatch
+    ),
+    removeProductFromExhibition: bindActionCreators(
+      removeProductFromExhibition,
+      dispatch
+    ),
+    getProductListAction: bindActionCreators(getProductListAction, dispatch)
   };
 };
 

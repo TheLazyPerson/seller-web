@@ -6,10 +6,6 @@ import SearchBarComponent from "CommonComponents/searchBarComponent";
 import DivRow from "CommonComponents/divRow";
 import ProductListItem from "CommonComponents/productListItem";
 import map from "lodash/map";
-import {
-  getProductListAction,
-  removeProductAction
-} from "Core/modules/product/productActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { connect } from "react-redux";
@@ -17,12 +13,13 @@ import { bindActionCreators } from "redux";
 
 class AttachProductModal extends Component {
   render() {
-    const { open, onClose } = this.props;
     const {
-      productReducer: { productList },
-      getProductListAction,
-      exhibitionId
+      open,
+      onClose,
+      onClickAttachProduct,
+      onClickRemoveProduct
     } = this.props;
+    const { productList, exhibitionId } = this.props;
     return (
       <Modal
         aria-labelledby="simple-modal-title"
@@ -44,22 +41,20 @@ class AttachProductModal extends Component {
               <div className={styles.header_title}>ATTACH PRODUCTS</div>
               <SearchBarComponent />
             </DivRow>
-            <InitialPageLoader
-              className={styles.product_loader}
-              initialPageApi={getProductListAction}
-            >
-              <DivColumn fillParent className={styles.content_container}>
-                <DivRow fillParent className={styles.item_container}>
-                  {map(productList, product => (
-                    <ProductListItem
-                      product={product}
-                      actionType={"attach_product"}
-                      exhibitionId={exhibitionId}
-                    />
-                  ))}
-                </DivRow>
-              </DivColumn>
-            </InitialPageLoader>
+
+            <DivColumn fillParent className={styles.content_container}>
+              <DivRow fillParent className={styles.item_container}>
+                {map(productList, product => (
+                  <ProductListItem
+                    product={product}
+                    actionType={"attach_product"}
+                    exhibitionId={exhibitionId}
+                    onClickAttachProduct={onClickAttachProduct}
+                    onClickRemoveProduct={onClickRemoveProduct}
+                  />
+                ))}
+              </DivRow>
+            </DivColumn>
           </DivColumn>
         </DivColumn>
       </Modal>
@@ -67,20 +62,4 @@ class AttachProductModal extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    productReducer: state.productReducer
-  };
-};
-
-const mapDispathToProps = dispatch => {
-  return {
-    getProductListAction: bindActionCreators(getProductListAction, dispatch),
-    removeProductAction: bindActionCreators(removeProductAction, dispatch)
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispathToProps
-)(navigatorHoc(AttachProductModal));
+export default AttachProductModal;
