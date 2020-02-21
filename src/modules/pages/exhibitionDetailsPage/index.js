@@ -201,7 +201,10 @@ class ExhibitionDetailsPage extends Component {
                   </NavHeader>
                   <DivRow fillParent className={styles.product_list_container}>
                     {map(exhibitionDetail.products, product => (
-                      <ProductListItem product={product} />
+                      <ProductListItem
+                        product={product}
+                        actionType={"mark_product_out_of_stock"}
+                      />
                     ))}
                   </DivRow>
                 </Fragment>
