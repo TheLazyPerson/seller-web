@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import navigatorHoc from "Hoc/navigatorHoc";
 import translatorHoc from "Hoc/translatorHoc";
+import isEmpty from "lodash/isEmpty";
 
 class MarketPlace extends Component {
   navigateToMarketplaceEditProfile = () => {
@@ -66,7 +67,14 @@ class MarketPlace extends Component {
               <DivColumn className={styles.field_container}>
                 <div className={styles.title}>Address</div>
                 <div className={styles.value}>
-                  {/* {profile.phone ? profile.phone : "Not Available"} */}
+                  {!isEmpty(profile.shop_address) && (
+                    <span>
+                      {profile.shop_address.address1},
+                      {profile.shop_address.city}, {profile.shop_address.state},
+                      {profile.shop_address.country} -{" "}
+                      {profile.shop_address.postcode}
+                    </span>
+                  )}
                 </div>
               </DivColumn>
             </DivColumn>

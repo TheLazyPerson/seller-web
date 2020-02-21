@@ -12,8 +12,10 @@ import navigatorHoc from "Hoc/navigatorHoc";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import {
   getMarketplaceProfileAction,
-  editMarketplaceProfileAction
+  editMarketplaceProfileAction,
+  selectMarketplaceAddress
 } from "Core/modules/marketplaceprofile/marketplaceProfileActions";
+import { getAddressListAction } from "Core/modules/address/addressActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
@@ -26,6 +28,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 import DivColumn from "CommonComponents/divColumn";
+import AddressItemComponent from "CommonComponents/addressItemComponent";
+import HorizontalBorder from "CommonComponents/horizontalBorder";
+import map from "lodash/map";
+import InitialPageLoader from "CommonContainers/initialPageLoader";
 
 class EditMarketplaceProfile extends Component {
   onBackPress = () => {
@@ -37,13 +43,14 @@ class EditMarketplaceProfile extends Component {
     const {
       editMarketplaceProfileAction,
       navigateTo,
-      showSuccessFlashMessage
+      showSuccessFlashMessage,
+      marketplaceProfileReducer: { marketplaceAddress }
     } = this.props;
-
     editMarketplaceProfileAction({
       shop_name: form.shopName,
       contact_number: form.contactNumber,
-      shop_email: form.shopEmail
+      shop_email: form.shopEmail,
+      shop_address_id: marketplaceAddress.id
     }).then(({ payload }) => {
       if (payload.code === 200 || payload.code === 201) {
         navigateTo("marketplace");
@@ -82,7 +89,10 @@ class EditMarketplaceProfile extends Component {
 
   render() {
     const {
-      marketplaceProfileReducer: { profile }
+      getAddressListAction,
+      selectMarketplaceAddress,
+      marketplaceProfileReducer: { profile, marketplaceAddress },
+      addressReducer: { addressList }
     } = this.props;
 
     return (
@@ -141,6 +151,24 @@ class EditMarketplaceProfile extends Component {
                 )}
               </Field>
 
+              <HorizontalBorder />
+
+              <InitialPageLoader initialPageApi={getAddressListAction}>
+                <DivColumn>
+                  {map(addressList, (address, index) => {
+                    return (
+                      <AddressItemComponent
+                        address={address}
+                        onClickEdit={this.handleEdit}
+                        onClickRemove={this.handleRemove}
+                        isSelected={address.id == marketplaceAddress.id}
+                        onClickItem={() => selectMarketplaceAddress(address)}
+                      />
+                    );
+                  })}
+                </DivColumn>
+              </InitialPageLoader>
+
               <DivRow className={styles.form_button_container}>
                 <SecondaryCapsuleButton onClick={this.onClickCancel}>
                   Cancel
@@ -159,7 +187,8 @@ class EditMarketplaceProfile extends Component {
 
 const mapStateToProps = state => {
   return {
-    marketplaceProfileReducer: state.marketplaceProfileReducer
+    marketplaceProfileReducer: state.marketplaceProfileReducer,
+    addressReducer: state.addressReducer
   };
 };
 
@@ -167,6 +196,11 @@ const mapDispathToProps = dispatch => {
   return {
     getMarketplaceProfileAction: bindActionCreators(
       getMarketplaceProfileAction,
+      dispatch
+    ),
+    getAddressListAction: bindActionCreators(getAddressListAction, dispatch),
+    selectMarketplaceAddress: bindActionCreators(
+      selectMarketplaceAddress,
       dispatch
     ),
     editMarketplaceProfileAction: bindActionCreators(

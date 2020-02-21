@@ -23,7 +23,8 @@ class FullwidthSecondaryHeader extends Component {
       whiteColor,
       className,
       navItems,
-      onClickNavItem
+      onClickNavItem,
+      selectedTab
     } = this.props;
 
     return (
@@ -43,9 +44,12 @@ class FullwidthSecondaryHeader extends Component {
         <DivRow className={styles.links_container}>
           {map(navItems, listItem => {
             const { title, slug } = listItem;
+            const isSelected = selectedTab === slug;
             return (
               <a
-                className={styles.nav_item}
+                className={`${styles.nav_item} ${
+                  isSelected ? styles.is_selected : ""
+                }`}
                 onClick={() => {
                   onClickNavItem(slug);
                 }}
