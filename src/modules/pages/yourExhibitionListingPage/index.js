@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getEnrolledExhibitionAction } from "Core/modules/exhibition/exhibitionActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
-import isEmpty from 'lodash/isEmpty';
+import isEmpty from "lodash/isEmpty";
 
 class YourExhibitionListingPage extends Component {
   onClickViewExhibitionDetail = exhibition => {
@@ -52,7 +52,7 @@ class YourExhibitionListingPage extends Component {
 
           <DivRow className={styles.action_container}>
             <div className={styles.last_date}>
-              LAST {listItem.last_date_of_enrollment} LEFT TO ENROLL
+              LAST {listItem.last_date_of_enrollment} LEFT TO TO SUBMIT PRODUCTS
             </div>
             <CapsuleButton
               onClick={() => this.onClickViewExhibitionDetail(listItem)}
