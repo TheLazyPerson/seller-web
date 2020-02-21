@@ -1,27 +1,31 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b5568be241c32c1e69e1c4aae097d5b7",
+    "revision": "3069e3787f27ecd80aa0ebf13e0a183f",
     "url": "/index.html"
   },
   {
-    "revision": "f2d480913a3d11fbc1bc",
+    "revision": "842714ca517fd2b0b92b",
     "url": "/static/css/2.4fec53f3.chunk.css"
   },
   {
-    "revision": "81b876126b67977d1e4e",
-    "url": "/static/css/main.0fc2ee90.chunk.css"
+    "revision": "32a38e72e166f20cdae2",
+    "url": "/static/css/main.98f6b9c7.chunk.css"
   },
   {
-    "revision": "f2d480913a3d11fbc1bc",
-    "url": "/static/js/2.d883b03c.chunk.js"
+    "revision": "842714ca517fd2b0b92b",
+    "url": "/static/js/2.443ffaf4.chunk.js"
   },
   {
-    "revision": "81b876126b67977d1e4e",
-    "url": "/static/js/main.c1b84687.chunk.js"
+    "revision": "32a38e72e166f20cdae2",
+    "url": "/static/js/main.0bc56d57.chunk.js"
   },
   {
     "revision": "cb599ba46cd85b9f34a1",
     "url": "/static/js/runtime-main.590a97a9.js"
+  },
+  {
+    "revision": "25c6cb6288798989361c01c8da2e6b3e",
+    "url": "/static/media/add-to-cart.25c6cb62.svg"
   },
   {
     "revision": "e89c59824554779dd8fa8936e19c7bb3",
@@ -52,6 +56,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/arrow-right-icon-black.97adcc4a.svg"
   },
   {
+    "revision": "b84c18e6eea3235af07d70f402d36a08",
+    "url": "/static/media/authenticate.b84c18e6.svg"
+  },
+  {
     "revision": "50120180c0460e62991ac14a71e8394f",
     "url": "/static/media/bookmark-icon-black.50120180.svg"
   },
@@ -76,8 +84,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/close-icon-black.1bf44a0b.svg"
   },
   {
+    "revision": "e3b23b7fac3231cd5c2e28de9e127ea4",
+    "url": "/static/media/deliver-products.e3b23b7f.svg"
+  },
+  {
     "revision": "5fcf4779e446c31ec9581fdf812a3bf1",
     "url": "/static/media/delivering-success.5fcf4779.svg"
+  },
+  {
+    "revision": "debe87e29d5d44a07f146e97d971f469",
+    "url": "/static/media/enroll-to-exhibition.debe87e2.svg"
   },
   {
     "revision": "9bf09aac004458e15f995f1749621db1",
@@ -192,6 +208,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/profile-icon-white.d848b5f8.svg"
   },
   {
+    "revision": "d40b1cd5875aa99a98b64263991e8189",
+    "url": "/static/media/recieve-payment.d40b1cd5.svg"
+  },
+  {
     "revision": "271edfa0b3c83a18f93517acd42682f8",
     "url": "/static/media/rocket-black.271edfa0.svg"
   },
@@ -234,6 +254,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "f0b5438a9e4c3afe30acd6fcc9c0161e",
     "url": "/static/media/subscription-icon-white.f0b5438a.svg"
+  },
+  {
+    "revision": "b0ee9e5e2a2063775d0ef4f85e007746",
+    "url": "/static/media/upload-listing.b0ee9e5e.svg"
   },
   {
     "revision": "0f036778e25dee2d38f1e0fae0cd31f2",
