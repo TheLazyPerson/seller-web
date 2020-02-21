@@ -13,6 +13,8 @@ import SellerProposition from "./sellerProposition";
 import Benefits from "./benefits";
 import FAQ from "./Faq";
 import Pricing from "./Pricing";
+import HowItWorks from "./HowItWorks";
+
 import { getPlanListAction } from "Core/modules/subscription/subscriptionActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import FullwidthSecondaryHeader from "CommonContainers/fullwidthSecondaryHeader";
@@ -90,6 +92,7 @@ class LandingPage extends Component {
         />
 
         {activeTab == "benefits" ? <Benefits /> : ""}
+        {activeTab == "how-it-works" ? <HowItWorks /> : ""}
         {activeTab == "faq" ? <FAQ /> : ""}
         {activeTab == "pricing" ? (
           <InitialPageLoader initialPageApi={getPlanListAction}>
