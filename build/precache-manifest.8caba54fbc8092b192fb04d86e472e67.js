@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4a37dda03ca853da53182a3dec3ece7f",
+    "revision": "2d9d30f0d917029701cd90b368186745",
     "url": "/index.html"
   },
   {
-    "revision": "5f2c771fb63137d09f3d",
+    "revision": "0d43efa8b64eb2f85454",
     "url": "/static/css/2.8f4a32ba.chunk.css"
   },
   {
-    "revision": "a7381f84d96b16854146",
-    "url": "/static/css/main.ef884e13.chunk.css"
+    "revision": "600212e7a4773325b933",
+    "url": "/static/css/main.9048db80.chunk.css"
   },
   {
-    "revision": "5f2c771fb63137d09f3d",
-    "url": "/static/js/2.61e7f22d.chunk.js"
+    "revision": "0d43efa8b64eb2f85454",
+    "url": "/static/js/2.24e0d1e3.chunk.js"
   },
   {
-    "revision": "a7381f84d96b16854146",
-    "url": "/static/js/main.39b54d3a.chunk.js"
+    "revision": "600212e7a4773325b933",
+    "url": "/static/js/main.5b456cc0.chunk.js"
   },
   {
     "revision": "cb599ba46cd85b9f34a1",
@@ -92,6 +92,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/delivering-success.5fcf4779.svg"
   },
   {
+    "revision": "04105398a3100f25f10715e4af6ca0fc",
+    "url": "/static/media/download-app.04105398.svg"
+  },
+  {
     "revision": "debe87e29d5d44a07f146e97d971f469",
     "url": "/static/media/enroll-to-exhibition.debe87e2.svg"
   },
@@ -126,6 +130,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "79539bb5bc17e8b8177bbf68e50fafa1",
     "url": "/static/media/faq-icon-black.79539bb5.svg"
+  },
+  {
+    "revision": "079e4921f7fe30c3e8e81a75ff47b9f7",
+    "url": "/static/media/fulfilment-by-us.079e4921.svg"
   },
   {
     "revision": "db9b21a1c41f3dcd9731e1e7acfdbb57",
@@ -234,6 +242,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "37b844ace2e5691b63f434c6dca926cf",
     "url": "/static/media/search-icon-white.37b844ac.svg"
+  },
+  {
+    "revision": "93cc99a9eeaa057450bf880eef996e6e",
+    "url": "/static/media/self-ship.93cc99a9.svg"
   },
   {
     "revision": "d8aedad27e8a588bc3f355c78a931aad",
