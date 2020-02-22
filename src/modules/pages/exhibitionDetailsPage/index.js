@@ -249,18 +249,19 @@ class ExhibitionDetailsPage extends Component {
                 </Fragment>
               )}
             </DivColumn>
-          </InitialPageLoader>
-          <InitialPageLoader
-            initialPageApi={() => getProductListAction(exhibitionDetail.id)}
-          >
-            <AttachProductModal
-              open={showModal}
-              onClose={this.onCloseModal}
-              exhibitionId={exhibitionDetail.id}
-              onClickAttachProduct={this.onClickAttachProduct}
-              onClickRemoveProduct={this.onClickRemoveProduct}
-              productList={productList}
-            />
+
+            <InitialPageLoader
+              initialPageApi={() => getProductListAction(exhibitionDetail.id)}
+            >
+              <AttachProductModal
+                open={showModal}
+                onClose={this.onCloseModal}
+                exhibitionId={exhibitionDetail.id}
+                onClickAttachProduct={this.onClickAttachProduct}
+                onClickRemoveProduct={this.onClickRemoveProduct}
+                productList={productList}
+              />
+            </InitialPageLoader>
           </InitialPageLoader>
         </DivColumn>
       </SectionedContainer>
