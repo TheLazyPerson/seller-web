@@ -15,11 +15,13 @@ import FAQ from "./Faq";
 import Pricing from "./Pricing";
 import HowItWorks from "./HowItWorks";
 import DeliveringOrders from "./DeliveringOrders";
+import DownloadApp from "./DownloadApp";
 
 import { getPlanListAction } from "Core/modules/subscription/subscriptionActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import FullwidthSecondaryHeader from "CommonContainers/fullwidthSecondaryHeader";
 import { landingPageHeaderItems } from "Constants/landingPageHeaderConstants";
+import HorizontalBorder from "CommonComponents/horizontalBorder";
 
 class LandingPage extends Component {
   onClickStartSelling = () => {
@@ -105,6 +107,9 @@ class LandingPage extends Component {
           ""
         )}
         {activeTab == "faq" ? <FAQ /> : ""}
+
+        <HorizontalBorder />
+        <DownloadApp />
       </FullWidthContainer>
     );
   }
