@@ -14,6 +14,7 @@ import Benefits from "./benefits";
 import FAQ from "./Faq";
 import Pricing from "./Pricing";
 import HowItWorks from "./HowItWorks";
+import DeliveringOrders from "./DeliveringOrders";
 
 import { getPlanListAction } from "Core/modules/subscription/subscriptionActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
@@ -28,6 +29,8 @@ class LandingPage extends Component {
     } = this.props;
 
     if (selectedSubscription.id) {
+      navigateTo("signup");
+    } else {
       navigateTo("signup");
     }
   };
@@ -93,7 +96,7 @@ class LandingPage extends Component {
 
         {activeTab == "benefits" ? <Benefits /> : ""}
         {activeTab == "how-it-works" ? <HowItWorks /> : ""}
-        {activeTab == "faq" ? <FAQ /> : ""}
+        {activeTab == "delivering-orders" ? <DeliveringOrders /> : ""}
         {activeTab == "pricing" ? (
           <InitialPageLoader initialPageApi={getPlanListAction}>
             <Pricing subscriptionPlanList={subscriptionPlanList} />
@@ -101,6 +104,7 @@ class LandingPage extends Component {
         ) : (
           ""
         )}
+        {activeTab == "faq" ? <FAQ /> : ""}
       </FullWidthContainer>
     );
   }
