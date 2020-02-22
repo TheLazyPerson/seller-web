@@ -1,0 +1,48 @@
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
+.download_app_container {
+  padding: 55px;
+
+  .title {
+    font-family: Lato;
+    font-size: 36px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .description {
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+    margin-top: 10px;
+  }
+
+  .highlighted {
+    color: #e2a515;
+  }
+  .image {
+    margin-top: 40px;
+  }
+
+  .badge_icon {
+    width: 140px;
+  }
+
+  .apple_badge {
+    width: 140px;
+    height: 38px;
+  }
+  .badge_container {
+    margin-top: 30px;
+  }
+}

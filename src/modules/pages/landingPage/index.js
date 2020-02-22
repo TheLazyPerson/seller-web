@@ -14,11 +14,14 @@ import Benefits from "./benefits";
 import FAQ from "./Faq";
 import Pricing from "./Pricing";
 import HowItWorks from "./HowItWorks";
+import DeliveringOrders from "./DeliveringOrders";
+import DownloadApp from "./DownloadApp";
 
 import { getPlanListAction } from "Core/modules/subscription/subscriptionActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import FullwidthSecondaryHeader from "CommonContainers/fullwidthSecondaryHeader";
 import { landingPageHeaderItems } from "Constants/landingPageHeaderConstants";
+import HorizontalBorder from "CommonComponents/horizontalBorder";
 
 class LandingPage extends Component {
   onClickStartSelling = () => {
@@ -28,6 +31,8 @@ class LandingPage extends Component {
     } = this.props;
 
     if (selectedSubscription.id) {
+      navigateTo("signup");
+    } else {
       navigateTo("signup");
     }
   };
@@ -93,7 +98,7 @@ class LandingPage extends Component {
 
         {activeTab == "benefits" ? <Benefits /> : ""}
         {activeTab == "how-it-works" ? <HowItWorks /> : ""}
-        {activeTab == "faq" ? <FAQ /> : ""}
+        {activeTab == "delivering-orders" ? <DeliveringOrders /> : ""}
         {activeTab == "pricing" ? (
           <InitialPageLoader initialPageApi={getPlanListAction}>
             <Pricing subscriptionPlanList={subscriptionPlanList} />
@@ -101,6 +106,10 @@ class LandingPage extends Component {
         ) : (
           ""
         )}
+        {activeTab == "faq" ? <FAQ /> : ""}
+
+        <HorizontalBorder />
+        <DownloadApp />
       </FullWidthContainer>
     );
   }

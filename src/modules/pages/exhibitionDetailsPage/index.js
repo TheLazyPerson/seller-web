@@ -239,7 +239,12 @@ class ExhibitionDetailsPage extends Component {
                     {map(exhibitionDetail.products, product => (
                       <ProductListItem
                         product={product}
-                        actionType={"remove_product"}
+                        actionType={
+                          exhibitionState.ENROLLED_LIVE ==
+                          exhibitionDetail.state
+                            ? "mark_product_out_of_stock"
+                            : "remove_product"
+                        }
                         onClickAttachProduct={this.onClickAttachProduct}
                         onClickRemoveProduct={this.onClickRemoveProduct}
                         exhibitionId={exhibitionDetail.id}
