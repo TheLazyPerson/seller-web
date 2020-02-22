@@ -30,6 +30,7 @@ import Select from "react-select";
 import map from "lodash/map";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import ImageSelectionComponent from "CommonComponents/imageSelectionComponent";
 
 class AddProduct extends Component {
   state = {
@@ -82,38 +83,7 @@ class AddProduct extends Component {
       productId,
       editProductAction
     } = this.props;
-    // "type": "simple",
-    // "sku": "sample",
-    // "name": "Mya Hermann PhD",
-    // "attribute_family_id": 1, --
-    // "short_description": "Numquam maxime ut.",
-    // "price": 1322.22,
-    // "cost": 1322.22,
-    // "description" : "Numquam maxime ut.",
-    // "status" : "draft",
-    // "special_price": 1300,
-    // "special_price_from": "",
-    // "special_price_to": "",
-    // "min_price": 1000,
-    // "max_price": 1500,
-    // "shipping": {
-    //   "width": "14",
-    //     "height": "14",
-    //       "depth": "14",
-    //         "weight": "14"
-    // },
-    // "meta_data": {
-    //   "meta_title": "Sample",
-    //     "meta_description": "Sample",
-    //       "meta_keywords": "Sample"
-    // },
 
-    // "inventory": {
-    //   "inventory_source_id": 1,
-    //     "qty": 10
-    // },
-    // "category_id": 1,
-    // "locale" : "en"
     const formData = {
       type: form.type,
       sku: form.sku,
@@ -184,7 +154,20 @@ class AddProduct extends Component {
       depth: product.depth ? product.depth : "",
       weight: product.weight ? product.weight : "",
       qty: product.qty ? product.qty : "",
-      status: product.status ? product.status : ""
+      status: product.status ? product.status : "",
+      minPrice: product.min_price ? product.min_price : "",
+      maxPrice: product.max_price ? product.max_price : "",
+      metaTitle: product.meta.meta_title ? product.meta.meta_title : "",
+      metaDescription: product.meta.meta_description
+        ? product.meta.meta_description
+        : "",
+      metaKeywords: product.meta.meta_keywords
+        ? product.meta.meta_keywords
+        : "",
+      width: product.shipping.width ? product.shipping.width : "",
+      height: product.shipping.height ? product.shipping.height : "",
+      depth: product.shipping.depth ? product.shipping.depth : "",
+      weight: product.shipping.weight ? product.shipping.weight : ""
     };
   };
 
@@ -394,6 +377,10 @@ class AddProduct extends Component {
                     )}
                   </Field>
                 </DivColumn>
+                <div className={styles.header}>SELECT THUMBNAIL</div>
+                <ImageSelectionComponent />
+                <div className={styles.header}>PRODUCT IMAGES</div>
+                <ImageSelectionComponent />
                 <div className={styles.header}>SHIPPING DETAILS</div>
 
                 <DivColumn className={styles.text_input_container}>

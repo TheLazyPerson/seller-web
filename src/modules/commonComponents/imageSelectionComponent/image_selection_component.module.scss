@@ -1,0 +1,43 @@
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
+
+$checkbox-color: $color-very-light-blue;
+
+.rtl {
+  flex-flow: row-reverse;
+
+  .checkbox_text {
+    margin-right: 7px;
+  }
+}
+
+.input_checkbox {
+  border-radius: 5px;
+  border: solid 1px $checkbox-color;
+}
+
+.checkbox_text {
+  font-size: 18px;
+  color: $primary-text-color;
+  margin-left: 7px;
+}
+
+@include medium {
+  .checkbox_text {
+    font-size: 16px;
+  }
+}
+
+@include small {
+  .checkbox_text {
+    font-size: 14px;
+  }
+}
+
+.container {
+  padding: 40px;
+  background-color: #eaeaea;
+}
+.dropzone {
+  padding: 20px;
+}
