@@ -23,6 +23,7 @@ import { bindActionCreators } from "redux";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import {
   createProductAction,
+  uploadImage,
   editProductAction
 } from "Core/modules/product/productActions";
 import find from "lodash/find";
@@ -31,10 +32,16 @@ import map from "lodash/map";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ImageSelectionComponent from "CommonComponents/imageSelectionComponent";
+import { getBase64 } from "Utils/generalUtils";
 
 class AddProduct extends Component {
   state = {
-    startDate: null
+    startDate: null,
+    thumbnailImage: null,
+    productImages: [],
+
+    thubnailObj: null,
+    productImagesObj: []
   };
 
   onSubmitComplete = () => {
@@ -83,6 +90,7 @@ class AddProduct extends Component {
       productId,
       editProductAction
     } = this.props;
+    const { thubnailObj, productImagesObj } = this.state;
 
     const formData = {
       type: form.type,
@@ -99,6 +107,8 @@ class AddProduct extends Component {
       special_price: 1000,
       special_price_from: "",
       special_price_from: "",
+      thumbnail_id: thubnailObj,
+      images: productImagesObj,
       meta_data: {
         meta_title: form.metaTitle,
         meta_description: form.metaDescription,
@@ -121,14 +131,14 @@ class AddProduct extends Component {
     if (productId) {
       editProductAction(productId, formData).then(({ payload }) => {
         if (payload.code === 200 || payload.code === 201) {
-          onSubmitComplete();
+          this.onSubmitComplete();
           showSuccessFlashMessage("Product Edited");
         }
       });
     } else {
       createProductAction(formData).then(({ payload }) => {
         if (payload.code === 200 || payload.code === 201) {
-          onSubmitComplete();
+          this.onSubmitComplete();
           showSuccessFlashMessage("Product Added");
         }
       });
@@ -175,6 +185,16 @@ class AddProduct extends Component {
     return map(list, item => ({ value: item.name, label: item.name }));
   };
 
+  uploadImage = async file => {
+    const { uploadImage } = this.props;
+    const baseImage = await getBase64(file[0]);
+    return uploadImage({
+      asset_type: "productimage",
+      file_type: file[0].type,
+      file: baseImage
+    });
+  };
+
   render() {
     const CustomRenderInput = ({ input, name, value, onClick, meta }) => {
       return (
@@ -194,6 +214,7 @@ class AddProduct extends Component {
       productId,
       basicReducer: { basicData }
     } = this.props;
+    const { thumbnailImage, productImages } = this.state;
 
     let startDate = null;
 
@@ -378,9 +399,30 @@ class AddProduct extends Component {
                   </Field>
                 </DivColumn>
                 <div className={styles.header}>SELECT THUMBNAIL</div>
-                <ImageSelectionComponent />
+                <ImageSelectionComponent
+                  files={[thumbnailImage]}
+                  onDrop={file => {
+                    this.uploadImage(file).then(({ payload }) => {
+                      this.setState({
+                        thumbnailImage: file,
+                        thubnailObj: payload.data.id
+                      });
+                    });
+                  }}
+                />
                 <div className={styles.header}>PRODUCT IMAGES</div>
-                <ImageSelectionComponent />
+                <ImageSelectionComponent
+                  files={productImages}
+                  onDrop={file => {
+                    this.uploadImage(file).then(({ payload }) => {
+                      const { productImages, productImagesObj } = this.state;
+                      this.setState({
+                        productImages: [...productImages, file],
+                        productImagesObj: [...productImagesObj, payload.data.id]
+                      });
+                    });
+                  }}
+                />
                 <div className={styles.header}>SHIPPING DETAILS</div>
 
                 <DivColumn className={styles.text_input_container}>
@@ -507,6 +549,7 @@ const mapDispathToProps = dispatch => {
   return {
     createProductAction: bindActionCreators(createProductAction, dispatch),
     editProductAction: bindActionCreators(editProductAction, dispatch),
+    uploadImage: bindActionCreators(uploadImage, dispatch),
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
