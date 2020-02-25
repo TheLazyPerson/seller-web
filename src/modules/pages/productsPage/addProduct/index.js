@@ -90,6 +90,7 @@ class AddProduct extends Component {
       productId,
       editProductAction
     } = this.props;
+    const {thubnailObj,productImagesObj} = this.state;
 
     const formData = {
       type: form.type,
@@ -106,6 +107,8 @@ class AddProduct extends Component {
       special_price: 1000,
       special_price_from: "",
       special_price_from: "",
+      thumbnail_id: thubnailObj,
+      images: productImagesObj,
       meta_data: {
         meta_title: form.metaTitle,
         meta_description: form.metaDescription,
@@ -403,7 +406,7 @@ class AddProduct extends Component {
                   files={[thumbnailImage]}
                   onDrop={file => {
                     this.uploadImage(file).then(({ payload }) => {
-                      this.setState({ thumbnailImage: file, thubnailObj: payload.data });
+                      this.setState({ thumbnailImage: file, thubnailObj: payload.data.id });
                     });
                   }}
                 />
@@ -412,6 +415,7 @@ class AddProduct extends Component {
                   files={productImages}
                   onDrop={file => {
                     this.uploadImage(file).then(({ payload }) => {
+
                       const { productImages, productImagesObj } = this.state;
                       this.setState({
                         productImages: [
@@ -420,7 +424,7 @@ class AddProduct extends Component {
                         ],
                         productImagesObj: [
                           ...productImagesObj,
-                          payload.data
+                          payload.data.id
                         ]
                       });
                     });
