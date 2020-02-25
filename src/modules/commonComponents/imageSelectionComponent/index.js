@@ -4,23 +4,14 @@ import DivColumn from "CommonComponents/divColumn";
 import translatorHoc from "Hoc/translatorHoc";
 import Dropzone from "react-dropzone";
 import map from "lodash/map";
+import isEmpty from 'lodash/isEmpty';
 
 class ImageSelectionComponent extends Component {
-  constructor() {
-    super();
-    this.onDrop = files => {
-      this.setState({ files });
-    };
-    this.state = {
-      files: []
-    };
-  }
-
   render() {
-    const files = this.state.files;
+    const { onDrop, files } = this.props;
 
     return (
-      <Dropzone onDrop={this.onDrop} className={styles.dropzone}>
+      <Dropzone onDrop={onDrop} className={styles.dropzone}>
         {({ getRootProps, getInputProps }) => (
           <section className={styles.container}>
             <div {...getRootProps({ className: "dropzone" })}>
@@ -30,11 +21,15 @@ class ImageSelectionComponent extends Component {
             <aside>
               <h4>Files</h4>
               <ul>
-                {map(file => (
-                  <li key={file.name}>
-                    {file.name} - {file.size} bytes
-                  </li>
-                ))}
+                {map(files, file => {
+                  if (isEmpty(file))
+                    return null;
+                  return (
+                    <li>
+                      {`${file[0].name} - ${file[0].size} bytes`}
+                    </li>
+                  )
+                })}
               </ul>
             </aside>
           </section>
