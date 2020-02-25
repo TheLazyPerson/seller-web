@@ -33,12 +33,12 @@ class OrdersPage extends Component {
       selector: "created_at",
       sortable: true
     },
-    {
-      name: "EXHIBITION NAME",
-      selector: "exhibition_name",
-      sortable: true,
-      grow: 2
-    },
+    // {
+    //   name: "EXHIBITION NAME",
+    //   selector: "exhibition_name",
+    //   sortable: true,
+    //   grow: 2
+    // },
     {
       name: "GRAND TOTAL",
       selector: "grand_total",
