@@ -32,7 +32,7 @@ import map from "lodash/map";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ImageSelectionComponent from "CommonComponents/imageSelectionComponent";
-import { getBase64 } from 'Utils/generalUtils';
+import { getBase64 } from "Utils/generalUtils";
 
 class AddProduct extends Component {
   state = {
@@ -90,7 +90,7 @@ class AddProduct extends Component {
       productId,
       editProductAction
     } = this.props;
-    const {thubnailObj,productImagesObj} = this.state;
+    const { thubnailObj, productImagesObj } = this.state;
 
     const formData = {
       type: form.type,
@@ -131,14 +131,14 @@ class AddProduct extends Component {
     if (productId) {
       editProductAction(productId, formData).then(({ payload }) => {
         if (payload.code === 200 || payload.code === 201) {
-          onSubmitComplete();
+          this.onSubmitComplete();
           showSuccessFlashMessage("Product Edited");
         }
       });
     } else {
       createProductAction(formData).then(({ payload }) => {
         if (payload.code === 200 || payload.code === 201) {
-          onSubmitComplete();
+          this.onSubmitComplete();
           showSuccessFlashMessage("Product Added");
         }
       });
@@ -185,15 +185,15 @@ class AddProduct extends Component {
     return map(list, item => ({ value: item.name, label: item.name }));
   };
 
-  uploadImage = async (file) => {
+  uploadImage = async file => {
     const { uploadImage } = this.props;
     const baseImage = await getBase64(file[0]);
     return uploadImage({
-      "asset_type": "productimage",
-      "file_type": file[0].type,
-      file: baseImage,
+      asset_type: "productimage",
+      file_type: file[0].type,
+      file: baseImage
     });
-  }
+  };
 
   render() {
     const CustomRenderInput = ({ input, name, value, onClick, meta }) => {
@@ -214,10 +214,7 @@ class AddProduct extends Component {
       productId,
       basicReducer: { basicData }
     } = this.props;
-    const {
-      thumbnailImage,
-      productImages
-    } = this.state;
+    const { thumbnailImage, productImages } = this.state;
 
     let startDate = null;
 
@@ -406,7 +403,10 @@ class AddProduct extends Component {
                   files={[thumbnailImage]}
                   onDrop={file => {
                     this.uploadImage(file).then(({ payload }) => {
-                      this.setState({ thumbnailImage: file, thubnailObj: payload.data.id });
+                      this.setState({
+                        thumbnailImage: file,
+                        thubnailObj: payload.data.id
+                      });
                     });
                   }}
                 />
@@ -415,17 +415,10 @@ class AddProduct extends Component {
                   files={productImages}
                   onDrop={file => {
                     this.uploadImage(file).then(({ payload }) => {
-
                       const { productImages, productImagesObj } = this.state;
                       this.setState({
-                        productImages: [
-                          ...productImages,
-                          file
-                        ],
-                        productImagesObj: [
-                          ...productImagesObj,
-                          payload.data.id
-                        ]
+                        productImages: [...productImages, file],
+                        productImagesObj: [...productImagesObj, payload.data.id]
                       });
                     });
                   }}
