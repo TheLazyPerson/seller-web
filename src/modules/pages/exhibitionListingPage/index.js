@@ -29,7 +29,7 @@ class ExhibitionListingPage extends Component {
       <DivRow className={styles.item}>
         <img className={styles.image} src={listItem.base_image} />
 
-        <DivColumn className={styles.item_content}>
+        <div className={styles.item_content}>
           <div className={styles.title}>{listItem.title}</div>
           <div className={styles.description}>{listItem.short_description}</div>
 
@@ -58,7 +58,7 @@ class ExhibitionListingPage extends Component {
               View Details
             </CapsuleButton>
           </DivRow>
-        </DivColumn>
+        </div>
       </DivRow>
     );
   };
@@ -77,13 +77,13 @@ class ExhibitionListingPage extends Component {
               Your Exhibitions
             </CapsuleButton>
           </NavHeader>
-          <DivColumn fillParent className={styles.content_container}>
+          <div fillParent className={styles.content_container}>
             <InitialPageLoader initialPageApi={getExhibitionAction}>
               {map(exhibitionList, exhibition => {
                 return this.getListItem(exhibition);
               })}
             </InitialPageLoader>
-          </DivColumn>
+          </div>
         </DivColumn>
       </SectionedContainer>
     );
