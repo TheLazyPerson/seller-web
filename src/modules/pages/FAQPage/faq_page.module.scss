@@ -1,6 +1,6 @@
 .page_container {
   padding: 80px 44px 0px 70px;
-  overflow: scroll;
+  overflow: auto;
 
   .page_title {
     font-family: PlayfairDisplay;
@@ -28,7 +28,7 @@
         font-weight: normal;
         color: black;
       }
-  
+
       .title_close_icon {
         height: 14px;
         visibility: hidden;
@@ -44,7 +44,6 @@
     }
   }
 
-  
   .is_selected {
     .faq_title_container {
       .faq_title {
@@ -52,7 +51,7 @@
       }
 
       .title_close_icon {
-        visibility: visible;        
+        visibility: visible;
       }
     }
 
@@ -60,5 +59,4 @@
       display: unset;
     }
   }
-
 }

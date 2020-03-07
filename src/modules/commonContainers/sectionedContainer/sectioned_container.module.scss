@@ -16,7 +16,7 @@
 
 .side_content_container {
   flex: 1;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .side_footer_container {
@@ -62,7 +62,7 @@
     }
 
     .content_container {
-      overflow-y: scroll;
+      overflow-y: auto;
     }
   }
 }
