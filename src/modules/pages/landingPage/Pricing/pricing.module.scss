@@ -3,3 +3,10 @@
 .subscription_container {
   padding: 55px;
 }
+
+@include small {
+  .subscription_container {
+    padding: 30px;
+    flex-direction: column;
+  }
+}

@@ -63,7 +63,12 @@ class LandingPage extends Component {
     return (
       <FullWidthContainer whiteColor>
         <DivRow fillParent className={styles.hero_section_container}>
-          <DivRow fillParent horizontalCenter verticalCenter>
+          <DivRow
+            fillParent
+            horizontalCenter
+            verticalCenter
+            className={styles.hero_section_inner_container}
+          >
             <DivColumn fillParent>
               <h1 className={styles.primary_header}>
                 Sell your products to customers across Kuwait
@@ -81,7 +86,7 @@ class LandingPage extends Component {
                 Start Selling
               </DivRow>
             </DivColumn>
-            <DivColumn fillParent>
+            <DivColumn fillParent className={styles.app_icon_container}>
               <img
                 src={heroImage}
                 className={styles.app_icon}
