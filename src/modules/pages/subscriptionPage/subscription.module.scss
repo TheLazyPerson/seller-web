@@ -3,3 +3,13 @@
 .content_container {
   padding: 17px 15px 9px 54px;
 }
+
+@include small {
+  .content_container {
+    padding: 17px 35px 9px 30px;
+
+    .inner_content_container {
+      flex-direction: column;
+    }
+  }
+}
