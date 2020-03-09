@@ -5,7 +5,7 @@ import DivRow from "CommonComponents/divRow";
 import styles from "./side_nav.module.scss";
 import map from "lodash/map";
 import navigatorHoc from "Hoc/navigatorHoc";
-import includes from 'lodash/includes';
+import includes from "lodash/includes";
 
 class SideNav extends Component {
   state = {
@@ -33,12 +33,14 @@ class SideNav extends Component {
         setRoute = "overview";
         break;
       case "/orders":
-      case includes(pathname, "/orders/details/") ? pathname : "/orders/details":
+      case includes(pathname, "/order/details/") ? pathname : "/order/details":
         setRoute = "orders";
         break;
       case "/products":
       case "/product/add":
-      case includes(pathname, "/product/details/") ? pathname : "/product/details/":
+      case includes(pathname, "/product/details/")
+        ? pathname
+        : "/product/details/":
         setRoute = "products";
         break;
       case "/sales":
@@ -46,8 +48,12 @@ class SideNav extends Component {
         setRoute = "sales";
         break;
       case "/exhibitions":
-      case includes(pathname, '/exhibition/details/') ? pathname : '/exhibition/details/':
-      case includes(pathname, '/exhibition/subscribe/') ? pathname : '/exhibition/subscribe/':
+      case includes(pathname, "/exhibition/details/")
+        ? pathname
+        : "/exhibition/details/":
+      case includes(pathname, "/exhibition/subscribe/")
+        ? pathname
+        : "/exhibition/subscribe/":
       case "/exhibition/enrolled":
         setRoute = "exhibitions";
         break;
