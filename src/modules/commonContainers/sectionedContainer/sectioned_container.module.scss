@@ -96,8 +96,12 @@
 ////////////////////////////////////////////////////////////////////////
 
 @include small {
+  .drawer_container {
+    overflow: auto;
+  }
   .header_container {
     height: unset;
+    padding: 15px 0px;
   }
 
   .page_container {
