@@ -98,7 +98,7 @@ class OrdersPage extends Component {
     const { data, columns, title } = this.props;
 
     return (
-      <DivColumn>
+      <DivColumn className={styles.date_container}>
         <div style={{ marginBottom: 20 }}>
           <SearchBarComponent />
         </div>

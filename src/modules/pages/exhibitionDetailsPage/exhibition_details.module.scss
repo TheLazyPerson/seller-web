@@ -149,6 +149,21 @@
     }
   }
 
+  .full_description_container {
+    flex-flow: column;
+    border-bottom: solid 1px #ededed;
+
+    .left_container {
+      border-bottom: solid 1px #ededed;
+      .description {
+      }
+    }
+  }
+
+  .product_list_container {
+    padding-left: 15px !important;
+  }
+
   .overview {
     font-size: 12px;
     font-weight: bold;
