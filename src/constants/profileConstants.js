@@ -83,13 +83,13 @@ export const profileListItem = [
     type: "header",
     name: "Account",
     items: [
-      {
-        blackImage: addressBlackIcon,
-        whiteImage: addressWhiteIcon,
-        title: "Address",
-        slug: "address",
-        description: "See all your addresses"
-      },
+      // {
+      //   blackImage: addressBlackIcon,
+      //   whiteImage: addressWhiteIcon,
+      //   title: "Address",
+      //   slug: "address",
+      //   description: "See all your addresses"
+      // },
       {
         blackImage: profileBlackIcon,
         whiteImage: profileWhiteIcon,
