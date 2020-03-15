@@ -16,7 +16,7 @@
 
 .side_content_container {
   flex: 1;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .side_footer_container {
@@ -62,7 +62,7 @@
     }
 
     .content_container {
-      overflow-y: scroll;
+      overflow-y: auto;
     }
   }
 }
@@ -81,7 +81,7 @@
 
         .header_container {
           height: unset;
-
+          justify-content: space-between;
           .hamburger_menu_icon {
             display: block;
             height: 16px;
@@ -96,8 +96,12 @@
 ////////////////////////////////////////////////////////////////////////
 
 @include small {
+  .drawer_container {
+    overflow: auto;
+  }
   .header_container {
     height: unset;
+    padding: 15px 0px;
   }
 
   .page_container {

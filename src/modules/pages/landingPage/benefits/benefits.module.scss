@@ -3,6 +3,7 @@
 
 .benefits {
   padding: 55px;
+  flex-wrap: wrap;
   .list_item {
     margin-right: 30px;
     .title_group {
@@ -34,6 +35,70 @@
     .image {
       height: 214px;
       margin-right: auto;
+    }
+  }
+}
+
+@include small {
+  .benefits {
+    flex-direction: column;
+    padding: 30px;
+
+    .list_item {
+      margin-bottom: 15px;
+      margin-right: 0px;
+      align-items: center;
+      text-align: center;
+      text-align: -webkit-center;
+      text-align: center;
+      text-align: -webkit-center;
+      .title_group {
+        width: 287px;
+        .title {
+          font-size: 24px;
+        }
+        .description {
+          font-size: 14px;
+        }
+      }
+
+      .image {
+        align-items: center;
+        width: 190px;
+        margin-right: none;
+      }
+    }
+  }
+}
+
+@include medium {
+  .benefits {
+    flex-direction: column;
+    padding: 30px;
+
+    .list_item {
+      margin-bottom: 15px;
+      margin-right: 0px;
+      align-items: center;
+      text-align: center;
+      text-align: -webkit-center;
+      text-align: center;
+      text-align: -webkit-center;
+      .title_group {
+        width: 287px;
+        .title {
+          font-size: 24px;
+        }
+        .description {
+          font-size: 14px;
+        }
+      }
+
+      .image {
+        align-items: center;
+        width: 190px;
+        margin-right: none;
+      }
     }
   }
 }

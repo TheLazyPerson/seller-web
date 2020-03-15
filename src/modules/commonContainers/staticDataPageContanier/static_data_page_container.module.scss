@@ -1,6 +1,8 @@
+@import "~Styles/mixins.module";
+
 .page_container {
   padding: 80px 44px 0px 70px;
-  overflow: scroll;
+  overflow: auto;
 
   .sub_title {
     font-size: 14px;
@@ -42,6 +44,48 @@
 
       .points_text:first-child {
         margin-top: 0px;
+      }
+    }
+  }
+}
+
+@include small {
+  .page_container {
+    padding: 10px 30px 0px 30px;
+    overflow: auto;
+
+    .sub_title {
+      font-size: 12px;
+    }
+
+    .qna_container {
+      margin-bottom: 45px;
+
+      .title {
+        font-size: 18px;
+      }
+
+      .description_text {
+        font-size: 10px;
+      }
+
+      .description_text:first-child {
+        margin-top: 0px;
+      }
+
+      .points_container {
+        margin-top: 9px;
+        margin-left: 15px;
+
+        .points_text {
+          font-size: 10px;
+          color: black;
+          margin-top: 5px;
+        }
+
+        .points_text:first-child {
+          margin-top: 0px;
+        }
       }
     }
   }

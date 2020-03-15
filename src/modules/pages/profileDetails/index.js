@@ -15,7 +15,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import navigatorHoc from "Hoc/navigatorHoc";
 import translatorHoc from "Hoc/translatorHoc";
-
+import MarketPlace from "../marketPlace";
 class ProfileDetails extends Component {
   navigateToChangePass = () => {
     const { navigateTo } = this.props;
@@ -39,21 +39,24 @@ class ProfileDetails extends Component {
         <DivColumn
           className={`${styles.details_container} ${isRTL ? styles.rtl : ""}`}
         >
-          <NavHeader title="profile details">
-            <DivRow className={styles.header_button_container}>
-              <SecondaryCapsuleButton
-                className={styles.reset_password_button}
-                onClick={this.navigateToChangePass}
-              >
-                Change Password
-              </SecondaryCapsuleButton>
-              <CapsuleButton onClick={this.navigateToEditProfile}>
-                Edit Profile
-              </CapsuleButton>
-            </DivRow>
-          </NavHeader>
           <InitialPageLoader initialPageApi={getProfileDetailsAction}>
             <DivColumn fillParent>
+              <DivColumn fillParent>
+                <MarketPlace></MarketPlace>
+              </DivColumn>
+              <NavHeader title="profile details">
+                <DivRow className={styles.header_button_container}>
+                  <SecondaryCapsuleButton
+                    className={styles.reset_password_button}
+                    onClick={this.navigateToChangePass}
+                  >
+                    Change Password
+                  </SecondaryCapsuleButton>
+                  <CapsuleButton onClick={this.navigateToEditProfile}>
+                    Edit
+                  </CapsuleButton>
+                </DivRow>
+              </NavHeader>
               <DivColumn className={styles.field_container}>
                 <div className={styles.title}>First Name</div>
                 <div className={styles.value}>

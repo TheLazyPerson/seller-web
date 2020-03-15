@@ -84,6 +84,7 @@
 
   .header_container {
     // height: 50px;
+    justify-content: center;
 
     .header_icon_container {
       width: unset;
@@ -102,5 +103,12 @@
 
   .search_bar_container {
     display: flex;
+  }
+
+  .links_container {
+    margin-top: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex: 1;
   }
 }

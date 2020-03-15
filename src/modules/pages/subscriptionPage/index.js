@@ -32,7 +32,7 @@ class SubscriptionPage extends Component {
 
           <DivColumn fillParent className={styles.content_container}>
             <InitialPageLoader initialPageApi={getPlanListAction}>
-              <DivRow>
+              <DivRow className={styles.inner_content_container}>
                 {map(subscriptionPlanList, (subscription, index) => {
                   return (
                     <Subscription

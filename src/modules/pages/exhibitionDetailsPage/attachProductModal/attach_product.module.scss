@@ -16,15 +16,15 @@
   }
 
   .content_container {
-    overflow: scroll;
+    overflow: auto;
 
     .item_container {
-      overflow: scroll;
+      overflow: auto;
       flex-wrap: wrap;
       justify-content: center;
     }
   }
   .product_loader {
-    overflow: scroll;
+    overflow: auto;
   }
 }

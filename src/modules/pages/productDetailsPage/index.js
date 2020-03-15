@@ -14,7 +14,11 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import DataTableContainer from "CommonContainers/dataTableContainer";
 import DataTable from "react-data-table-component";
-import { getProductDetailsAction } from "Core/modules/product/productActions";
+import {
+  getProductDetailsAction,
+  removeProductAction
+} from "Core/modules/product/productActions";
+import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import HorizontalBorder from "CommonComponents/horizontalBorder";
 import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
@@ -24,6 +28,21 @@ class ProductDetailsPage extends Component {
     const { pop } = this.props;
     pop();
   };
+
+  handleRemove = id => {
+    const {
+      removeProductAction,
+      showSuccessFlashMessage,
+      navigateTo
+    } = this.props;
+    removeProductAction(id).then(({ payload }) => {
+      if (payload.code === 200 || payload.code === 201) {
+        showSuccessFlashMessage("Product Deleted");
+        navigateTo("products");
+      }
+    });
+  };
+
   render() {
     const {
       productReducer: { product },
@@ -97,11 +116,15 @@ class ProductDetailsPage extends Component {
         }
       }
     };
+
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <NavHeader title="Product Detail" onBackClick={this.onBackPress}>
           <DivRow>
-            <SecondaryCapsuleButton className={styles.cancel_button}>
+            <SecondaryCapsuleButton
+              onClick={() => this.handleRemove(params.productId)}
+              className={styles.cancel_button}
+            >
               Delete
             </SecondaryCapsuleButton>
 
@@ -251,6 +274,11 @@ const mapDispathToProps = dispatch => {
   return {
     getProductDetailsAction: bindActionCreators(
       getProductDetailsAction,
+      dispatch
+    ),
+    removeProductAction: bindActionCreators(removeProductAction, dispatch),
+    showSuccessFlashMessage: bindActionCreators(
+      showSuccessFlashMessage,
       dispatch
     )
   };

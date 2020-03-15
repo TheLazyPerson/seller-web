@@ -1,7 +1,7 @@
-@import '~Styles/colors.module';
+@import "~Styles/colors.module";
 
 .order_page_container {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .header {
@@ -9,7 +9,6 @@
   color: $color-dark;
   padding: 17px 0px 17px 54px;
 }
-
 
 .order_container {
   padding: 17px 0px 9px 54px;

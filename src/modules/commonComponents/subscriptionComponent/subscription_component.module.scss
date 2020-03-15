@@ -111,3 +111,36 @@
     }
   }
 }
+
+@include small {
+  .subscription:first-child {
+    margin-right: 0px;
+  }
+  .subscription:last-child {
+    margin-left: 0px;
+  }
+
+  .subscription {
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    .subscription_title {
+      font-family: Lato;
+      font-size: 18px;
+      margin-bottom: 25px;
+    }
+    .subscription_price {
+      font-family: Lato;
+      font-size: 18px;
+      margin-bottom: 22px;
+    }
+    .subtitle {
+      opacity: 0.6;
+      font-family: Lato;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+  }
+}

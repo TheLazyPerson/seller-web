@@ -63,13 +63,13 @@ export const profileListItem = [
         slug: "sales",
         description: "See your sales overview"
       },
-      {
-        blackImage: marketplaceProfileBlackIcon,
-        whiteImage: marketplaceProfileWhiteIcon,
-        title: "Marketplace Profile",
-        slug: "marketplace-profile",
-        description: "See your marketplace profile"
-      },
+      // {
+      //   blackImage: marketplaceProfileBlackIcon,
+      //   whiteImage: marketplaceProfileWhiteIcon,
+      //   title: "Marketplace Profile",
+      //   slug: "marketplace-profile",
+      //   description: "See your marketplace profile"
+      // },
       {
         blackImage: productBlackIcon,
         whiteImage: productWhiteIcon,
@@ -83,13 +83,13 @@ export const profileListItem = [
     type: "header",
     name: "Account",
     items: [
-      {
-        blackImage: addressBlackIcon,
-        whiteImage: addressWhiteIcon,
-        title: "Address",
-        slug: "address",
-        description: "See all your addresses"
-      },
+      // {
+      //   blackImage: addressBlackIcon,
+      //   whiteImage: addressWhiteIcon,
+      //   title: "Address",
+      //   slug: "address",
+      //   description: "See all your addresses"
+      // },
       {
         blackImage: profileBlackIcon,
         whiteImage: profileWhiteIcon,

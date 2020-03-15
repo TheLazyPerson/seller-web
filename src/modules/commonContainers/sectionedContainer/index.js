@@ -78,11 +78,11 @@ class SectionedContainer extends Component {
           <DivColumn fillSelfHorizontal className={styles.top_header_container}>
             <DivRow verticalCenter className={styles.header_container}>
               {/* only Visible on responive */}
-              {/* <img
+              <img
                 src={hamburgerIconBlack}
                 className={styles.hamburger_menu_icon}
                 onClick={this.onClickHamburgerMenu}
-              /> */}
+              />
 
               <SectionedHeader />
             </DivRow>

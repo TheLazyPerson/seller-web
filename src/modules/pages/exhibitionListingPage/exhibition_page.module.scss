@@ -1,8 +1,8 @@
 @import "~Styles/colors.module";
-
+@import "~Styles/mixins.module";
 .exhibition_page_container {
   .content_container {
-    overflow: scroll;
+    overflow: auto;
     padding: 25px 50px 0px;
 
     .item {
@@ -65,6 +65,32 @@
             color: $color-green-apple;
             margin-right: auto;
             text-transform: uppercase;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include small {
+  .exhibition_page_container {
+    .content_container {
+      overflow: auto;
+      padding: 25px 30px 0px;
+
+      .image {
+        align-self: stretch;
+        width: 100% !important;
+      }
+
+      .item {
+        height: 100%;
+        flex-direction: column;
+        .action_container {
+          text-align: center;
+          margin-top: auto;
+          button {
+            height: 30px;
           }
         }
       }

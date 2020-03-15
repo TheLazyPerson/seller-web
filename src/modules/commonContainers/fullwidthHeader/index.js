@@ -19,10 +19,7 @@ class FullwidthHeader extends Component {
     const { children, whiteColor, className } = this.props;
 
     return (
-      <DivColumn
-        fillSelfHorizontal
-        className={`${styles.top_header} ${className}`}
-      >
+      <div fillSelfHorizontal className={`${styles.top_header} ${className}`}>
         <DivRow className={`${styles.header_container}`}>
           <DivRow className={styles.header_icon_container}>
             <img
@@ -38,7 +35,7 @@ class FullwidthHeader extends Component {
           className={styles.search_bar_container}
           whiteColor={whiteColor}
         /> */}
-      </DivColumn>
+      </div>
     );
   }
 }
