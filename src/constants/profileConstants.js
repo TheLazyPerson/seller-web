@@ -63,13 +63,13 @@ export const profileListItem = [
         slug: "sales",
         description: "See your sales overview"
       },
-      {
-        blackImage: marketplaceProfileBlackIcon,
-        whiteImage: marketplaceProfileWhiteIcon,
-        title: "Marketplace Profile",
-        slug: "marketplace-profile",
-        description: "See your marketplace profile"
-      },
+      // {
+      //   blackImage: marketplaceProfileBlackIcon,
+      //   whiteImage: marketplaceProfileWhiteIcon,
+      //   title: "Marketplace Profile",
+      //   slug: "marketplace-profile",
+      //   description: "See your marketplace profile"
+      // },
       {
         blackImage: productBlackIcon,
         whiteImage: productWhiteIcon,
