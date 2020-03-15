@@ -46,13 +46,13 @@ class MarketPlace extends Component {
         <InitialPageLoader initialPageApi={getMarketplaceProfileAction}>
           <DivColumn fillParent>
             <DivColumn className={styles.field_container}>
-              <div className={styles.title}>Shop Name</div>
+              <div className={styles.title}>Shop Name :</div>
               <div className={styles.value}>
                 {profile.shop_name ? profile.shop_name : "Not Available"}
               </div>
             </DivColumn>
             <DivColumn className={styles.field_container}>
-              <div className={styles.title}>Contact Number</div>
+              <div className={styles.title}>Contact Number :</div>
               <div className={styles.value}>
                 {profile.contact_number
                   ? profile.contact_number
@@ -60,13 +60,13 @@ class MarketPlace extends Component {
               </div>
             </DivColumn>
             <DivColumn className={styles.field_container}>
-              <div className={styles.title}>Email Address</div>
+              <div className={styles.title}>Email Address :</div>
               <div className={styles.value}>
                 {profile.shop_email ? profile.shop_email : "Not Available"}
               </div>
             </DivColumn>
             <DivColumn className={styles.field_container}>
-              <div className={styles.title}>Address</div>
+              <div className={styles.title}>Address :</div>
               <div className={styles.value}>
                 {!isEmpty(profile.shop_address) && (
                   <span>

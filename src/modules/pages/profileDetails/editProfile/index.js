@@ -213,6 +213,17 @@ class EditProfile extends Component {
                 )}
               </Field>
 
+              <Field name="civilId">
+                {({ input, meta }) => (
+                  <InputTextComponent
+                    meta={meta}
+                    {...input}
+                    placeholder="Civil Id"
+                    className={styles.input_text}
+                  />
+                )}
+              </Field>
+
               <Field name="birthday">
                 {({ input, meta }) => (
                   <DatePicker

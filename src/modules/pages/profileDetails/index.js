@@ -58,7 +58,7 @@ class ProfileDetails extends Component {
                 </DivRow>
               </NavHeader>
               <DivColumn className={styles.field_container}>
-                <div className={styles.title}>First Name</div>
+                <div className={styles.title}>First Name :</div>
                 <div className={styles.value}>
                   {userDetails.first_name
                     ? userDetails.first_name
@@ -66,7 +66,7 @@ class ProfileDetails extends Component {
                 </div>
               </DivColumn>
               <DivColumn className={styles.field_container}>
-                <div className={styles.title}>Last Name</div>
+                <div className={styles.title}>Last Name :</div>
                 <div className={styles.value}>
                   {userDetails.last_name
                     ? userDetails.last_name
@@ -74,31 +74,63 @@ class ProfileDetails extends Component {
                 </div>
               </DivColumn>
               <DivColumn className={styles.field_container}>
-                <div className={styles.title}>Email</div>
+                <div className={styles.title}>Email :</div>
                 <div className={styles.value}>
                   {userDetails.email ? userDetails.email : "Not Available"}
                 </div>
               </DivColumn>
               <DivColumn className={styles.field_container}>
-                <div className={styles.title}>Phone Number</div>
-                <div className={styles.value}>
-                  {userDetails.phone ? userDetails.phone : "Not Available"}
-                </div>
-              </DivColumn>
-              <DivColumn className={styles.field_container}>
-                <div className={styles.title}>Gender</div>
+                <div className={styles.title}>Civil ID :</div>
                 <div className={styles.value}>
                   {userDetails.gender ? userDetails.gender : "Not Available"}
                 </div>
               </DivColumn>
               <DivColumn className={styles.field_container}>
-                <div className={styles.title}>Birthday</div>
+                <div className={styles.title}>Phone Number :</div>
+                <div className={styles.value}>
+                  {userDetails.phone ? userDetails.phone : "Not Available"}
+                </div>
+              </DivColumn>
+              <DivColumn className={styles.field_container}>
+                <div className={styles.title}>Gender :</div>
+                <div className={styles.value}>
+                  {userDetails.gender ? userDetails.gender : "Not Available"}
+                </div>
+              </DivColumn>
+              <DivColumn className={styles.field_container}>
+                <div className={styles.title}>Birthday :</div>
                 <div className={styles.value}>
                   {userDetails.birthday
                     ? userDetails.birthday
                     : "Not Available"}
                 </div>
               </DivColumn>
+            </DivColumn>
+
+            <NavHeader title="bank details">
+              <DivRow className={styles.header_button_container}>
+                <CapsuleButton onClick={this.navigateToEditProfile}>
+                  Edit
+                </CapsuleButton>
+              </DivRow>
+            </NavHeader>
+            <DivColumn className={styles.field_container}>
+              <div className={styles.title}>Account Holder :</div>
+              <div className={styles.value}>
+                {userDetails.gender ? userDetails.gender : "Not Available"}
+              </div>
+            </DivColumn>
+            <DivColumn className={styles.field_container}>
+              <div className={styles.title}>Bank Name :</div>
+              <div className={styles.value}>
+                {userDetails.gender ? userDetails.gender : "Not Available"}
+              </div>
+            </DivColumn>
+            <DivColumn className={styles.field_container}>
+              <div className={styles.title}>IBAN :</div>
+              <div className={styles.value}>
+                {userDetails.gender ? userDetails.gender : "Not Available"}
+              </div>
             </DivColumn>
           </InitialPageLoader>
         </DivColumn>
