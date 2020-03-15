@@ -118,42 +118,129 @@ class EditMarketplaceProfile extends Component {
             pristine,
             values
           }) => (
-            <form className={styles.form_container} onSubmit={handleSubmit}>
-              <Field name="shopName">
-                {({ input, meta }) => (
-                  <InputTextComponent
-                    meta={meta}
-                    {...input}
-                    placeholder="Shop Name"
-                    className={styles.input_text}
-                  />
-                )}
-              </Field>
-              <Field name="contactNumber">
-                {({ input, meta }) => (
-                  <InputTextComponent
-                    meta={meta}
-                    {...input}
-                    placeholder="Contact Number"
-                    className={styles.input_text}
-                  />
-                )}
-              </Field>
+            <form onSubmit={handleSubmit}>
+              <DivColumn className={styles.form_container}>
+                <Field name="shopName">
+                  {({ input, meta }) => (
+                    <InputTextComponent
+                      meta={meta}
+                      {...input}
+                      placeholder="Shop Name"
+                      className={styles.input_text}
+                    />
+                  )}
+                </Field>
+                <Field name="contactNumber">
+                  {({ input, meta }) => (
+                    <InputTextComponent
+                      meta={meta}
+                      {...input}
+                      placeholder="Contact Number"
+                      className={styles.input_text}
+                    />
+                  )}
+                </Field>
 
-              <Field name="shopEmail">
-                {({ input, meta }) => (
-                  <InputTextComponent
-                    meta={meta}
-                    {...input}
-                    placeholder="Shop Email Address"
-                    className={styles.input_text}
-                  />
-                )}
-              </Field>
+                <Field name="shopEmail">
+                  {({ input, meta }) => (
+                    <InputTextComponent
+                      meta={meta}
+                      {...input}
+                      placeholder="Shop Email Address"
+                      className={styles.input_text}
+                    />
+                  )}
+                </Field>
+              </DivColumn>
+              <NavHeader title="Address details" />
 
-              <HorizontalBorder />
+              <DivColumn className={styles.form_container}>
+                <Field name="area">
+                  {({ input, meta }) => (
+                    <InputTextComponent
+                      meta={meta}
+                      {...input}
+                      placeholder="Area*"
+                      className={styles.input_text}
+                    />
+                  )}
+                </Field>
+                <Field name="blockNumber">
+                  {({ input, meta }) => (
+                    <InputTextComponent
+                      meta={meta}
+                      {...input}
+                      placeholder="Block Number*"
+                      className={styles.input_text}
+                    />
+                  )}
+                </Field>
 
-              <InitialPageLoader initialPageApi={getAddressListAction}>
+                <Field name="houseNumber">
+                  {({ input, meta }) => (
+                    <InputTextComponent
+                      meta={meta}
+                      {...input}
+                      placeholder="House Number*"
+                      className={styles.input_text}
+                    />
+                  )}
+                </Field>
+
+                <Field name="streetNumber">
+                  {({ input, meta }) => (
+                    <InputTextComponent
+                      meta={meta}
+                      {...input}
+                      placeholder="Street Number*"
+                      className={styles.input_text}
+                    />
+                  )}
+                </Field>
+                <Field name="avenue">
+                  {({ input, meta }) => (
+                    <InputTextComponent
+                      meta={meta}
+                      {...input}
+                      placeholder="Avenue"
+                      className={styles.input_text}
+                    />
+                  )}
+                </Field>
+
+                <Field name="landmark">
+                  {({ input, meta }) => (
+                    <InputTextComponent
+                      meta={meta}
+                      {...input}
+                      placeholder="Landmark"
+                      className={styles.input_text}
+                    />
+                  )}
+                </Field>
+
+                <Field name="homeOffice">
+                  {({ input, meta }) => (
+                    <InputTextComponent
+                      meta={meta}
+                      {...input}
+                      placeholder="Home/Office*"
+                      className={styles.input_text}
+                    />
+                  )}
+                </Field>
+                <Field name="city">
+                  {({ input, meta }) => (
+                    <InputTextComponent
+                      meta={meta}
+                      {...input}
+                      placeholder="City"
+                      className={styles.input_text}
+                    />
+                  )}
+                </Field>
+
+                {/* <InitialPageLoader initialPageApi={getAddressListAction}>
                 <DivColumn>
                   {map(addressList, (address, index) => {
                     return (
@@ -167,16 +254,17 @@ class EditMarketplaceProfile extends Component {
                     );
                   })}
                 </DivColumn>
-              </InitialPageLoader>
+              </InitialPageLoader> */}
 
-              <DivRow className={styles.form_button_container}>
-                <SecondaryCapsuleButton onClick={this.onClickCancel}>
-                  Cancel
-                </SecondaryCapsuleButton>
-                <CapsuleButton type="submit" disabled={submitting}>
-                  Save Details
-                </CapsuleButton>
-              </DivRow>
+                <DivRow className={styles.form_button_container}>
+                  <SecondaryCapsuleButton onClick={this.onClickCancel}>
+                    Cancel
+                  </SecondaryCapsuleButton>
+                  <CapsuleButton type="submit" disabled={submitting}>
+                    Save Details
+                  </CapsuleButton>
+                </DivRow>
+              </DivColumn>
             </form>
           )}
         />
