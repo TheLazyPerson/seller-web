@@ -1,5 +1,5 @@
-@import '~Styles/colors.module';
-
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
 .header_container {
   padding: 10px 0px 50px 0px;
 
@@ -9,12 +9,21 @@
     color: $color-orangey-red;
     text-align: center;
   }
-  
+
   .title {
     font-family: PlayfairDisplay;
     font-size: 50px;
     font-weight: 900;
     color: $primary-text-color;
     text-align: center;
-  }  
+  }
+}
+
+@include small {
+  .title {
+    font-size: 24px !important;
+  }
+  .sub_title {
+    font-size: 12px !important;
+  }
 }
