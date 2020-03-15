@@ -1,5 +1,5 @@
-@import '~Styles/colors.module';
-
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
 .title {
   font-family: PlayfairDisplay;
   font-size: 50px;
@@ -10,5 +10,16 @@
 .message {
   font-size: 16px;
   color: $primary-text-color;
-  margin-top: 20px;
+  padding: 20px;
+}
+
+@include small {
+  .title {
+    font-size: 30px;
+  }
+
+  .message {
+    font-size: 10px;
+    padding: 20px;
+  }
 }
