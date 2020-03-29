@@ -71,6 +71,7 @@ class SideNav extends Component {
       case "/profile/details":
       case "/profile/details/change-password":
       case "/profile/details/edit-profile":
+      case "/profile/details/edit-bank-details":
         setRoute = "profile-details";
         break;
       case "/subscription":

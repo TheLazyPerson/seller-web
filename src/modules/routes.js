@@ -17,6 +17,7 @@ import Settings from "./pages/settings";
 import HelpCenter from "./pages/helpCenter";
 import ChangePassword from "./pages/profileDetails/changePassword";
 import EditProfile from "./pages/profileDetails/editProfile";
+import EditBankDetails from "./pages/profileDetails/editBankDetails";
 import EditMarketplaceProfile from "./pages/marketPlace/editMarketplaceProfile";
 import ProfileAddress from "./pages/address";
 import AddAddress from "./pages/address/addAddress";
@@ -166,6 +167,14 @@ const App = ({ isUserSignedIn }) => {
         exact
         path="/profile/details/edit-profile"
         component={EditProfile}
+        redirectTo="signin"
+        validator={() => isUserSignedIn}
+      />
+
+      <ProtectedRoute
+        exact
+        path="/profile/details/edit-bank-details"
+        component={EditBankDetails}
         redirectTo="signin"
         validator={() => isUserSignedIn}
       />

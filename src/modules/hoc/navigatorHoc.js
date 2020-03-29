@@ -130,6 +130,9 @@ const navigatorHoc = WrappedComponent => {
         case "edit-marketplace-profile":
           return navigationFunction("/marketplace/edit-marketplace-profile");
 
+        case "edit-bank-details":
+          return navigationFunction("/profile/details/edit-bank-details");
+
         default:
           return navigationFunction("/");
       }

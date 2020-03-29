@@ -50,7 +50,8 @@ class EditProfile extends Component {
       gender: form.gender,
       phone: form.phone,
       email: form.email,
-      birthday: form.birthday
+      birthday: form.birthday,
+      civilId: form.civilId
     }).then(({ payload }) => {
       if (payload.code === 200 || payload.code === 201) {
         navigateTo("profile");
@@ -76,6 +77,7 @@ class EditProfile extends Component {
       gender: isEmptyValidator(values.gender),
       mobileNumber: isPhoneNumber(values.mobileNumber),
       email: emailValidator(values.email),
+      civilId: isEmptyValidator(values.civilId),
       birthday: isEmptyValidator(values.birthday)
     };
 
@@ -138,6 +140,7 @@ class EditProfile extends Component {
             gender: userDetails.gender ? userDetails.gender : "",
             mobileNumber: userDetails.phone ? userDetails.phone : "",
             email: userDetails.email ? userDetails.email : "",
+            civilId: userDetails.birthday ? userDetails.birthday : "",
             birthday: userDetails.birthday ? userDetails.birthday : ""
           }}
           render={({

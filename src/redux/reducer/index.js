@@ -13,6 +13,7 @@ import exhibitionReducer from "Core/modules/exhibition/exhibitionReducer";
 import productReducer from "Core/modules/product/productReducer";
 import orderReducer from "Core/modules/order/orderReducer";
 import overviewReducer from "Core/modules/overview/overviewReducer";
+import bankDetailsReducer from "Core/modules/bankDetails/bankDetailsReducer";
 
 const appReducer = history =>
   combineReducers({
@@ -29,7 +30,8 @@ const appReducer = history =>
     exhibitionReducer,
     productReducer,
     orderReducer,
-    overviewReducer
+    overviewReducer,
+    bankDetailsReducer
   });
 
 /* const rootReducer = ( state, action ) => {

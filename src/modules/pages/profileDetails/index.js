@@ -10,6 +10,7 @@ import map from "lodash/map";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
 import { getProfileDetailsAction } from "Core/modules/profiledetails/profileDetailsActions";
+import { getBankDetailsAction } from "Core/modules/bankDetails/bankDetailsActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -27,6 +28,11 @@ class ProfileDetails extends Component {
     navigateTo("edit-profile");
   };
 
+  navigateToEditBankDetails = () => {
+    const { navigateTo } = this.props;
+    navigateTo("edit-bank-details");
+  };
+
   render() {
     const {
       profileDetailsReducer: { userDetails },
@@ -34,12 +40,19 @@ class ProfileDetails extends Component {
       isRTL
     } = this.props;
 
+    const {
+      bankDetailsReducer: { bankDetails },
+      getBankDetailsAction
+    } = this.props;
+
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn
           className={`${styles.details_container} ${isRTL ? styles.rtl : ""}`}
         >
-          <InitialPageLoader initialPageApi={getProfileDetailsAction}>
+          <InitialPageLoader
+            initialPageApi={(getProfileDetailsAction, getBankDetailsAction)}
+          >
             <DivColumn fillParent>
               <DivColumn fillParent>
                 <MarketPlace></MarketPlace>
@@ -109,7 +122,7 @@ class ProfileDetails extends Component {
 
             <NavHeader title="bank details">
               <DivRow className={styles.header_button_container}>
-                <CapsuleButton onClick={this.navigateToEditProfile}>
+                <CapsuleButton onClick={this.navigateToEditBankDetails}>
                   Edit
                 </CapsuleButton>
               </DivRow>
@@ -117,19 +130,23 @@ class ProfileDetails extends Component {
             <DivColumn className={styles.field_container}>
               <div className={styles.title}>Account Holder :</div>
               <div className={styles.value}>
-                {userDetails.gender ? userDetails.gender : "Not Available"}
+                {bankDetails.account_holder
+                  ? bankDetails.account_holder
+                  : "Not Available"}
               </div>
             </DivColumn>
             <DivColumn className={styles.field_container}>
               <div className={styles.title}>Bank Name :</div>
               <div className={styles.value}>
-                {userDetails.gender ? userDetails.gender : "Not Available"}
+                {bankDetails.bank_name
+                  ? bankDetails.bank_name
+                  : "Not Available"}
               </div>
             </DivColumn>
             <DivColumn className={styles.field_container}>
               <div className={styles.title}>IBAN :</div>
               <div className={styles.value}>
-                {userDetails.gender ? userDetails.gender : "Not Available"}
+                {bankDetails.iban ? bankDetails.iban : "Not Available"}
               </div>
             </DivColumn>
           </InitialPageLoader>
@@ -141,7 +158,8 @@ class ProfileDetails extends Component {
 
 const mapStateToProps = state => {
   return {
-    profileDetailsReducer: state.profileDetailsReducer
+    profileDetailsReducer: state.profileDetailsReducer,
+    bankDetailsReducer: state.bankDetailsReducer
   };
 };
 
@@ -150,7 +168,8 @@ const mapDispathToProps = dispatch => {
     getProfileDetailsAction: bindActionCreators(
       getProfileDetailsAction,
       dispatch
-    )
+    ),
+    getBankDetailsAction: bindActionCreators(getBankDetailsAction, dispatch)
   };
 };
 
