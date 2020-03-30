@@ -47,11 +47,11 @@ class ProfileDetails extends Component {
         <DivColumn
           className={`${styles.details_container} ${isRTL ? styles.rtl : ""}`}
         >
+          <DivColumn fillParent>
+            <MarketPlace></MarketPlace>
+          </DivColumn>
           <InitialPageLoader initialPageApi={getProfileDetailsAction}>
             <DivColumn fillParent>
-              <DivColumn fillParent>
-                <MarketPlace></MarketPlace>
-              </DivColumn>
               <NavHeader title="profile details">
                 <DivRow className={styles.header_button_container}>
                   <SecondaryCapsuleButton
