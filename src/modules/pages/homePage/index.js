@@ -47,6 +47,7 @@ class HomePage extends Component {
   render() {
     const {
       overviewReducer: { overviewData },
+      signInReducer: { userDetails },
       getOverviewAction
     } = this.props;
     return (
@@ -58,7 +59,9 @@ class HomePage extends Component {
             className={styles.header_container}
           >
             <div className={styles.header_title}>MY ACCOUNT</div>
-            <div className={styles.header_message}>Welcome, Omar.</div>
+            <div className={styles.header_message}>
+              Welcome, {!isEmpty(userDetails) && userDetails.first_name}.
+            </div>
           </DivColumn>
           <InitialPageLoader
             initialPageApi={getOverviewAction}
@@ -78,7 +81,8 @@ class HomePage extends Component {
 
 const mapStateToProps = state => {
   return {
-    overviewReducer: state.overviewReducer
+    overviewReducer: state.overviewReducer,
+    signInReducer: state.signInReducer
   };
 };
 
