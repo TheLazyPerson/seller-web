@@ -68,13 +68,11 @@ class MarketPlace extends Component {
             <DivColumn className={styles.field_container}>
               <div className={styles.title}>Address :</div>
               <div className={styles.value}>
-                {!isEmpty(profile.shop_address) && (
-                  <span>
-                    {profile.shop_address.address1},{profile.shop_address.city},{" "}
-                    {profile.shop_address.state},{profile.shop_address.country}{" "}
-                    - {profile.shop_address.postcode}
-                  </span>
-                )}
+                <span>
+                  {profile.area},{profile.block_number}, {profile.house_number},
+                  {profile.street_number}, {profile.avenue} , {profile.landmark}
+                  - {profile.city}
+                </span>
               </div>
             </DivColumn>
           </DivColumn>

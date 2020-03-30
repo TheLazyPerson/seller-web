@@ -37,10 +37,7 @@ class ProfileDetails extends Component {
     const {
       profileDetailsReducer: { userDetails },
       getProfileDetailsAction,
-      isRTL
-    } = this.props;
-
-    const {
+      isRTL,
       bankDetailsReducer: { bankDetails },
       getBankDetailsAction
     } = this.props;
@@ -50,9 +47,7 @@ class ProfileDetails extends Component {
         <DivColumn
           className={`${styles.details_container} ${isRTL ? styles.rtl : ""}`}
         >
-          <InitialPageLoader
-            initialPageApi={(getProfileDetailsAction, getBankDetailsAction)}
-          >
+          <InitialPageLoader initialPageApi={getProfileDetailsAction}>
             <DivColumn fillParent>
               <DivColumn fillParent>
                 <MarketPlace></MarketPlace>
@@ -95,7 +90,9 @@ class ProfileDetails extends Component {
               <DivColumn className={styles.field_container}>
                 <div className={styles.title}>Civil ID :</div>
                 <div className={styles.value}>
-                  {userDetails.gender ? userDetails.gender : "Not Available"}
+                  {userDetails.civil_id
+                    ? userDetails.civil_id
+                    : "Not Available"}
                 </div>
               </DivColumn>
               <DivColumn className={styles.field_container}>
@@ -119,7 +116,8 @@ class ProfileDetails extends Component {
                 </div>
               </DivColumn>
             </DivColumn>
-
+          </InitialPageLoader>
+          <InitialPageLoader initialPageApi={getBankDetailsAction}>
             <NavHeader title="bank details">
               <DivRow className={styles.header_button_container}>
                 <CapsuleButton onClick={this.navigateToEditBankDetails}>

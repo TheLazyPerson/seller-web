@@ -50,10 +50,17 @@ class EditMarketplaceProfile extends Component {
       shop_name: form.shopName,
       contact_number: form.contactNumber,
       shop_email: form.shopEmail,
-      shop_address_id: marketplaceAddress.id
+      area: form.area,
+      block_number: form.blockNumber,
+      house_number: form.houseNumber,
+      street_number: form.streetNumber,
+      avenue: form.avenue,
+      landmark: form.landmark,
+      address_type: form.addressType,
+      city: form.city
     }).then(({ payload }) => {
       if (payload.code === 200 || payload.code === 201) {
-        navigateTo("marketplace");
+        navigateTo("profile-details");
         showSuccessFlashMessage("Profile Updated");
       }
     });
@@ -107,7 +114,15 @@ class EditMarketplaceProfile extends Component {
           initialValues={{
             shopName: profile.shop_name ? profile.shop_name : "",
             contactNumber: profile.contact_number ? profile.contact_number : "",
-            shopEmail: profile.shop_email ? profile.shop_email : ""
+            shopEmail: profile.shop_email ? profile.shop_email : "",
+            area: profile.area ? profile.area : "",
+            blockNumber: profile.block_number ? profile.block_number : "",
+            houseNumber: profile.house_number ? profile.house_number : "",
+            streetNumber: profile.street_number ? profile.street_number : "",
+            avenue: profile.avenue ? profile.avenue : "",
+            landmark: profile.landmark ? profile.landmark : "",
+            addressType: profile.address_type ? profile.address_type : "",
+            city: profile.city ? profile.city : ""
           }}
           render={({
             handleSubmit,
@@ -219,7 +234,7 @@ class EditMarketplaceProfile extends Component {
                   )}
                 </Field>
 
-                <Field name="homeOffice">
+                <Field name="addressType">
                   {({ input, meta }) => (
                     <InputTextComponent
                       meta={meta}

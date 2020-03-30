@@ -19,8 +19,8 @@ class EditBankDetails extends Component {
   validate = values => {
     const errors = {};
     const validators = {
-      account_holder: isEmptyValidator(values.account_holder),
-      bank_name: isEmptyValidator(values.bank_name),
+      account_holder: isEmptyValidator(values.accountHolder),
+      bank_name: isEmptyValidator(values.bankName),
       iban: isEmptyValidator(values.iban)
     };
 
@@ -39,12 +39,12 @@ class EditBankDetails extends Component {
     } = this.props;
 
     editBankDetailsAction({
-      account_holder: form.account_holder,
-      bank_name: form.bank_name,
+      account_holder: form.accountHolder,
+      bank_name: form.bankName,
       iban: form.iban
     }).then(({ payload }) => {
       if (payload.code === 200 || payload.code === 201) {
-        navigateTo("profile");
+        navigateTo("profile-details");
         showSuccessFlashMessage("Bank Details Changed successfuly");
       }
     });
@@ -60,15 +60,26 @@ class EditBankDetails extends Component {
   };
 
   render() {
+    const {
+      bankDetailsReducer: { bankDetails }
+    } = this.props;
+
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <NavHeader title="Edit Bank Details" onBackClick={this.onBackPress} />
         <Form
           onSubmit={this.onSubmit}
           validate={this.validate}
+          initialValues={{
+            accountHolder: bankDetails.account_holder
+              ? bankDetails.account_holder
+              : "",
+            bankName: bankDetails.bank_name ? bankDetails.bank_name : "",
+            iban: bankDetails.iban ? bankDetails.iban : ""
+          }}
           render={({ handleSubmit, form, submitting, pristine, values }) => (
             <form className={styles.form_container} onSubmit={handleSubmit}>
-              <Field name="account_holder">
+              <Field name="accountHolder">
                 {({ input, meta }) => (
                   <InputTextComponent
                     meta={meta}
@@ -79,7 +90,7 @@ class EditBankDetails extends Component {
                   />
                 )}
               </Field>
-              <Field name="bank_name">
+              <Field name="bankName">
                 {({ input, meta }) => (
                   <InputTextComponent
                     meta={meta}
