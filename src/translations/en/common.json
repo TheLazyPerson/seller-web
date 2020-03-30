@@ -99,11 +99,11 @@
   "signin_page": {
     "create": "Create an account",
     "new": "New to Home Expo?",
-    "page_title": "SignIn",
+    "page_title": "Sign In",
     "password": "Password",
     "remember_me": "Remember Me",
     "sign_in_button": "Sign In",
-    "username": "Username"
+    "username": "Email"
   },
   "signup_page": {
     "confirm_password": "Confirm Password",
