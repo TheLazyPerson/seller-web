@@ -42,6 +42,9 @@ const navigatorHoc = WrappedComponent => {
         case "add-product":
           return navigationFunction("/product/add");
 
+        case "edit-product":
+          return navigationFunction(`/product/edit/${data.productId}`);
+
         case "product-details":
           return navigationFunction(`/product/details/${data.productId}`);
 

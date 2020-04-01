@@ -31,6 +31,7 @@ import SalesPage from "./pages/salesPage";
 import SubscriptionPage from "./pages/subscriptionPage";
 import YourExhibitionListingPage from "./pages/yourExhibitionListingPage";
 import AddProduct from "./pages/productsPage/addProduct";
+import EditProduct from "./pages/productsPage/editProduct";
 import OrderDetailsPage from "./pages/orderDetailsPage";
 import TransactionDetailsPage from "./pages/salesPage/transactionDetailPage";
 import ExhibitionSubscriptionOverviewPage from "./pages/exhibitionSuscriptionOverviewPage";
@@ -116,6 +117,13 @@ const App = ({ isUserSignedIn }) => {
         exact
         path="/product/details/:productId?"
         component={ProductDetailsPage}
+        redirectTo="signin"
+        validator={() => isUserSignedIn}
+      />
+      <ProtectedRoute
+        exact
+        path="/product/edit/:productId?"
+        component={EditProduct}
         redirectTo="signin"
         validator={() => isUserSignedIn}
       />

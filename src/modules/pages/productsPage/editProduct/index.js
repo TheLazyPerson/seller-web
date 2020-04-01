@@ -3,7 +3,7 @@ import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivColumn from "CommonComponents/divColumn";
 import DivRow from "CommonComponents/divRow";
 import SideNav from "CommonComponents/sideNav";
-import styles from "./add_product.module.scss";
+import styles from "./edit_product.module.scss";
 import NavHeader from "CommonComponents/navHeader";
 import { Form, Field } from "react-final-form";
 import CapsuleButton from "CommonComponents/capsuleButton";
@@ -22,7 +22,7 @@ import map from "lodash/map";
 
 import Select from "react-select";
 
-class AddProduct extends Component {
+class EditProduct extends Component {
   onSubmitComplete = () => {
     this.onBackPress();
   };
@@ -55,8 +55,7 @@ class AddProduct extends Component {
     const {
       createProductAction,
       showSuccessFlashMessage,
-      onSubmitComplete,
-      navigateTo
+      onSubmitComplete
     } = this.props;
 
     const formData = {
@@ -67,8 +66,8 @@ class AddProduct extends Component {
 
     createProductAction(formData).then(({ payload }) => {
       if (payload.code === 200 || payload.code === 201) {
-        const productId = payload.data.product.id;
-        navigateTo("edit-product", { productId });
+        this.onSubmitComplete();
+        showSuccessFlashMessage("Product Added");
       }
     });
   };
@@ -117,7 +116,7 @@ class AddProduct extends Component {
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.page_container}>
           <NavHeader
-            title="Add Product"
+            title="Edit Product"
             onBackClick={this.onBackPress}
           ></NavHeader>
         </DivColumn>
@@ -229,4 +228,4 @@ const mapDispathToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(AddProduct));
+)(navigatorHoc(EditProduct));
