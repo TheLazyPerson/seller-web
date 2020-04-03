@@ -36,6 +36,7 @@ import OrderDetailsPage from "./pages/orderDetailsPage";
 import TransactionDetailsPage from "./pages/salesPage/transactionDetailPage";
 import ExhibitionSubscriptionOverviewPage from "./pages/exhibitionSuscriptionOverviewPage";
 import ProductDetailsPage from "./pages/productDetailsPage";
+import ForgotPassword from "./pages/forgetPassword";
 import { connect } from "react-redux";
 
 const App = ({ isUserSignedIn }) => {
@@ -58,6 +59,12 @@ const App = ({ isUserSignedIn }) => {
         exact
         path="/signup"
         component={SignUpPage}
+        validator={() => !isUserSignedIn}
+      />
+      <ProtectedRoute
+        exact
+        path="/forgot-password"
+        component={ForgotPassword}
         validator={() => !isUserSignedIn}
       />
       <ProtectedRoute

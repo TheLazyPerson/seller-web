@@ -122,5 +122,14 @@
     "move_bag": "MOVE TO BAG",
     "my_wishlist": "My Wishlist",
     "start_shopping": "START SHOPPING"
+  },
+  "reset_password_page": {
+    "new": "Already have an account?",
+    "create": "SignIn",
+    "page_title": "Reset Password",
+    "sub_title": "We will send you an email to reset your password.",
+    "password": "Password",
+    "reset_password_button": "Reset Password",
+    "username": "Email"
   }
 }

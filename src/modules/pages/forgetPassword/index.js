@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import FullWidthContainer from "CommonContainers/fullwidthContainer";
 import DivColumn from "CommonComponents/divColumn";
-import styles from "./signin_page.module.scss";
+import styles from "./forget_password.module.scss";
 import InputTextComponent from "CommonComponents/InputTextComponent";
 import InputCheckbox from "CommonComponents/InputCheckbox";
 import navigatorHoc from "Hoc/navigatorHoc";
@@ -12,7 +12,7 @@ import { CookieService } from "Utils/cookieService";
 import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import translatorHoc from "Hoc/translatorHoc";
 
-class SignInPage extends Component {
+class ForgotPassword extends Component {
   state = {
     userName: "",
     password: ""
@@ -49,44 +49,37 @@ class SignInPage extends Component {
           className={styles.page_container}
         >
           <div className={styles.signin_title_text}>
-            {translate("signin_page.page_title")}
+            {translate("reset_password_page.page_title")}
+          </div>
+          <div>
+            <div className={styles.signin_subtitle_text}>
+              {translate("reset_password_page.sub_title")}&nbsp;
+            </div>
           </div>
           <form className={styles.form_container} onSubmit={this.onSubmit}>
             <InputTextComponent
-              placeholder={translate("signin_page.username")}
+              placeholder={translate("reset_password_page.username")}
               className={styles.input_text}
               value={userName}
               onChange={event =>
                 this.setState({ userName: event.target.value })
               }
             />
-
-            <InputTextComponent
-              placeholder={translate("signin_page.password")}
-              className={styles.input_text}
-              type="password"
-              value={password}
-              onChange={event =>
-                this.setState({ password: event.target.value })
-              }
-            />
-
-            <InputCheckbox text={translate("signin_page.remember_me")} />
             <input
               type="submit"
-              value={translate("signin_page.sign_in_button")}
+              value={translate("reset_password_page.reset_password_button")}
               className={styles.input_submit}
             />
           </form>
-          <a className={styles.hyper_link} href="/forgot-password">
+          {/* <a className={styles.hyper_link} href="/forgot-password">
             Forgot password
-          </a>
+          </a> */}
           <div className={styles.create_account_container}>
             <span className={styles.new_description_text}>
-              {translate("signin_page.new")}&nbsp;
+              {translate("reset_password_page.new")}&nbsp;
             </span>
-            <a className={styles.hyper_link} href="/signup">
-              {translate("signin_page.create")}
+            <a className={styles.hyper_link} href="/signin">
+              {translate("reset_password_page.create")}
             </a>
           </div>
         </DivColumn>
@@ -110,4 +103,4 @@ const mapDispathToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(translatorHoc(navigatorHoc(SignInPage)));
+)(translatorHoc(navigatorHoc(ForgotPassword)));
