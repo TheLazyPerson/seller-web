@@ -29,7 +29,7 @@ class RestPassword extends Component {
       navigateTo,
       resetPasswordReducer: { tokenInformation }
     } = this.props;
-    const { confirm_passowrd, password, email, token } = this.state;
+    const { confirm_passowrd, password } = this.state;
     if (confirm_passowrd && password) {
       const formData = {
         email: tokenInformation.data["token-information"].email,
@@ -41,7 +41,9 @@ class RestPassword extends Component {
       resetPasswordAction(formData).then(response => {
         const { data, code } = response.payload;
         if (code === 200 || code === 201) {
-          navigateTo("home");
+          navigateTo("reset-password-sucess");
+        } else if (code === 400 || code === 404) {
+          // navigateTo("reset-password-sucess");
         }
       });
     }

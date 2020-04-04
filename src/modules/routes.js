@@ -38,6 +38,7 @@ import ExhibitionSubscriptionOverviewPage from "./pages/exhibitionSuscriptionOve
 import ProductDetailsPage from "./pages/productDetailsPage";
 import ForgotPassword from "./pages/forgetPassword";
 import RestPassword from "./pages/resetPassword";
+import RestPasswordSuccess from "./pages/resetPassword/resetPasswordSucess";
 import { connect } from "react-redux";
 
 const App = ({ isUserSignedIn }) => {
@@ -66,6 +67,13 @@ const App = ({ isUserSignedIn }) => {
         exact
         path="/reset-password/:token?"
         component={RestPassword}
+        validator={() => !isUserSignedIn}
+      />
+
+      <ProtectedRoute
+        exact
+        path="/reset-password-sucess"
+        component={RestPasswordSuccess}
         validator={() => !isUserSignedIn}
       />
       <ProtectedRoute
@@ -119,7 +127,6 @@ const App = ({ isUserSignedIn }) => {
         component={ProductsPage}
         validator={() => isUserSignedIn}
       />
-
       <ProtectedRoute
         exact
         path="/product/add"
@@ -141,7 +148,6 @@ const App = ({ isUserSignedIn }) => {
         redirectTo="signin"
         validator={() => isUserSignedIn}
       />
-
       <ProtectedRoute
         exact
         path="/sales"
@@ -162,7 +168,6 @@ const App = ({ isUserSignedIn }) => {
         component={MarketPlace}
         validator={() => isUserSignedIn}
       />
-
       <ProtectedRoute
         exact
         path="/marketplace/edit-marketplace-profile"
@@ -170,7 +175,6 @@ const App = ({ isUserSignedIn }) => {
         redirectTo="signin"
         validator={() => isUserSignedIn}
       />
-
       <ProtectedRoute
         exact
         path="/profile/details"
@@ -192,7 +196,6 @@ const App = ({ isUserSignedIn }) => {
         redirectTo="signin"
         validator={() => isUserSignedIn}
       />
-
       <ProtectedRoute
         exact
         path="/profile/details/edit-bank-details"
@@ -200,7 +203,6 @@ const App = ({ isUserSignedIn }) => {
         redirectTo="signin"
         validator={() => isUserSignedIn}
       />
-
       <ProtectedRoute
         exact
         path="/profile/address"
@@ -222,7 +224,6 @@ const App = ({ isUserSignedIn }) => {
         redirectTo="signin"
         validator={() => isUserSignedIn}
       />
-
       <ProtectedRoute
         exact
         path="/subscription"
@@ -230,7 +231,6 @@ const App = ({ isUserSignedIn }) => {
         redirectTo="signin"
         validator={() => isUserSignedIn}
       />
-
       <ProtectedRoute
         exact
         path="/profile/helpcenter"
@@ -250,10 +250,8 @@ const App = ({ isUserSignedIn }) => {
         path="/terms-and-condition"
         component={TermsAndConditionPage}
       />
-
       <Route exact path="/privacy-policy" component={PrivacyPolicyPage} />
       <Route exact path="/faq" component={FAQPage} />
-
       <Route component={PageNotFound} />
     </Switch>
   );
