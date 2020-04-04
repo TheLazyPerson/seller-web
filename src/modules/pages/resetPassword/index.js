@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import FullWidthContainer from "CommonContainers/fullwidthContainer";
 import DivColumn from "CommonComponents/divColumn";
-import styles from "./update_password.module.scss";
+import styles from "./reset_password.module.scss";
 import InputTextComponent from "CommonComponents/InputTextComponent";
 import InputCheckbox from "CommonComponents/InputCheckbox";
 import navigatorHoc from "Hoc/navigatorHoc";
@@ -12,7 +12,7 @@ import { CookieService } from "Utils/cookieService";
 import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import translatorHoc from "Hoc/translatorHoc";
 
-class UpdatePassword extends Component {
+class RestPassword extends Component {
   state = {
     userName: "",
     password: ""
@@ -111,4 +111,4 @@ const mapDispathToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(translatorHoc(navigatorHoc(UpdatePassword)));
+)(translatorHoc(navigatorHoc(RestPassword)));

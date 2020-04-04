@@ -37,7 +37,7 @@ import TransactionDetailsPage from "./pages/salesPage/transactionDetailPage";
 import ExhibitionSubscriptionOverviewPage from "./pages/exhibitionSuscriptionOverviewPage";
 import ProductDetailsPage from "./pages/productDetailsPage";
 import ForgotPassword from "./pages/forgetPassword";
-import UpdatePassword from "./pages/updatePassword";
+import RestPassword from "./pages/resetPassword";
 import { connect } from "react-redux";
 
 const App = ({ isUserSignedIn }) => {
@@ -64,8 +64,8 @@ const App = ({ isUserSignedIn }) => {
       />
       <ProtectedRoute
         exact
-        path="/update-password"
-        component={UpdatePassword}
+        path="/reset-password"
+        component={RestPassword}
         validator={() => !isUserSignedIn}
       />
       <ProtectedRoute
