@@ -14,6 +14,7 @@ import productReducer from "Core/modules/product/productReducer";
 import orderReducer from "Core/modules/order/orderReducer";
 import overviewReducer from "Core/modules/overview/overviewReducer";
 import bankDetailsReducer from "Core/modules/bankDetails/bankDetailsReducer";
+import resetPasswordReducer from "Core/modules/resetpassword/resetPasswordReducer";
 
 const appReducer = history =>
   combineReducers({
@@ -31,7 +32,8 @@ const appReducer = history =>
     productReducer,
     orderReducer,
     overviewReducer,
-    bankDetailsReducer
+    bankDetailsReducer,
+    resetPasswordReducer
   });
 
 /* const rootReducer = ( state, action ) => {

@@ -75,7 +75,7 @@ const navigatorHoc = WrappedComponent => {
           return navigationFunction("/signin");
 
         case "reset-password":
-          return navigationFunction("/reset-password");
+          return navigationFunction("/reset-password?token={data}");
 
         case "forgot-password":
           return navigationFunction("/forgot-password");

@@ -138,6 +138,7 @@
     "sub_title": "Enter the password to update.",
     "password": "Password",
     "confirmed_password": "Confirmed Password",
-    "reset_password_button": "Reset Password"
+    "reset_password_button": "Reset Password",
+    "sub_title1": "Your token is expired or password is already updated "
   }
 }

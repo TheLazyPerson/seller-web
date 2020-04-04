@@ -64,7 +64,7 @@ const App = ({ isUserSignedIn }) => {
       />
       <ProtectedRoute
         exact
-        path="/reset-password"
+        path="/reset-password/:token?"
         component={RestPassword}
         validator={() => !isUserSignedIn}
       />

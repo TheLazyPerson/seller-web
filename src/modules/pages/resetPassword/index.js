@@ -7,30 +7,46 @@ import InputCheckbox from "CommonComponents/InputCheckbox";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { postSigninAction } from "Core/modules/signin/signinActions";
+import {
+  verifyPasswordTokenAction,
+  resetPasswordAction
+} from "Core/modules/resetpassword/resetPasswordActions";
 import { CookieService } from "Utils/cookieService";
 import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import translatorHoc from "Hoc/translatorHoc";
+import InitialPageLoader from "CommonContainers/initialPageLoader";
+import queryString from "query-string";
+// import resetPasswordAction from "Core/modules/resetpassword";
 
 class RestPassword extends Component {
   state = {
-    userName: "",
-    password: ""
+    password: "",
+    confirm_passowrd: "",
+    params: queryString.parse(this.props.location.search)
   };
 
   onSubmit = form => {
     form.preventDefault();
-    const { postSigninAction, navigateTo } = this.props;
-    const { userName, password } = this.state;
+    const {
+      resetPasswordAction,
+      navigateTo,
+      resetPasswordReducer: { tokenInformation }
+    } = this.props;
+    const { confirm_passowrd, password, email, token } = this.state;
+    console.log("token this.props", this.state);
 
-    if (userName && password) {
-      postSigninAction({
-        email: userName, // "buisness@gmail.com",
-        password
-      }).then(response => {
+    if (confirm_passowrd && password) {
+      const formData = {
+        email: tokenInformation.data["token-information"].email,
+        password_confirmation: confirm_passowrd, // "buisness@gmail.com",
+        password: password,
+        token: tokenInformation.data["token-information"].token
+      };
+
+      resetPasswordAction(formData).then(response => {
         const { data, code } = response.payload;
+        console.log("response", response);
         if (code === 200 || code === 201) {
-          CookieService.set(USER_DATA_COOKIE, data);
           navigateTo("home");
         }
       });
@@ -38,51 +54,81 @@ class RestPassword extends Component {
   };
 
   render() {
-    const { userName, password } = this.state;
-    const { translate } = this.props;
-
+    const { confirm_passowrd, password } = this.state;
+    const {
+      translate,
+      verifyPasswordTokenAction,
+      resetPasswordReducer: { tokenInformation }
+    } = this.props;
+    console.log("this.props", this.props);
     return (
       <FullWidthContainer>
-        <DivColumn
-          verticalCenter
-          horizontalCenter
-          className={styles.page_container}
+        <InitialPageLoader
+          initialPageApi={() =>
+            verifyPasswordTokenAction(this.state.params.token)
+          }
         >
-          <div className={styles.signin_title_text}>
-            {translate("update_password_page.page_title")}
-          </div>
-          <div>
-            <div className={styles.signin_subtitle_text}>
-              {translate("update_password_page.sub_title")}&nbsp;
+          <DivColumn
+            verticalCenter
+            horizontalCenter
+            className={styles.page_container}
+          >
+            <div className={styles.signin_title_text}>
+              {translate("update_password_page.page_title")}
             </div>
-          </div>
-          <form className={styles.form_container} onSubmit={this.onSubmit}>
-            <InputTextComponent
-              placeholder={translate("update_password_page.password")}
-              className={styles.input_text}
-              value={userName}
-              onChange={event =>
-                this.setState({ userName: event.target.value })
-              }
-            />
-            <InputTextComponent
-              placeholder={translate("update_password_page.confirmed_password")}
-              className={styles.input_text}
-              value={userName}
-              onChange={event =>
-                this.setState({ userName: event.target.value })
-              }
-            />
-            <input
-              type="submit"
-              value={translate("update_password_page.reset_password_button")}
-              className={styles.input_submit}
-            />
-          </form>
-          {/* <a className={styles.hyper_link} href="/forgot-password">
+            {tokenInformation.code == 200 && (
+              <div>
+                <div className={styles.signin_subtitle_text}>
+                  {translate("update_password_page.sub_title")}&nbsp;
+                </div>
+              </div>
+            )}
+            {tokenInformation.code == 400 ||
+              (tokenInformation.code == 404 && (
+                <div>
+                  <div className={styles.signin_subtitle_text}>
+                    {translate("update_password_page.sub_title1")}&nbsp;
+                  </div>
+                </div>
+              ))}
+
+            {tokenInformation.code == 200 && (
+              <form className={styles.form_container} onSubmit={this.onSubmit}>
+                <InputTextComponent
+                  type="password"
+                  placeholder={translate("update_password_page.password")}
+                  className={styles.input_text}
+                  value={password}
+                  onChange={event =>
+                    this.setState({ password: event.target.value })
+                  }
+                />
+                <InputTextComponent
+                  type="password"
+                  placeholder={translate(
+                    "update_password_page.confirmed_password"
+                  )}
+                  className={styles.input_text}
+                  value={confirm_passowrd}
+                  onChange={event =>
+                    this.setState({ confirm_passowrd: event.target.value })
+                  }
+                />
+
+                <input
+                  type="submit"
+                  value={translate(
+                    "update_password_page.reset_password_button"
+                  )}
+                  className={styles.input_submit}
+                />
+              </form>
+            )}
+
+            {/* <a className={styles.hyper_link} href="/forgot-password">
             Forgot password
           </a> */}
-          {/* <div className={styles.create_account_container}>
+            {/* <div className={styles.create_account_container}>
             <span className={styles.new_description_text}>
               {translate("reset_password_page.new")}&nbsp;
             </span>
@@ -90,7 +136,8 @@ class RestPassword extends Component {
               {translate("reset_password_page.create")}
             </a>
           </div> */}
-        </DivColumn>
+          </DivColumn>
+        </InitialPageLoader>
       </FullWidthContainer>
     );
   }
@@ -98,13 +145,17 @@ class RestPassword extends Component {
 
 const mapStateToProps = state => {
   return {
-    signInReducer: state.signInReducer
+    resetPasswordReducer: state.resetPasswordReducer
   };
 };
 
 const mapDispathToProps = dispatch => {
   return {
-    postSigninAction: bindActionCreators(postSigninAction, dispatch)
+    verifyPasswordTokenAction: bindActionCreators(
+      verifyPasswordTokenAction,
+      dispatch
+    ),
+    resetPasswordAction: bindActionCreators(resetPasswordAction, dispatch)
   };
 };
 
