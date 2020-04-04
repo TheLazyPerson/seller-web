@@ -3,34 +3,32 @@ import FullWidthContainer from "CommonContainers/fullwidthContainer";
 import DivColumn from "CommonComponents/divColumn";
 import styles from "./forget_password.module.scss";
 import InputTextComponent from "CommonComponents/InputTextComponent";
-import InputCheckbox from "CommonComponents/InputCheckbox";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { postSigninAction } from "Core/modules/signin/signinActions";
-import { CookieService } from "Utils/cookieService";
-import { USER_DATA_COOKIE } from "Constants/cookieConstants";
+import { createPasswordTokenAction } from "Core/modules/resetpassword/resetPasswordActions";
 import translatorHoc from "Hoc/translatorHoc";
-
+import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 class ForgotPassword extends Component {
   state = {
-    userName: "",
-    password: ""
+    userName: ""
   };
 
   onSubmit = form => {
     form.preventDefault();
-    const { postSigninAction, navigateTo } = this.props;
-    const { userName, password } = this.state;
+    const {
+      createPasswordTokenAction,
+      navigateTo,
+      showSuccessFlashMessage
+    } = this.props;
+    const { userName } = this.state;
 
-    if (userName && password) {
-      postSigninAction({
-        email: userName, // "buisness@gmail.com",
-        password
+    if (userName) {
+      createPasswordTokenAction({
+        email: userName // "buisness@gmail.com",
       }).then(response => {
-        const { data, code } = response.payload;
-        if (code === 200 || code === 201) {
-          CookieService.set(USER_DATA_COOKIE, data);
+        if (response.payload.message) {
+          showSuccessFlashMessage(response.payload.message);
           navigateTo("home");
         }
       });
@@ -38,7 +36,7 @@ class ForgotPassword extends Component {
   };
 
   render() {
-    const { userName, password } = this.state;
+    const { userName } = this.state;
     const { translate } = this.props;
 
     return (
@@ -90,13 +88,20 @@ class ForgotPassword extends Component {
 
 const mapStateToProps = state => {
   return {
-    signInReducer: state.signInReducer
+    createPasswordTokenAction: state.createPasswordTokenAction
   };
 };
 
 const mapDispathToProps = dispatch => {
   return {
-    postSigninAction: bindActionCreators(postSigninAction, dispatch)
+    createPasswordTokenAction: bindActionCreators(
+      createPasswordTokenAction,
+      dispatch
+    ),
+    showSuccessFlashMessage: bindActionCreators(
+      showSuccessFlashMessage,
+      dispatch
+    )
   };
 };
 
