@@ -3,7 +3,6 @@ import FullWidthContainer from "CommonContainers/fullwidthContainer";
 import DivColumn from "CommonComponents/divColumn";
 import styles from "./reset_password.module.scss";
 import InputTextComponent from "CommonComponents/InputTextComponent";
-import InputCheckbox from "CommonComponents/InputCheckbox";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -11,8 +10,6 @@ import {
   verifyPasswordTokenAction,
   resetPasswordAction
 } from "Core/modules/resetpassword/resetPasswordActions";
-import { CookieService } from "Utils/cookieService";
-import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import translatorHoc from "Hoc/translatorHoc";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import queryString from "query-string";
@@ -33,8 +30,6 @@ class RestPassword extends Component {
       resetPasswordReducer: { tokenInformation }
     } = this.props;
     const { confirm_passowrd, password, email, token } = this.state;
-    console.log("token this.props", this.state);
-
     if (confirm_passowrd && password) {
       const formData = {
         email: tokenInformation.data["token-information"].email,
@@ -45,7 +40,6 @@ class RestPassword extends Component {
 
       resetPasswordAction(formData).then(response => {
         const { data, code } = response.payload;
-        console.log("response", response);
         if (code === 200 || code === 201) {
           navigateTo("home");
         }
@@ -60,7 +54,6 @@ class RestPassword extends Component {
       verifyPasswordTokenAction,
       resetPasswordReducer: { tokenInformation }
     } = this.props;
-    console.log("this.props", this.props);
     return (
       <FullWidthContainer>
         <InitialPageLoader
@@ -124,18 +117,6 @@ class RestPassword extends Component {
                 />
               </form>
             )}
-
-            {/* <a className={styles.hyper_link} href="/forgot-password">
-            Forgot password
-          </a> */}
-            {/* <div className={styles.create_account_container}>
-            <span className={styles.new_description_text}>
-              {translate("reset_password_page.new")}&nbsp;
-            </span>
-            <a className={styles.hyper_link} href="/signin">
-              {translate("reset_password_page.create")}
-            </a>
-          </div> */}
           </DivColumn>
         </InitialPageLoader>
       </FullWidthContainer>
