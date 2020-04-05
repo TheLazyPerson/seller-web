@@ -27,9 +27,9 @@ class ForgotPassword extends Component {
       createPasswordTokenAction({
         email: userName // "buisness@gmail.com",
       }).then(response => {
-        if (response.payload.code == 200) {
+        if (response.payload.code === 200) {
           showSuccessFlashMessage(response.payload.message);
-        } else if (response.payload.code == 404) {
+        } else if (response.payload.code === 404) {
           showSuccessFlashMessage("User Doesn't Exists ");
         }
       });

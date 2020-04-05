@@ -5,27 +5,97 @@ import DivRow from "CommonComponents/divRow";
 import SideNav from "CommonComponents/sideNav";
 import styles from "./profile_settings.module.scss";
 import InputCheckbox from "CommonComponents/InputCheckbox";
+import FullWidthContainer from "CommonContainers/fullwidthContainer";
+import InputTextComponent from "CommonComponents/InputTextComponent";
+import navigatorHoc from "Hoc/navigatorHoc";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import {
+  getSettingsAction,
+  updateSettingsAction
+} from "Core/modules/settings/settingsActions";
+import translatorHoc from "Hoc/translatorHoc";
+import InitialPageLoader from "CommonContainers/initialPageLoader";
+import queryString from "query-string";
+class Settings extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     isGoing: true,
+  //     numberOfGuests: 2
+  //   };
 
-export default class Settings extends Component {
+  //   this.handleInputChange = this.handleInputChange.bind(this);
+  // }
+
+  state = {
+    isGoing: true,
+    numberOfGuests: 2
+  };
+
+  updateNotificationStatus = isInputChecked => {
+    const { updateSettingsAction } = this.props;
+    const formData = {
+      wants_updates: isInputChecked ? 1 : 0
+    };
+
+    updateSettingsAction(formData).then(response => {
+      const { code } = response.payload;
+      if (code === 200 || code === 201) {
+      } else if (code === 400 || code === 404) {
+        console.log("error");
+      }
+    });
+  };
+
   render() {
+    const {
+      getSettingsAction,
+      settingsReducer: { settings }
+    } = this.props;
+
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent>
           <DivRow className={styles.header}>
             <div className={styles.header_text}>Settings</div>
           </DivRow>
-
-          <DivRow verticalCenter className={styles.settings_item_container}>
-            <DivColumn>
-              <div className={styles.item_title}>Notification</div>
-              <div className={styles.item_description}>
-                This will not affect order updates.
-              </div>
-            </DivColumn>
-            <InputCheckbox />
-          </DivRow>
+          <InitialPageLoader initialPageApi={() => getSettingsAction()}>
+            <DivRow verticalCenter className={styles.settings_item_container}>
+              <DivColumn>
+                <div className={styles.item_title}>Notification</div>
+                <div className={styles.item_description}>
+                  This will not affect order updates.
+                </div>
+              </DivColumn>
+              <InputCheckbox
+                name="isGoing"
+                type="checkbox"
+                isChecked={settings.wants_updates}
+                handleCheckBoxUpdate={this.updateNotificationStatus}
+              />
+            </DivRow>
+          </InitialPageLoader>
         </DivColumn>
       </SectionedContainer>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    settingsReducer: state.settingsReducer
+  };
+};
+
+const mapDispathToProps = dispatch => {
+  return {
+    getSettingsAction: bindActionCreators(getSettingsAction, dispatch),
+    updateSettingsAction: bindActionCreators(updateSettingsAction, dispatch)
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispathToProps
+)(translatorHoc(navigatorHoc(Settings)));
