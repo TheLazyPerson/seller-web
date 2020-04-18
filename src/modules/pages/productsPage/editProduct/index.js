@@ -9,6 +9,7 @@ import { Form, Field } from "react-final-form";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
 import InputTextComponent from "CommonComponents/InputTextComponent";
+import InputTextareaComponent from "CommonComponents/InputTextareaComponent";
 import navigatorHoc from "Hoc/navigatorHoc";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 
@@ -17,7 +18,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import { createProductAction } from "Core/modules/product/productActions";
-import { getAttributeFamilyAction } from "Core/modules/basic/basicActions";
+import { getProductFormAction } from "Core/modules/product/productActions";
 import map from "lodash/map";
 
 import Select from "react-select";
@@ -36,32 +37,32 @@ class EditProduct extends Component {
     this.onBackPress();
   };
 
-  validate = values => {
+  validate = (values) => {
     const errors = {};
     const validators = {
       type: isEmptyValidator(values.type),
       sku: isEmptyValidator(values.sku),
-      attribute_family_id: isEmptyValidator(values.attributeFamily)
+      attribute_family_id: isEmptyValidator(values.attributeFamily),
     };
 
-    Object.keys(validators).forEach(key => {
+    Object.keys(validators).forEach((key) => {
       if (!validators[key].result) errors[key] = validators[key].error;
     });
 
     return errors;
   };
 
-  onSubmit = form => {
+  onSubmit = (form) => {
     const {
       createProductAction,
       showSuccessFlashMessage,
-      onSubmitComplete
+      onSubmitComplete,
     } = this.props;
 
     const formData = {
       type: form.type,
       sku: form.sku,
-      attribute_family_id: form.attributeFamily
+      attribute_family_id: form.attributeFamily,
     };
 
     createProductAction(formData).then(({ payload }) => {
@@ -72,8 +73,102 @@ class EditProduct extends Component {
     });
   };
 
-  formatSelectorData = list => {
-    return map(list, item => ({ value: item.id, label: item.name }));
+  formatSelectorData = (list) => {
+    return map(list, (item) => ({ value: item.id, label: item.name }));
+  };
+
+  formatAttributeOptionData = (list) => {
+    return map(list, (item) => ({ value: item.id, label: item.label }));
+  };
+
+  getFormItem = (attribute) => {
+    const { type, slug, name } = attribute;
+
+    if (type === "text") {
+      return (
+        <DivColumn className={styles.text_input_container}>
+          <Field name={slug}>
+            {({ input, meta }) => (
+              <InputTextComponent
+                meta={meta}
+                {...input}
+                placeholder={name}
+                className={styles.input_text}
+              />
+            )}
+          </Field>
+        </DivColumn>
+      );
+    } else if (type === "select") {
+      const { options } = attribute;
+      const attributeOptions = this.formatAttributeOptionData(options);
+      return (
+        <DivColumn className={styles.text_input_container}>
+          <Field name={slug}>
+            {({ input, meta }) => (
+              <DivColumn className="input_select_container">
+                <Select
+                  options={attributeOptions}
+                  onChange={(value) => {
+                    input.onChange(value.value);
+                  }}
+                  className="react-select-container"
+                  classNamePrefix="react-select"
+                  placeholder={name}
+                  defaultValue={null}
+                />
+                {meta.error && meta.touched && (
+                  <span className="error_text">{meta.error}</span>
+                )}
+              </DivColumn>
+            )}
+          </Field>
+        </DivColumn>
+      );
+    } else if (type === "boolean") {
+      const attributeOptions = [
+        { value: true, label: "Yes" },
+        { value: false, label: "No" },
+      ];
+      return (
+        <DivColumn className={styles.text_input_container}>
+          <Field name={slug}>
+            {({ input, meta }) => (
+              <DivColumn className="input_select_container">
+                <Select
+                  options={attributeOptions}
+                  onChange={(value) => {
+                    input.onChange(value.value);
+                  }}
+                  className="react-select-container"
+                  classNamePrefix="react-select"
+                  placeholder={name}
+                  defaultValue={null}
+                />
+                {meta.error && meta.touched && (
+                  <span className="error_text">{meta.error}</span>
+                )}
+              </DivColumn>
+            )}
+          </Field>
+        </DivColumn>
+      );
+    } else if (type === "textarea") {
+      return (
+        <DivColumn className={styles.text_input_container}>
+          <Field name={slug}>
+            {({ input, meta }) => (
+              <InputTextareaComponent
+                meta={meta}
+                {...input}
+                placeholder={name}
+                className={styles.input_text_area}
+              />
+            )}
+          </Field>
+        </DivColumn>
+      );
+    }
   };
 
   render() {
@@ -91,26 +186,11 @@ class EditProduct extends Component {
     };
     const {
       onClickCancel,
-      productReducer: { product },
-      productId,
+      productReducer: { prouctForm },
+      match: { params },
       basicReducer: { basicData, attributeFamilies },
-      getAttributeFamilyAction
+      getProductFormAction,
     } = this.props;
-
-    const productTypes = [
-      {
-        value: "simple",
-        label: "Simple"
-      },
-      {
-        value: "configurable",
-        label: "Configurable"
-      }
-    ];
-
-    let defaultProductType = null;
-    const attributeFamiliesOptions = this.formatSelectorData(attributeFamilies);
-    let defaultAttributeFamily = null;
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
@@ -121,7 +201,9 @@ class EditProduct extends Component {
           ></NavHeader>
         </DivColumn>
         <DivColumn fillParent className={styles.page_container}>
-          <InitialPageLoader initialPageApi={getAttributeFamilyAction}>
+          <InitialPageLoader
+            initialPageApi={() => getProductFormAction(params.productId)}
+          >
             <Form
               onSubmit={this.onSubmit}
               validate={this.validate}
@@ -130,62 +212,25 @@ class EditProduct extends Component {
                 form,
                 submitting,
                 pristine,
-                values
+                values,
               }) => (
                 <form className={styles.form_container} onSubmit={handleSubmit}>
-                  <DivColumn className={styles.text_input_container}>
-                    <Field name="type">
-                      {({ input, meta }) => (
-                        <DivColumn className="input_select_container">
-                          <Select
-                            options={productTypes}
-                            onChange={value => {
-                              input.onChange(value.value);
-                            }}
-                            className="react-select-container"
-                            classNamePrefix="react-select"
-                            placeholder="Product Type"
-                            defaultValue={defaultProductType}
-                          />
-                          {meta.error && meta.touched && (
-                            <span className="error_text">{meta.error}</span>
-                          )}
-                        </DivColumn>
-                      )}
-                    </Field>
-
-                    <Field name="sku">
-                      {({ input, meta }) => (
-                        <InputTextComponent
-                          meta={meta}
-                          {...input}
-                          placeholder="SKU"
-                          className={styles.input_text}
-                        />
-                      )}
-                    </Field>
-
-                    <Field name="attributeFamily">
-                      {({ input, meta }) => (
-                        <DivColumn className="input_select_container">
-                          <Select
-                            options={attributeFamiliesOptions}
-                            onChange={value => {
-                              input.onChange(value.value);
-                            }}
-                            className="react-select-container"
-                            classNamePrefix="react-select"
-                            placeholder="Attribute Family"
-                            defaultValue={defaultAttributeFamily}
-                          />
-                          {meta.error && meta.touched && (
-                            <span className="error_text">{meta.error}</span>
-                          )}
-                        </DivColumn>
-                      )}
-                    </Field>
-                  </DivColumn>
-
+                  <DivColumn
+                    className={styles.text_input_container}
+                  ></DivColumn>
+                  {map(prouctForm, (attributeGroup) => {
+                    const { name, attributes: fieldList } = attributeGroup;
+                    return (
+                      <DivColumn>
+                        <div className={styles.header}>{name}</div>
+                        <div>
+                          {map(fieldList, (attribute) => {
+                            return this.getFormItem(attribute);
+                          })}
+                        </div>
+                      </DivColumn>
+                    );
+                  })}
                   <DivRow className={styles.form_button_container}>
                     <SecondaryCapsuleButton onClick={onClickCancel}>
                       Cancel
@@ -204,24 +249,21 @@ class EditProduct extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     productReducer: state.productReducer,
-    basicReducer: state.basicReducer
+    basicReducer: state.basicReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     createProductAction: bindActionCreators(createProductAction, dispatch),
-    getAttributeFamilyAction: bindActionCreators(
-      getAttributeFamilyAction,
-      dispatch
-    ),
+    getProductFormAction: bindActionCreators(getProductFormAction, dispatch),
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
-    )
+    ),
   };
 };
 
