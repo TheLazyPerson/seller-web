@@ -1,7 +1,8 @@
 @import "~Styles/colors.module";
-@import '~Styles/mixins.module';
+@import "~Styles/mixins.module";
 
 $checkbox-color: $color-very-light-blue;
+$checkbox-icon-color: $primary-color;
 
 .rtl {
   flex-flow: row-reverse;
@@ -16,6 +17,13 @@ $checkbox-color: $color-very-light-blue;
   border: solid 1px $checkbox-color;
 }
 
+.color_primary {
+  color: $checkbox-icon-color;
+}
+
+.fill_primary {
+  fill: $checkbox-icon-color;
+}
 .checkbox_text {
   font-size: 18px;
   color: $primary-text-color;

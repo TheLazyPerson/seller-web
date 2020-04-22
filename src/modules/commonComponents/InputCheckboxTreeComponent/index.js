@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styles from "./input_checkbox.module.scss";
+import styles from "./input_checkbox_tree.module.scss";
 import DivRow from "CommonComponents/divRow";
 import translatorHoc from "Hoc/translatorHoc";
 import CheckboxTree from "react-checkbox-tree";
@@ -50,17 +50,22 @@ class InputCheckboxTreeComponent extends Component {
         onCheck={(checked) => this.setState({ checked })}
         onExpand={(expanded) => this.setState({ expanded })}
         showExpandAll={true}
+        expandOnClick={true}
         icons={{
-          check: <CheckBoxOutlined />,
-          uncheck: <CheckBoxOutlineBlankOutlined />,
-          halfCheck: <CheckOutlined />,
-          expandClose: <ChevronRightOutlined />,
-          expandOpen: <KeyboardArrowDownOutlined />,
-          expandAll: <AddOutlined />,
-          collapseAll: <RemoveOutlined />,
-          parentClose: <FolderOutlined />,
-          parentOpen: <FolderOpenOutlined />,
-          leaf: <DescriptionOutlined />,
+          check: <CheckBoxOutlined classes={styles.color_primary} />,
+          uncheck: (
+            <CheckBoxOutlineBlankOutlined classes={styles.color_primary} />
+          ),
+          halfCheck: <CheckOutlined classes={styles.color_primary} />,
+          expandClose: <ChevronRightOutlined classes={styles.color_primary} />,
+          expandOpen: (
+            <KeyboardArrowDownOutlined classes={styles.color_primary} />
+          ),
+          expandAll: <AddOutlined classes={styles.color_primary} />,
+          collapseAll: <RemoveOutlined classes={styles.color_primary} />,
+          parentClose: <FolderOutlined classes={styles.fill_primary} />,
+          parentOpen: <FolderOpenOutlined classes={styles.fill_primary} />,
+          leaf: <DescriptionOutlined classes={styles.fill_primary} />,
         }}
       />
     );
