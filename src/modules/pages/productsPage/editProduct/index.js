@@ -9,6 +9,7 @@ import { Form, Field } from "react-final-form";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
 import InputTextComponent from "CommonComponents/InputTextComponent";
+import InputCheckboxTreeComponent from "CommonComponents/InputCheckboxTreeComponent";
 import InputTextareaComponent from "CommonComponents/InputTextareaComponent";
 import navigatorHoc from "Hoc/navigatorHoc";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
@@ -19,11 +20,20 @@ import { bindActionCreators } from "redux";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import { createProductAction } from "Core/modules/product/productActions";
 import { getProductFormAction } from "Core/modules/product/productActions";
+import ImageSelectionComponent from "CommonComponents/imageSelectionComponent";
+import { getBase64 } from "Utils/generalUtils";
+
 import map from "lodash/map";
 
 import Select from "react-select";
 
 class EditProduct extends Component {
+  state = {
+    productImages: [],
+
+    productImagesObj: [],
+  };
+
   onSubmitComplete = () => {
     this.onBackPress();
   };
@@ -79,6 +89,16 @@ class EditProduct extends Component {
 
   formatAttributeOptionData = (list) => {
     return map(list, (item) => ({ value: item.id, label: item.label }));
+  };
+
+  uploadImage = async (file) => {
+    const { uploadImage } = this.props;
+    const baseImage = await getBase64(file[0]);
+    return uploadImage({
+      asset_type: "productimage",
+      file_type: file[0].type,
+      file: baseImage,
+    });
   };
 
   getFormItem = (attribute) => {
@@ -165,6 +185,52 @@ class EditProduct extends Component {
                 className={styles.input_text_area}
               />
             )}
+          </Field>
+        </DivColumn>
+      );
+    } else if (type === "price") {
+      return (
+        <DivColumn className={styles.text_input_container}>
+          <Field name={slug}>
+            {({ input, meta }) => (
+              <InputTextComponent
+                meta={meta}
+                {...input}
+                placeholder={name}
+                className={styles.input_text}
+              />
+            )}
+          </Field>
+        </DivColumn>
+      );
+    } else if (type === "file") {
+      const { productImages } = this.state;
+
+      return (
+        <DivColumn className={styles.text_file_container}>
+          <Field name={slug}>
+            {({ input, meta }) => (
+              <ImageSelectionComponent
+                files={productImages}
+                onDrop={(file) => {
+                  this.uploadImage(file).then(({ payload }) => {
+                    const { productImages, productImagesObj } = this.state;
+                    this.setState({
+                      productImages: [...productImages, file],
+                      productImagesObj: [...productImagesObj, payload.data.id],
+                    });
+                  });
+                }}
+              />
+            )}
+          </Field>
+        </DivColumn>
+      );
+    } else if (type === "tree-checkbox") {
+      return (
+        <DivColumn className={styles.text_input_container}>
+          <Field name={slug}>
+            {({ input, meta }) => <InputCheckboxTreeComponent />}
           </Field>
         </DivColumn>
       );
