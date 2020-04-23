@@ -22,6 +22,7 @@ import { createProductAction } from "Core/modules/product/productActions";
 import { getProductFormAction } from "Core/modules/product/productActions";
 import ImageSelectionComponent from "CommonComponents/imageSelectionComponent";
 import { getBase64 } from "Utils/generalUtils";
+import { getCategoryTreeAction } from "Core/modules/category/categoryActions";
 
 import map from "lodash/map";
 
@@ -227,12 +228,20 @@ class EditProduct extends Component {
         </DivColumn>
       );
     } else if (type === "tree-checkbox") {
+      const {
+        getCategoryTreeAction,
+        categoryReducer: { categories },
+      } = this.props;
       return (
-        <DivColumn className={styles.text_input_container}>
-          <Field name={slug}>
-            {({ input, meta }) => <InputCheckboxTreeComponent />}
-          </Field>
-        </DivColumn>
+        <InitialPageLoader initialPageApi={getCategoryTreeAction}>
+          <DivColumn className={styles.text_input_container}>
+            <Field name={slug}>
+              {({ input, meta }) => (
+                <InputCheckboxTreeComponent data={categories} />
+              )}
+            </Field>
+          </DivColumn>
+        </InitialPageLoader>
       );
     }
   };
@@ -319,6 +328,7 @@ const mapStateToProps = (state) => {
   return {
     productReducer: state.productReducer,
     basicReducer: state.basicReducer,
+    categoryReducer: state.categoryReducer,
   };
 };
 
@@ -326,6 +336,7 @@ const mapDispathToProps = (dispatch) => {
   return {
     createProductAction: bindActionCreators(createProductAction, dispatch),
     getProductFormAction: bindActionCreators(getProductFormAction, dispatch),
+    getCategoryTreeAction: bindActionCreators(getCategoryTreeAction, dispatch),
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
