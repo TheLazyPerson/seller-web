@@ -16,8 +16,9 @@ import overviewReducer from "Core/modules/overview/overviewReducer";
 import bankDetailsReducer from "Core/modules/bankDetails/bankDetailsReducer";
 import resetPasswordReducer from "Core/modules/resetpassword/resetPasswordReducer";
 import settingsReducer from "Core/modules/settings/settingsReducer";
+import categoryReducer from "Core/modules/category/categoryReducer";
 
-const appReducer = history =>
+const appReducer = (history) =>
   combineReducers({
     router: connectRouter(history),
     loaderReducer,
@@ -35,7 +36,8 @@ const appReducer = history =>
     overviewReducer,
     bankDetailsReducer,
     resetPasswordReducer,
-    settingsReducer
+    settingsReducer,
+    categoryReducer,
   });
 
 /* const rootReducer = ( state, action ) => {
