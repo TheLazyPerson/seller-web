@@ -4,6 +4,8 @@ import DivRow from "CommonComponents/divRow";
 import translatorHoc from "Hoc/translatorHoc";
 import CheckboxTree from "react-checkbox-tree";
 import "react-checkbox-tree/lib/react-checkbox-tree.css";
+import map from "lodash/map";
+
 import {
   CheckBoxOutlineBlankOutlined,
   DescriptionOutlined,
@@ -17,34 +19,23 @@ import {
   KeyboardArrowDownOutlined,
 } from "@material-ui/icons";
 
-const nodes = [
-  {
-    value: "mars",
-    label: "Mars",
-    children: [
-      {
-        value: "phobos",
-        label: "Phobos",
-        children: [
-          { value: "sample", label: "Phobos" },
-          { value: "sample-2", label: "Deimos" },
-        ],
-      },
-      { value: "deimos", label: "Deimos" },
-    ],
-  },
-];
-
 class InputCheckboxTreeComponent extends Component {
   state = {
     checked: [],
     expanded: [],
   };
 
+  formatSelectorData = (list) => {
+    return map(list, (item) => ({
+      value: item.id,
+      label: item.name,
+    }));
+  };
   render() {
+    const { data } = this.props;
     return (
       <CheckboxTree
-        nodes={nodes}
+        nodes={this.formatSelectorData(data)}
         checked={this.state.checked}
         expanded={this.state.expanded}
         onCheck={(checked) => this.setState({ checked })}
