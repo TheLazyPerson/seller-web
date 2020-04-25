@@ -140,5 +140,31 @@
     "confirmed_password": "Confirmed Password",
     "reset_password_button": "Reset Password",
     "sub_title1": "Your token is expired or password is already updated "
+  },
+  "marketplace_detail_page": {
+    "create": "Next",
+    "page_title": "Marketplace Details",
+    "shop_name": "Shop Name",
+    "shop_contact_number": "Shop Contact Number",
+    "shop_email_addres": "Shop Email Address"
+  },
+  "bank_detail_page": {
+    "create": "Next",
+    "page_title": "Bank Details",
+    "acount_holder": "Account Holder ",
+    "bank_name": "Bank Name",
+    "iban": "IBAN"
+  },
+  "location_detail_page": {
+    "create": "Next",
+    "page_title": "Location Details",
+    "area": "Area",
+    "block_number": "Block Number",
+    "house_number": "House Number",
+    "street_number": "Street Number",
+    "avenue": "Avenue",
+    "landmark": "Landmark",
+    "home_office": "Home/Office",
+    "city": "City"
   }
 }
