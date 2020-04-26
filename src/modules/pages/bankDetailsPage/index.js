@@ -12,6 +12,7 @@ import { Form, Field } from "react-final-form";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { store } from "react-notifications-component";
+import CustomNotification from "CommonComponents/customNotification";
 // import {
 //   nameValidator,
 //   emailValidator,
@@ -40,16 +41,13 @@ class BankDetails extends Component {
     // });
 
     store.addNotification({
-      title: "Wonderful!",
-      message: "teodosii@react-notifications-component",
-      type: "default",
-      insert: "top",
+      content: CustomNotification, // 👈
       container: "bottom-right",
+      insert: "top",
       animationIn: ["animated", "fadeIn"],
       animationOut: ["animated", "fadeOut"],
       dismiss: {
-        duration: 5000,
-        onScreen: true
+        duration: 3000
       }
     });
   };
