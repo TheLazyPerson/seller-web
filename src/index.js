@@ -13,7 +13,8 @@ import common_ar from "./translations/ar/common.json";
 import common_en from "./translations/en/common.json";
 import { LANG } from "Constants/cookieConstants";
 import { CookieService } from "Utils/cookieService";
-
+import "react-notifications-component/dist/theme.css";
+import ReactNotification from "react-notifications-component";
 const languageCode = CookieService.getJSON(LANG);
 
 let store = configureStore();
@@ -35,6 +36,7 @@ ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <I18nextProvider i18n={i18next}>
+        <ReactNotification />
         <App />
       </I18nextProvider>
     </ConnectedRouter>

@@ -11,30 +11,43 @@ import { Form, Field } from "react-final-form";
 // import { postSignupAction } from "Core/modules/signup/actions";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import navigatorHoc from "Hoc/navigatorHoc";
-import {
-  nameValidator,
-  emailValidator,
-  passwordValidator,
-  isEmptyValidator
-} from "Utils/validators";
+import { store } from "react-notifications-component";
+import CustomNotification from "CommonComponents/customNotification";
+// import {
+//   nameValidator,
+//   emailValidator,
+//   passwordValidator,
+//   isEmptyValidator
+// } from "Utils/validators";
 import translatorHoc from "Hoc/translatorHoc";
 
 class BankDetails extends Component {
   onSubmit = form => {
-    const {
-      postSignupAction,
-      navigateTo,
-      showSuccessFlashMessage
-    } = this.props;
+    // const {
+    //   postSignupAction,
+    //   navigateTo,
+    //   showSuccessFlashMessage
+    // } = this.props;
 
-    postSignupAction({
-      acount_holder: form.acount_holder,
-      bank_name: form.bank_name,
-      iban: form.iban
-    }).then(({ payload }) => {
-      if (payload.code == 200 || payload.code == 201) {
-        navigateTo("signin");
-        showSuccessFlashMessage("Signed up successfuly");
+    // postSignupAction({
+    //   acount_holder: form.acount_holder,
+    //   bank_name: form.bank_name,
+    //   iban: form.iban
+    // }).then(({ payload }) => {
+    //   if (payload.code == 200 || payload.code == 201) {
+    //     navigateTo("signin");
+    //     showSuccessFlashMessage("Signed up successfuly");
+    //   }
+    // });
+
+    store.addNotification({
+      content: CustomNotification, // 👈
+      container: "bottom-right",
+      insert: "top",
+      animationIn: ["animated", "fadeIn"],
+      animationOut: ["animated", "fadeOut"],
+      dismiss: {
+        duration: 3000
       }
     });
   };
