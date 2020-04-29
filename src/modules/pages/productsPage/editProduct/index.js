@@ -13,7 +13,7 @@ import InputCheckboxTreeComponent from "CommonComponents/InputCheckboxTreeCompon
 import InputTextareaComponent from "CommonComponents/InputTextareaComponent";
 import navigatorHoc from "Hoc/navigatorHoc";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
-
+import { uploadImage } from "Core/modules/product/productActions";
 import { isEmptyValidator } from "Utils/validators";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -337,6 +337,7 @@ const mapDispathToProps = (dispatch) => {
     createProductAction: bindActionCreators(createProductAction, dispatch),
     getProductFormAction: bindActionCreators(getProductFormAction, dispatch),
     getCategoryTreeAction: bindActionCreators(getCategoryTreeAction, dispatch),
+    uploadImage: bindActionCreators(uploadImage, dispatch),
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
