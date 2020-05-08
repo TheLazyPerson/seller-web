@@ -11,22 +11,22 @@ import translatorHoc from "Hoc/translatorHoc";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 class ForgotPassword extends Component {
   state = {
-    userName: ""
+    userName: "",
   };
 
-  onSubmit = form => {
+  onSubmit = (form) => {
     form.preventDefault();
     const {
       createPasswordTokenAction,
       navigateTo,
-      showSuccessFlashMessage
+      showSuccessFlashMessage,
     } = this.props;
     const { userName } = this.state;
 
     if (userName) {
       createPasswordTokenAction({
-        email: userName // "buisness@gmail.com",
-      }).then(response => {
+        email: userName, // "buisness@gmail.com",
+      }).then((response) => {
         if (response.payload.code === 200) {
           showSuccessFlashMessage(response.payload.message);
         } else if (response.payload.code === 404) {
@@ -60,7 +60,7 @@ class ForgotPassword extends Component {
               placeholder={translate("reset_password_page.username")}
               className={styles.input_text}
               value={userName}
-              onChange={event =>
+              onChange={(event) =>
                 this.setState({ userName: event.target.value })
               }
             />
@@ -87,13 +87,13 @@ class ForgotPassword extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    createPasswordTokenAction: state.createPasswordTokenAction
+    createPasswordTokenAction: state.createPasswordTokenAction,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     createPasswordTokenAction: bindActionCreators(
       createPasswordTokenAction,
@@ -102,7 +102,7 @@ const mapDispathToProps = dispatch => {
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
-    )
+    ),
   };
 };
 
