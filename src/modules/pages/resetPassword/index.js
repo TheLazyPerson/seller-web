@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import FullWidthContainer from "CommonContainers/fullwidthContainer";
 import DivColumn from "CommonComponents/divColumn";
 import styles from "./reset_password.module.scss";
@@ -8,53 +8,69 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
   verifyPasswordTokenAction,
-  resetPasswordAction
+  resetPasswordAction,
 } from "Core/modules/resetpassword/resetPasswordActions";
 import translatorHoc from "Hoc/translatorHoc";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import queryString from "query-string";
+import { Form, Field } from "react-final-form";
+import {
+  emailValidator,
+  isEmptyValidator,
+  passwordValidator,
+} from "Utils/validators";
+
 // import resetPasswordAction from "Core/modules/resetpassword";
 
 class RestPassword extends Component {
   state = {
-    password: "",
-    confirm_passowrd: "",
-    params: queryString.parse(this.props.location.search)
+    params: queryString.parse(this.props.location.search),
   };
 
-  onSubmit = form => {
-    form.preventDefault();
+  onSubmit = (form) => {
     const {
       resetPasswordAction,
       navigateTo,
-      resetPasswordReducer: { tokenInformation }
+      resetPasswordReducer: { tokenInformation },
     } = this.props;
-    const { confirm_passowrd, password } = this.state;
-    if (confirm_passowrd && password) {
-      const formData = {
-        email: tokenInformation.data["token-information"].email,
-        password_confirmation: confirm_passowrd, // "buisness@gmail.com",
-        password: password,
-        token: tokenInformation.data["token-information"].token
-      };
 
-      resetPasswordAction(formData).then(response => {
-        const { data, code } = response.payload;
-        if (code === 200 || code === 201) {
-          navigateTo("reset-password-sucess");
-        } else if (code === 400 || code === 404) {
-          // navigateTo("reset-password-sucess");
-        }
-      });
-    }
+    resetPasswordAction({
+      email: tokenInformation.data["token-information"].email,
+      password_confirmation: form.confirmPassword, // "buisness@gmail.com",
+      password: form.password,
+      token: tokenInformation.data["token-information"].token,
+    }).then(({ payload }) => {
+      const { data, code } = payload;
+      if (code === 200 || code === 201) {
+        navigateTo("reset-password-sucess");
+      } else if (code === 400 || code === 404) {
+        // navigateTo("reset-password-sucess");
+      }
+    });
+  };
+
+  validate = (values) => {
+    const errors = {};
+    const validators = {
+      password: isEmptyValidator(values.password),
+      confirmed_password: passwordValidator(
+        values.password,
+        values.confirmPassword
+      ),
+    };
+
+    Object.keys(validators).forEach((key) => {
+      if (!validators[key].result) errors[key] = validators[key].error;
+    });
+
+    return errors;
   };
 
   render() {
-    const { confirm_passowrd, password } = this.state;
     const {
       translate,
       verifyPasswordTokenAction,
-      resetPasswordReducer: { tokenInformation }
+      resetPasswordReducer: { tokenInformation },
     } = this.props;
     return (
       <FullWidthContainer>
@@ -88,36 +104,58 @@ class RestPassword extends Component {
               ))}
 
             {tokenInformation.code == 200 && (
-              <form className={styles.form_container} onSubmit={this.onSubmit}>
-                <InputTextComponent
-                  type="password"
-                  placeholder={translate("update_password_page.password")}
-                  className={styles.input_text}
-                  value={password}
-                  onChange={event =>
-                    this.setState({ password: event.target.value })
-                  }
-                />
-                <InputTextComponent
-                  type="password"
-                  placeholder={translate(
-                    "update_password_page.confirmed_password"
-                  )}
-                  className={styles.input_text}
-                  value={confirm_passowrd}
-                  onChange={event =>
-                    this.setState({ confirm_passowrd: event.target.value })
-                  }
-                />
+              <Form
+                onSubmit={this.onSubmit}
+                validate={this.validate}
+                render={({
+                  handleSubmit,
+                  form,
+                  submitting,
+                  pristine,
+                  values,
+                }) => (
+                  <form
+                    className={styles.form_container}
+                    onSubmit={handleSubmit}
+                  >
+                    <Field name="password">
+                      {({ input, meta }) => (
+                        <InputTextComponent
+                          meta={meta}
+                          {...input}
+                          type="password"
+                          placeholder={translate(
+                            "update_password_page.password"
+                          )}
+                          className={styles.input_text}
+                        />
+                      )}
+                    </Field>
+                    <Field name="confirmPassword">
+                      {({ input, meta }) => (
+                        <InputTextComponent
+                          meta={meta}
+                          {...input}
+                          type="password"
+                          placeholder={translate(
+                            "update_password_page.confirmed_password"
+                          )}
+                          className={styles.input_text}
+                        />
+                      )}
+                    </Field>
 
-                <input
-                  type="submit"
-                  value={translate(
-                    "update_password_page.reset_password_button"
-                  )}
-                  className={styles.input_submit}
-                />
-              </form>
+                    <input
+                      type="submit"
+                      value={translate(
+                        "update_password_page.reset_password_button"
+                      )}
+                      disabled={submitting}
+                      className={styles.input_submit}
+                    />
+                  </form>
+                )}
+              />
             )}
           </DivColumn>
         </InitialPageLoader>
@@ -126,19 +164,19 @@ class RestPassword extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    resetPasswordReducer: state.resetPasswordReducer
+    resetPasswordReducer: state.resetPasswordReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     verifyPasswordTokenAction: bindActionCreators(
       verifyPasswordTokenAction,
       dispatch
     ),
-    resetPasswordAction: bindActionCreators(resetPasswordAction, dispatch)
+    resetPasswordAction: bindActionCreators(resetPasswordAction, dispatch),
   };
 };
 
