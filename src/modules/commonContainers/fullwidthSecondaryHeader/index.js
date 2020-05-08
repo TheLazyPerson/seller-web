@@ -24,7 +24,7 @@ class FullwidthSecondaryHeader extends Component {
       className,
       navItems,
       onClickNavItem,
-      selectedTab
+      selectedTab,
     } = this.props;
 
     return (
@@ -40,25 +40,25 @@ class FullwidthSecondaryHeader extends Component {
               onClick={this.onClickAppIcon}
             />
           </DivRow>
-        </DivRow>
-        <DivRow className={styles.links_container}>
-          {map(navItems, listItem => {
-            const { title, slug } = listItem;
-            const isSelected = selectedTab === slug;
-            return (
-              <a
-                className={`${styles.nav_item} ${
-                  isSelected ? styles.is_selected : ""
-                }`}
-                onClick={() => {
-                  onClickNavItem(slug);
-                }}
-              >
-                {" "}
-                {title}
-              </a>
-            );
-          })}
+          <DivRow className={styles.links_container}>
+            {map(navItems, (listItem) => {
+              const { title, slug } = listItem;
+              const isSelected = selectedTab === slug;
+              return (
+                <a
+                  className={`${styles.nav_item} ${
+                    isSelected ? styles.is_selected : ""
+                  }`}
+                  onClick={() => {
+                    onClickNavItem(slug);
+                  }}
+                >
+                  {" "}
+                  {title}
+                </a>
+              );
+            })}
+          </DivRow>
         </DivRow>
       </DivColumn>
     );
@@ -66,7 +66,7 @@ class FullwidthSecondaryHeader extends Component {
 }
 
 FullwidthSecondaryHeader.defaultProps = {
-  whiteColor: false
+  whiteColor: false,
 };
 
 export default navigatorHoc(FullwidthSecondaryHeader);
