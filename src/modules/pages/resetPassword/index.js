@@ -14,11 +14,7 @@ import translatorHoc from "Hoc/translatorHoc";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import queryString from "query-string";
 import { Form, Field } from "react-final-form";
-import {
-  emailValidator,
-  isEmptyValidator,
-  passwordValidator,
-} from "Utils/validators";
+import { isEmptyValidator, passwordValidator } from "Utils/validators";
 
 // import resetPasswordAction from "Core/modules/resetpassword";
 
@@ -53,7 +49,7 @@ class ResetPassword extends Component {
     const errors = {};
     const validators = {
       password: isEmptyValidator(values.password),
-      confirmed_password: passwordValidator(
+      confirmPassword: passwordValidator(
         values.password,
         values.confirmPassword
       ),
