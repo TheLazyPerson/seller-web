@@ -37,12 +37,13 @@ import TransactionDetailsPage from "./pages/salesPage/transactionDetailPage";
 import ExhibitionSubscriptionOverviewPage from "./pages/exhibitionSuscriptionOverviewPage";
 import ProductDetailsPage from "./pages/productDetailsPage";
 import ForgotPassword from "./pages/forgetPassword";
-import RestPassword from "./pages/resetPassword";
-import RestPasswordSuccess from "./pages/resetPassword/resetPasswordSucess";
+import ResetPassword from "./pages/resetPassword";
+import ResetPasswordSuccess from "./pages/resetPassword/resetPasswordSucess";
 import { connect } from "react-redux";
 import MarketplaceDetail from "./pages/marketplaceDetails";
 import BankDetails from "./pages/bankDetailsPage";
 import LocationDetails from "./pages/locationDetailsPage";
+import resetPassword from "./pages/resetPassword";
 
 const App = ({ isUserSignedIn }) => {
   return (
@@ -87,14 +88,14 @@ const App = ({ isUserSignedIn }) => {
       <ProtectedRoute
         exact
         path="/reset-password/:token?"
-        component={RestPassword}
+        component={resetPassword}
         validator={() => !isUserSignedIn}
       />
 
       <ProtectedRoute
         exact
         path="/reset-password-sucess"
-        component={RestPasswordSuccess}
+        component={ResetPasswordSuccess}
         validator={() => !isUserSignedIn}
       />
       <ProtectedRoute
@@ -278,9 +279,9 @@ const App = ({ isUserSignedIn }) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    isUserSignedIn: state.signInReducer.isUserSignedIn
+    isUserSignedIn: state.signInReducer.isUserSignedIn,
   };
 };
 

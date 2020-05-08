@@ -22,7 +22,7 @@ import {
 
 // import resetPasswordAction from "Core/modules/resetpassword";
 
-class RestPassword extends Component {
+class ResetPassword extends Component {
   state = {
     params: queryString.parse(this.props.location.search),
   };
@@ -183,4 +183,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(translatorHoc(navigatorHoc(RestPassword)));
+)(translatorHoc(navigatorHoc(ResetPassword)));
