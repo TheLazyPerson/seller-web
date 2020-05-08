@@ -9,27 +9,28 @@ import closeIcon from "Icons/close-icon-black.svg";
 
 class FAQ extends Component {
   state = {
-    faq
+    faq,
   };
 
-  onClickFaqItem = index => {
+  onClickFaqItem = (index) => {
     const { faq } = this.state;
 
     const updatedFaq = map(faq, (faqItem, itemIndex) => {
       if (itemIndex === index) {
         return {
           ...faqItem,
-          isSelected: !faqItem.isSelected
+          isSelected: !faqItem.isSelected,
         };
       }
 
       return faqItem;
     });
-
     this.setState({ faq: updatedFaq });
   };
 
   render() {
+    const { faq } = this.state;
+
     return (
       <DivColumn fillParent className={styles.faq_landing_container}>
         {map(faq, (faqItem, index) => {
