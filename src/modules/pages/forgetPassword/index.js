@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import FullWidthContainer from "CommonContainers/fullwidthContainer";
 import DivColumn from "CommonComponents/divColumn";
 import styles from "./forget_password.module.scss";
@@ -9,35 +9,46 @@ import { bindActionCreators } from "redux";
 import { createPasswordTokenAction } from "Core/modules/resetpassword/resetPasswordActions";
 import translatorHoc from "Hoc/translatorHoc";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
-class ForgotPassword extends Component {
-  state = {
-    userName: "",
-  };
+import { emailValidator } from "Utils/validators";
+import { Form, Field } from "react-final-form";
 
+class ForgotPassword extends Component {
   onSubmit = (form) => {
-    form.preventDefault();
     const {
       createPasswordTokenAction,
       navigateTo,
       showSuccessFlashMessage,
     } = this.props;
-    const { userName } = this.state;
 
-    if (userName) {
-      createPasswordTokenAction({
-        email: userName, // "buisness@gmail.com",
-      }).then((response) => {
-        if (response.payload.code === 200) {
-          showSuccessFlashMessage(response.payload.message);
-        } else if (response.payload.code === 404) {
-          showSuccessFlashMessage("User Doesn't Exists ");
-        }
-      });
-    }
+    createPasswordTokenAction({
+      email: form.userName,
+    }).then(({ payload }) => {
+      const { code, message } = payload;
+      if (code === 200) {
+        showSuccessFlashMessage(message);
+
+        // TODO: redirect to new page saying that we have sent a reset link on your email
+        navigateTo("signin");
+      } else if (code === 404) {
+        showSuccessFlashMessage("User Doesn't Exists ");
+      }
+    });
+  };
+
+  validate = (values) => {
+    const errors = {};
+    const validators = {
+      userName: emailValidator(values.userName),
+    };
+
+    Object.keys(validators).forEach((key) => {
+      if (!validators[key].result) errors[key] = validators[key].error;
+    });
+
+    return errors;
   };
 
   render() {
-    const { userName } = this.state;
     const { translate } = this.props;
 
     return (
@@ -55,24 +66,31 @@ class ForgotPassword extends Component {
               {translate("reset_password_page.sub_title")}&nbsp;
             </div>
           </div>
-          <form className={styles.form_container} onSubmit={this.onSubmit}>
-            <InputTextComponent
-              placeholder={translate("reset_password_page.username")}
-              className={styles.input_text}
-              value={userName}
-              onChange={(event) =>
-                this.setState({ userName: event.target.value })
-              }
-            />
-            <input
-              type="submit"
-              value={translate("reset_password_page.reset_password_button")}
-              className={styles.input_submit}
-            />
-          </form>
-          {/* <a className={styles.hyper_link} href="/forgot-password">
-            Forgot password
-          </a> */}
+          <Form
+            onSubmit={this.onSubmit}
+            validate={this.validate}
+            render={({ handleSubmit, form, submitting, pristine, values }) => (
+              <form className={styles.form_container} onSubmit={handleSubmit}>
+                <Field name="userName">
+                  {({ input, meta }) => (
+                    <InputTextComponent
+                      meta={meta}
+                      {...input}
+                      placeholder={translate("reset_password_page.username")}
+                      className={styles.input_text}
+                    />
+                  )}
+                </Field>
+                <input
+                  type="submit"
+                  value={translate("reset_password_page.reset_password_button")}
+                  className={styles.input_submit}
+                  disabled={submitting}
+                />
+              </form>
+            )}
+          />
+
           <div className={styles.create_account_container}>
             <span className={styles.new_description_text}>
               {translate("reset_password_page.new")}&nbsp;
