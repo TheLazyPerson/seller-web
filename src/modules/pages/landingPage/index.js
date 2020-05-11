@@ -22,12 +22,12 @@ import InitialPageLoader from "CommonContainers/initialPageLoader";
 import FullwidthSecondaryHeader from "CommonContainers/fullwidthSecondaryHeader";
 import { landingPageHeaderItems } from "Constants/landingPageHeaderConstants";
 import HorizontalBorder from "CommonComponents/horizontalBorder";
-
+import HostExhibition from "./hostExhibition";
 class LandingPage extends Component {
   onClickStartSelling = () => {
     const {
       subscriptionReducer: { selectedSubscription },
-      navigateTo
+      navigateTo,
     } = this.props;
 
     if (selectedSubscription.id) {
@@ -37,19 +37,19 @@ class LandingPage extends Component {
     }
   };
   state = {
-    activeTab: "benefits"
+    activeTab: "benefits",
   };
 
-  handleNavItemClicked = slug => {
+  handleNavItemClicked = (slug) => {
     this.setState({
-      activeTab: slug
+      activeTab: slug,
     });
   };
 
   render() {
     const {
       subscriptionReducer: { subscriptionPlanList },
-      getPlanListAction
+      getPlanListAction,
     } = this.props;
 
     {
@@ -107,6 +107,8 @@ class LandingPage extends Component {
         {activeTab == "pricing" ? (
           <InitialPageLoader initialPageApi={getPlanListAction}>
             <Pricing subscriptionPlanList={subscriptionPlanList} />
+            <HorizontalBorder />
+            <HostExhibition />
           </InitialPageLoader>
         ) : (
           ""
@@ -120,15 +122,15 @@ class LandingPage extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    subscriptionReducer: state.subscriptionReducer
+    subscriptionReducer: state.subscriptionReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
-    getPlanListAction: bindActionCreators(getPlanListAction, dispatch)
+    getPlanListAction: bindActionCreators(getPlanListAction, dispatch),
   };
 };
 
