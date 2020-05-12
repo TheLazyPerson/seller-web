@@ -107,6 +107,20 @@ class LandingPage extends Component {
         {activeTab == "pricing" ? (
           <InitialPageLoader initialPageApi={getPlanListAction}>
             <Pricing subscriptionPlanList={subscriptionPlanList} />
+            <DivColumn
+              horizontalCenter
+              className={styles.pricing_select_container}
+            >
+              <DivRow
+                verticalCenter
+                horizontalCenter
+                className={styles.start_selling_button_pricing}
+                onClick={this.onClickStartSelling}
+              >
+                Start Selling
+              </DivRow>
+            </DivColumn>
+
             <HorizontalBorder />
             <HostExhibition />
           </InitialPageLoader>
