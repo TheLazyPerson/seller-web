@@ -58,7 +58,9 @@
   color: $color-dark;
 
   .title {
-    width: 140px;
+    span {
+      width: 100px;
+    }
   }
 
   .value {
