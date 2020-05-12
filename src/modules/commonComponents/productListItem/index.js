@@ -15,7 +15,7 @@ class ProductListItem extends Component {
       exhibitionId,
       actionType,
       onClickAttachProduct,
-      onClickRemoveProduct
+      onClickRemoveProduct,
     } = this.props;
     const ACTION_TYPE_ATTACH_PRODUCT = "attach_product";
     const ACTION_TYPE_MARK_OUT_OF_STOCK = "mark_product_out_of_stock";
@@ -29,7 +29,7 @@ class ProductListItem extends Component {
         <div className={styles.title}>{product.name}</div>
         <div className={styles.description}>{product.short_description}</div>
         {!isEmpty(product.thumbnail) && (
-          <img src={product.thumbnail} className={styles.image} />
+          <img src={product.thumbnail.path} className={styles.image} />
         )}
         {!product.is_attached && actionType == ACTION_TYPE_ATTACH_PRODUCT && (
           <div

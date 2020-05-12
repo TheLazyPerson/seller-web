@@ -103,7 +103,7 @@
     "password": "كلمه السر",
     "remember_me": "تذكرنى",
     "sign_in_button": "تسجيل الدخول",
-    "username": "اسم المستخدم"
+    "username": "البريد الإلكتروني"
   },
   "signup_page": {
     "confirm_password": "تأكيد كلمة المرور",

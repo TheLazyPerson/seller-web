@@ -25,9 +25,9 @@ import memoize from "memoize-one";
 import SearchBarComponent from "CommonComponents/searchBarComponent";
 
 const sortIcon = <ArrowDownward />;
-const selectProps = { indeterminate: isIndeterminate => isIndeterminate };
+const selectProps = { indeterminate: (isIndeterminate) => isIndeterminate };
 
-const contextActions = memoize(deleteHandler => (
+const contextActions = memoize((deleteHandler) => (
   <IconButton color="secondary" onClick={deleteHandler}>
     <Delete />
   </IconButton>
@@ -37,58 +37,58 @@ const columns = memoize(() => [
   {
     name: "ID",
     selector: "id",
-    sortable: true
+    sortable: true,
   },
   {
     name: "ORDER DATE",
     selector: "order_date",
-    sortable: true
+    sortable: true,
   },
   {
     name: "EXHIBITION NAME",
     selector: "exhibition_name",
     sortable: true,
-    grow: 2
+    grow: 2,
   },
   {
     name: "GRAND TOTAL",
     selector: "grand_total",
-    sortable: true
+    sortable: true,
   },
   {
     name: "TOTAL ITEMS",
     selector: "total_items",
-    sortable: true
+    sortable: true,
   },
   {
     name: "STATUS",
     selector: "status",
-    sortable: true
-  }
+    sortable: true,
+  },
 ]);
 
 class OrdersPage extends Component {
   state = {
     selectedRows: [],
-    toggleCleared: false
+    toggleCleared: false,
   };
 
-  handleChange = state => {
+  handleChange = (state) => {
     this.setState({ selectedRows: state.selectedRows });
   };
 
-  handleRowClicked = row => {
+  handleRowClicked = (row) => {
     console.log(`${row.name} was clicked!`);
   };
 
   deleteAll = () => {
     const { selectedRows } = this.state;
-    const rows = selectedRows.map(r => r.name);
+    const rows = selectedRows.map((r) => r.name);
 
     if (window.confirm(`Are you sure you want to delete:\r ${rows}?`)) {
-      this.setState(state => ({
+      this.setState((state) => ({
         toggleCleared: !state.toggleCleared,
-        data: differenceBy(state.data, state.selectedRows, "name")
+        data: differenceBy(state.data, state.selectedRows, "name"),
       }));
     }
   };
@@ -108,7 +108,8 @@ class OrdersPage extends Component {
             title={title ? title : "Orders"}
             columns={columns ? columns : columns()}
             data={data}
-            selectableRows
+            //TODO: Configure later
+            // selectableRows
             highlightOnHover
             defaultSortField="name"
             contextActions={contextActions(this.deleteAll)}
@@ -119,7 +120,8 @@ class OrdersPage extends Component {
             clearSelectedRows={toggleCleared}
             onRowClicked={this.handleRowClicked}
             pagination
-            expandableRows
+            //TODO: Configure later
+            // expandableRows
           />
         </Card>
       </DivColumn>
@@ -127,9 +129,9 @@ class OrdersPage extends Component {
   }
 }
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
-    logoutAction: bindActionCreators(logoutAction, dispatch)
+    logoutAction: bindActionCreators(logoutAction, dispatch),
   };
 };
 

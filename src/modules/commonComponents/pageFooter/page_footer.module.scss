@@ -1,5 +1,5 @@
-@import '~Styles/colors.module';
-@import '~Styles/mixins.module';
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
 
 .footer_container {
   margin-top: 40px;
@@ -21,6 +21,7 @@
     .link_header {
       margin-bottom: 12px;
       font-size: 12px;
+      text-transform: uppercase;
     }
 
     .link {
@@ -41,9 +42,8 @@
   height: 38px;
 }
 
-
 .facebook {
-  background: url(https://assets.myntassets.com/assets/images/2017/2/3/11486103069298-footerSprite.png);  
+  background: url(https://assets.myntassets.com/assets/images/2017/2/3/11486103069298-footerSprite.png);
   width: 23px;
   height: 21px;
   background-size: 706px 49px;
@@ -78,30 +78,26 @@
   margin-right: 10px;
 }
 
-
 @include medium {
   .footer_container {
     padding: 0px 30px 30px;
 
     .footer_link_container {
       margin-top: 40px;
-    }      
+    }
   }
 }
 
-
 @include small {
-
   .footer_container {
     .footer_link_container {
       .link_header {
         font-size: 10px;
       }
-    
+
       .link {
         font-size: 12px;
-      }    
+      }
     }
   }
 }
-

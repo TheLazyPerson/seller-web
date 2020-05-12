@@ -26,39 +26,35 @@ class OrdersPage extends Component {
     {
       name: "ID",
       selector: "id",
-      sortable: true
+      sortable: true,
     },
     {
       name: "ORDER DATE",
+      //TODO: fix the date format
       selector: "created_at",
-      sortable: true
+      sortable: true,
     },
-    // {
-    //   name: "EXHIBITION NAME",
-    //   selector: "exhibition_name",
-    //   sortable: true,
-    //   grow: 2
-    // },
     {
       name: "GRAND TOTAL",
       selector: "grand_total",
-      sortable: true
+      sortable: false,
     },
     {
       name: "TOTAL ITEMS",
       selector: "total_item_count",
-      sortable: true
+      sortable: false,
     },
     {
       name: "STATUS",
-      selector: "status",
-      sortable: true
+      selector: "status_label",
+      sortable: true,
     },
     {
-      cell: value => (
+      cell: (value) => (
         <Button
           variant="contained"
           color="primary"
+          className={styles.custom_button}
           onClick={() => {
             const { navigateTo } = this.props;
             navigateTo("order-details", { orderId: value.id });
@@ -67,39 +63,35 @@ class OrdersPage extends Component {
           View
         </Button>
       ),
-      button: true
-    }
+      button: true,
+    },
   ]);
+
+  getListItem = (listItem) => {
+    return (
+      <DivColumn verticalCenter horizontalCenter className={styles.box}>
+        <div className={styles.title}>
+          {listItem.card_type == "price-card" ? "KD " : ""}
+          {listItem.value}
+        </div>
+        <div className={styles.description}>{listItem.title}</div>
+      </DivColumn>
+    );
+  };
 
   render() {
     const {
-      orderReducer: { orderList },
-      getOrderListAction
+      orderReducer: { overview, orderList },
+      getOrderListAction,
     } = this.props;
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.orders_page_container}>
           <DivRow className={styles.box_container}>
-            <DivColumn verticalCenter horizontalCenter className={styles.box}>
-              <div className={styles.title}>20</div>
-              <div className={styles.description}>NEW ORDERS</div>
-            </DivColumn>
-
-            <DivColumn verticalCenter horizontalCenter className={styles.box}>
-              <div className={styles.title}>20</div>
-              <div className={styles.description}>INCOMPLETE ORDERS</div>
-            </DivColumn>
-
-            <DivColumn verticalCenter horizontalCenter className={styles.box}>
-              <div className={styles.title}>200</div>
-              <div className={styles.description}>AVERAGE ORDER SALE</div>
-            </DivColumn>
-
-            <DivColumn verticalCenter horizontalCenter className={styles.box}>
-              <div className={styles.title}>30</div>
-              <div className={styles.description}>TOTAL ORDERS</div>
-            </DivColumn>
+            {map(overview, (item) => {
+              return this.getListItem(item);
+            })}
           </DivRow>
           <InitialPageLoader
             initialPageApi={getOrderListAction}
@@ -117,15 +109,15 @@ class OrdersPage extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    orderReducer: state.orderReducer
+    orderReducer: state.orderReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
-    getOrderListAction: bindActionCreators(getOrderListAction, dispatch)
+    getOrderListAction: bindActionCreators(getOrderListAction, dispatch),
   };
 };
 

@@ -1,5 +1,5 @@
 @import "~Styles/colors.module";
-@import '~Styles/mixins.module';
+@import "~Styles/mixins.module";
 
 $input-text-background: $color-very-light-blue;
 
@@ -34,14 +34,16 @@ $input-text-background: $color-very-light-blue;
 }
 
 .error_text {
-  font-size: 16px;;
+  font-size: 12px;
   color: red;
+  padding-left: 24px;
+  margin-top: 5px;
 }
 
 @include medium {
   .input_text {
     padding: 14px 24px;
-  
+
     font-size: 16px;
   }
 
@@ -53,7 +55,7 @@ $input-text-background: $color-very-light-blue;
 @include small {
   .input_text {
     padding: 12px 20px;
-  
+
     font-size: 14px;
   }
 

@@ -23,16 +23,9 @@ class Subscription extends Component {
     const {
       subscription,
       isRTL,
-      features,
-      subscriptionReducer: { selectedSubscription }
+      subscriptionReducer: { selectedSubscription },
     } = this.props;
 
-    const exhibitionFeature = features.filter(
-      feature => feature.name === "exhibition_listing"
-    );
-    const productFeature = features.filter(
-      feature => feature.name === "product_listing"
-    );
     return (
       <DivColumn
         fillParent
@@ -41,10 +34,10 @@ class Subscription extends Component {
         }`}
         onClick={this.selectSubscription}
       >
-        <div className={styles.subscription_title}>{subscription.name}</div>
-        <div className={styles.subscription_price}>
-          KD {subscription.signup_fee} / Month
+        <div className={styles.subscription_title}>
+          {subscription.plan_name}
         </div>
+        <div className={styles.subscription_price}>KD {subscription.price}</div>
         <div className={styles.subtitle}>Benefits Include:</div>
         <DivColumn fillParent className={styles.features}>
           <DivRow className={styles.feature}>
@@ -59,10 +52,10 @@ class Subscription extends Component {
             />
             <DivColumn className={styles.feature_details}>
               <div className={styles.feature_title}>
-                {exhibitionFeature[0].value} Exhibitions
+                {subscription.no_of_exhibitions} Exhibitions
               </div>
               <div className={styles.feature_description}>
-                You can enroll in {exhibitionFeature[0].value} number of
+                You can enroll in {subscription.no_of_exhibitions} number of
                 exhibitions
               </div>
             </DivColumn>
@@ -79,10 +72,10 @@ class Subscription extends Component {
             />
             <DivColumn className={styles.feature_details}>
               <div className={styles.feature_title}>
-                {productFeature[0].value} Products
+                {subscription.no_of_products} Products
               </div>
               <div className={styles.feature_description}>
-                You can maintain {productFeature[0].value} products
+                You can maintain {subscription.no_of_products} products
               </div>
             </DivColumn>
           </DivRow>
@@ -108,18 +101,18 @@ class Subscription extends Component {
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    subscriptionReducer: state.subscriptionReducer
+    subscriptionReducer: state.subscriptionReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     setSelectedSubscription: bindActionCreators(
       setSelectedSubscription,
       dispatch
-    )
+    ),
   };
 };
 

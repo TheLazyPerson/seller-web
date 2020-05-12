@@ -16,7 +16,7 @@ import { CookieService } from "Utils/cookieService";
 import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import {
   getExhibitionSubscriptionOverview,
-  subscribeToExhibition
+  subscribeToExhibition,
 } from "Core/modules/exhibition/exhibitionActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import HorizontalBorder from "CommonComponents/horizontalBorder";
@@ -32,10 +32,10 @@ class ExhibitionSubscriptionOverviewPage extends Component {
     const {
       subscribeToExhibition,
       showSuccessFlashMessage,
-      navigateTo
+      navigateTo,
     } = this.props;
     subscribeToExhibition(exhibitionId, {
-      type: subscriptionOption.type
+      type: subscriptionOption.type,
     }).then(({ payload }) => {
       if (payload.code == 200 || payload.code == 201) {
         navigateTo("your-exhibitions");
@@ -49,9 +49,9 @@ class ExhibitionSubscriptionOverviewPage extends Component {
     const {
       exhibitionReducer: { subscriptionOverview, selectedSubscriptionOption },
       match: { params },
-      getExhibitionSubscriptionOverview
+      getExhibitionSubscriptionOverview,
     } = this.props;
-    const subscriptionTypes = ["both", "flat_fee", "commision"];
+    const subscriptionTypes = ["both", "flat_fee", "commision", "free"];
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
@@ -110,7 +110,7 @@ class ExhibitionSubscriptionOverviewPage extends Component {
             </DivRow>
 
             <DivRow className={styles.options_wrapper}>
-              {map(subscriptionOverview.subscription_options, option => {
+              {map(subscriptionOverview.subscription_options, (option) => {
                 return <SubscriptionOption option={option} />;
               })}
             </DivRow>
@@ -134,13 +134,13 @@ class ExhibitionSubscriptionOverviewPage extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    exhibitionReducer: state.exhibitionReducer
+    exhibitionReducer: state.exhibitionReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     getExhibitionSubscriptionOverview: bindActionCreators(
       getExhibitionSubscriptionOverview,
@@ -152,7 +152,7 @@ const mapDispathToProps = dispatch => {
       showSuccessFlashMessage,
       dispatch
     ),
-    logoutAction: bindActionCreators(logoutAction, dispatch)
+    logoutAction: bindActionCreators(logoutAction, dispatch),
   };
 };
 

@@ -29,7 +29,21 @@
         font-size: 16px;
         font-weight: bold;
         text-align: center;
+        text-transform: uppercase;
       }
+    }
+  }
+
+  .custom_button {
+    background-color: $color-gold;
+    &:active {
+      background-color: $color-gold;
+    }
+    &:hover {
+      background-color: $color-gold;
+    }
+    &:link {
+      background-color: $color-gold;
     }
   }
 }

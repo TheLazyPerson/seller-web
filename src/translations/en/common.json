@@ -99,11 +99,11 @@
   "signin_page": {
     "create": "Create an account",
     "new": "New to Home Expo?",
-    "page_title": "SignIn",
+    "page_title": "Sign In",
     "password": "Password",
     "remember_me": "Remember Me",
     "sign_in_button": "Sign In",
-    "username": "Username"
+    "username": "Email"
   },
   "signup_page": {
     "confirm_password": "Confirm Password",
@@ -122,5 +122,49 @@
     "move_bag": "MOVE TO BAG",
     "my_wishlist": "My Wishlist",
     "start_shopping": "START SHOPPING"
+  },
+  "reset_password_page": {
+    "new": "Already have an account?",
+    "create": "SignIn",
+    "page_title": "Reset Password",
+    "sub_title": "We will send you an email to reset your password.",
+    "password": "Password",
+    "reset_password_button": "Reset Password",
+    "username": "Email"
+  },
+  "update_password_page": {
+    "create": "SignIn",
+    "page_title": "Reset Password",
+    "sub_title": "Enter the password to update.",
+    "password": "Password",
+    "confirmed_password": "Confirmed Password",
+    "reset_password_button": "Reset Password",
+    "sub_title1": "Your token is expired or password is already updated "
+  },
+  "marketplace_detail_page": {
+    "create": "Next",
+    "page_title": "Marketplace Details",
+    "shop_name": "Shop Name",
+    "shop_contact_number": "Shop Contact Number",
+    "shop_email_addres": "Shop Email Address"
+  },
+  "bank_detail_page": {
+    "create": "Next",
+    "page_title": "Bank Details",
+    "acount_holder": "Account Holder ",
+    "bank_name": "Bank Name",
+    "iban": "IBAN"
+  },
+  "location_detail_page": {
+    "create": "Next",
+    "page_title": "Location Details",
+    "area": "Area",
+    "block_number": "Block Number",
+    "house_number": "House Number",
+    "street_number": "Street Number",
+    "avenue": "Avenue",
+    "landmark": "Landmark",
+    "home_office": "Home/Office",
+    "city": "City"
   }
 }

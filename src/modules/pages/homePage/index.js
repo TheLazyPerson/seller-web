@@ -12,9 +12,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { CookieService } from "Utils/cookieService";
 import { USER_DATA_COOKIE } from "Constants/cookieConstants";
+import { getOverviewAction } from "Core/modules/overview/overviewAction";
+import InitialPageLoader from "CommonContainers/initialPageLoader";
+import isEmpty from "lodash/isEmpty";
 
 class HomePage extends Component {
-  onClickNavItemClick = slug => {
+  onClickNavItemClick = (slug) => {
     const { navigateTo, logoutAction } = this.props;
 
     if (slug === "overview") {
@@ -32,7 +35,24 @@ class HomePage extends Component {
     }
   };
 
+  getListItem = (listItem) => {
+    return (
+      <DivColumn verticalCenter horizontalCenter className={styles.box}>
+        <div className={styles.title}>
+          {listItem.card_type == "price-card" ? "KD " : ""}
+          {listItem.value}
+        </div>
+        <div className={styles.description}>{listItem.title}</div>
+      </DivColumn>
+    );
+  };
+
   render() {
+    const {
+      overviewReducer: { overviewData },
+      signInReducer: { userDetails },
+      getOverviewAction,
+    } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn className={styles.profile_overview_container}>
@@ -42,40 +62,41 @@ class HomePage extends Component {
             className={styles.header_container}
           >
             <div className={styles.header_title}>MY ACCOUNT</div>
-            <div className={styles.header_message}>Welcome, Omar.</div>
+            <div className={styles.header_message}>
+              Welcome, {!isEmpty(userDetails) && userDetails.first_name}.
+            </div>
           </DivColumn>
-
-          <DivRow className={styles.box_container}>
-            <DivColumn verticalCenter horizontalCenter className={styles.box}>
-              <div className={styles.title}>20</div>
-              <div className={styles.description}>NEW ORDERS</div>
-            </DivColumn>
-
-            <DivColumn verticalCenter horizontalCenter className={styles.box}>
-              <div className={styles.title}>20</div>
-              <div className={styles.description}>INCOMPLETE ORDERS</div>
-            </DivColumn>
-
-            <DivColumn verticalCenter horizontalCenter className={styles.box}>
-              <div className={styles.title}>200</div>
-              <div className={styles.description}>AVERAGE ORDER SALE</div>
-            </DivColumn>
-
-            <DivColumn verticalCenter horizontalCenter className={styles.box}>
-              <div className={styles.title}>30</div>
-              <div className={styles.description}>TOTAL ORDERS</div>
-            </DivColumn>
-          </DivRow>
+          <InitialPageLoader
+            initialPageApi={getOverviewAction}
+            isEmpty={isEmpty(overviewData)}
+          >
+            <DivRow className={styles.box_container}>
+              {map(overviewData, (overview) => {
+                return this.getListItem(overview);
+              })}
+            </DivRow>
+          </InitialPageLoader>
         </DivColumn>
       </SectionedContainer>
     );
   }
 }
 
-const mapDispathToProps = dispatch => {
+const mapStateToProps = (state) => {
   return {
-    logoutAction: bindActionCreators(logoutAction, dispatch)
+    overviewReducer: state.overviewReducer,
+    signInReducer: state.signInReducer,
   };
 };
 
-export default connect(null, mapDispathToProps)(navigatorHoc(HomePage));
+const mapDispathToProps = (dispatch) => {
+  return {
+    logoutAction: bindActionCreators(logoutAction, dispatch),
+    getOverviewAction: bindActionCreators(getOverviewAction, dispatch),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispathToProps
+)(navigatorHoc(HomePage));

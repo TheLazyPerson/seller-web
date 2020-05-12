@@ -16,7 +16,6 @@ class Pricing extends Component {
           return (
             <Subscription
               subscription={subscription}
-              features={subscription.features}
               isSelected={subscription.isSelected}
             />
           );

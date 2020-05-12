@@ -46,13 +46,13 @@ class MarketPlace extends Component {
         <InitialPageLoader initialPageApi={getMarketplaceProfileAction}>
           <DivColumn fillParent>
             <DivColumn className={styles.field_container}>
-              <div className={styles.title}>Shop Name</div>
+              <div className={styles.title}>Shop Name :</div>
               <div className={styles.value}>
                 {profile.shop_name ? profile.shop_name : "Not Available"}
               </div>
             </DivColumn>
             <DivColumn className={styles.field_container}>
-              <div className={styles.title}>Contact Number</div>
+              <div className={styles.title}>Contact Number :</div>
               <div className={styles.value}>
                 {profile.contact_number
                   ? profile.contact_number
@@ -60,21 +60,19 @@ class MarketPlace extends Component {
               </div>
             </DivColumn>
             <DivColumn className={styles.field_container}>
-              <div className={styles.title}>Email Address</div>
+              <div className={styles.title}>Email Address :</div>
               <div className={styles.value}>
                 {profile.shop_email ? profile.shop_email : "Not Available"}
               </div>
             </DivColumn>
             <DivColumn className={styles.field_container}>
-              <div className={styles.title}>Address</div>
+              <div className={styles.title}>Address :</div>
               <div className={styles.value}>
-                {!isEmpty(profile.shop_address) && (
-                  <span>
-                    {profile.shop_address.address1},{profile.shop_address.city},{" "}
-                    {profile.shop_address.state},{profile.shop_address.country}{" "}
-                    - {profile.shop_address.postcode}
-                  </span>
-                )}
+                <span>
+                  {profile.area},{profile.block_number}, {profile.house_number},
+                  {profile.street_number}, {profile.avenue} , {profile.landmark}
+                  - {profile.city}
+                </span>
               </div>
             </DivColumn>
           </DivColumn>

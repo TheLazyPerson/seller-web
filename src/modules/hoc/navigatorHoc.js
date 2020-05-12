@@ -42,6 +42,9 @@ const navigatorHoc = WrappedComponent => {
         case "add-product":
           return navigationFunction("/product/add");
 
+        case "edit-product":
+          return navigationFunction(`/product/edit/${data.productId}`);
+
         case "product-details":
           return navigationFunction(`/product/details/${data.productId}`);
 
@@ -68,8 +71,26 @@ const navigatorHoc = WrappedComponent => {
         case "select-payment":
           return navigationFunction("/select-payment");
 
+        case "/marketplace-details":
+          return navigationFunction("/marketplace-details");
+
+        case "/bank-details":
+          return navigationFunction("/bank-details");
+
+        case "/location-details":
+          return navigationFunction("/location-details");
+
         case "signin":
           return navigationFunction("/signin");
+
+        case "reset-password":
+          return navigationFunction("/reset-password?token={data}");
+
+        case "reset-password-sucess":
+          return navigationFunction("/reset-password-sucess");
+
+        case "forgot-password":
+          return navigationFunction("/forgot-password");
 
         case "signup":
           return navigationFunction("/signup");
@@ -129,6 +150,9 @@ const navigatorHoc = WrappedComponent => {
 
         case "edit-marketplace-profile":
           return navigationFunction("/marketplace/edit-marketplace-profile");
+
+        case "edit-bank-details":
+          return navigationFunction("/profile/details/edit-bank-details");
 
         default:
           return navigationFunction("/");

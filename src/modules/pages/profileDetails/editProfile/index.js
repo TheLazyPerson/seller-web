@@ -48,12 +48,13 @@ class EditProfile extends Component {
       first_name: form.firstName,
       last_name: form.lastName,
       gender: form.gender,
-      phone: form.phone,
+      phone: form.mobileNumber,
       email: form.email,
-      birthday: form.birthday
+      birthday: form.birthday,
+      civil_id: form.civilId
     }).then(({ payload }) => {
       if (payload.code === 200 || payload.code === 201) {
-        navigateTo("profile");
+        navigateTo("profile-details");
         showSuccessFlashMessage("Profile Updated");
       }
     });
@@ -73,10 +74,8 @@ class EditProfile extends Component {
     const validators = {
       firstName: nameValidator(values.firstName),
       lastName: nameValidator(values.lastName),
-      gender: isEmptyValidator(values.gender),
-      mobileNumber: isPhoneNumber(values.mobileNumber),
       email: emailValidator(values.email),
-      birthday: isEmptyValidator(values.birthday)
+      civilId: isEmptyValidator(values.civilId)
     };
 
     Object.keys(validators).forEach(key => {
@@ -128,7 +127,10 @@ class EditProfile extends Component {
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <NavHeader title="Profile details" onBackClick={this.onBackPress} />
+        <NavHeader
+          title="Edit Profile details"
+          onBackClick={this.onBackPress}
+        />
         <Form
           onSubmit={this.onSubmit}
           validate={this.validate}
@@ -138,6 +140,7 @@ class EditProfile extends Component {
             gender: userDetails.gender ? userDetails.gender : "",
             mobileNumber: userDetails.phone ? userDetails.phone : "",
             email: userDetails.email ? userDetails.email : "",
+            civilId: userDetails.civil_id ? userDetails.civil_id : "",
             birthday: userDetails.birthday ? userDetails.birthday : ""
           }}
           render={({
@@ -208,6 +211,17 @@ class EditProfile extends Component {
                     meta={meta}
                     {...input}
                     placeholder="Email Address"
+                    className={styles.input_text}
+                  />
+                )}
+              </Field>
+
+              <Field name="civilId">
+                {({ input, meta }) => (
+                  <InputTextComponent
+                    meta={meta}
+                    {...input}
+                    placeholder="Civil Id"
                     className={styles.input_text}
                   />
                 )}

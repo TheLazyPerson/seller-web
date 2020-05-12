@@ -17,6 +17,7 @@ import Settings from "./pages/settings";
 import HelpCenter from "./pages/helpCenter";
 import ChangePassword from "./pages/profileDetails/changePassword";
 import EditProfile from "./pages/profileDetails/editProfile";
+import EditBankDetails from "./pages/profileDetails/editBankDetails";
 import EditMarketplaceProfile from "./pages/marketPlace/editMarketplaceProfile";
 import ProfileAddress from "./pages/address";
 import AddAddress from "./pages/address/addAddress";
@@ -30,11 +31,19 @@ import SalesPage from "./pages/salesPage";
 import SubscriptionPage from "./pages/subscriptionPage";
 import YourExhibitionListingPage from "./pages/yourExhibitionListingPage";
 import AddProduct from "./pages/productsPage/addProduct";
+import EditProduct from "./pages/productsPage/editProduct";
 import OrderDetailsPage from "./pages/orderDetailsPage";
 import TransactionDetailsPage from "./pages/salesPage/transactionDetailPage";
 import ExhibitionSubscriptionOverviewPage from "./pages/exhibitionSuscriptionOverviewPage";
 import ProductDetailsPage from "./pages/productDetailsPage";
+import ForgotPassword from "./pages/forgetPassword";
+import ResetPassword from "./pages/resetPassword";
+import ResetPasswordSuccess from "./pages/resetPassword/resetPasswordSucess";
 import { connect } from "react-redux";
+import MarketplaceDetail from "./pages/marketplaceDetails";
+import BankDetails from "./pages/bankDetailsPage";
+import LocationDetails from "./pages/locationDetailsPage";
+import resetPassword from "./pages/resetPassword";
 
 const App = ({ isUserSignedIn }) => {
   return (
@@ -56,6 +65,43 @@ const App = ({ isUserSignedIn }) => {
         exact
         path="/signup"
         component={SignUpPage}
+        validator={() => !isUserSignedIn}
+      />
+      <ProtectedRoute
+        exact
+        path="/marketplace-details"
+        component={MarketplaceDetail}
+        validator={() => !isUserSignedIn}
+      />
+      <ProtectedRoute
+        exact
+        path="/bank-details"
+        component={BankDetails}
+        validator={() => !isUserSignedIn}
+      />
+      <ProtectedRoute
+        exact
+        path="/location-details"
+        component={LocationDetails}
+        validator={() => !isUserSignedIn}
+      />
+      <ProtectedRoute
+        exact
+        path="/reset-password/:token?"
+        component={resetPassword}
+        validator={() => !isUserSignedIn}
+      />
+
+      <ProtectedRoute
+        exact
+        path="/reset-password-sucess"
+        component={ResetPasswordSuccess}
+        validator={() => !isUserSignedIn}
+      />
+      <ProtectedRoute
+        exact
+        path="/forgot-password"
+        component={ForgotPassword}
         validator={() => !isUserSignedIn}
       />
       <ProtectedRoute
@@ -103,7 +149,6 @@ const App = ({ isUserSignedIn }) => {
         component={ProductsPage}
         validator={() => isUserSignedIn}
       />
-
       <ProtectedRoute
         exact
         path="/product/add"
@@ -118,7 +163,13 @@ const App = ({ isUserSignedIn }) => {
         redirectTo="signin"
         validator={() => isUserSignedIn}
       />
-
+      <ProtectedRoute
+        exact
+        path="/product/edit/:productId?"
+        component={EditProduct}
+        redirectTo="signin"
+        validator={() => isUserSignedIn}
+      />
       <ProtectedRoute
         exact
         path="/sales"
@@ -139,7 +190,6 @@ const App = ({ isUserSignedIn }) => {
         component={MarketPlace}
         validator={() => isUserSignedIn}
       />
-
       <ProtectedRoute
         exact
         path="/marketplace/edit-marketplace-profile"
@@ -147,7 +197,6 @@ const App = ({ isUserSignedIn }) => {
         redirectTo="signin"
         validator={() => isUserSignedIn}
       />
-
       <ProtectedRoute
         exact
         path="/profile/details"
@@ -169,7 +218,13 @@ const App = ({ isUserSignedIn }) => {
         redirectTo="signin"
         validator={() => isUserSignedIn}
       />
-
+      <ProtectedRoute
+        exact
+        path="/profile/details/edit-bank-details"
+        component={EditBankDetails}
+        redirectTo="signin"
+        validator={() => isUserSignedIn}
+      />
       <ProtectedRoute
         exact
         path="/profile/address"
@@ -191,7 +246,6 @@ const App = ({ isUserSignedIn }) => {
         redirectTo="signin"
         validator={() => isUserSignedIn}
       />
-
       <ProtectedRoute
         exact
         path="/subscription"
@@ -199,7 +253,6 @@ const App = ({ isUserSignedIn }) => {
         redirectTo="signin"
         validator={() => isUserSignedIn}
       />
-
       <ProtectedRoute
         exact
         path="/profile/helpcenter"
@@ -219,18 +272,16 @@ const App = ({ isUserSignedIn }) => {
         path="/terms-and-condition"
         component={TermsAndConditionPage}
       />
-
       <Route exact path="/privacy-policy" component={PrivacyPolicyPage} />
       <Route exact path="/faq" component={FAQPage} />
-
       <Route component={PageNotFound} />
     </Switch>
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    isUserSignedIn: state.signInReducer.isUserSignedIn
+    isUserSignedIn: state.signInReducer.isUserSignedIn,
   };
 };
 

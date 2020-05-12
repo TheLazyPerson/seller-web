@@ -10,6 +10,7 @@ import map from "lodash/map";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
 import { getProfileDetailsAction } from "Core/modules/profiledetails/profileDetailsActions";
+import { getBankDetailsAction } from "Core/modules/bankDetails/bankDetailsActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -27,11 +28,18 @@ class ProfileDetails extends Component {
     navigateTo("edit-profile");
   };
 
+  navigateToEditBankDetails = () => {
+    const { navigateTo } = this.props;
+    navigateTo("edit-bank-details");
+  };
+
   render() {
     const {
       profileDetailsReducer: { userDetails },
       getProfileDetailsAction,
-      isRTL
+      isRTL,
+      bankDetailsReducer: { bankDetails },
+      getBankDetailsAction
     } = this.props;
 
     return (
@@ -39,11 +47,11 @@ class ProfileDetails extends Component {
         <DivColumn
           className={`${styles.details_container} ${isRTL ? styles.rtl : ""}`}
         >
+          <DivColumn fillParent>
+            <MarketPlace></MarketPlace>
+          </DivColumn>
           <InitialPageLoader initialPageApi={getProfileDetailsAction}>
             <DivColumn fillParent>
-              <DivColumn fillParent>
-                <MarketPlace></MarketPlace>
-              </DivColumn>
               <NavHeader title="profile details">
                 <DivRow className={styles.header_button_container}>
                   <SecondaryCapsuleButton
@@ -58,7 +66,7 @@ class ProfileDetails extends Component {
                 </DivRow>
               </NavHeader>
               <DivColumn className={styles.field_container}>
-                <div className={styles.title}>First Name</div>
+                <div className={styles.title}>First Name :</div>
                 <div className={styles.value}>
                   {userDetails.first_name
                     ? userDetails.first_name
@@ -66,7 +74,7 @@ class ProfileDetails extends Component {
                 </div>
               </DivColumn>
               <DivColumn className={styles.field_container}>
-                <div className={styles.title}>Last Name</div>
+                <div className={styles.title}>Last Name :</div>
                 <div className={styles.value}>
                   {userDetails.last_name
                     ? userDetails.last_name
@@ -74,31 +82,70 @@ class ProfileDetails extends Component {
                 </div>
               </DivColumn>
               <DivColumn className={styles.field_container}>
-                <div className={styles.title}>Email</div>
+                <div className={styles.title}>Email :</div>
                 <div className={styles.value}>
                   {userDetails.email ? userDetails.email : "Not Available"}
                 </div>
               </DivColumn>
               <DivColumn className={styles.field_container}>
-                <div className={styles.title}>Phone Number</div>
+                <div className={styles.title}>Civil ID :</div>
+                <div className={styles.value}>
+                  {userDetails.civil_id
+                    ? userDetails.civil_id
+                    : "Not Available"}
+                </div>
+              </DivColumn>
+              <DivColumn className={styles.field_container}>
+                <div className={styles.title}>Phone Number :</div>
                 <div className={styles.value}>
                   {userDetails.phone ? userDetails.phone : "Not Available"}
                 </div>
               </DivColumn>
               <DivColumn className={styles.field_container}>
-                <div className={styles.title}>Gender</div>
+                <div className={styles.title}>Gender :</div>
                 <div className={styles.value}>
                   {userDetails.gender ? userDetails.gender : "Not Available"}
                 </div>
               </DivColumn>
               <DivColumn className={styles.field_container}>
-                <div className={styles.title}>Birthday</div>
+                <div className={styles.title}>Birthday :</div>
                 <div className={styles.value}>
                   {userDetails.birthday
                     ? userDetails.birthday
                     : "Not Available"}
                 </div>
               </DivColumn>
+            </DivColumn>
+          </InitialPageLoader>
+          <InitialPageLoader initialPageApi={getBankDetailsAction}>
+            <NavHeader title="bank details">
+              <DivRow className={styles.header_button_container}>
+                <CapsuleButton onClick={this.navigateToEditBankDetails}>
+                  Edit
+                </CapsuleButton>
+              </DivRow>
+            </NavHeader>
+            <DivColumn className={styles.field_container}>
+              <div className={styles.title}>Account Holder :</div>
+              <div className={styles.value}>
+                {bankDetails.account_holder
+                  ? bankDetails.account_holder
+                  : "Not Available"}
+              </div>
+            </DivColumn>
+            <DivColumn className={styles.field_container}>
+              <div className={styles.title}>Bank Name :</div>
+              <div className={styles.value}>
+                {bankDetails.bank_name
+                  ? bankDetails.bank_name
+                  : "Not Available"}
+              </div>
+            </DivColumn>
+            <DivColumn className={styles.field_container}>
+              <div className={styles.title}>IBAN :</div>
+              <div className={styles.value}>
+                {bankDetails.iban ? bankDetails.iban : "Not Available"}
+              </div>
             </DivColumn>
           </InitialPageLoader>
         </DivColumn>
@@ -109,7 +156,8 @@ class ProfileDetails extends Component {
 
 const mapStateToProps = state => {
   return {
-    profileDetailsReducer: state.profileDetailsReducer
+    profileDetailsReducer: state.profileDetailsReducer,
+    bankDetailsReducer: state.bankDetailsReducer
   };
 };
 
@@ -118,7 +166,8 @@ const mapDispathToProps = dispatch => {
     getProfileDetailsAction: bindActionCreators(
       getProfileDetailsAction,
       dispatch
-    )
+    ),
+    getBankDetailsAction: bindActionCreators(getBankDetailsAction, dispatch)
   };
 };
 

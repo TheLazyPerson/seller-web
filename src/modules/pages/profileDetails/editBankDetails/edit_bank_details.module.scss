@@ -1,0 +1,72 @@
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
+
+.form_container {
+  display: flex;
+  flex-direction: column;
+  padding: 22px 0px 0px 33px;
+  max-width: 393px;
+
+  .input_text {
+    margin-bottom: 10px;
+  }
+
+  .form_button_container {
+    margin-top: 13px;
+    justify-content: space-between;
+  }
+}
+
+:global {
+  .input_select_container {
+    margin-bottom: 10px;
+
+    .error_text {
+      color: red;
+    }
+  }
+
+  .react-select-container {
+    .react-select__control {
+      border: none;
+      border-color: rgba(black, 0);
+      background: rgba($color-very-light-blue, 0.4);
+      border-radius: 24px;
+      padding: 8px 28px;
+      align-self: stretch;
+
+      .react-select__value-container {
+        font-size: 18px;
+        color: $primary-text-color;
+      }
+
+      .react-select__value-container::placeholder {
+        color: rgba($primary-text-color, 0.3);
+      }
+    }
+  }
+
+  @include medium {
+    .react-select-container {
+      .react-select__control {
+        padding: 14px 24px;
+
+        .react-select__value-container {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  @include small {
+    .react-select-container {
+      .react-select__control {
+        padding: 12px 20px;
+
+        .react-select__value-container {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
