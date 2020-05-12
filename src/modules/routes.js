@@ -47,7 +47,8 @@ import resetPassword from "./pages/resetPassword";
 import SubscriptionPaymentSuccessPage from "./pages/subscriptionPaymentSuccessPage";
 import SubscriptionPaymentFailurePage from "./pages/subscriptionPaymentFailurePage";
 import orderDetails from "./pages/orderDetailsPage";
-import MainOrdersDetailsPage from "./pages/mainOrdersDetailsPage";
+import MainOrdersDetailsPage from "./pages/mainOrdersShippingPage";
+import OrderShippingInformationPage from "./pages/ordersShippingInfomationPage";
 const App = ({ isUserSignedIn }) => {
   return (
     <Switch>
@@ -81,6 +82,12 @@ const App = ({ isUserSignedIn }) => {
         exact
         path="/orders-details"
         component={MainOrdersDetailsPage}
+        validator={() => !isUserSignedIn}
+      />
+      <ProtectedRoute
+        exact
+        path="/orders-shipping"
+        component={OrderShippingInformationPage}
         validator={() => !isUserSignedIn}
       />
       <Route

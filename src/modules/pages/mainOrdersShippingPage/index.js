@@ -5,7 +5,7 @@ import DivRow from "CommonComponents/divRow";
 import NavHeader from "CommonComponents/navHeader";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import isEmpty from "lodash/isEmpty";
-import styles from "./main_orders.module.scss";
+import styles from "./main_orders_shipping.module.scss";
 import SideNav from "CommonComponents/sideNav";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { logoutAction } from "Core/modules/signin/signinActions";
@@ -18,7 +18,7 @@ import InitialPageLoader from "CommonContainers/initialPageLoader";
 import HorizontalBorder from "CommonComponents/horizontalBorder";
 import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
 
-class MainOrdersDetailsPage extends Component {
+class MainOrdersShippingPage extends Component {
   onBackPress = () => {
     const { pop } = this.props;
     pop();
@@ -118,7 +118,7 @@ class MainOrdersDetailsPage extends Component {
           </DivRow>
         </DivColumn>
 
-        <div className={styles.header}>PRODUCT LIST</div>
+        <div className={styles.header}>PRODUCTS ORDERED</div>
 
         <DataTable
           columns={columns}
@@ -130,19 +130,19 @@ class MainOrdersDetailsPage extends Component {
 
         <DivColumn className={styles.normal_container}>
           <DivRow className={styles.title}>
-            Subtotal:
+            <span>Subtotal:</span>
             <div className={styles.value}>KD 273</div>
           </DivRow>
           <DivRow className={styles.title}>
-            Discount:
+            <span>Discount:</span>
             <div className={styles.value}>KD 30</div>
           </DivRow>
           <DivRow className={styles.title}>
-            Item Discount
+            <span>Item Discount</span>
             <div className={styles.value}>KD 30</div>
           </DivRow>
           <DivRow className={styles.title}>
-            Total:
+            <span>Total:</span>
             <div className={styles.value}>KD 333</div>
           </DivRow>
         </DivColumn>
@@ -200,4 +200,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(MainOrdersDetailsPage));
+)(navigatorHoc(MainOrdersShippingPage));
