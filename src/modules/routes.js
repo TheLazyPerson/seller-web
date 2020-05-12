@@ -44,6 +44,8 @@ import MarketplaceDetail from "./pages/marketplaceDetails";
 import BankDetails from "./pages/bankDetailsPage";
 import LocationDetails from "./pages/locationDetailsPage";
 import resetPassword from "./pages/resetPassword";
+import SubscriptionPaymentSuccessPage from "./pages/subscriptionPaymentSuccessPage";
+import SubscriptionPaymentFailurePage from "./pages/subscriptionPaymentFailurePage";
 
 const App = ({ isUserSignedIn }) => {
   return (
@@ -66,6 +68,17 @@ const App = ({ isUserSignedIn }) => {
         path="/signup"
         component={SignUpPage}
         validator={() => !isUserSignedIn}
+      />
+
+      <Route
+        exact
+        path="/signup/subscription/payment/success"
+        component={SubscriptionPaymentSuccessPage}
+      />
+      <Route
+        exact
+        path="/signup/subscription/payment/failure"
+        component={SubscriptionPaymentFailurePage}
       />
       <ProtectedRoute
         exact
@@ -183,7 +196,7 @@ const App = ({ isUserSignedIn }) => {
         component={TransactionDetailsPage}
         validator={() => isUserSignedIn}
       />
-      <Route
+      <ProtectedRoute
         exact
         path="/marketplace"
         redirectTo="signin"
