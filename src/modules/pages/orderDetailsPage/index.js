@@ -27,54 +27,49 @@ class OrdersDetailsPage extends Component {
     const {
       orderReducer: { order },
       match: { params },
-      getOrderDetailsAction
+      getOrderDetailsAction,
     } = this.props;
     const rowStyle = {
       fontSize: 12,
-      color: "#19202c"
+      color: "#19202c",
     };
     const columns = [
       {
-        name: "SKU",
+        name: "ITEM CODE",
         selector: "sku",
-        style: rowStyle
+        style: rowStyle,
       },
       {
         name: "NAME",
         selector: "name",
-        style: rowStyle
+        style: rowStyle,
       },
       {
         name: "EXHIBITION NAME",
-        selector: "exhibition_name",
+        selector: "exhibition.title",
         grow: 2,
-        style: rowStyle
-      },
-      {
-        name: "STATUS",
-        selector: "status",
-        style: rowStyle
+        style: rowStyle,
       },
       {
         name: "PRICE",
         selector: "price",
-        style: rowStyle
+        style: rowStyle,
       },
       {
         name: "QUANTITY",
         selector: "qty_ordered",
-        style: rowStyle
+        style: rowStyle,
       },
       {
         name: "COMMISSION",
         selector: "commission",
-        style: rowStyle
+        style: rowStyle,
       },
       {
         name: "GRAND TOTAL",
         selector: "formated_base_total",
-        style: rowStyle
-      }
+        style: rowStyle,
+      },
     ];
 
     const customStyles = {
@@ -82,17 +77,17 @@ class OrdersDetailsPage extends Component {
         style: {
           borderTop: "1px solid #ededed",
           borderBottom: "1px solid #ededed",
-          backgroundColor: "#f4f7fa"
-        }
+          backgroundColor: "#f4f7fa",
+        },
       },
       headCells: {
         style: {
           color: "#202124",
           fontSize: 12,
           fontWeight: "bold",
-          color: "#7c858e"
-        }
-      }
+          color: "#7c858e",
+        },
+      },
     };
     const { shipping_address, billing_address } = order;
     return (
@@ -119,7 +114,7 @@ class OrdersDetailsPage extends Component {
               <div className={styles.placed_on}>
                 Placed On: {order.created_at}
               </div>
-              <div className={styles.status}>Delivered</div>
+              <div className={styles.status}>{order.status_label}</div>
             </DivColumn>
 
             <div className={styles.header}>CUSTOMER DETAILS</div>
@@ -194,15 +189,15 @@ class OrdersDetailsPage extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    orderReducer: state.orderReducer
+    orderReducer: state.orderReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
-    getOrderDetailsAction: bindActionCreators(getOrderDetailsAction, dispatch)
+    getOrderDetailsAction: bindActionCreators(getOrderDetailsAction, dispatch),
   };
 };
 
