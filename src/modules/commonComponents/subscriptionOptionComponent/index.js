@@ -17,7 +17,7 @@ class SubscriptionOption extends Component {
     const {
       option,
       isRTL,
-      exhibitionReducer: { selectedSubscriptionOption }
+      exhibitionReducer: { selectedSubscriptionOption },
     } = this.props;
 
     return (
@@ -32,33 +32,36 @@ class SubscriptionOption extends Component {
         onClick={this.selectSubscriptionOption}
       >
         <div className={styles.subscription_option_price}>
-          {option.type == "flat_type" ? "KD" : ""} {option.value}{" "}
-          {option.type == "flat_type" ? "" : "%"}
+          {option.type == "flat_type" || option.type == "free" ? "KD" : ""}{" "}
+          {option.value}{" "}
+          {option.type == "flat_type" || option.type == "free" ? "" : "%"}
         </div>
         <div className={styles.subscription_option_title}>
-          {option.type == "flat_type" ? "Flat Fee" : "Commission"}
+          {option.type == "flat_type" && "Flat Fee"}
+          {option.type == "commission" && "Commission"}
+          {option.type == "free" && "Free"}
         </div>
         <div className={styles.subscription_option_subtitle}>
-          {option.type == "flat_type"
-            ? "Ony have to pay once"
-            : "On each product you sale"}
+          {option.type == "flat_type" && "Ony have to pay once"}
+          {option.type == "commission" && "On each product you sale"}
+          {option.type == "free" && "Free to enter"}
         </div>
       </DivColumn>
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    exhibitionReducer: state.exhibitionReducer
+    exhibitionReducer: state.exhibitionReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     setSelectedSubscriptionOption: bindActionCreators(
       setSelectedSubscriptionOption,
       dispatch
-    )
+    ),
   };
 };
 
