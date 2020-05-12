@@ -43,8 +43,15 @@ class SignUpPage extends Component {
         password_confirmation: form.confirmPassword,
         plan_id: selectedSubscription.id,
       }).then(({ payload }) => {
+        const {
+          data: { payment_information },
+        } = payload;
         if (payload.code == 200 || payload.code == 201) {
-          navigateTo("signin");
+          if (payload.data.is_free == 1) {
+            navigateTo("signin");
+          } else {
+            window.location.href = payment_information.paymentURL;
+          }
           showSuccessFlashMessage("Signed up successfuly");
         }
       });
