@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 
-const navigatorHoc = WrappedComponent => {
+const navigatorHoc = (WrappedComponent) => {
   class navigator extends Component {
     navigateTo = (pageName, data = null) => {
       const { push } = this.props.history;
@@ -39,6 +39,12 @@ const navigatorHoc = WrappedComponent => {
         case "products":
           return navigationFunction("/products");
 
+        case "orders-details":
+          return navigationFunction("/orders-details");
+
+        case "orders-shipping":
+          return navigationFunction("/orders-shipping");
+
         case "add-product":
           return navigationFunction("/product/add");
 
@@ -47,6 +53,9 @@ const navigatorHoc = WrappedComponent => {
 
         case "product-details":
           return navigationFunction(`/product/details/${data.productId}`);
+
+        case "order-details":
+          return navigationFunction(`/profile/orders/details/${data.orderId}`);
 
         case "sales":
           return navigationFunction("/sales");

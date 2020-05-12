@@ -49,15 +49,22 @@ class EditProduct extends Component {
   };
 
   validate = (values) => {
-    const errors = {};
-    const validators = {
-      type: isEmptyValidator(values.type),
-      sku: isEmptyValidator(values.sku),
-      attribute_family_id: isEmptyValidator(values.attributeFamily),
-    };
+    const {
+      productReducer: { prouctForm },
+    } = this.props;
 
-    Object.keys(validators).forEach((key) => {
-      if (!validators[key].result) errors[key] = validators[key].error;
+    const errors = {};
+
+    const reduced = prouctForm.reduce((prev, element) => {
+      element.attributes.forEach((attribute) => {
+        const validatorResponse = isEmptyValidator(values[attribute.slug]);
+        prev[attribute.slug] = validatorResponse;
+      });
+      return prev;
+    }, {});
+
+    Object.keys(reduced).forEach((key) => {
+      if (!reduced[key].result) errors[key] = reduced[key].error;
     });
 
     return errors;
@@ -68,13 +75,16 @@ class EditProduct extends Component {
       createProductAction,
       showSuccessFlashMessage,
       onSubmitComplete,
+      productReducer: { prouctForm },
     } = this.props;
 
-    const formData = {
-      type: form.type,
-      sku: form.sku,
-      attribute_family_id: form.attributeFamily,
-    };
+
+    const formData = prouctForm.reduce((prev, element) => {
+      element.attributes.forEach((attribute) => {
+        prev[attribute.slug] = form[attribute.slug];
+      });
+      return prev;
+    }, {});
 
     createProductAction(formData).then(({ payload }) => {
       if (payload.code === 200 || payload.code === 201) {

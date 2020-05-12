@@ -46,7 +46,9 @@ import LocationDetails from "./pages/locationDetailsPage";
 import resetPassword from "./pages/resetPassword";
 import SubscriptionPaymentSuccessPage from "./pages/subscriptionPaymentSuccessPage";
 import SubscriptionPaymentFailurePage from "./pages/subscriptionPaymentFailurePage";
-
+import orderDetails from "./pages/orderDetailsPage";
+import MainOrdersDetailsPage from "./pages/mainOrdersShippingPage";
+import OrderShippingInformationPage from "./pages/ordersShippingInfomationPage";
 const App = ({ isUserSignedIn }) => {
   return (
     <Switch>
@@ -69,7 +71,25 @@ const App = ({ isUserSignedIn }) => {
         component={SignUpPage}
         validator={() => !isUserSignedIn}
       />
-
+      <ProtectedRoute
+        exact
+        path="/profile/orders/details/:orderId?"
+        component={orderDetails}
+        redirectTo="signin"
+        validator={() => isUserSignedIn}
+      />
+      <ProtectedRoute
+        exact
+        path="/orders-details"
+        component={MainOrdersDetailsPage}
+        validator={() => !isUserSignedIn}
+      />
+      <ProtectedRoute
+        exact
+        path="/orders-shipping"
+        component={OrderShippingInformationPage}
+        validator={() => !isUserSignedIn}
+      />
       <Route
         exact
         path="/signup/subscription/payment/success"
