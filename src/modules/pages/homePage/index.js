@@ -17,7 +17,7 @@ import InitialPageLoader from "CommonContainers/initialPageLoader";
 import isEmpty from "lodash/isEmpty";
 
 class HomePage extends Component {
-  onClickNavItemClick = slug => {
+  onClickNavItemClick = (slug) => {
     const { navigateTo, logoutAction } = this.props;
 
     if (slug === "overview") {
@@ -35,10 +35,13 @@ class HomePage extends Component {
     }
   };
 
-  getListItem = listItem => {
+  getListItem = (listItem) => {
     return (
       <DivColumn verticalCenter horizontalCenter className={styles.box}>
-        <div className={styles.title}>{listItem.value}</div>
+        <div className={styles.title}>
+          {listItem.card_type == "price-card" ? "KD " : ""}
+          {listItem.value}
+        </div>
         <div className={styles.description}>{listItem.title}</div>
       </DivColumn>
     );
@@ -48,7 +51,7 @@ class HomePage extends Component {
     const {
       overviewReducer: { overviewData },
       signInReducer: { userDetails },
-      getOverviewAction
+      getOverviewAction,
     } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
@@ -68,7 +71,7 @@ class HomePage extends Component {
             isEmpty={isEmpty(overviewData)}
           >
             <DivRow className={styles.box_container}>
-              {map(overviewData, overview => {
+              {map(overviewData, (overview) => {
                 return this.getListItem(overview);
               })}
             </DivRow>
@@ -79,17 +82,17 @@ class HomePage extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     overviewReducer: state.overviewReducer,
-    signInReducer: state.signInReducer
+    signInReducer: state.signInReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     logoutAction: bindActionCreators(logoutAction, dispatch),
-    getOverviewAction: bindActionCreators(getOverviewAction, dispatch)
+    getOverviewAction: bindActionCreators(getOverviewAction, dispatch),
   };
 };
 
