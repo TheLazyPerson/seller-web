@@ -21,6 +21,9 @@ class HostExhibition extends Component {
         <DivColumn className={styles.title_group}>
           <div className={styles.title}>{listItem.title}</div>
           <div className={styles.description}>{listItem.description}</div>
+          <div className={styles.contact_number}>
+            CALL US AT: {listItem.contact}
+          </div>
         </DivColumn>
       </DivRow>
     );
