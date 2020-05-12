@@ -9,7 +9,7 @@ import includes from "lodash/includes";
 
 class SideNav extends Component {
   state = {
-    selectedRoute: ""
+    selectedRoute: "",
   };
 
   componentDidMount() {
@@ -20,9 +20,9 @@ class SideNav extends Component {
     this.validateAndSelectRoute(nextProps);
   }
 
-  validateAndSelectRoute = props => {
+  validateAndSelectRoute = (props) => {
     const {
-      location: { pathname }
+      location: { pathname },
     } = props;
     const { selectedRoute } = this.state;
 
@@ -41,6 +41,7 @@ class SideNav extends Component {
       case includes(pathname, "/product/details/")
         ? pathname
         : "/product/details/":
+      case includes(pathname, "/product/edit/") ? pathname : "/product/edit/":
         setRoute = "products";
         break;
       case "/sales":
@@ -88,12 +89,12 @@ class SideNav extends Component {
 
     if (setRoute !== selectedRoute) {
       this.setState({
-        selectedRoute: setRoute
+        selectedRoute: setRoute,
       });
     }
   };
 
-  onClickNavItemClick = slug => {
+  onClickNavItemClick = (slug) => {
     const { navigateTo } = this.props;
     if (slug === "overview") {
       navigateTo("home");
@@ -132,11 +133,11 @@ class SideNav extends Component {
 
     return (
       <DivColumn verticalCenter className={styles.side_nav_container}>
-        {map(profileListItem, listItem => {
+        {map(profileListItem, (listItem) => {
           const { type, name, items: subProfileList } = listItem;
 
           if (type == "no-header") {
-            return map(subProfileList, subProfileListItem => {
+            return map(subProfileList, (subProfileListItem) => {
               const isSelected = selectedRoute === subProfileListItem.slug;
               return this.getListItem(isSelected, subProfileListItem);
             });
@@ -146,7 +147,7 @@ class SideNav extends Component {
             <DivColumn className={styles.list_container}>
               <div className={styles.list_header}>{name}</div>
               <DivColumn className={styles.list_container}>
-                {map(subProfileList, subProfileListItem => {
+                {map(subProfileList, (subProfileListItem) => {
                   const isSelected = selectedRoute === subProfileListItem.slug;
                   return this.getListItem(isSelected, subProfileListItem);
                 })}
