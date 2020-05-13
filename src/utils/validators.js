@@ -56,6 +56,16 @@ export const isEmptyValidator = (value) => {
   return { result: true };
 };
 
+export function isEmptyArrayValidator(value) {
+  if (!value.length === 0)
+    return {
+      result: false,
+      error: "Please fill in these details to continue",
+    };
+
+  return { result: true };
+}
+
 export const isPhoneNumber = (value) => {
   let error = "";
   const numberRegex = /^\d+$/;

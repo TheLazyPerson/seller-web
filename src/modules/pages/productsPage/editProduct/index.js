@@ -14,7 +14,7 @@ import InputTextareaComponent from "CommonComponents/InputTextareaComponent";
 import navigatorHoc from "Hoc/navigatorHoc";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import { uploadImage } from "Core/modules/product/productActions";
-import { isEmptyValidator } from "Utils/validators";
+import { isEmptyValidator, isEmptyArrayValidator } from "Utils/validators";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
@@ -31,12 +31,14 @@ import Select from "react-select";
 class EditProduct extends Component {
   state = {
     productImages: [],
-
     productImagesObj: [],
+    productImagesPayload: [],
+    selectedCategories: [],
   };
 
   onSubmitComplete = () => {
-    this.onBackPress();
+    const { navigateTo } = this.props;
+    navigateTo("products");
   };
 
   onBackPress = () => {
@@ -46,6 +48,12 @@ class EditProduct extends Component {
 
   onClickCancel = () => {
     this.onBackPress();
+  };
+
+  onSelectCategory = (data) => {
+    this.setState({
+      selectedCategories: data,
+    });
   };
 
   validate = (values) => {
@@ -58,7 +66,11 @@ class EditProduct extends Component {
     const reduced = prouctForm.reduce((prev, element) => {
       element.attributes.forEach((attribute) => {
         const { type, slug, name } = attribute;
-        const validatorResponse = isEmptyValidator(values[attribute.slug]);
+        const validatorResponse =
+          type == "file" || type == "tree-checkbox"
+            ? { result: true }
+            : isEmptyValidator(values[attribute.slug]);
+
         prev[attribute.slug] = validatorResponse;
       });
       return prev;
@@ -67,7 +79,6 @@ class EditProduct extends Component {
     Object.keys(reduced).forEach((key) => {
       if (!reduced[key].result) errors[key] = reduced[key].error;
     });
-
     return errors;
   };
 
@@ -83,7 +94,13 @@ class EditProduct extends Component {
     const formData = prouctForm.reduce(
       (prev, element) => {
         element.attributes.forEach((attribute) => {
-          prev[attribute.slug] = form[attribute.slug];
+          if (attribute.slug === "category") {
+            prev[attribute.slug] = this.state.selectedCategories;
+          } else if (attribute.slug === "image") {
+            prev[attribute.slug] = this.state.productImagesObj;
+          } else {
+            prev[attribute.slug] = form[attribute.slug];
+          }
         });
         return prev;
       },
@@ -219,7 +236,7 @@ class EditProduct extends Component {
         </DivColumn>
       );
     } else if (type === "file") {
-      const { productImages } = this.state;
+      const { productImages, productImagesPayload } = this.state;
 
       return (
         <DivColumn className={styles.text_file_container}>
@@ -227,12 +244,21 @@ class EditProduct extends Component {
             {({ input, meta }) => (
               <ImageSelectionComponent
                 files={productImages}
+                uploadedFiles={productImagesPayload}
                 onDrop={(file) => {
                   this.uploadImage(file).then(({ payload }) => {
-                    const { productImages, productImagesObj } = this.state;
+                    const {
+                      productImages,
+                      productImagesObj,
+                      productImagesPayload,
+                    } = this.state;
                     this.setState({
                       productImages: [...productImages, file],
                       productImagesObj: [...productImagesObj, payload.data.id],
+                      productImagesPayload: [
+                        ...productImagesPayload,
+                        payload.data,
+                      ],
                     });
                   });
                 }}
@@ -251,7 +277,10 @@ class EditProduct extends Component {
           <DivColumn className={styles.text_input_container}>
             <Field name={slug}>
               {({ input, meta }) => (
-                <InputCheckboxTreeComponent data={categories} />
+                <InputCheckboxTreeComponent
+                  data={categories.categories}
+                  onSelectCategory={this.onSelectCategory}
+                />
               )}
             </Field>
           </DivColumn>
