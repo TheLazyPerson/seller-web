@@ -46,7 +46,8 @@ class ProductsPage extends Component {
     },
     {
       name: "QUANTITY",
-      selector: "inventory.qty",
+      //inventory.qty
+      selector: "",
       sortable: true,
     },
     {
