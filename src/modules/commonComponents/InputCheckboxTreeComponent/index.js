@@ -25,20 +25,36 @@ class InputCheckboxTreeComponent extends Component {
     expanded: [],
   };
 
-  formatSelectorData = (list) => {
-    return map(list, (item) => ({
-      value: item.id,
-      label: item.name,
-    }));
+  formatSelectorData = (array) => {
+    return array.map(({ id, name, children }) =>
+      Object.assign(
+        { value: id, label: name },
+        children.length > 0 && { children: this.formatSelectorData(children) }
+      )
+    );
   };
+
+  onChecked = (checked) => {
+    this.setState(
+      {
+        checked,
+      },
+      () => {
+        this.props.onSelectCategory(this.state.checked);
+      }
+    );
+  };
+
   render() {
     const { data } = this.props;
+    const nodes = this.formatSelectorData(data);
+
     return (
       <CheckboxTree
-        nodes={this.formatSelectorData(data)}
+        nodes={nodes}
         checked={this.state.checked}
         expanded={this.state.expanded}
-        onCheck={(checked) => this.setState({ checked })}
+        onCheck={(checked) => this.onChecked(checked)}
         onExpand={(expanded) => this.setState({ expanded })}
         showExpandAll={true}
         expandOnClick={true}

@@ -31,8 +31,8 @@ import Select from "react-select";
 class EditProduct extends Component {
   state = {
     productImages: [],
-
     productImagesObj: [],
+    selectedCategories: [],
   };
 
   onSubmitComplete = () => {
@@ -46,6 +46,12 @@ class EditProduct extends Component {
 
   onClickCancel = () => {
     this.onBackPress();
+  };
+
+  onSelectCategory = (data) => {
+    this.setState({
+      selectedCategories: data,
+    });
   };
 
   validate = (values) => {
@@ -83,7 +89,13 @@ class EditProduct extends Component {
     const formData = prouctForm.reduce(
       (prev, element) => {
         element.attributes.forEach((attribute) => {
-          prev[attribute.slug] = form[attribute.slug];
+          if (attribute.slug === "category") {
+            prev[attribute.slug] = this.state.selectedCategories;
+          } else if (attribute.slug === "image") {
+            prev[attribute.slug] = this.state.productImagesObj;
+          } else {
+            prev[attribute.slug] = form[attribute.slug];
+          }
         });
         return prev;
       },
@@ -251,7 +263,10 @@ class EditProduct extends Component {
           <DivColumn className={styles.text_input_container}>
             <Field name={slug}>
               {({ input, meta }) => (
-                <InputCheckboxTreeComponent data={categories} />
+                <InputCheckboxTreeComponent
+                  data={categories.categories}
+                  onSelectCategory={this.onSelectCategory}
+                />
               )}
             </Field>
           </DivColumn>
