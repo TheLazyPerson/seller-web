@@ -16,8 +16,10 @@ import DataTableContainer from "CommonContainers/dataTableContainer";
 import DataTable from "react-data-table-component";
 import {
   getProductDetailsAction,
-  removeProductAction
+  removeProductAction,
+  getProductFormAction,
 } from "Core/modules/product/productActions";
+
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import HorizontalBorder from "CommonComponents/horizontalBorder";
@@ -28,12 +30,19 @@ class ProductDetailsPage extends Component {
     const { pop } = this.props;
     pop();
   };
+  componentDidMount() {
+    const {
+      getProductFormAction,
+      match: { params },
+    } = this.props;
+    getProductFormAction(params.productId);
+  }
 
-  handleRemove = id => {
+  handleRemove = (id) => {
     const {
       removeProductAction,
       showSuccessFlashMessage,
-      navigateTo
+      navigateTo,
     } = this.props;
     removeProductAction(id).then(({ payload }) => {
       if (payload.code === 200 || payload.code === 201) {
@@ -43,78 +52,44 @@ class ProductDetailsPage extends Component {
     });
   };
 
+  getFormItem = (attribute, product) => {
+    const { type, slug, name } = attribute;
+
+    return (
+      <DivRow className={styles.title}>
+        {name}: <div className={styles.value}>{product[slug]}</div>
+      </DivRow>
+    );
+  };
+
   render() {
     const {
-      productReducer: { product },
+      productReducer: { product, prouctForm },
       match: { params },
-      getProductDetailsAction
+      getProductDetailsAction,
     } = this.props;
 
     const rowStyle = {
       fontSize: 12,
-      color: "#19202c"
+      color: "#19202c",
     };
-
-    const columns = [
-      {
-        name: "SKU",
-        selector: "sku",
-        style: rowStyle
-      },
-      {
-        name: "NAME",
-        selector: "name",
-        style: rowStyle
-      },
-      {
-        name: "EXHIBITION NAME",
-        selector: "exhibition_name",
-        grow: 2,
-        style: rowStyle
-      },
-      {
-        name: "STATUS",
-        selector: "status",
-        style: rowStyle
-      },
-      {
-        name: "PRICE",
-        selector: "price",
-        style: rowStyle
-      },
-      {
-        name: "QUANTITY",
-        selector: "qty_ordered",
-        style: rowStyle
-      },
-      {
-        name: "COMMISSION",
-        selector: "commission",
-        style: rowStyle
-      },
-      {
-        name: "GRAND TOTAL",
-        selector: "formated_base_total",
-        style: rowStyle
-      }
-    ];
 
     const customStyles = {
       headRow: {
         style: {
           borderTop: "1px solid #ededed",
           borderBottom: "1px solid #ededed",
-          backgroundColor: "#f4f7fa"
-        }
+          backgroundColor: "#f4f7fa",
+        },
       },
       headCells: {
         style: {
           color: "#202124",
           fontSize: 12,
           fontWeight: "bold",
-          color: "#7c858e"
-        }
-      }
+          color: "#7c858e",
+        },
+      },
     };
 
     return (
@@ -135,7 +110,22 @@ class ProductDetailsPage extends Component {
           initialPageApi={() => getProductDetailsAction(params.productId)}
         >
           <DivColumn fillParent className={styles.product_page_container}>
-            <DivColumn className={styles.order_container}>
+            {map(prouctForm, (attributeGroup) => {
+              const { name, attributes: fieldList } = attributeGroup;
+              return (
+                <DivColumn>
+                  <div className={styles.header}>{name}</div>
+                  <div>
+                    <DivColumn className={styles.normal_container}>
+                      {map(fieldList, (attribute) => {
+                        return this.getFormItem(attribute, product);
+                      })}
+                    </DivColumn>
+                  </div>
+                </DivColumn>
+              );
+            })}
+            {/* <DivColumn className={styles.order_container}>
               <div className={styles.order_id}>
                 Product Name: <b>{product.name}</b>
               </div>
@@ -180,7 +170,7 @@ class ProductDetailsPage extends Component {
             <div className={styles.header}>PRODUCT IMAGES</div>
             <DivRow className={styles.image_container}>
               {!isEmpty(product.images) &&
-                map(product.images, image => {
+                map(product.images, (image) => {
                   return (
                     <DivColumn className={styles.image_contain}>
                       <img src={image.path} className={styles.image} />
@@ -256,7 +246,7 @@ class ProductDetailsPage extends Component {
                   {!isEmpty(product.meta) && product.meta.meta_description}
                 </div>
               </DivColumn>
-            </DivRow>
+            </DivRow> */}
           </DivColumn>
         </InitialPageLoader>
       </SectionedContainer>
@@ -264,23 +254,24 @@ class ProductDetailsPage extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    productReducer: state.productReducer
+    productReducer: state.productReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     getProductDetailsAction: bindActionCreators(
       getProductDetailsAction,
       dispatch
     ),
+    getProductFormAction: bindActionCreators(getProductFormAction, dispatch),
     removeProductAction: bindActionCreators(removeProductAction, dispatch),
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
-    )
+    ),
   };
 };
 
