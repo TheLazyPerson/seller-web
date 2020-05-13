@@ -33,11 +33,26 @@ $checkbox-color: $color-very-light-blue;
     font-size: 14px;
   }
 }
+.image_container {
+  padding: 17px 0px 17px 54px;
+  flex-wrap: wrap;
 
-.container {
+  .image_contain {
+    margin-left: 15px;
+    margin-top: 15px;
+  }
+  .image {
+    object-fit: contain;
+    max-height: 150px;
+  }
+}
+.inner_dropzone_container {
   padding: 40px;
-  background-color: #eaeaea;
 }
-.dropzone {
-  padding: 20px;
+.container {
+  //padding: 40px;
+  //background-color: #eaeaea;
 }
+// .dropzone {
+//   padding: 20px;
+// }
