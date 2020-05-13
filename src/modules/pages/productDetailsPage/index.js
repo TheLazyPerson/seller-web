@@ -52,6 +52,13 @@ class ProductDetailsPage extends Component {
     });
   };
 
+  handleUpdate = (productId) => {
+    const { navigateTo } = this.props;
+    navigateTo("edit-product", {
+      productId,
+    });
+  };
+
   getFormItem = (attribute, product) => {
     const { type, slug, name } = attribute;
 
@@ -103,7 +110,9 @@ class ProductDetailsPage extends Component {
               Delete
             </SecondaryCapsuleButton>
 
-            <CapsuleButton>Edit</CapsuleButton>
+            <CapsuleButton onClick={() => this.handleUpdate(params.productId)}>
+              Edit
+            </CapsuleButton>
           </DivRow>
         </NavHeader>
         <InitialPageLoader
