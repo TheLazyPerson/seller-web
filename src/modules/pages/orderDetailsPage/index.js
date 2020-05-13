@@ -35,7 +35,7 @@ class OrdersDetailsPage extends Component {
     };
     const columns = [
       {
-        name: "SKU",
+        name: "ITEM CODE",
         selector: "sku",
         style: rowStyle,
       },
@@ -46,13 +46,8 @@ class OrdersDetailsPage extends Component {
       },
       {
         name: "EXHIBITION NAME",
-        selector: "exhibition_name",
+        selector: "exhibition.title",
         grow: 2,
-        style: rowStyle,
-      },
-      {
-        name: "STATUS",
-        selector: "status",
         style: rowStyle,
       },
       {
@@ -119,7 +114,7 @@ class OrdersDetailsPage extends Component {
               <div className={styles.placed_on}>
                 Placed On: {order.created_at}
               </div>
-              <div className={styles.status}>Delivered</div>
+              <div className={styles.status}>{order.status_label}</div>
             </DivColumn>
 
             <div className={styles.header}>CUSTOMER DETAILS</div>
