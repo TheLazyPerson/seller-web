@@ -18,7 +18,7 @@ import { isEmptyValidator } from "Utils/validators";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
-import { createProductAction } from "Core/modules/product/productActions";
+import { editProductAction } from "Core/modules/product/productActions";
 import { getProductFormAction } from "Core/modules/product/productActions";
 import ImageSelectionComponent from "CommonComponents/imageSelectionComponent";
 import { getBase64 } from "Utils/generalUtils";
@@ -57,6 +57,7 @@ class EditProduct extends Component {
 
     const reduced = prouctForm.reduce((prev, element) => {
       element.attributes.forEach((attribute) => {
+        const { type, slug, name } = attribute;
         const validatorResponse = isEmptyValidator(values[attribute.slug]);
         prev[attribute.slug] = validatorResponse;
       });
@@ -72,21 +73,24 @@ class EditProduct extends Component {
 
   onSubmit = (form) => {
     const {
-      createProductAction,
+      editProductAction,
       showSuccessFlashMessage,
       onSubmitComplete,
       productReducer: { prouctForm },
+      match: { params },
     } = this.props;
 
+    const formData = prouctForm.reduce(
+      (prev, element) => {
+        element.attributes.forEach((attribute) => {
+          prev[attribute.slug] = form[attribute.slug];
+        });
+        return prev;
+      },
+      { id: params.productId }
+    );
 
-    const formData = prouctForm.reduce((prev, element) => {
-      element.attributes.forEach((attribute) => {
-        prev[attribute.slug] = form[attribute.slug];
-      });
-      return prev;
-    }, {});
-
-    createProductAction(formData).then(({ payload }) => {
+    editProductAction(formData).then(({ payload }) => {
       if (payload.code === 200 || payload.code === 201) {
         this.onSubmitComplete();
         showSuccessFlashMessage("Product Added");
@@ -344,7 +348,7 @@ const mapStateToProps = (state) => {
 
 const mapDispathToProps = (dispatch) => {
   return {
-    createProductAction: bindActionCreators(createProductAction, dispatch),
+    editProductAction: bindActionCreators(editProductAction, dispatch),
     getProductFormAction: bindActionCreators(getProductFormAction, dispatch),
     getCategoryTreeAction: bindActionCreators(getCategoryTreeAction, dispatch),
     uploadImage: bindActionCreators(uploadImage, dispatch),
