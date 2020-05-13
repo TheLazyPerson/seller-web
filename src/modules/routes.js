@@ -46,7 +46,6 @@ import LocationDetails from "./pages/locationDetailsPage";
 import resetPassword from "./pages/resetPassword";
 import SubscriptionPaymentSuccessPage from "./pages/subscriptionPaymentSuccessPage";
 import SubscriptionPaymentFailurePage from "./pages/subscriptionPaymentFailurePage";
-import orderDetails from "./pages/orderDetailsPage";
 import MainOrdersDetailsPage from "./pages/mainOrdersShippingPage";
 import OrderShippingInformationPage from "./pages/ordersShippingInfomationPage";
 const App = ({ isUserSignedIn }) => {
@@ -74,21 +73,22 @@ const App = ({ isUserSignedIn }) => {
       <ProtectedRoute
         exact
         path="/profile/orders/details/:orderId?"
-        component={orderDetails}
+        component={OrderDetailsPage}
         redirectTo="signin"
         validator={() => isUserSignedIn}
       />
       <ProtectedRoute
         exact
-        path="/orders-details"
+        path="/profile/orders/shipping/information/:orderId?"
         component={MainOrdersDetailsPage}
-        validator={() => !isUserSignedIn}
+        validator={() => isUserSignedIn}
       />
       <ProtectedRoute
         exact
-        path="/orders-shipping"
+        path="/profile/orders/shipping/:orderId?"
         component={OrderShippingInformationPage}
-        validator={() => !isUserSignedIn}
+        redirectTo="signin"
+        validator={() => isUserSignedIn}
       />
       <Route
         exact
