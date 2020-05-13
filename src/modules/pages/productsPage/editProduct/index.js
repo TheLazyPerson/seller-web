@@ -14,7 +14,7 @@ import InputTextareaComponent from "CommonComponents/InputTextareaComponent";
 import navigatorHoc from "Hoc/navigatorHoc";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import { uploadImage } from "Core/modules/product/productActions";
-import { isEmptyValidator } from "Utils/validators";
+import { isEmptyValidator, isEmptyArrayValidator } from "Utils/validators";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
@@ -37,7 +37,8 @@ class EditProduct extends Component {
   };
 
   onSubmitComplete = () => {
-    this.onBackPress();
+    const { navigateTo } = this.props;
+    navigateTo("products");
   };
 
   onBackPress = () => {
@@ -65,7 +66,11 @@ class EditProduct extends Component {
     const reduced = prouctForm.reduce((prev, element) => {
       element.attributes.forEach((attribute) => {
         const { type, slug, name } = attribute;
-        const validatorResponse = isEmptyValidator(values[attribute.slug]);
+        const validatorResponse =
+          type == "file" || type == "tree-checkbox"
+            ? { result: true }
+            : isEmptyValidator(values[attribute.slug]);
+
         prev[attribute.slug] = validatorResponse;
       });
       return prev;
@@ -74,7 +79,6 @@ class EditProduct extends Component {
     Object.keys(reduced).forEach((key) => {
       if (!reduced[key].result) errors[key] = reduced[key].error;
     });
-
     return errors;
   };
 
