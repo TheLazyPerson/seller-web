@@ -15,7 +15,7 @@ import memoize from "memoize-one";
 import DataTableContainer from "CommonContainers/dataTableContainer";
 import {
   getProductListAction,
-  removeProductAction
+  removeProductAction,
 } from "Core/modules/product/productActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
@@ -26,34 +26,35 @@ class ProductsPage extends Component {
     {
       name: "ID",
       selector: "id",
-      sortable: true
+      sortable: true,
     },
     {
       name: "SKU",
       selector: "sku",
-      sortable: true
+      sortable: true,
     },
     {
       name: "NAME",
       selector: "name",
       sortable: true,
-      grow: 2
+      grow: 2,
     },
     {
       name: "PRICE",
       selector: "price",
-      sortable: true
+      sortable: true,
     },
     {
       name: "QUANTITY",
       selector: "inventory.qty",
-      sortable: true
+      sortable: true,
     },
     {
-      cell: value => (
+      cell: (value) => (
         <Button
           variant="contained"
           color="primary"
+          className={styles.custom_button}
           onClick={() => {
             const { navigateTo } = this.props;
             navigateTo("product-details", { productId: value.id });
@@ -62,8 +63,8 @@ class ProductsPage extends Component {
           View
         </Button>
       ),
-      button: true
-    }
+      button: true,
+    },
   ]);
   onClickNewProduct = () => {
     const { navigateTo } = this.props;
@@ -73,7 +74,7 @@ class ProductsPage extends Component {
   render() {
     const {
       productReducer: { productList },
-      getProductListAction
+      getProductListAction,
     } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
@@ -98,20 +99,20 @@ class ProductsPage extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    productReducer: state.productReducer
+    productReducer: state.productReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     getProductListAction: bindActionCreators(getProductListAction, dispatch),
     removeProductAction: bindActionCreators(removeProductAction, dispatch),
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
-    )
+    ),
   };
 };
 
