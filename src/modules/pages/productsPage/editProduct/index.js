@@ -32,6 +32,7 @@ class EditProduct extends Component {
   state = {
     productImages: [],
     productImagesObj: [],
+    productImagesPayload: [],
     selectedCategories: [],
   };
 
@@ -231,7 +232,7 @@ class EditProduct extends Component {
         </DivColumn>
       );
     } else if (type === "file") {
-      const { productImages } = this.state;
+      const { productImages, productImagesPayload } = this.state;
 
       return (
         <DivColumn className={styles.text_file_container}>
@@ -239,12 +240,21 @@ class EditProduct extends Component {
             {({ input, meta }) => (
               <ImageSelectionComponent
                 files={productImages}
+                uploadedFiles={productImagesPayload}
                 onDrop={(file) => {
                   this.uploadImage(file).then(({ payload }) => {
-                    const { productImages, productImagesObj } = this.state;
+                    const {
+                      productImages,
+                      productImagesObj,
+                      productImagesPayload,
+                    } = this.state;
                     this.setState({
                       productImages: [...productImages, file],
                       productImagesObj: [...productImagesObj, payload.data.id],
+                      productImagesPayload: [
+                        ...productImagesPayload,
+                        payload.data,
+                      ],
                     });
                   });
                 }}
