@@ -32,10 +32,11 @@ $input-text-background: $color-very-light-blue;
 }
 
 .error_text {
-  font-size: 16px;
+  font-size: 12px;
   color: red;
+  padding-left: 24px;
+  margin-top: 5px;
 }
-
 @include medium {
   .input_text_area {
     padding: 14px 24px;
