@@ -147,11 +147,13 @@ class OrdersDetailsPage extends Component {
                 <div className={styles.description}>
                   {!isEmpty(order.shipping_address) && (
                     <span>
-                      {order.shipping_address.address1},
-                      {order.shipping_address.city},{" "}
-                      {order.shipping_address.state},
-                      {order.shipping_address.country} -{" "}
-                      {order.shipping_address.postcode}
+                      {order.shipping_address.area},{" "}
+                      {order.shipping_address.block_number},{" "}
+                      {order.shipping_address.house_number},{" "}
+                      {order.shipping_address.street_number},{" "}
+                      {order.shipping_address.avenue} ,{" "}
+                      {order.shipping_address.landmark}-{" "}
+                      {order.shipping_address.city}
                     </span>
                   )}
                 </div>
@@ -162,11 +164,13 @@ class OrdersDetailsPage extends Component {
                 <div className={styles.description}>
                   {!isEmpty(order.billing_address) && (
                     <span>
-                      {order.billing_address.address1},
-                      {order.billing_address.city},{" "}
-                      {order.billing_address.state},
-                      {order.billing_address.country} -{" "}
-                      {order.billing_address.postcode}
+                      {order.shipping_address.area},{" "}
+                      {order.shipping_address.block_number},{" "}
+                      {order.shipping_address.house_number},{" "}
+                      {order.shipping_address.street_number},{" "}
+                      {order.shipping_address.avenue} ,{" "}
+                      {order.shipping_address.landmark}-{" "}
+                      {order.shipping_address.city}
                     </span>
                   )}
                 </div>
