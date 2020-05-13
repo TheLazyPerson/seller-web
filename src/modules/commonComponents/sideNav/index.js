@@ -33,7 +33,9 @@ class SideNav extends Component {
         setRoute = "overview";
         break;
       case "/orders":
-      case includes(pathname, "/order/details/") ? pathname : "/order/details":
+      case includes(pathname, "/orders/details/")
+        ? pathname
+        : "/orders/details":
         setRoute = "orders";
         break;
       case "/products":
