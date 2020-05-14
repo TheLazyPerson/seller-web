@@ -59,9 +59,37 @@ class ProductDetailsPage extends Component {
     });
   };
 
-  getFormItem = (attribute, product) => {
+  getViewItem = (attribute, product) => {
     const { type, slug, name } = attribute;
+    if (type == "file") {
+      return (
+        <DivRow className={styles.image_container}>
+          {map(product.images, (file) => {
+            if (isEmpty(file)) return null;
+            return (
+              <DivColumn className={styles.image_contain}>
+                <img src={file.path} className={styles.image} />
+              </DivColumn>
+            );
+          })}
+        </DivRow>
+      );
+    }
 
+    if (type == "tree-checkbox") {
+      return (
+        <DivRow className={styles.title}>
+          {name}:
+          {map(product.category, (item) => {
+            return (
+              <DivRow className={styles.title}>
+                <div className={styles.value}>{item.name},</div>
+              </DivRow>
+            );
+          })}
+        </DivRow>
+      );
+    }
     return (
       <DivRow className={styles.title}>
         {name}: <div className={styles.value}>{product[slug]}</div>
@@ -127,7 +155,7 @@ class ProductDetailsPage extends Component {
                   <div>
                     <DivColumn className={styles.normal_container}>
                       {map(fieldList, (attribute) => {
-                        return this.getFormItem(attribute, product);
+                        return this.getViewItem(attribute, product);
                       })}
                     </DivColumn>
                   </div>
