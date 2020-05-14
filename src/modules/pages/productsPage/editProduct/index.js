@@ -25,6 +25,7 @@ import { getBase64 } from "Utils/generalUtils";
 import { getCategoryTreeAction } from "Core/modules/category/categoryActions";
 
 import map from "lodash/map";
+import isEmpty from "lodash/isEmpty";
 
 import Select from "react-select";
 
@@ -34,7 +35,17 @@ class EditProduct extends Component {
     productImagesObj: [],
     productImagesPayload: [],
     selectedCategories: [],
+    productIntitalValues: {},
   };
+
+  componentDidMount() {
+    const {
+      editProductAction,
+      match: { params },
+    } = this.props;
+
+    editProductAction({ id: params.productId });
+  }
 
   onSubmitComplete = () => {
     const { navigateTo } = this.props;
@@ -280,6 +291,7 @@ class EditProduct extends Component {
                 <InputCheckboxTreeComponent
                   data={categories.categories}
                   onSelectCategory={this.onSelectCategory}
+                  selectedCategories={this.state.selectedCategories}
                 />
               )}
             </Field>
@@ -287,6 +299,45 @@ class EditProduct extends Component {
         </InitialPageLoader>
       );
     }
+  };
+
+  getInitialValuesFromProduct = (productForm) => {
+    const {
+      productReducer: { editProduct },
+    } = this.props;
+    if (isEmpty(editProduct)) {
+      return {};
+    }
+    const formData = productForm.reduce((prev, element) => {
+      element.attributes.forEach((attribute) => {
+        if (attribute.slug === "category") {
+          const categoryPayload = map(
+            editProduct.product[attribute.slug],
+            (category) => {
+              return category.id.toString();
+            }
+          );
+          //TODO: BLOCKER fix the state setting
+          // this.setState({
+          //   selectedCategories: categoryPayload,
+          // });
+
+          this.state.selectedCategories = categoryPayload;
+        } else if (attribute.slug === "image") {
+          //TODO: BLOCKER fix the state setting
+          // this.setState({
+          //   productImagesPayload: editProduct.product[attribute.slug],
+          // });
+          this.state.productImagesPayload = editProduct.product[attribute.slug];
+
+          // this.state.productImagesObj =
+        } else {
+          prev[attribute.slug] = editProduct.product[attribute.slug];
+        }
+      });
+      return prev;
+    }, {});
+    return formData;
   };
 
   render() {
@@ -309,7 +360,7 @@ class EditProduct extends Component {
       basicReducer: { basicData, attributeFamilies },
       getProductFormAction,
     } = this.props;
-
+    console.log("ON RENDER", prouctForm);
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.page_container}>
@@ -322,44 +373,51 @@ class EditProduct extends Component {
           <InitialPageLoader
             initialPageApi={() => getProductFormAction(params.productId)}
           >
-            <Form
-              onSubmit={this.onSubmit}
-              validate={this.validate}
-              render={({
-                handleSubmit,
-                form,
-                submitting,
-                pristine,
-                values,
-              }) => (
-                <form className={styles.form_container} onSubmit={handleSubmit}>
-                  <DivColumn
-                    className={styles.text_input_container}
-                  ></DivColumn>
-                  {map(prouctForm, (attributeGroup) => {
-                    const { name, attributes: fieldList } = attributeGroup;
-                    return (
-                      <DivColumn>
-                        <div className={styles.header}>{name}</div>
-                        <div>
-                          {map(fieldList, (attribute) => {
-                            return this.getFormItem(attribute);
-                          })}
-                        </div>
-                      </DivColumn>
-                    );
-                  })}
-                  <DivRow className={styles.form_button_container}>
-                    <SecondaryCapsuleButton onClick={onClickCancel}>
-                      Cancel
-                    </SecondaryCapsuleButton>
-                    <CapsuleButton type="submit" disabled={submitting}>
-                      Save Details
-                    </CapsuleButton>
-                  </DivRow>
-                </form>
-              )}
-            />
+            {!isEmpty(prouctForm) && (
+              <Form
+                onSubmit={this.onSubmit}
+                validate={this.validate}
+                initialValues={this.getInitialValuesFromProduct(prouctForm)}
+                render={({
+                  handleSubmit,
+                  form,
+                  submitting,
+                  pristine,
+                  values,
+                }) => (
+                  <form
+                    className={styles.form_container}
+                    onSubmit={handleSubmit}
+                  >
+                    <DivColumn
+                      className={styles.text_input_container}
+                    ></DivColumn>
+                    {map(prouctForm, (attributeGroup) => {
+                      const { name, attributes: fieldList } = attributeGroup;
+                      return (
+                        <DivColumn>
+                          <div className={styles.header}>{name}</div>
+                          <div>
+                            {map(fieldList, (attribute) => {
+                              return this.getFormItem(attribute);
+                            })}
+                          </div>
+                        </DivColumn>
+                      );
+                    })}
+                    <DivRow className={styles.form_button_container}>
+                      <SecondaryCapsuleButton onClick={onClickCancel}>
+                        Cancel
+                      </SecondaryCapsuleButton>
+                      <CapsuleButton type="submit" disabled={submitting}>
+                        Save Details
+                      </CapsuleButton>
+                    </DivRow>
+                  </form>
+                )}
+              />
+            )}
+            ;
           </InitialPageLoader>
         </DivColumn>
       </SectionedContainer>
