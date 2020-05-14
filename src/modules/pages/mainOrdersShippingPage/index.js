@@ -125,6 +125,7 @@ class MainOrdersShippingPage extends Component {
           customStyles={customStyles}
           data=""
           style={{ minHeight: 200 }}
+          noHeader={true}
         />
         <div className={styles.header}>PRICING INFORMATION</div>
 

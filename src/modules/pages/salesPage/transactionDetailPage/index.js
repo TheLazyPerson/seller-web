@@ -25,7 +25,7 @@ class TransactionDetailsPage extends Component {
         price: "price",
         quantity: "quantity",
         commission: "commission",
-        grand_total: "grand_total"
+        grand_total: "grand_total",
       },
       {
         sku: "sku",
@@ -35,58 +35,58 @@ class TransactionDetailsPage extends Component {
         price: "price",
         quantity: "quantity",
         commission: "commission",
-        grand_total: "grand_total"
+        grand_total: "grand_total",
       },
       {
         commission: <div>aslkdjalksdj</div>,
-        grand_total: <div>aslkdjaasdaslksdj</div>
-      }
-    ]
+        grand_total: <div>aslkdjaasdaslksdj</div>,
+      },
+    ],
   };
 
   render() {
     const { data } = this.state;
     const rowStyle = {
       fontSize: 12,
-      color: "#19202c"
+      color: "#19202c",
     };
     const columns = [
       {
         name: "SKU",
         selector: "sku",
-        style: rowStyle
+        style: rowStyle,
       },
       {
         name: "NAME",
         selector: "name",
-        style: rowStyle
+        style: rowStyle,
       },
       {
         name: "EXHIBITION NAME",
         selector: "exhibition_name",
         grow: 2,
-        style: rowStyle
+        style: rowStyle,
       },
       {
         name: "PRICE",
         selector: "price",
-        style: rowStyle
+        style: rowStyle,
       },
       {
         name: "QUANTITY",
         selector: "quantity",
-        style: rowStyle
+        style: rowStyle,
       },
       {
         name: "COMMISSION",
         selector: "commission",
-        style: rowStyle
+        style: rowStyle,
       },
       {
         name: "GRAND TOTAL",
         selector: "grand_total",
-        style: rowStyle
-      }
+        style: rowStyle,
+      },
     ];
 
     const customStyles = {
@@ -94,17 +94,17 @@ class TransactionDetailsPage extends Component {
         style: {
           borderTop: "1px solid #ededed",
           borderBottom: "1px solid #ededed",
-          backgroundColor: "#f4f7fa"
-        }
+          backgroundColor: "#f4f7fa",
+        },
       },
       headCells: {
         style: {
           color: "#202124",
           fontSize: 12,
           fontWeight: "bold",
-          color: "#7c858e"
-        }
-      }
+          color: "#7c858e",
+        },
+      },
     };
 
     return (
@@ -144,6 +144,7 @@ class TransactionDetailsPage extends Component {
             customStyles={customStyles}
             data={data}
             style={{ minHeight: 200 }}
+            noHeader={true}
           />
         </DivColumn>
       </SectionedContainer>
@@ -151,9 +152,9 @@ class TransactionDetailsPage extends Component {
   }
 }
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
-    logoutAction: bindActionCreators(logoutAction, dispatch)
+    logoutAction: bindActionCreators(logoutAction, dispatch),
   };
 };
 

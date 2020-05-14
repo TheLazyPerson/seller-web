@@ -139,6 +139,7 @@ class OrdersDetailsPage extends Component {
               customStyles={customStyles}
               data={order.items}
               style={{ minHeight: 200 }}
+              noHeader={true}
             />
             <HorizontalBorder />
             <DivRow className={styles.address_container}>
