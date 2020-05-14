@@ -55,12 +55,14 @@
   }
 }
 .header {
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: 700;
   color: $color-dark;
   padding: 17px 0px 17px 54px;
-
+  margin-bottom: 10px;
   border-top: 1px solid #ededed;
   border-bottom: 1px solid #ededed;
+  text-transform: uppercase;
 }
 
 .normal_container {
