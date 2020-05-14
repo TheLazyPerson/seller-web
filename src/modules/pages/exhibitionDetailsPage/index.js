@@ -20,12 +20,12 @@ import CategoryListItem from "CommonComponents/categoryListItem";
 import {
   getExhibitionDetailAction,
   attachProductsToExhibition,
-  removeProductFromExhibition
+  removeProductFromExhibition,
 } from "Core/modules/exhibition/exhibitionActions";
 
 import {
   getProductListAction,
-  removeProductAction
+  removeProductAction,
 } from "Core/modules/product/productActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import AttachProductModal from "./attachProductModal";
@@ -34,7 +34,7 @@ import isEmpty from "lodash/isEmpty";
 const exhibitionState = {
   UPCOMING: "upcoming",
   UPCOMING_ENROLLED: "subscribed",
-  ENROLLED_LIVE: "live"
+  ENROLLED_LIVE: "live",
 };
 
 const ProductDescription = ({ exhibitionDetail }) => (
@@ -49,10 +49,10 @@ class ExhibitionDetailsPage extends Component {
     const {
       attachProductsToExhibition,
       getProductListAction,
-      exhibitionReducer: { exhibitionDetail }
+      exhibitionReducer: { exhibitionDetail },
     } = this.props;
     attachProductsToExhibition(exhibitionId, {
-      products: [productId]
+      products: [productId],
     }).then(() => {
       getProductListAction(exhibitionId);
       console.log("attachment successful");
@@ -62,17 +62,17 @@ class ExhibitionDetailsPage extends Component {
     const {
       removeProductFromExhibition,
       getProductListAction,
-      exhibitionReducer: { exhibitionDetail }
+      exhibitionReducer: { exhibitionDetail },
     } = this.props;
     removeProductFromExhibition(exhibitionId, {
-      product: productId
+      product: productId,
     }).then(() => {
       getProductListAction(exhibitionId);
       console.log("removal successful");
     });
   };
   state = {
-    showModal: false
+    showModal: false,
   };
 
   onBackPress = () => {
@@ -82,18 +82,18 @@ class ExhibitionDetailsPage extends Component {
 
   onCloseModal = () => {
     this.setState({
-      showModal: false
+      showModal: false,
     });
   };
 
-  onClickSubscribe = exhibitionId => {
+  onClickSubscribe = (exhibitionId) => {
     const { navigateTo } = this.props;
     navigateTo("exhibition-subscribe", { id: exhibitionId });
   };
 
-  handleAttachProduct = exhibitionId => {
+  handleAttachProduct = (exhibitionId) => {
     this.setState({
-      showModal: true
+      showModal: true,
     });
   };
 
@@ -103,7 +103,7 @@ class ExhibitionDetailsPage extends Component {
       productReducer: { productList },
       getProductListAction,
       match: { params },
-      getExhibitionDetailAction
+      getExhibitionDetailAction,
     } = this.props;
     const { showModal } = this.state;
 
@@ -136,7 +136,7 @@ class ExhibitionDetailsPage extends Component {
                 className={styles.exhibition_banner_container}
                 style={{
                   background: `url(${exhibitionDetail.base_image}) center no-repeat`,
-                  backgroundSize: "cover"
+                  backgroundSize: "cover",
                 }}
               >
                 <div className={styles.overlay_gradient}></div>
@@ -168,21 +168,23 @@ class ExhibitionDetailsPage extends Component {
                       <div className={styles.overview}>Overview :</div>
                       {!isEmpty(exhibitionDetail.overview.card) && (
                         <DivRow>
-                          {map(exhibitionDetail.overview.card, card => {
+                          {map(exhibitionDetail.overview.card, (card) => {
                             return (
                               <BoxComponent
                                 containerStyle={{
                                   width: 142,
                                   height: 113,
-                                  marginRight: 10
+                                  marginRight: 10,
                                 }}
                                 titleStyle={{
-                                  fontSize: 20
+                                  fontSize: 20,
                                 }}
                                 descriptionStyle={{
-                                  fontSize: 12
+                                  fontSize: 12,
                                 }}
-                                title={card.value}
+                                title={`${
+                                  card.card_type == "price-card" ? "KD " : ""
+                                } ${card.value}`}
                                 description={card.title}
                               />
                             );
@@ -215,7 +217,7 @@ class ExhibitionDetailsPage extends Component {
                 <Fragment>
                   <NavHeader title="CATEGORIES"></NavHeader>
                   <DivRow fillParent className={styles.category_list_container}>
-                    {map(exhibitionDetail.categories, category => (
+                    {map(exhibitionDetail.categories, (category) => (
                       <CategoryListItem name={category.name} />
                     ))}
                   </DivRow>
@@ -236,7 +238,7 @@ class ExhibitionDetailsPage extends Component {
                     )}
                   </NavHeader>
                   <DivRow fillParent className={styles.product_list_container}>
-                    {map(exhibitionDetail.products, product => (
+                    {map(exhibitionDetail.products, (product) => (
                       <ProductListItem
                         product={product}
                         actionType={
@@ -274,14 +276,14 @@ class ExhibitionDetailsPage extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     exhibitionReducer: state.exhibitionReducer,
-    productReducer: state.productReducer
+    productReducer: state.productReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     getExhibitionDetailAction: bindActionCreators(
       getExhibitionDetailAction,
@@ -296,7 +298,7 @@ const mapDispathToProps = dispatch => {
       removeProductFromExhibition,
       dispatch
     ),
-    getProductListAction: bindActionCreators(getProductListAction, dispatch)
+    getProductListAction: bindActionCreators(getProductListAction, dispatch),
   };
 };
 
