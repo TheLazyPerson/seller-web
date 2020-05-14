@@ -21,7 +21,7 @@ import {
 
 class InputCheckboxTreeComponent extends Component {
   state = {
-    checked: [],
+    checked: this.props.selectedCategories,
     expanded: [],
   };
 
@@ -56,7 +56,6 @@ class InputCheckboxTreeComponent extends Component {
         expanded={this.state.expanded}
         onCheck={(checked) => this.onChecked(checked)}
         onExpand={(expanded) => this.setState({ expanded })}
-        showExpandAll={true}
         expandOnClick={true}
         icons={{
           check: <CheckBoxOutlined classes={styles.color_primary} />,
