@@ -120,6 +120,7 @@ class OrdersPage extends Component {
             clearSelectedRows={toggleCleared}
             onRowClicked={this.handleRowClicked}
             pagination
+            noHeader={true}
             //TODO: Configure later
             // expandableRows
           />

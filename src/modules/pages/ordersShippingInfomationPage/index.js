@@ -129,6 +129,7 @@ class OrderShippingInformationPage extends Component {
           customStyles={customStyles}
           data=""
           style={{ minHeight: 200 }}
+          noHeader={true}
         />
 
         <HorizontalBorder />
