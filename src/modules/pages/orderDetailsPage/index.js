@@ -23,6 +23,13 @@ class OrdersDetailsPage extends Component {
     const { pop } = this.props;
     pop();
   };
+  onCreatePickupRequest = () => {
+    const {
+      navigateTo,
+      match: { params },
+    } = this.props;
+    navigateTo("order-shipping", { orderId: params.orderId });
+  };
   render() {
     const {
       orderReducer: { order },
@@ -90,6 +97,7 @@ class OrdersDetailsPage extends Component {
       },
     };
     const { shipping_address, billing_address } = order;
+
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <NavHeader title="Order Detail" onBackClick={this.onBackPress}>
@@ -100,7 +108,11 @@ class OrdersDetailsPage extends Component {
             <CapsuleButton className={styles.print_invoice_button}>
               Print Invoice
             </CapsuleButton>
-            <CapsuleButton>Ship Order</CapsuleButton>
+            {!isEmpty(order.status) && order.status == "processing" && (
+              <CapsuleButton onClick={() => this.onCreatePickupRequest()}>
+                Create Pickup Request
+              </CapsuleButton>
+            )}
           </DivRow>
         </NavHeader>
         <InitialPageLoader
