@@ -14,16 +14,20 @@ import { bindActionCreators } from "redux";
 import { CookieService } from "Utils/cookieService";
 import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
-import { getPlanListAction } from "Core/modules/subscription/subscriptionActions";
+import {
+  getPlanListAction,
+  getActivePlan,
+} from "Core/modules/subscription/subscriptionActions";
 import Pricing from "../landingPage/Pricing";
-import Subscription from "CommonComponents/subscriptionComponent";
+import ActiveSubscription from "CommonComponents/activeSubscriptionComponent";
 
 class SubscriptionPage extends Component {
   render() {
     const {
       translate,
       subscriptionReducer: { subscriptionPlanList, activeSubscription },
-      getPlanListAction
+      getPlanListAction,
+      getActivePlan,
     } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
@@ -31,8 +35,14 @@ class SubscriptionPage extends Component {
           <NavHeader title="Subscription Details"></NavHeader>
 
           <DivColumn fillParent className={styles.content_container}>
-            <InitialPageLoader initialPageApi={getPlanListAction}>
-              <DivRow className={styles.inner_content_container}>
+            <DivRow className={styles.inner_content_container}>
+              <InitialPageLoader initialPageApi={getActivePlan}>
+                <ActiveSubscription
+                  subscription={activeSubscription}
+                  isSelected={false}
+                />
+              </InitialPageLoader>
+              {/* <InitialPageLoader initialPageApi={getPlanListAction}>
                 {map(subscriptionPlanList, (subscription, index) => {
                   return (
                     <Subscription
@@ -44,8 +54,8 @@ class SubscriptionPage extends Component {
                     />
                   );
                 })}
-              </DivRow>
-            </InitialPageLoader>
+            </InitialPageLoader> */}
+            </DivRow>
           </DivColumn>
         </DivColumn>
       </SectionedContainer>
@@ -53,15 +63,16 @@ class SubscriptionPage extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    subscriptionReducer: state.subscriptionReducer
+    subscriptionReducer: state.subscriptionReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
-    getPlanListAction: bindActionCreators(getPlanListAction, dispatch)
+    getPlanListAction: bindActionCreators(getPlanListAction, dispatch),
+    getActivePlan: bindActionCreators(getActivePlan, dispatch),
   };
 };
 
