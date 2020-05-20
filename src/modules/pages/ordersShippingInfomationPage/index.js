@@ -4,14 +4,11 @@ import DivColumn from "CommonComponents/divColumn";
 import DivRow from "CommonComponents/divRow";
 import NavHeader from "CommonComponents/navHeader";
 import CapsuleButton from "CommonComponents/capsuleButton";
-import isEmpty from "lodash/isEmpty";
 import styles from "./orders_shipping.module.scss";
 import SideNav from "CommonComponents/sideNav";
 import navigatorHoc from "Hoc/navigatorHoc";
-import { logoutAction } from "Core/modules/signin/signinActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import DataTableContainer from "CommonContainers/dataTableContainer";
 import DataTable from "react-data-table-component";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 
@@ -21,12 +18,12 @@ import {
 } from "Core/modules/order/orderActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import HorizontalBorder from "CommonComponents/horizontalBorder";
-import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
 import { Form, Field } from "react-final-form";
 import InputTextComponent from "CommonComponents/InputTextComponent";
 import { isEmptyValidator } from "Utils/validators";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import isEmpty from "lodash/isEmpty";
 
 class OrderShippingInformationPage extends Component {
   state = {
@@ -222,32 +219,45 @@ class OrderShippingInformationPage extends Component {
             <DivColumn className={styles.address_item_container}>
               <div className={styles.title}>SHIPPING ADDRESS</div>
               <div className={styles.description}>
-                <span>
-                  Building 43B 4th Floor, Suite 402 Street Number 3 P.O. Box 593
-                  Kuwait Safat 13006
-                </span>
+                {!isEmpty(order.shipping_address) && (
+                  <span>
+                    {order.shipping_address.area},{" "}
+                    {order.shipping_address.block_number},{" "}
+                    {order.shipping_address.house_number},{" "}
+                    {order.shipping_address.street_number},{" "}
+                    {order.shipping_address.avenue} ,{" "}
+                    {order.shipping_address.landmark}-{" "}
+                    {order.shipping_address.city}
+                  </span>
+                )}
               </div>
             </DivColumn>
 
             <DivColumn className={styles.address_item_container}>
               <div className={styles.title}>BILLING ADDRESS</div>
               <div className={styles.description}>
-                <span>
-                  Building 43B 4th Floor, Suite 402 Street Number 3 P.O. Box 593
-                  Kuwait Safat 13006
-                </span>
+                {!isEmpty(order.billing_address) && (
+                  <span>
+                    {order.shipping_address.area},{" "}
+                    {order.shipping_address.block_number},{" "}
+                    {order.shipping_address.house_number},{" "}
+                    {order.shipping_address.street_number},{" "}
+                    {order.shipping_address.avenue} ,{" "}
+                    {order.shipping_address.landmark}-{" "}
+                    {order.shipping_address.city}
+                  </span>
+                )}
               </div>
             </DivColumn>
 
-            <HorizontalBorder />
             <DivColumn className={styles.address_item_container}>
               <div className={styles.title}>SHIPPING METHOD</div>
-              <div className={styles.description}>Flat Rate - Flat Rate</div>
+              <div className={styles.description}>{order.shipping_title}</div>
             </DivColumn>
 
             <DivColumn className={styles.address_item_container}>
               <div className={styles.title}>PAYMENT METHOD</div>
-              <div className={styles.description}>Cash On Delivery</div>
+              <div className={styles.description}>{order.payment_title}</div>
             </DivColumn>
           </DivRow>
         </InitialPageLoader>

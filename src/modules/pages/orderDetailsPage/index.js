@@ -30,6 +30,15 @@ class OrdersDetailsPage extends Component {
     } = this.props;
     navigateTo("order-shipping", { orderId: params.orderId });
   };
+
+  viewPickupRequest = () => {
+    const {
+      navigateTo,
+      match: { params },
+    } = this.props;
+    navigateTo("order-shipping-details", { orderId: params.orderId });
+  };
+
   render() {
     const {
       orderReducer: { order },
@@ -102,15 +111,20 @@ class OrdersDetailsPage extends Component {
       <SectionedContainer sideBarContainer={<SideNav />}>
         <NavHeader title="Order Detail" onBackClick={this.onBackPress}>
           <DivRow>
-            <SecondaryCapsuleButton className={styles.cancel_button}>
+            {/* <SecondaryCapsuleButton className={styles.cancel_button}>
               Cancel Order
-            </SecondaryCapsuleButton>
+            </SecondaryCapsuleButton> */}
             <CapsuleButton className={styles.print_invoice_button}>
               Print Invoice
             </CapsuleButton>
             {!isEmpty(order.status) && order.status == "processing" && (
               <CapsuleButton onClick={() => this.onCreatePickupRequest()}>
                 Create Pickup Request
+              </CapsuleButton>
+            )}
+            {!isEmpty(order.status) && order.status == "pickup_requested" && (
+              <CapsuleButton onClick={() => this.viewPickupRequest()}>
+                View Pickup Request
               </CapsuleButton>
             )}
           </DivRow>
