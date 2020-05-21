@@ -4,19 +4,23 @@ import DivColumn from "CommonComponents/divColumn";
 import DivRow from "CommonComponents/divRow";
 import NavHeader from "CommonComponents/navHeader";
 import CapsuleButton from "CommonComponents/capsuleButton";
-import isEmpty from "lodash/isEmpty";
 import styles from "./main_orders_shipping.module.scss";
 import SideNav from "CommonComponents/sideNav";
 import navigatorHoc from "Hoc/navigatorHoc";
-import { logoutAction } from "Core/modules/signin/signinActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import DataTableContainer from "CommonContainers/dataTableContainer";
 import DataTable from "react-data-table-component";
+import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
+
 import { getOrderDetailsAction } from "Core/modules/order/orderActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import HorizontalBorder from "CommonComponents/horizontalBorder";
-import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
+import { Form, Field } from "react-final-form";
+import InputTextComponent from "CommonComponents/InputTextComponent";
+import { isEmptyValidator } from "Utils/validators";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import isEmpty from "lodash/isEmpty";
 
 class MainOrdersShippingPage extends Component {
   onBackPress = () => {
@@ -30,7 +34,7 @@ class MainOrdersShippingPage extends Component {
     };
     const columns = [
       {
-        name: "SKU",
+        name: "ITEM CODE",
         selector: "sku",
         style: rowStyle,
       },
@@ -41,18 +45,8 @@ class MainOrdersShippingPage extends Component {
       },
       {
         name: "EXHIBITION NAME",
-        selector: "exhibition_name",
+        selector: "exhibition.title",
         grow: 2,
-        style: rowStyle,
-      },
-      {
-        name: "STATUS",
-        selector: "status",
-        style: rowStyle,
-      },
-      {
-        name: "PRICE",
-        selector: "price",
         style: rowStyle,
       },
       {
@@ -61,13 +55,8 @@ class MainOrdersShippingPage extends Component {
         style: rowStyle,
       },
       {
-        name: "COMMISSION",
-        selector: "commission",
-        style: rowStyle,
-      },
-      {
-        name: "GRAND TOTAL",
-        selector: "formated_base_total",
+        name: "QUANTITY TO SHIP",
+        selector: "qty_ordered",
         style: rowStyle,
       },
     ];
@@ -89,98 +78,111 @@ class MainOrdersShippingPage extends Component {
         },
       },
     };
+    const {
+      orderReducer: { order },
+      match: { params },
+      getOrderDetailsAction,
+    } = this.props;
+
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <NavHeader
-          title="Order Detail"
+          title="Pickup Request Details"
           onBackClick={this.onBackPress}
         ></NavHeader>
-
-        <DivColumn className={styles.order_page_container}>
-          <DivColumn className={styles.order_container}>
-            <div className={styles.order_id}>
-              Order ID: <b>123</b>
-            </div>
-            <div className={styles.placed_on}>Placed On: 16 OCT 2019</div>
-            <div className={styles.status}>Delivered</div>
+        <InitialPageLoader
+          initialPageApi={() => getOrderDetailsAction(params.orderId)}
+        >
+          <DivColumn className={styles.order_page_container}>
+            <DivColumn className={styles.order_container}>
+              <div className={styles.order_id}>
+                Order ID: <b>{order.id}</b>
+              </div>
+              <div className={styles.placed_on}>
+                Placed On: {order.created_at}
+              </div>
+              <div className={styles.status}>{order.status_label}</div>
+            </DivColumn>
           </DivColumn>
-        </DivColumn>
-        <div className={styles.header}>CUSTOMER DETAILS</div>
-
-        <DivColumn className={styles.normal_container}>
-          <DivRow className={styles.title}>
-            Name:
-            <div className={styles.value}>Omar Lastname</div>
-          </DivRow>
-          <DivRow className={styles.title}>
-            Email:
-            <div className={styles.value}>omarlastname@mail.com</div>
-          </DivRow>
-        </DivColumn>
-
-        <div className={styles.header}>PRODUCTS ORDERED</div>
-
-        <DataTable
-          columns={columns}
-          customStyles={customStyles}
-          data=""
-          style={{ minHeight: 200 }}
-          noHeader={true}
-        />
-        <div className={styles.header}>PRICING INFORMATION</div>
-
-        <DivColumn className={styles.normal_container}>
-          <DivRow className={styles.title}>
-            <span>Subtotal:</span>
-            <div className={styles.value}>KD 273</div>
-          </DivRow>
-          <DivRow className={styles.title}>
-            <span>Discount:</span>
-            <div className={styles.value}>KD 30</div>
-          </DivRow>
-          <DivRow className={styles.title}>
-            <span>Item Discount</span>
-            <div className={styles.value}>KD 30</div>
-          </DivRow>
-          <DivRow className={styles.title}>
-            <span>Total:</span>
-            <div className={styles.value}>KD 333</div>
-          </DivRow>
-        </DivColumn>
-
-        <HorizontalBorder />
-        <DivRow className={styles.address_container}>
-          <DivColumn className={styles.address_item_container}>
-            <div className={styles.title}>SHIPPING ADDRESS</div>
-            <div className={styles.description}>
-              <span>
-                Building 43B 4th Floor, Suite 402 Street Number 3 P.O. Box 593
-                Kuwait Safat 13006
-              </span>
-            </div>
+          <div className={styles.header}>PICKUP INFORMATION</div>
+          <DivColumn className={styles.normal_container}>
+            <DivRow className={styles.title}>
+              Requested Pickup On:{" "}
+              <div className={styles.value}>
+                {!isEmpty(order.pickup_request)
+                  ? order.pickup_request.requested_pickup_on
+                  : ""}
+              </div>
+            </DivRow>
           </DivColumn>
 
-          <DivColumn className={styles.address_item_container}>
-            <div className={styles.title}>BILLING ADDRESS</div>
-            <div className={styles.description}>
-              <span>
-                Building 43B 4th Floor, Suite 402 Street Number 3 P.O. Box 593
-                Kuwait Safat 13006
-              </span>
-            </div>
+          <div className={styles.header}>CUSTOMER DETAILS</div>
+          <DivColumn className={styles.normal_container}>
+            <DivRow className={styles.title}>
+              Name:{" "}
+              <div className={styles.value}>
+                {order.customer_first_name} {order.customer_last_name}
+              </div>
+            </DivRow>
+            <DivRow className={styles.title}>
+              Email: <div className={styles.value}>{order.customer_email}</div>
+            </DivRow>
           </DivColumn>
-
+          <div className={styles.header}>PRODUCTS ORDERED</div>
+          <DataTable
+            columns={columns}
+            customStyles={customStyles}
+            data={order.items}
+            style={{ minHeight: 200 }}
+            noHeader={true}
+          />
           <HorizontalBorder />
-          <DivColumn className={styles.address_item_container}>
-            <div className={styles.title}>SHIPPING METHOD</div>
-            <div className={styles.description}>Flat Rate - Flat Rate</div>
-          </DivColumn>
+          <DivRow className={styles.address_container}>
+            <DivColumn className={styles.address_item_container}>
+              <div className={styles.title}>SHIPPING ADDRESS</div>
+              <div className={styles.description}>
+                {!isEmpty(order.shipping_address) && (
+                  <span>
+                    {order.shipping_address.area},{" "}
+                    {order.shipping_address.block_number},{" "}
+                    {order.shipping_address.house_number},{" "}
+                    {order.shipping_address.street_number},{" "}
+                    {order.shipping_address.avenue} ,{" "}
+                    {order.shipping_address.landmark}-{" "}
+                    {order.shipping_address.city}
+                  </span>
+                )}
+              </div>
+            </DivColumn>
 
-          <DivColumn className={styles.address_item_container}>
-            <div className={styles.title}>PAYMENT METHOD</div>
-            <div className={styles.description}>Cash On Delivery</div>
-          </DivColumn>
-        </DivRow>
+            <DivColumn className={styles.address_item_container}>
+              <div className={styles.title}>BILLING ADDRESS</div>
+              <div className={styles.description}>
+                {!isEmpty(order.billing_address) && (
+                  <span>
+                    {order.shipping_address.area},{" "}
+                    {order.shipping_address.block_number},{" "}
+                    {order.shipping_address.house_number},{" "}
+                    {order.shipping_address.street_number},{" "}
+                    {order.shipping_address.avenue} ,{" "}
+                    {order.shipping_address.landmark}-{" "}
+                    {order.shipping_address.city}
+                  </span>
+                )}
+              </div>
+            </DivColumn>
+
+            <DivColumn className={styles.address_item_container}>
+              <div className={styles.title}>SHIPPING METHOD</div>
+              <div className={styles.description}>{order.shipping_title}</div>
+            </DivColumn>
+
+            <DivColumn className={styles.address_item_container}>
+              <div className={styles.title}>PAYMENT METHOD</div>
+              <div className={styles.description}>{order.payment_title}</div>
+            </DivColumn>
+          </DivRow>
+        </InitialPageLoader>
       </SectionedContainer>
     );
   }

@@ -60,6 +60,11 @@ const navigatorHoc = (WrappedComponent) => {
         case "order-shipping":
           return navigationFunction(`/profile/orders/shipping/${data.orderId}`);
 
+        case "order-shipping-details":
+          return navigationFunction(
+            `/orders/shipping/information/${data.orderId}`
+          );
+
         case "sales":
           return navigationFunction("/sales");
 

@@ -13,10 +13,14 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import DataTableContainer from "CommonContainers/dataTableContainer";
 import DataTable from "react-data-table-component";
-import { getOrderDetailsAction } from "Core/modules/order/orderActions";
+import {
+  getOrderDetailsAction,
+  printOrderInvoice,
+} from "Core/modules/order/orderActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import HorizontalBorder from "CommonComponents/horizontalBorder";
 import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
+import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 
 class OrdersDetailsPage extends Component {
   onBackPress = () => {
@@ -30,6 +34,29 @@ class OrdersDetailsPage extends Component {
     } = this.props;
     navigateTo("order-shipping", { orderId: params.orderId });
   };
+
+  viewPickupRequest = () => {
+    const {
+      navigateTo,
+      match: { params },
+    } = this.props;
+    navigateTo("order-shipping-details", { orderId: params.orderId });
+  };
+
+  onClickPrintInvoice = () => {
+    const {
+      printOrderInvoice,
+      navigateTo,
+      match: { params },
+    } = this.props;
+    printOrderInvoice(params.orderId).then(({ payload }) => {
+      if (payload.code === 200 || payload.code === 201) {
+        window.open(payload.data.invoice.url);
+        showSuccessFlashMessage("Request Processed successfuly");
+      }
+    });
+  };
+
   render() {
     const {
       orderReducer: { order },
@@ -102,15 +129,23 @@ class OrdersDetailsPage extends Component {
       <SectionedContainer sideBarContainer={<SideNav />}>
         <NavHeader title="Order Detail" onBackClick={this.onBackPress}>
           <DivRow>
-            <SecondaryCapsuleButton className={styles.cancel_button}>
+            {/* <SecondaryCapsuleButton className={styles.cancel_button}>
               Cancel Order
-            </SecondaryCapsuleButton>
-            <CapsuleButton className={styles.print_invoice_button}>
+            </SecondaryCapsuleButton> */}
+            <CapsuleButton
+              onClick={() => this.onClickPrintInvoice()}
+              className={styles.print_invoice_button}
+            >
               Print Invoice
             </CapsuleButton>
             {!isEmpty(order.status) && order.status == "processing" && (
               <CapsuleButton onClick={() => this.onCreatePickupRequest()}>
                 Create Pickup Request
+              </CapsuleButton>
+            )}
+            {!isEmpty(order.status) && order.status == "pickup_requested" && (
+              <CapsuleButton onClick={() => this.viewPickupRequest()}>
+                View Pickup Request
               </CapsuleButton>
             )}
           </DivRow>
@@ -215,6 +250,11 @@ const mapStateToProps = (state) => {
 const mapDispathToProps = (dispatch) => {
   return {
     getOrderDetailsAction: bindActionCreators(getOrderDetailsAction, dispatch),
+    printOrderInvoice: bindActionCreators(printOrderInvoice, dispatch),
+    showSuccessFlashMessage: bindActionCreators(
+      showSuccessFlashMessage,
+      dispatch
+    ),
   };
 };
 
