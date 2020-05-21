@@ -43,10 +43,10 @@ class SignUpPage extends Component {
         password_confirmation: form.confirmPassword,
         plan_id: selectedSubscription.id,
       }).then(({ payload }) => {
-        const {
-          data: { payment_information },
-        } = payload;
         if (payload.code == 200 || payload.code == 201) {
+          const {
+            data: { payment_information },
+          } = payload;
           if (payload.data.is_free == 1) {
             navigateTo("signin");
           } else {
