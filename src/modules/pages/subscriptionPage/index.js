@@ -20,6 +20,8 @@ import {
 } from "Core/modules/subscription/subscriptionActions";
 import Pricing from "../landingPage/Pricing";
 import ActiveSubscription from "CommonComponents/activeSubscriptionComponent";
+import Subscription from "CommonComponents/subscriptionComponent";
+import HorizontalBorder from "CommonComponents/horizontalBorder";
 
 class SubscriptionPage extends Component {
   render() {
@@ -35,27 +37,39 @@ class SubscriptionPage extends Component {
           <NavHeader title="Subscription Details"></NavHeader>
 
           <DivColumn fillParent className={styles.content_container}>
-            <DivRow className={styles.inner_content_container}>
+            <DivColumn className={styles.inner_content_container}>
               <InitialPageLoader initialPageApi={getActivePlan}>
                 <ActiveSubscription
                   subscription={activeSubscription}
                   isSelected={false}
                 />
               </InitialPageLoader>
-              {/* <InitialPageLoader initialPageApi={getPlanListAction}>
-                {map(subscriptionPlanList, (subscription, index) => {
-                  return (
-                    <Subscription
-                      subscription={subscription}
-                      features={subscription.features}
-                      isSelected={
-                        subscription.id == activeSubscription.id ? true : false
-                      }
-                    />
-                  );
-                })}
-            </InitialPageLoader> */}
-            </DivRow>
+
+              <DivColumn fillParent className={styles.additional_plans}>
+                <DivColumn className={styles.additional_plans_title}>
+                  Add Additional Plans:
+                </DivColumn>
+                <DivColumn className={styles.additional_plans_container}>
+                  <InitialPageLoader initialPageApi={getPlanListAction}>
+                    <DivRow>
+                      {map(subscriptionPlanList, (subscription, index) => {
+                        if (
+                          activeSubscription.id !== subscription.id &&
+                          subscription.price !== 0
+                        ) {
+                          return (
+                            <Subscription
+                              subscription={subscription}
+                              features={subscription.features}
+                            />
+                          );
+                        }
+                      })}
+                    </DivRow>
+                  </InitialPageLoader>
+                </DivColumn>
+              </DivColumn>
+            </DivColumn>
           </DivColumn>
         </DivColumn>
       </SectionedContainer>
