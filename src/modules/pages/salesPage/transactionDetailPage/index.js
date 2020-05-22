@@ -13,6 +13,11 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import DataTableContainer from "CommonContainers/dataTableContainer";
 import DataTable from "react-data-table-component";
+import {
+  getTransactionDetailsAction,
+  printTransactionInvoice,
+} from "Core/modules/transaction/transactionActions";
+import InitialPageLoader from "CommonContainers/initialPageLoader";
 
 class TransactionDetailsPage extends Component {
   state = {
@@ -44,6 +49,10 @@ class TransactionDetailsPage extends Component {
     ],
   };
 
+  onBackPress = () => {
+    const { pop } = this.props;
+    pop();
+  };
   render() {
     const { data } = this.state;
     const rowStyle = {
@@ -63,7 +72,7 @@ class TransactionDetailsPage extends Component {
       },
       {
         name: "EXHIBITION NAME",
-        selector: "exhibition_name",
+        selector: "exhibition.title",
         grow: 2,
         style: rowStyle,
       },
@@ -74,7 +83,7 @@ class TransactionDetailsPage extends Component {
       },
       {
         name: "QUANTITY",
-        selector: "quantity",
+        selector: "qty_ordered",
         style: rowStyle,
       },
       {
@@ -84,7 +93,7 @@ class TransactionDetailsPage extends Component {
       },
       {
         name: "GRAND TOTAL",
-        selector: "grand_total",
+        selector: "formated_base_total",
         style: rowStyle,
       },
     ];
@@ -107,58 +116,86 @@ class TransactionDetailsPage extends Component {
       },
     };
 
+    const {
+      transactionReducer: { transaction },
+      match: { params },
+      getTransactionDetailsAction,
+    } = this.props;
+
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <NavHeader title="Trasaction Detail">
-          <DivRow>
+        <NavHeader title="Trasaction Detail" onBackClick={this.onBackPress}>
+          {/* <DivRow>
             <CapsuleButton>Print Invoice</CapsuleButton>
-          </DivRow>
+          </DivRow> */}
         </NavHeader>
-        <DivColumn fillParent className={styles.order_page_container}>
-          <DivColumn className={styles.order_container}>
-            <div className={styles.order_id}>
-              TRANSACTION ID: <b>123123</b>
-            </div>
-            <div className={styles.placed_on}>Created On: </div>
-            <div className={styles.status}>SUCCESSFUL</div>
+        <InitialPageLoader
+          initialPageApi={() =>
+            getTransactionDetailsAction(params.transactionId)
+          }
+        >
+          <DivColumn fillParent className={styles.order_page_container}>
+            <DivColumn className={styles.order_container}>
+              <div className={styles.order_id}>
+                TRANSACTION ID: <b>{transaction.transaction_id}</b>
+              </div>
+              <div className={styles.placed_on}>
+                Created On: {transaction.created_on}{" "}
+              </div>
+              {/* <div className={styles.status}>SUCCESSFUL</div> */}
+            </DivColumn>
+
+            <div className={styles.header}>PAYMENT DETAILS</div>
+
+            <DivColumn className={styles.normal_container}>
+              <DivRow className={styles.title}>
+                Payment Method:{" "}
+                <div className={styles.value}>{transaction.payment_method}</div>
+              </DivRow>
+              <DivRow className={styles.title}>
+                Total:{" "}
+                <div className={styles.value}>{transaction.payout_amount}</div>
+              </DivRow>
+              <DivRow className={styles.title}>
+                Comment:{" "}
+                <div className={styles.value}>{transaction.comment}</div>
+              </DivRow>
+            </DivColumn>
+
+            <div className={styles.header}>PRODUCTS ORDERED</div>
+
+            {transaction.order && (
+              <DataTable
+                columns={columns}
+                customStyles={customStyles}
+                data={transaction.order.items}
+                style={{ minHeight: 200 }}
+                noHeader={true}
+              />
+            )}
           </DivColumn>
-
-          <div className={styles.header}>PAYMENT DETAILS</div>
-
-          <DivColumn className={styles.normal_container}>
-            <DivRow className={styles.title}>
-              Payment Method: <div className={styles.value}>value</div>
-            </DivRow>
-            <DivRow className={styles.title}>
-              Total: <div className={styles.value}>value</div>
-            </DivRow>
-            <DivRow className={styles.title}>
-              Comment: <div className={styles.value}>value</div>
-            </DivRow>
-          </DivColumn>
-
-          <div className={styles.header}>PRODUCTS ORDERED</div>
-
-          <DataTable
-            columns={columns}
-            customStyles={customStyles}
-            data={data}
-            style={{ minHeight: 200 }}
-            noHeader={true}
-          />
-        </DivColumn>
+        </InitialPageLoader>
       </SectionedContainer>
     );
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    transactionReducer: state.transactionReducer,
+  };
+};
+
 const mapDispathToProps = (dispatch) => {
   return {
-    logoutAction: bindActionCreators(logoutAction, dispatch),
+    getTransactionDetailsAction: bindActionCreators(
+      getTransactionDetailsAction,
+      dispatch
+    ),
   };
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispathToProps
 )(navigatorHoc(TransactionDetailsPage));

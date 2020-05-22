@@ -17,6 +17,7 @@ import bankDetailsReducer from "Core/modules/bankDetails/bankDetailsReducer";
 import resetPasswordReducer from "Core/modules/resetpassword/resetPasswordReducer";
 import settingsReducer from "Core/modules/settings/settingsReducer";
 import categoryReducer from "Core/modules/category/categoryReducer";
+import transactionReducer from "Core/modules/transaction/transactionReducer";
 
 const appReducer = (history) =>
   combineReducers({
@@ -38,6 +39,7 @@ const appReducer = (history) =>
     resetPasswordReducer,
     settingsReducer,
     categoryReducer,
+    transactionReducer,
   });
 
 /* const rootReducer = ( state, action ) => {
