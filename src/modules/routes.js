@@ -48,6 +48,7 @@ import SubscriptionPaymentSuccessPage from "./pages/subscriptionPaymentSuccessPa
 import SubscriptionPaymentFailurePage from "./pages/subscriptionPaymentFailurePage";
 import MainOrdersDetailsPage from "./pages/mainOrdersShippingPage";
 import OrderShippingInformationPage from "./pages/ordersShippingInfomationPage";
+import CustomerOnboard from "./pages/customerOnboard";
 const App = ({ isUserSignedIn }) => {
   return (
     <Switch>
@@ -94,6 +95,11 @@ const App = ({ isUserSignedIn }) => {
         exact
         path="/signup/subscription/payment/success"
         component={SubscriptionPaymentSuccessPage}
+      />
+      <Route
+        exact
+        path="/customer-onboard"
+        component={CustomerOnboard}
       />
       <Route
         exact

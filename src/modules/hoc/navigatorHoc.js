@@ -112,6 +112,9 @@ const navigatorHoc = (WrappedComponent) => {
         case "signup":
           return navigationFunction("/signup");
 
+        case "customer-onboard":
+          return navigationFunction("/customerOnboard");
+
         case "profile":
           return navigationFunction("/profile");
 

@@ -18,7 +18,7 @@ import {
   getPlanListAction,
   getActivePlan,
 } from "Core/modules/subscription/subscriptionActions";
-import Pricing from "../landingPage/Pricing";
+import Pricing from "../Pricing";
 import ActiveSubscription from "CommonComponents/activeSubscriptionComponent";
 import Subscription from "CommonComponents/subscriptionComponent";
 import HorizontalBorder from "CommonComponents/horizontalBorder";

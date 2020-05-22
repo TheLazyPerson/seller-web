@@ -112,7 +112,7 @@ class SignInPage extends Component {
             <span className={styles.new_description_text}>
               {translate("signin_page.new")}&nbsp;
             </span>
-            <a className={styles.hyper_link} href="/signup">
+            <a className={styles.hyper_link} href="/customer-onboard">
               {translate("signin_page.create")}
             </a>
           </div>

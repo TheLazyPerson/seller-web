@@ -20,9 +20,11 @@ import CustomNotification from "CommonComponents/customNotification";
 //   isEmptyValidator
 // } from "Utils/validators";
 import translatorHoc from "Hoc/translatorHoc";
+import CapsuleButton from "CommonComponents/capsuleButton";
 
 class BankDetails extends Component {
-  onSubmit = form => {
+  onSubmit = (form) => {
+    this.props.next();
     // const {
     //   postSignupAction,
     //   navigateTo,
@@ -40,16 +42,16 @@ class BankDetails extends Component {
     //   }
     // });
 
-    store.addNotification({
-      content: CustomNotification, // 👈
-      container: "bottom-right",
-      insert: "top",
-      animationIn: ["animated", "fadeIn"],
-      animationOut: ["animated", "fadeOut"],
-      dismiss: {
-        duration: 3000
-      }
-    });
+    // store.addNotification({
+    //   content: CustomNotification, // 👈
+    //   container: "bottom-right",
+    //   insert: "top",
+    //   animationIn: ["animated", "fadeIn"],
+    //   animationOut: ["animated", "fadeOut"],
+    //   dismiss: {
+    //     duration: 3000
+    //   }
+    // });
   };
 
   // validate = (values) => {
@@ -74,84 +76,88 @@ class BankDetails extends Component {
     const { translate } = this.props;
 
     return (
-      <FullWidthContainer>
-        <DivColumn
-          verticalCenter
-          horizontalCenter
-          className={styles.page_container}
-        >
-          <div className={styles.signin_title_text}>
+      <DivColumn
+        verticalCenter
+        horizontalCenter
+        className={styles.page_container}
+      >
+        {/* <div className={styles.signin_title_text}>
             {translate("bank_detail_page.page_title")}
-          </div>
-          <Form
-            onSubmit={this.onSubmit}
-            // validate={this.validate}
-            render={({ handleSubmit, form, submitting, pristine, values }) => (
-              <form className={styles.form_container} onSubmit={handleSubmit}>
-                <Field name="acount_holder">
-                  {({ input, meta }) => (
-                    <InputTextComponent
-                      meta={meta}
-                      type="text"
-                      {...input}
-                      placeholder={translate("bank_detail_page.acount_holder")}
-                      className={styles.input_text}
-                    />
-                  )}
-                </Field>
+          </div> */}
+        <Form
+          onSubmit={this.onSubmit}
+          // validate={this.validate}
+          render={({ handleSubmit, form, submitting, pristine, values }) => (
+            <form className={styles.form_container} onSubmit={handleSubmit}>
+              <Field name="acount_holder">
+                {({ input, meta }) => (
+                  <InputTextComponent
+                    meta={meta}
+                    type="text"
+                    {...input}
+                    placeholder={translate("bank_detail_page.acount_holder")}
+                    className={styles.input_text}
+                  />
+                )}
+              </Field>
 
-                <Field name="bank_name">
-                  {({ input, meta }) => (
-                    <InputTextComponent
-                      meta={meta}
-                      type="text"
-                      {...input}
-                      placeholder={translate("bank_detail_page.bank_name")}
-                      className={styles.input_text}
-                    />
-                  )}
-                </Field>
+              <Field name="bank_name">
+                {({ input, meta }) => (
+                  <InputTextComponent
+                    meta={meta}
+                    type="text"
+                    {...input}
+                    placeholder={translate("bank_detail_page.bank_name")}
+                    className={styles.input_text}
+                  />
+                )}
+              </Field>
 
-                <Field name="iban">
-                  {({ input, meta }) => (
-                    <InputTextComponent
-                      meta={meta}
-                      type="text"
-                      {...input}
-                      placeholder={translate("bank_detail_page.iban")}
-                      className={styles.input_text}
-                    />
-                  )}
-                </Field>
-                <input
-                  type="submit"
-                  value={translate("bank_detail_page.create")}
-                  className={styles.input_submit}
-                  disabled={submitting}
-                />
-              </form>
-            )}
-          />
-        </DivColumn>
-      </FullWidthContainer>
+              <Field name="iban">
+                {({ input, meta }) => (
+                  <InputTextComponent
+                    meta={meta}
+                    type="text"
+                    {...input}
+                    placeholder={translate("bank_detail_page.iban")}
+                    className={styles.input_text}
+                  />
+                )}
+              </Field>
+              <input
+                type="submit"
+                value={translate("bank_detail_page.create")}
+                className={styles.input_submit}
+                disabled={submitting}
+              />
+            </form>
+          )}
+        />
+        <CapsuleButton
+          className={styles.capsule_button}
+          onClick={() => this.props.prev()}
+        >
+          Back
+        </CapsuleButton>
+      </DivColumn>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     signupReducer: state.signupReducer,
-    signInReducer: state.signInReducer
+    signInReducer: state.signInReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     // postSignupAction: bindActionCreators(postSignupAction, dispatch),
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
-    )
+    ),
   };
 };
 

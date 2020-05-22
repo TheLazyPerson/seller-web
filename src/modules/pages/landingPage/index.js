@@ -12,7 +12,7 @@ import heroImage from "Images/delivering-success.svg";
 import SellerProposition from "./sellerProposition";
 import Benefits from "./benefits";
 import FAQ from "./Faq";
-import Pricing from "./Pricing";
+import Pricing from "../Pricing";
 import HowItWorks from "./HowItWorks";
 import DeliveringOrders from "./DeliveringOrders";
 import DownloadApp from "./DownloadApp";

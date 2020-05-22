@@ -23,7 +23,7 @@ $submit-button-background: $color-gold;
         min-width: unset;
         width: 30px;
       }
-      
+
       .input_text:first-child {
         margin-right: 17px;
       }
@@ -40,7 +40,7 @@ $submit-button-background: $color-gold;
       box-shadow: 0 18px 24px 0 rgba(0, 0, 0, 0.12);
       background-color: var(--gold);
       min-width: 219px;
-      margin: 30px 0px 34px 0px;
+      margin: 30px 0px 10px 0px;
       border: none;
 
       font-size: 18px;
@@ -66,13 +66,13 @@ $submit-button-background: $color-gold;
     text-decoration: underline !important;
     color: $primary-text-color;
     text-transform: uppercase;
-    
+
     opacity: 0.6;
     font-size: 14px;
   }
 
   .create_account_container {
-    margin-top: 15px;
+    margin-top: 5px;
     font-size: 14px;
     color: $primary-text-color;
   }
