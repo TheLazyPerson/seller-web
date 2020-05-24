@@ -36,15 +36,30 @@ class EditProduct extends Component {
     productImagesPayload: [],
     selectedCategories: [],
     productIntitalValues: {},
+    firstTime: true,
   };
 
   componentDidMount() {
     const {
       editProductAction,
+      productReducer: { prouctForm, editProduct },
       match: { params },
     } = this.props;
 
-    editProductAction({ id: params.productId });
+    editProductAction({ id: params.productId }).then(({ payload }) => {
+      const categoryPayload = payload.data.product["category"].map(
+        (category) => {
+          return category.id.toString();
+        }
+      );
+      console.log("CATEGORY_PAYLOAD", categoryPayload);
+      this.setState({
+        selectedCategories: categoryPayload,
+      });
+      this.setState({
+        productImagesPayload: payload.data.product["image"],
+      });
+    });
   }
 
   onSubmitComplete = () => {
@@ -141,6 +156,19 @@ class EditProduct extends Component {
       asset_type: "productimage",
       file_type: file[0].type,
       file: baseImage,
+    });
+  };
+
+  setUpdatedImages = (file, id, data) => {
+    const {
+      productImages,
+      productImagesPayload,
+      productImagesObj,
+    } = this.state;
+    this.setState({
+      productImages: [...productImages, file],
+      productImagesObj: [...productImagesObj, id],
+      productImagesPayload: [...productImagesPayload, data],
     });
   };
 
@@ -258,19 +286,7 @@ class EditProduct extends Component {
                 uploadedFiles={productImagesPayload}
                 onDrop={(file) => {
                   this.uploadImage(file).then(({ payload }) => {
-                    const {
-                      productImages,
-                      productImagesObj,
-                      productImagesPayload,
-                    } = this.state;
-                    this.setState({
-                      productImages: [...productImages, file],
-                      productImagesObj: [...productImagesObj, payload.data.id],
-                      productImagesPayload: [
-                        ...productImagesPayload,
-                        payload.data,
-                      ],
-                    });
+                    this.setUpdatedImages(file, payload.data.id, payload.data);
                   });
                 }}
               />
@@ -310,28 +326,7 @@ class EditProduct extends Component {
     }
     const formData = productForm.reduce((prev, element) => {
       element.attributes.forEach((attribute) => {
-        if (attribute.slug === "category") {
-          const categoryPayload = map(
-            editProduct.product[attribute.slug],
-            (category) => {
-              return category.id.toString();
-            }
-          );
-          //TODO: BLOCKER fix the state setting
-          // this.setState({
-          //   selectedCategories: categoryPayload,
-          // });
-
-          this.state.selectedCategories = categoryPayload;
-        } else if (attribute.slug === "image") {
-          //TODO: BLOCKER fix the state setting
-          // this.setState({
-          //   productImagesPayload: editProduct.product[attribute.slug],
-          // });
-          this.state.productImagesPayload = editProduct.product[attribute.slug];
-
-          // this.state.productImagesObj =
-        } else {
+        if (attribute.slug !== "category" && attribute.slug !== "image") {
           prev[attribute.slug] = editProduct.product[attribute.slug];
         }
       });
@@ -360,7 +355,6 @@ class EditProduct extends Component {
       basicReducer: { basicData, attributeFamilies },
       getProductFormAction,
     } = this.props;
-    console.log("ON RENDER", prouctForm);
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.page_container}>
