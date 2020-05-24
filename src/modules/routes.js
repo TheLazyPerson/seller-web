@@ -79,7 +79,7 @@ const App = ({ isUserSignedIn }) => {
       />
       <ProtectedRoute
         exact
-        path="/profile/orders/shipping/information/:orderId?"
+        path="/orders/shipping/information/:orderId?"
         component={MainOrdersDetailsPage}
         validator={() => isUserSignedIn}
       />

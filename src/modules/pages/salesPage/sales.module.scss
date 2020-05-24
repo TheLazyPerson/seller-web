@@ -1,5 +1,20 @@
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
 .sales_page_container {
   .content_container {
     padding: 40px 40px 0px;
+  }
+
+  .custom_button {
+    background-color: $color-gold;
+    &:active {
+      background-color: $color-gold;
+    }
+    &:hover {
+      background-color: $color-gold;
+    }
+    &:link {
+      background-color: $color-gold;
+    }
   }
 }

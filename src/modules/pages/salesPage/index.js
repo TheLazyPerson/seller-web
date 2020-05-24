@@ -15,51 +15,91 @@ import { CookieService } from "Utils/cookieService";
 import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import memoize from "memoize-one";
 import DataTableContainer from "CommonContainers/dataTableContainer";
+import { getTransactionListAction } from "Core/modules/transaction/transactionActions";
+import InitialPageLoader from "CommonContainers/initialPageLoader";
+import isEmpty from "lodash/isEmpty";
+import Button from "@material-ui/core/Button";
 
-const columns = memoize(() => [
-  {
-    name: "ID",
-    selector: "id",
-    sortable: true
-  },
-  {
-    name: "TRANSACTION ID",
-    selector: "transaction_id",
-    sortable: true
-  },
-  {
-    name: "COMMENT",
-    selector: "comment",
-    sortable: true,
-    grow: 2
-  },
-  {
-    name: "GRAND TOTAL",
-    selector: "grand_total",
-    sortable: true
-  }
-]);
-
-class ProductsPage extends Component {
+class SalesPage extends Component {
+  columns = memoize(() => [
+    {
+      name: "ID",
+      selector: "id",
+      sortable: true,
+    },
+    {
+      name: "TRANSACTION ID",
+      selector: "transaction_id",
+      sortable: true,
+    },
+    {
+      name: "COMMENT",
+      selector: "comment",
+      sortable: true,
+      grow: 2,
+    },
+    {
+      name: "GRAND TOTAL",
+      selector: "order.grand_total",
+      sortable: true,
+    },
+    {
+      cell: (value) => (
+        <Button
+          variant="contained"
+          color="primary"
+          className={styles.custom_button}
+          onClick={() => {
+            const { navigateTo } = this.props;
+            navigateTo("sales-details", { transactionId: value.id });
+          }}
+        >
+          View
+        </Button>
+      ),
+      button: true,
+    },
+  ]);
   render() {
+    const {
+      transactionReducer: { transactionList },
+      getTransactionListAction,
+    } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.sales_page_container}>
-          <NavHeader title="Sales"></NavHeader>
-
-          <DivColumn fillParent className={styles.content_container}>
-            <DataTableContainer title="Transactions" columns={columns()} />
-          </DivColumn>
+          <NavHeader title="Transactions"></NavHeader>
+          <InitialPageLoader initialPageApi={getTransactionListAction}>
+            <DivColumn fillParent className={styles.content_container}>
+              <DataTableContainer
+                data={transactionList}
+                title="Transactions"
+                columns={this.columns()}
+              />
+            </DivColumn>
+          </InitialPageLoader>
         </DivColumn>
       </SectionedContainer>
     );
   }
 }
 
-const mapDispathToProps = dispatch => {
+const mapStateToProps = (state) => {
   return {
-    logoutAction: bindActionCreators(logoutAction, dispatch)
+    transactionReducer: state.transactionReducer,
   };
 };
 
-export default connect(null, mapDispathToProps)(navigatorHoc(ProductsPage));
+const mapDispathToProps = (dispatch) => {
+  return {
+    getTransactionListAction: bindActionCreators(
+      getTransactionListAction,
+      dispatch
+    ),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispathToProps
+)(navigatorHoc(SalesPage));
