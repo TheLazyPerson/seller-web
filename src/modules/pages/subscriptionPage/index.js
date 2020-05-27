@@ -19,6 +19,7 @@ import {
   getActivePlan,
   getSubscriptionListAction,
   buyAdditionalPlanAction,
+  activatePlanAction,
 } from "Core/modules/subscription/subscriptionActions";
 import Pricing from "../landingPage/Pricing";
 import ActiveSubscription from "CommonComponents/activeSubscriptionComponent";
@@ -30,6 +31,7 @@ import DataTable from "react-data-table-component";
 import Button from "@material-ui/core/Button";
 import memoize from "memoize-one";
 import BuyPlanModal from "./buyAddtionalPlanModal";
+import isEmpty from "lodash/isEmpty";
 
 class SubscriptionPage extends Component {
   state = {
@@ -65,19 +67,29 @@ class SubscriptionPage extends Component {
       sortable: true,
     },
     {
-      cell: (value) => (
-        <Button
-          variant="contained"
-          color="primary"
-          className={styles.custom_button}
-          onClick={() => {
-            const { navigateTo } = this.props;
-            // navigateTo("product-details", { productId: value.id });
-          }}
-        >
-          Activate
-        </Button>
-      ),
+      cell: (value) => {
+        console.log("VALUE", value);
+        const {
+          subscriptionReducer: { activeSubscription },
+          activatePlanAction,
+        } = this.props;
+        if (value.plan.id === activeSubscription.plan.id) {
+          return <span> Active</span>;
+        } else {
+          return (
+            <Button
+              variant="contained"
+              color="primary"
+              className={styles.custom_button}
+              onClick={() => {
+                activatePlanAction(value.id);
+              }}
+            >
+              Activate
+            </Button>
+          );
+        }
+      },
       button: true,
     },
   ]);
@@ -148,23 +160,15 @@ class SubscriptionPage extends Component {
                   className={styles.additional_plans_container}
                 >
                   <InitialPageLoader initialPageApi={getSubscriptionListAction}>
-                    <DivRow>
-                      <DataTableContainer
-                        data={sellerSubscriptionList}
-                        title="SubscriptionLost"
-                        columns={this.columns()}
-                      />
-                      {/* {map(sellerSubscriptionList, (subscription, index) => {
-                        if (activeSubscription.id !== subscription.id) {
-                          return (
-                            <SubscribedComponent
-                              subscription={subscription}
-                              features={subscription.features}
-                            />
-                          );
-                        }
-                      })} */}
-                    </DivRow>
+                    {!isEmpty(activeSubscription) && (
+                      <DivRow>
+                        <DataTableContainer
+                          data={sellerSubscriptionList}
+                          title="SubscriptionLost"
+                          columns={this.columns()}
+                        />
+                      </DivRow>
+                    )}
                   </InitialPageLoader>
                 </DivColumn>
               </DivColumn>
@@ -229,6 +233,7 @@ const mapDispathToProps = (dispatch) => {
       buyAdditionalPlanAction,
       dispatch
     ),
+    activatePlanAction: bindActionCreators(activatePlanAction, dispatch),
   };
 };
 

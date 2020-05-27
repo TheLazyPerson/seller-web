@@ -16,18 +16,18 @@
     }
   }
 
-  // .custom_button {
-  //   background-color: $color-gold;
-  //   &:active {
-  //     background-color: $color-gold;
-  //   }
-  //   &:hover {
-  //     background-color: $color-gold;
-  //   }
-  //   &:link {
-  //     background-color: $color-gold;
-  //   }
-  // }
+  .custom_button {
+    background-color: $color-gold;
+    &:active {
+      background-color: $color-gold;
+    }
+    &:hover {
+      background-color: $color-gold;
+    }
+    &:link {
+      background-color: $color-gold;
+    }
+  }
 }
 
 @include small {
