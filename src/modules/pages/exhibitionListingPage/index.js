@@ -13,9 +13,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getExhibitionAction } from "Core/modules/exhibition/exhibitionActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
+import isEmpty from "lodash/isEmpty";
 
 class ExhibitionListingPage extends Component {
-  onClickViewExhibitionDetail = exhibition => {
+  onClickViewExhibitionDetail = (exhibition) => {
     const { navigateTo } = this.props;
     navigateTo("exhibition-details", exhibition);
   };
@@ -24,7 +25,7 @@ class ExhibitionListingPage extends Component {
     navigateTo("your-exhibitions");
   }
 
-  getListItem = listItem => {
+  getListItem = (listItem) => {
     return (
       <DivRow className={styles.item}>
         <img className={styles.image} src={listItem.base_image} />
@@ -65,7 +66,7 @@ class ExhibitionListingPage extends Component {
   render() {
     const {
       exhibitionReducer: { exhibitionList },
-      getExhibitionAction
+      getExhibitionAction,
     } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
@@ -78,8 +79,11 @@ class ExhibitionListingPage extends Component {
             </CapsuleButton>
           </NavHeader>
           <div fillParent className={styles.content_container}>
-            <InitialPageLoader initialPageApi={getExhibitionAction}>
-              {map(exhibitionList, exhibition => {
+            <InitialPageLoader
+              initialPageApi={getExhibitionAction}
+              isEmpty={isEmpty(exhibitionList)}
+            >
+              {map(exhibitionList, (exhibition) => {
                 return this.getListItem(exhibition);
               })}
             </InitialPageLoader>
@@ -90,15 +94,15 @@ class ExhibitionListingPage extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    exhibitionReducer: state.exhibitionReducer
+    exhibitionReducer: state.exhibitionReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
-    getExhibitionAction: bindActionCreators(getExhibitionAction, dispatch)
+    getExhibitionAction: bindActionCreators(getExhibitionAction, dispatch),
   };
 };
 
