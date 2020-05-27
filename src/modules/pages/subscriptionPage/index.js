@@ -134,7 +134,7 @@ class SubscriptionPage extends Component {
             <DivColumn className={styles.inner_content_container}>
               <InitialPageLoader initialPageApi={getActivePlan}>
                 <ActiveSubscription
-                  subscription={activeSubscription}
+                  subscription={activeSubscription.plan}
                   isSelected={false}
                 />
               </InitialPageLoader>
