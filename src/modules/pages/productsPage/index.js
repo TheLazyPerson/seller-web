@@ -35,7 +35,7 @@ class ProductsPage extends Component {
     },
     {
       name: "NAME",
-      selector: "name",
+      selector: "translations.en.name",
       sortable: true,
       grow: 2,
     },
@@ -46,8 +46,7 @@ class ProductsPage extends Component {
     },
     {
       name: "QUANTITY",
-      //inventory.qty
-      selector: "",
+      selector: "inventory.qty",
       sortable: true,
     },
     {
