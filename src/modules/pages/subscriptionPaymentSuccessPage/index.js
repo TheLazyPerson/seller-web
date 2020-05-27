@@ -34,7 +34,7 @@ class SubscriptionPaymentSuccessPage extends Component {
           className={styles.page_container}
         >
           <div className={styles.title}>Payment Successful</div>
-          <div className={styles.description}>Welcome to the family.</div>=
+          <div className={styles.description}>Welcome to the family.</div>
         </DivColumn>
       </FullWidthContainer>
     );
