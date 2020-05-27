@@ -46,6 +46,8 @@ import LocationDetails from "./pages/locationDetailsPage";
 import resetPassword from "./pages/resetPassword";
 import SubscriptionPaymentSuccessPage from "./pages/subscriptionPaymentSuccessPage";
 import SubscriptionPaymentFailurePage from "./pages/subscriptionPaymentFailurePage";
+import ProfileSubscriptionPaymentSuccessPage from "./pages/subscriptionPage/profileSubscriptionPaymentSuccessPage";
+import ProfileSubscriptionPaymentFailurePage from "./pages/subscriptionPage/profileSubscriptionPaymentFailurePage";
 import MainOrdersDetailsPage from "./pages/mainOrdersShippingPage";
 import OrderShippingInformationPage from "./pages/ordersShippingInfomationPage";
 const App = ({ isUserSignedIn }) => {
@@ -99,6 +101,16 @@ const App = ({ isUserSignedIn }) => {
         exact
         path="/signup/subscription/payment/failure"
         component={SubscriptionPaymentFailurePage}
+      />
+      <Route
+        exact
+        path="/profile/subscription/payment/success"
+        component={ProfileSubscriptionPaymentSuccessPage}
+      />
+      <Route
+        exact
+        path="/profile/subscription/payment/failure"
+        component={ProfileSubscriptionPaymentFailurePage}
       />
       <ProtectedRoute
         exact

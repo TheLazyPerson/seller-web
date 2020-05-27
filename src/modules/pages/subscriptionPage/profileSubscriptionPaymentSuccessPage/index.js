@@ -11,13 +11,15 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 
-class SubscriptionPaymentSuccessPage extends Component {
+import SectionedContainer from "CommonContainers/sectionedContainer";
+import SideNav from "CommonComponents/sideNav";
+
+class ProfileSubscriptionPaymentSuccessPage extends Component {
   componentDidMount() {
     const { navigateTo, showSuccessFlashMessage } = this.props;
     this.id = setTimeout(() => {
-      navigateTo("signin");
-      showSuccessFlashMessage("Signed up successfuly");
-    }, 10000);
+      navigateTo("subscription");
+    }, 2000);
   }
 
   componentWillUnmount() {
@@ -27,16 +29,15 @@ class SubscriptionPaymentSuccessPage extends Component {
     const parsed = queryString.parse(this.props.location.search);
 
     return (
-      <FullWidthContainer>
+      <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn
           verticalCenter
           horizontalCenter
           className={styles.page_container}
         >
           <div className={styles.title}>Payment Successful</div>
-          <div className={styles.description}>Welcome to the family.</div>
         </DivColumn>
-      </FullWidthContainer>
+      </SectionedContainer>
     );
   }
 }
@@ -53,4 +54,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   null,
   mapDispathToProps
-)(navigatorHoc(SubscriptionPaymentSuccessPage));
+)(navigatorHoc(ProfileSubscriptionPaymentSuccessPage));
