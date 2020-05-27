@@ -8,11 +8,15 @@ import appIcon from "Icons/app-icon-black.svg";
 //import appIcon from "Icons/logo-image.png";
 import navigatorHoc from "Hoc/navigatorHoc";
 import SearchBar from "CommonContainers/searchBar";
+import { connect } from "react-redux";
 
 class FullwidthHeader extends Component {
   onClickAppIcon = () => {
-    const { navigateTo } = this.props;
-    navigateTo("");
+    const { navigateTo, isUserSignedIn } = this.props;
+    if (!isUserSignedIn) {
+      navigateTo("");
+    }
+    navigateTo("home");
   };
 
   render() {
@@ -41,7 +45,13 @@ class FullwidthHeader extends Component {
 }
 
 FullwidthHeader.defaultProps = {
-  whiteColor: false
+  whiteColor: false,
 };
 
-export default navigatorHoc(FullwidthHeader);
+const mapStateToProps = (state) => {
+  return {
+    isUserSignedIn: state.signInReducer.isUserSignedIn,
+  };
+};
+
+export default connect(mapStateToProps, null)(navigatorHoc(FullwidthHeader));
