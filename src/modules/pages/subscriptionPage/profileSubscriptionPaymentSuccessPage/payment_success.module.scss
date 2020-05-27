@@ -1,0 +1,14 @@
+@import "~Styles/colors.module";
+
+.title {
+  font-family: PlayfairDisplay;
+  font-size: 50px;
+  font-weight: bold;
+  color: $color-dark-grey;
+}
+
+.description {
+  font-family: Lato;
+  font-size: 16px;
+  color: $color-dark-grey;
+}

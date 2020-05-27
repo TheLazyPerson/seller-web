@@ -18,6 +18,7 @@ import {
   getProductDetailsAction,
   removeProductAction,
   getProductFormAction,
+  editProductAction,
 } from "Core/modules/product/productActions";
 
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
@@ -60,11 +61,11 @@ class ProductDetailsPage extends Component {
   };
 
   getViewItem = (attribute, product) => {
-    const { type, slug, name } = attribute;
+    const { type, slug, name, is_translatable } = attribute;
     if (type == "file") {
       return (
         <DivRow className={styles.image_container}>
-          {map(product.images, (file) => {
+          {map(product.image, (file) => {
             if (isEmpty(file)) return null;
             return (
               <DivColumn className={styles.image_contain}>
@@ -90,6 +91,19 @@ class ProductDetailsPage extends Component {
         </DivRow>
       );
     }
+    if (is_translatable === 1) {
+      return (
+        <DivColumn>
+          <DivRow className={styles.title}>
+            {name}: <div className={styles.value}>{product[slug].en}</div>
+          </DivRow>
+          <DivRow className={styles.title}>
+            {name.concat(" - Arabic")}:{" "}
+            <div className={styles.value}>{product[slug].ar}</div>
+          </DivRow>
+        </DivColumn>
+      );
+    }
     return (
       <DivRow className={styles.title}>
         {name}: <div className={styles.value}>{product[slug]}</div>
@@ -99,9 +113,10 @@ class ProductDetailsPage extends Component {
 
   render() {
     const {
-      productReducer: { product, prouctForm },
+      productReducer: { product, prouctForm, editProduct },
       match: { params },
       getProductDetailsAction,
+      editProductAction,
     } = this.props;
 
     const rowStyle = {
@@ -144,24 +159,28 @@ class ProductDetailsPage extends Component {
           </DivRow>
         </NavHeader>
         <InitialPageLoader
-          initialPageApi={() => getProductDetailsAction(params.productId)}
+          initialPageApi={() => editProductAction({ id: params.productId })}
         >
           <DivColumn fillParent className={styles.product_page_container}>
-            {map(prouctForm, (attributeGroup) => {
-              const { name, attributes: fieldList } = attributeGroup;
-              return (
-                <DivColumn>
-                  <div className={styles.header}>{name}</div>
-                  <div>
-                    <DivColumn className={styles.normal_container}>
-                      {map(fieldList, (attribute) => {
-                        return this.getViewItem(attribute, product);
-                      })}
-                    </DivColumn>
-                  </div>
-                </DivColumn>
-              );
-            })}
+            {!isEmpty(editProduct) &&
+              map(prouctForm, (attributeGroup) => {
+                const { name, attributes: fieldList } = attributeGroup;
+                return (
+                  <DivColumn>
+                    <div className={styles.header}>{name}</div>
+                    <div>
+                      <DivColumn className={styles.normal_container}>
+                        {map(fieldList, (attribute) => {
+                          return this.getViewItem(
+                            attribute,
+                            editProduct.product
+                          );
+                        })}
+                      </DivColumn>
+                    </div>
+                  </DivColumn>
+                );
+              })}
             {/* <DivColumn className={styles.order_container}>
               <div className={styles.order_id}>
                 Product Name: <b>{product.name}</b>
@@ -304,6 +323,7 @@ const mapDispathToProps = (dispatch) => {
       dispatch
     ),
     getProductFormAction: bindActionCreators(getProductFormAction, dispatch),
+    editProductAction: bindActionCreators(editProductAction, dispatch),
     removeProductAction: bindActionCreators(removeProductAction, dispatch),
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
