@@ -259,7 +259,6 @@ class ExhibitionDetailsPage extends Component {
 
             <InitialPageLoader
               initialPageApi={() => getProductListAction(exhibitionDetail.id)}
-              isEmpty={isEmpty(productList)}
             >
               <AttachProductModal
                 open={showModal}
