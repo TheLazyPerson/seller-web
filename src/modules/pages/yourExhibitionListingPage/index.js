@@ -14,9 +14,13 @@ import { bindActionCreators } from "redux";
 import { getEnrolledExhibitionAction } from "Core/modules/exhibition/exhibitionActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import isEmpty from "lodash/isEmpty";
+import {
+  formatUnixTimeStampToDateTime,
+  calculateDateDiffFrom,
+} from "Utils/formatHelper";
 
 class YourExhibitionListingPage extends Component {
-  onClickViewExhibitionDetail = exhibition => {
+  onClickViewExhibitionDetail = (exhibition) => {
     const { navigateTo } = this.props;
     navigateTo("exhibition-details", exhibition);
   };
@@ -26,7 +30,7 @@ class YourExhibitionListingPage extends Component {
     pop();
   };
 
-  getListItem = listItem => {
+  getListItem = (listItem) => {
     return (
       <DivRow className={styles.item}>
         <img className={styles.image} src={listItem.base_image} />
@@ -42,12 +46,18 @@ class YourExhibitionListingPage extends Component {
 
           <DivRow className={styles.date_container}>
             <div className={styles.date_title}>Starts At:</div>
-            <div className={styles.date_value}> {listItem.starts_from}</div>
+            <div className={styles.date_value}>
+              {" "}
+              {formatUnixTimeStampToDateTime(listItem.starts_from)}
+            </div>
           </DivRow>
 
           <DivRow className={styles.date_container}>
             <div className={styles.date_title}>Ends On:</div>
-            <div className={styles.date_value}> {listItem.ends_till}</div>
+            <div className={styles.date_value}>
+              {" "}
+              {formatUnixTimeStampToDateTime(listItem.ends_till)}
+            </div>
           </DivRow>
 
           <DivRow className={styles.action_container}>
@@ -67,7 +77,7 @@ class YourExhibitionListingPage extends Component {
   render() {
     const {
       exhibitionReducer: { subscribedExhibitionList },
-      getEnrolledExhibitionAction
+      getEnrolledExhibitionAction,
     } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
@@ -81,7 +91,7 @@ class YourExhibitionListingPage extends Component {
               initialPageApi={getEnrolledExhibitionAction}
               isEmpty={isEmpty(subscribedExhibitionList)}
             >
-              {map(subscribedExhibitionList, exhibition => {
+              {map(subscribedExhibitionList, (exhibition) => {
                 return this.getListItem(exhibition);
               })}
             </InitialPageLoader>
@@ -92,18 +102,18 @@ class YourExhibitionListingPage extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    exhibitionReducer: state.exhibitionReducer
+    exhibitionReducer: state.exhibitionReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     getEnrolledExhibitionAction: bindActionCreators(
       getEnrolledExhibitionAction,
       dispatch
-    )
+    ),
   };
 };
 
