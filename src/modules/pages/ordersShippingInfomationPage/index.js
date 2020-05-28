@@ -24,6 +24,7 @@ import { isEmptyValidator } from "Utils/validators";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import isEmpty from "lodash/isEmpty";
+import { momentToDate } from "Utils/formatHelper";
 
 class OrderShippingInformationPage extends Component {
   state = {
@@ -55,7 +56,6 @@ class OrderShippingInformationPage extends Component {
       match: { params },
       showSuccessFlashMessage,
     } = this.props;
-
     createPickupRequestAction(params.orderId, {
       pickup_date: form.pickupDate,
     }).then(({ payload }) => {
@@ -174,10 +174,11 @@ class OrderShippingInformationPage extends Component {
                 <Field name="pickupDate">
                   {({ input, meta }) => (
                     <DatePicker
+                      dateFormat="dd/MM/yyyy"
                       selected={startDate}
                       onChange={(date) => {
                         this.setState({ startDate: date });
-                        input.onChange(date.valueOf());
+                        input.onChange(date);
                       }}
                       minDate={new Date()}
                       customInput={
