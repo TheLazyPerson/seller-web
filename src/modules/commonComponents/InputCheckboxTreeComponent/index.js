@@ -57,6 +57,7 @@ class InputCheckboxTreeComponent extends Component {
         onCheck={(checked) => this.onChecked(checked)}
         onExpand={(expanded) => this.setState({ expanded })}
         expandOnClick={true}
+        noCascade={true}
         icons={{
           check: <CheckBoxOutlined classes={styles.color_primary} />,
           uncheck: (
