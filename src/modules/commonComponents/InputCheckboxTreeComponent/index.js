@@ -5,6 +5,7 @@ import translatorHoc from "Hoc/translatorHoc";
 import CheckboxTree from "react-checkbox-tree";
 import "react-checkbox-tree/lib/react-checkbox-tree.css";
 import map from "lodash/map";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import {
   CheckBoxOutlineBlankOutlined,
@@ -18,7 +19,7 @@ import {
   ChevronRightOutlined,
   KeyboardArrowDownOutlined,
 } from "@material-ui/icons";
-
+//TODO: replace icons with font awesome icons
 class InputCheckboxTreeComponent extends Component {
   state = {
     checked: this.props.selectedCategories,
@@ -57,6 +58,7 @@ class InputCheckboxTreeComponent extends Component {
         onCheck={(checked) => this.onChecked(checked)}
         onExpand={(expanded) => this.setState({ expanded })}
         expandOnClick={true}
+        noCascade={true}
         icons={{
           check: <CheckBoxOutlined classes={styles.color_primary} />,
           uncheck: (
