@@ -31,6 +31,8 @@ import InitialPageLoader from "CommonContainers/initialPageLoader";
 import AttachProductModal from "./attachProductModal";
 import BoxComponent from "CommonComponents/boxComponent";
 import isEmpty from "lodash/isEmpty";
+import { formatUnixTimeStampToDateTime } from "Utils/formatHelper";
+import { calculateDateDiff, calculateDateDiffFrom } from "Utils/formatHelper";
 const exhibitionState = {
   UPCOMING: "upcoming",
   UPCOMING_ENROLLED: "subscribed",
@@ -149,16 +151,25 @@ class ExhibitionDetailsPage extends Component {
                     {exhibitionDetail.short_description}
                   </div>
                   <div className={styles.exhibition_date}>
-                    LAST {exhibitionDetail.last_date_of_enrollment} LEFT TO
-                    ENROLL
+                    {exhibitionState.UPCOMING_ENROLLED ==
+                      exhibitionDetail.state &&
+                      `LAST ${calculateDateDiffFrom(
+                        exhibitionDetail.starts_from
+                      )} DAYS LEFT TO SUBMIT PRODUCTS`}
+                    {exhibitionState.UPCOMING == exhibitionDetail.state &&
+                      `LAST ${calculateDateDiff(
+                        exhibitionDetail.last_date_of_enrollment
+                      )} DAYS LEFT TO ENROLL`}
                   </div>
                 </DivColumn>
-                <CapsuleButton
-                  onClick={() => this.onClickSubscribe(exhibitionDetail.id)}
-                  style={{ zIndex: 1 }}
-                >
-                  {headerTitle}
-                </CapsuleButton>
+                {exhibitionState.UPCOMING == exhibitionDetail.state && (
+                  <CapsuleButton
+                    onClick={() => this.onClickSubscribe(exhibitionDetail.id)}
+                    style={{ zIndex: 1 }}
+                  >
+                    {headerTitle}
+                  </CapsuleButton>
+                )}
               </DivRow>
               <NavHeader title="BASIC DETAILS"></NavHeader>
               <DivRow className={styles.full_description_container}>
@@ -204,10 +215,16 @@ class ExhibitionDetailsPage extends Component {
                     <Fragment>
                       <div className={styles.title}>DATES:</div>
                       <div className={styles.date}>
-                        <b>STARTS AT:</b> {exhibitionDetail.starts_from}
+                        <b>STARTS AT:</b>{" "}
+                        {formatUnixTimeStampToDateTime(
+                          exhibitionDetail.starts_from
+                        )}
                       </div>
                       <div className={styles.date}>
-                        <b>ENDS ON:</b> {exhibitionDetail.ends_till}
+                        <b>ENDS ON:</b>{" "}
+                        {formatUnixTimeStampToDateTime(
+                          exhibitionDetail.ends_till
+                        )}
                       </div>
                     </Fragment>
                   )}

@@ -13,9 +13,14 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getExhibitionAction } from "Core/modules/exhibition/exhibitionActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
+import isEmpty from "lodash/isEmpty";
+import {
+  formatUnixTimeStampToDateTime,
+  calculateDateDiff,
+} from "Utils/formatHelper";
 
 class ExhibitionListingPage extends Component {
-  onClickViewExhibitionDetail = exhibition => {
+  onClickViewExhibitionDetail = (exhibition) => {
     const { navigateTo } = this.props;
     navigateTo("exhibition-details", exhibition);
   };
@@ -24,7 +29,7 @@ class ExhibitionListingPage extends Component {
     navigateTo("your-exhibitions");
   }
 
-  getListItem = listItem => {
+  getListItem = (listItem) => {
     return (
       <DivRow className={styles.item}>
         <img className={styles.image} src={listItem.base_image} />
@@ -40,17 +45,24 @@ class ExhibitionListingPage extends Component {
 
           <DivRow className={styles.date_container}>
             <div className={styles.date_title}>Starts At:</div>
-            <div className={styles.date_value}> {listItem.starts_from}</div>
+            <div className={styles.date_value}>
+              {" "}
+              {formatUnixTimeStampToDateTime(listItem.starts_from)}
+            </div>
           </DivRow>
 
           <DivRow className={styles.date_container}>
             <div className={styles.date_title}>Ends On:</div>
-            <div className={styles.date_value}> {listItem.ends_till}</div>
+            <div className={styles.date_value}>
+              {" "}
+              {formatUnixTimeStampToDateTime(listItem.ends_till)}
+            </div>
           </DivRow>
 
           <DivRow className={styles.action_container}>
             <div className={styles.last_date}>
-              LAST {listItem.last_date_of_enrollment} LEFT TO ENROLL
+              LAST {calculateDateDiff(listItem.last_date_of_enrollment)} DAYS
+              LEFT TO ENROLL
             </div>
             <CapsuleButton
               onClick={() => this.onClickViewExhibitionDetail(listItem)}
@@ -65,7 +77,7 @@ class ExhibitionListingPage extends Component {
   render() {
     const {
       exhibitionReducer: { exhibitionList },
-      getExhibitionAction
+      getExhibitionAction,
     } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
@@ -78,8 +90,11 @@ class ExhibitionListingPage extends Component {
             </CapsuleButton>
           </NavHeader>
           <div fillParent className={styles.content_container}>
-            <InitialPageLoader initialPageApi={getExhibitionAction}>
-              {map(exhibitionList, exhibition => {
+            <InitialPageLoader
+              initialPageApi={getExhibitionAction}
+              isEmpty={isEmpty(exhibitionList)}
+            >
+              {map(exhibitionList, (exhibition) => {
                 return this.getListItem(exhibition);
               })}
             </InitialPageLoader>
@@ -90,15 +105,15 @@ class ExhibitionListingPage extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    exhibitionReducer: state.exhibitionReducer
+    exhibitionReducer: state.exhibitionReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
-    getExhibitionAction: bindActionCreators(getExhibitionAction, dispatch)
+    getExhibitionAction: bindActionCreators(getExhibitionAction, dispatch),
   };
 };
 

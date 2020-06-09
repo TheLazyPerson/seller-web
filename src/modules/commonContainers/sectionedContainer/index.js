@@ -10,15 +10,20 @@ import Drawer from "@material/react-drawer";
 import "@material/react-drawer/dist/drawer.css";
 import hamburgerIconBlack from "Icons/hamburger-menu-icon-black.svg";
 import SearchBar from "CommonContainers/searchBar";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 class SectionedContainer extends Component {
   state = {
-    openDrawer: false
+    openDrawer: false,
   };
 
   onClickAppIcon = () => {
-    const { navigateTo } = this.props;
-    navigateTo("");
+    const { navigateTo, isUserSignedIn } = this.props;
+    if (!isUserSignedIn) {
+      navigateTo("");
+    }
+    navigateTo("home");
   };
 
   onClickHamburgerMenu = () => {
@@ -103,4 +108,10 @@ class SectionedContainer extends Component {
   }
 }
 
-export default navigatorHoc(SectionedContainer);
+const mapStateToProps = (state) => {
+  return {
+    isUserSignedIn: state.signInReducer.isUserSignedIn,
+  };
+};
+
+export default connect(mapStateToProps, null)(navigatorHoc(SectionedContainer));

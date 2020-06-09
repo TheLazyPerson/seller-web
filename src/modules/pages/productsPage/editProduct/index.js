@@ -36,15 +36,29 @@ class EditProduct extends Component {
     productImagesPayload: [],
     selectedCategories: [],
     productIntitalValues: {},
+    firstTime: true,
   };
 
   componentDidMount() {
     const {
       editProductAction,
+      productReducer: { prouctForm, editProduct },
       match: { params },
     } = this.props;
 
-    editProductAction({ id: params.productId });
+    editProductAction({ id: params.productId }).then(({ payload }) => {
+      const categoryPayload = payload.data.product["category"].map(
+        (category) => {
+          return category.id.toString();
+        }
+      );
+      this.setState({
+        selectedCategories: categoryPayload,
+      });
+      this.setState({
+        productImagesPayload: payload.data.product["image"],
+      });
+    });
   }
 
   onSubmitComplete = () => {
@@ -76,13 +90,19 @@ class EditProduct extends Component {
 
     const reduced = prouctForm.reduce((prev, element) => {
       element.attributes.forEach((attribute) => {
-        const { type, slug, name } = attribute;
+        const { type, slug, name, is_translatable } = attribute;
         const validatorResponse =
           type == "file" || type == "tree-checkbox"
             ? { result: true }
             : isEmptyValidator(values[attribute.slug]);
-
         prev[attribute.slug] = validatorResponse;
+        if (is_translatable === 1) {
+          const validatorForTranslatableResponse =
+            type == "file" || type == "tree-checkbox"
+              ? { result: true }
+              : isEmptyValidator(values[attribute.slug.concat("_ar")]);
+          prev[attribute.slug.concat("_ar")] = validatorForTranslatableResponse;
+        }
       });
       return prev;
     }, {});
@@ -110,7 +130,14 @@ class EditProduct extends Component {
           } else if (attribute.slug === "image") {
             prev[attribute.slug] = this.state.productImagesObj;
           } else {
-            prev[attribute.slug] = form[attribute.slug];
+            if (attribute.is_translatable === 1) {
+              prev[attribute.slug] = {
+                ar: form[attribute.slug.concat("_ar")],
+                en: form[attribute.slug],
+              };
+            } else {
+              prev[attribute.slug] = form[attribute.slug];
+            }
           }
         });
         return prev;
@@ -144,8 +171,21 @@ class EditProduct extends Component {
     });
   };
 
+  setUpdatedImages = (file, id, data) => {
+    const {
+      productImages,
+      productImagesPayload,
+      productImagesObj,
+    } = this.state;
+    this.setState({
+      productImages: [...productImages, file],
+      productImagesObj: [...productImagesObj, id],
+      productImagesPayload: [...productImagesPayload, data],
+    });
+  };
+
   getFormItem = (attribute) => {
-    const { type, slug, name } = attribute;
+    const { type, slug, name, is_translatable } = attribute;
 
     if (type === "text") {
       return (
@@ -160,6 +200,19 @@ class EditProduct extends Component {
               />
             )}
           </Field>
+
+          {is_translatable === 1 && (
+            <Field name={slug.concat("_ar")}>
+              {({ input, meta }) => (
+                <InputTextComponent
+                  meta={meta}
+                  {...input}
+                  placeholder={name.concat(" - Arabic")}
+                  className={styles.input_text}
+                />
+              )}
+            </Field>
+          )}
         </DivColumn>
       );
     } else if (type === "select") {
@@ -229,6 +282,19 @@ class EditProduct extends Component {
               />
             )}
           </Field>
+
+          {is_translatable === 1 && (
+            <Field name={slug.concat("_ar")}>
+              {({ input, meta }) => (
+                <InputTextareaComponent
+                  meta={meta}
+                  {...input}
+                  placeholder={name.concat(" - Arabic")}
+                  className={styles.input_text_area}
+                />
+              )}
+            </Field>
+          )}
         </DivColumn>
       );
     } else if (type === "price") {
@@ -258,19 +324,7 @@ class EditProduct extends Component {
                 uploadedFiles={productImagesPayload}
                 onDrop={(file) => {
                   this.uploadImage(file).then(({ payload }) => {
-                    const {
-                      productImages,
-                      productImagesObj,
-                      productImagesPayload,
-                    } = this.state;
-                    this.setState({
-                      productImages: [...productImages, file],
-                      productImagesObj: [...productImagesObj, payload.data.id],
-                      productImagesPayload: [
-                        ...productImagesPayload,
-                        payload.data,
-                      ],
-                    });
+                    this.setUpdatedImages(file, payload.data.id, payload.data);
                   });
                 }}
               />
@@ -310,29 +364,14 @@ class EditProduct extends Component {
     }
     const formData = productForm.reduce((prev, element) => {
       element.attributes.forEach((attribute) => {
-        if (attribute.slug === "category") {
-          const categoryPayload = map(
-            editProduct.product[attribute.slug],
-            (category) => {
-              return category.id.toString();
-            }
-          );
-          //TODO: BLOCKER fix the state setting
-          // this.setState({
-          //   selectedCategories: categoryPayload,
-          // });
-
-          this.state.selectedCategories = categoryPayload;
-        } else if (attribute.slug === "image") {
-          //TODO: BLOCKER fix the state setting
-          // this.setState({
-          //   productImagesPayload: editProduct.product[attribute.slug],
-          // });
-          this.state.productImagesPayload = editProduct.product[attribute.slug];
-
-          // this.state.productImagesObj =
-        } else {
-          prev[attribute.slug] = editProduct.product[attribute.slug];
+        if (attribute.slug !== "category" && attribute.slug !== "image") {
+          if (attribute.is_translatable === 1) {
+            prev[attribute.slug.concat("_ar")] =
+              editProduct.product[attribute.slug].ar;
+            prev[attribute.slug] = editProduct.product[attribute.slug].en;
+          } else {
+            prev[attribute.slug] = editProduct.product[attribute.slug];
+          }
         }
       });
       return prev;
@@ -360,7 +399,6 @@ class EditProduct extends Component {
       basicReducer: { basicData, attributeFamilies },
       getProductFormAction,
     } = this.props;
-    console.log("ON RENDER", prouctForm);
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.page_container}>

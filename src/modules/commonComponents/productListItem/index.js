@@ -26,8 +26,10 @@ class ProductListItem extends Component {
         horizontalCenter
         className={styles.product_list_item_container}
       >
-        <div className={styles.title}>{product.name}</div>
-        <div className={styles.description}>{product.short_description}</div>
+        <div className={styles.title}>{product.translations.en.name}</div>
+        <div className={styles.description}>
+          {product.translations.en.short_description}
+        </div>
         {!isEmpty(product.thumbnail) && (
           <img src={product.thumbnail.path} className={styles.image} />
         )}

@@ -36,33 +36,33 @@ class AddProduct extends Component {
     this.onBackPress();
   };
 
-  validate = values => {
+  validate = (values) => {
     const errors = {};
     const validators = {
-      type: isEmptyValidator(values.type),
+      // type: isEmptyValidator(values.type),
       sku: isEmptyValidator(values.sku),
-      attribute_family_id: isEmptyValidator(values.attributeFamily)
+      attribute_family_id: isEmptyValidator(values.attributeFamily),
     };
 
-    Object.keys(validators).forEach(key => {
+    Object.keys(validators).forEach((key) => {
       if (!validators[key].result) errors[key] = validators[key].error;
     });
 
     return errors;
   };
 
-  onSubmit = form => {
+  onSubmit = (form) => {
     const {
       createProductAction,
       showSuccessFlashMessage,
       onSubmitComplete,
-      navigateTo
+      navigateTo,
     } = this.props;
 
     const formData = {
-      type: form.type,
+      type: "simple",
       sku: form.sku,
-      attribute_family_id: form.attributeFamily
+      attribute_family_id: form.attributeFamily,
     };
 
     createProductAction(formData).then(({ payload }) => {
@@ -73,8 +73,8 @@ class AddProduct extends Component {
     });
   };
 
-  formatSelectorData = list => {
-    return map(list, item => ({ value: item.id, label: item.name }));
+  formatSelectorData = (list) => {
+    return map(list, (item) => ({ value: item.id, label: item.name }));
   };
 
   render() {
@@ -95,18 +95,18 @@ class AddProduct extends Component {
       productReducer: { product },
       productId,
       basicReducer: { basicData, attributeFamilies },
-      getAttributeFamilyAction
+      getAttributeFamilyAction,
     } = this.props;
 
     const productTypes = [
       {
         value: "simple",
-        label: "Simple"
+        label: "Simple",
       },
       {
         value: "configurable",
-        label: "Configurable"
-      }
+        label: "Configurable",
+      },
     ];
 
     let defaultProductType = null;
@@ -115,12 +115,10 @@ class AddProduct extends Component {
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <DivColumn fillParent className={styles.page_container}>
-          <NavHeader
-            title="Add Product"
-            onBackClick={this.onBackPress}
-          ></NavHeader>
-        </DivColumn>
+        <NavHeader
+          title="Add Product"
+          onBackClick={this.onBackPress}
+        ></NavHeader>
         <DivColumn fillParent className={styles.page_container}>
           <InitialPageLoader initialPageApi={getAttributeFamilyAction}>
             <Form
@@ -131,16 +129,16 @@ class AddProduct extends Component {
                 form,
                 submitting,
                 pristine,
-                values
+                values,
               }) => (
                 <form className={styles.form_container} onSubmit={handleSubmit}>
                   <DivColumn className={styles.text_input_container}>
-                    <Field name="type">
+                    {/* <Field name="type">
                       {({ input, meta }) => (
                         <DivColumn className="input_select_container">
                           <Select
                             options={productTypes}
-                            onChange={value => {
+                            onChange={(value) => {
                               input.onChange(value.value);
                             }}
                             className="react-select-container"
@@ -153,14 +151,14 @@ class AddProduct extends Component {
                           )}
                         </DivColumn>
                       )}
-                    </Field>
+                    </Field> */}
 
                     <Field name="sku">
                       {({ input, meta }) => (
                         <InputTextComponent
                           meta={meta}
                           {...input}
-                          placeholder="SKU"
+                          placeholder="Item Code"
                           className={styles.input_text}
                         />
                       )}
@@ -171,12 +169,12 @@ class AddProduct extends Component {
                         <DivColumn className="input_select_container">
                           <Select
                             options={attributeFamiliesOptions}
-                            onChange={value => {
+                            onChange={(value) => {
                               input.onChange(value.value);
                             }}
                             className="react-select-container"
                             classNamePrefix="react-select"
-                            placeholder="Attribute Family"
+                            placeholder="Product Vertical"
                             defaultValue={defaultAttributeFamily}
                           />
                           {meta.error && meta.touched && (
@@ -205,14 +203,14 @@ class AddProduct extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     productReducer: state.productReducer,
-    basicReducer: state.basicReducer
+    basicReducer: state.basicReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     createProductAction: bindActionCreators(createProductAction, dispatch),
     getAttributeFamilyAction: bindActionCreators(
@@ -222,7 +220,7 @@ const mapDispathToProps = dispatch => {
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
-    )
+    ),
   };
 };
 
