@@ -24,7 +24,10 @@ import { isEmptyValidator } from "Utils/validators";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import isEmpty from "lodash/isEmpty";
-import { momentToDate } from "Utils/formatHelper";
+import {
+  formatUnixTimeStampToDateTime,
+  momentToDate,
+} from "Utils/formatHelper";
 
 class OrderShippingInformationPage extends Component {
   state = {
@@ -155,7 +158,7 @@ class OrderShippingInformationPage extends Component {
                 Order ID: <b>{order.id}</b>
               </div>
               <div className={styles.placed_on}>
-                Placed On: {order.created_at}
+                Placed On: {formatUnixTimeStampToDateTime(order.created_at)}
               </div>
               <div className={styles.status}>{order.status_label}</div>
             </DivColumn>

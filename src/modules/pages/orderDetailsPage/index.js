@@ -21,6 +21,7 @@ import InitialPageLoader from "CommonContainers/initialPageLoader";
 import HorizontalBorder from "CommonComponents/horizontalBorder";
 import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
+import { formatUnixTimeStampToDateTime } from "Utils/formatHelper";
 
 class OrdersDetailsPage extends Component {
   onBackPress = () => {
@@ -159,7 +160,7 @@ class OrdersDetailsPage extends Component {
                 Order ID: <b>{order.id}</b>
               </div>
               <div className={styles.placed_on}>
-                Placed On: {order.created_at}
+                Placed On: {formatUnixTimeStampToDateTime(order.created_at)}
               </div>
               <div className={styles.status}>{order.status_label}</div>
             </DivColumn>

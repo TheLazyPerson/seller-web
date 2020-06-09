@@ -21,6 +21,7 @@ import { isEmptyValidator } from "Utils/validators";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import isEmpty from "lodash/isEmpty";
+import { formatUnixTimeStampToDateTime } from "Utils/formatHelper";
 
 class MainOrdersShippingPage extends Component {
   onBackPress = () => {
@@ -99,7 +100,7 @@ class MainOrdersShippingPage extends Component {
                 Order ID: <b>{order.id}</b>
               </div>
               <div className={styles.placed_on}>
-                Placed On: {order.created_at}
+                Placed On: {formatUnixTimeStampToDateTime(order.created_at)}
               </div>
               <div className={styles.status}>{order.status_label}</div>
             </DivColumn>
