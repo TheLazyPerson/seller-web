@@ -124,14 +124,22 @@
     "start_shopping": "ابدأ التسوق"
   },
 
-
-  "address_page":{
-    "default_adddress":"العنوان الافتراضي",
-    "address_deleted":"تم حذف العنوان"
+  "address_page": {
+    "default_adddress": "العنوان الافتراضي",
+    "address_deleted": "تم حذف العنوان"
   },
-  "edit_address_page":{
-    "edit_address":"تعديل العنوان" 
+  "edit_address_page": {
+    "edit_address": "تعديل العنوان"
+  },
+  "main_home_page": {
+    "title": "بيع منتجاتك للعملاء عبر الكويت",
+    "subtitle": "مصافحة مع أكثر الشركات المشهورة باستضافة المعارض. وصلنا إلى جميع أنحاء الكويت.",
+    "start_selling": "ابدأ بالبيع"
+  },
+  "download_app": {
+    "the": "ال",
+    "home_expo": "معرض المنزل",
+    "advantage": "مميزات",
+    "subtitle": "إدارة كل شيء في متناول يدك."
   }
 }
-
-

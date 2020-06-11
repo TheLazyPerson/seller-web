@@ -168,12 +168,29 @@
     "city": "City"
   },
 
-
-  "address_page":{
-    "default_adddress":"Default Address",
-    "address_deleted":"Address Deleted"
+  "address_page": {
+    "default_adddress": "Default Address",
+    "address_deleted": "Address Deleted"
   },
-  "edit_address_page":{
-    "edit_address":"Edit Address" 
+  "edit_address_page": {
+    "edit_address": "Edit Address"
+  },
+  "main_home_page": {
+    "title": "Sell your products to customers across Kuwait",
+    "subtitle": "Shake hand with the most reputed company known for hosting exhibitions. We reached around all the corners of Kuwait.",
+    "start_selling": "Start Selling"
+  },
+  "home_nav": {
+    "benefits": "BENEFITS",
+    "how_it_works": "HOW IT WORKS?",
+    "delivering_orders": "DELIVERING ORDERS",
+    "pricing": "PRICING",
+    "faq": "FAQ"
+  },
+  "download_app": {
+    "the": "The",
+    "home_expo": "Home Expo",
+    "advantage": "Advantage",
+    "subtitle": "Manage Everyting at your fingertips."
   }
 }
