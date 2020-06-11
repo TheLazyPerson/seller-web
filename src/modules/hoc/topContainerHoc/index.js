@@ -8,7 +8,7 @@ import { bindActionCreators } from "redux";
 import { hideFlashMessage } from "Redux/actions/flashMessageActions";
 // import { setBagCount } from 'Core/modules/bag/bagActions';
 import { setUserDataAction } from "Core/modules/signin/signinActions";
-// import { setLanguageAction } from 'Core/modules/language/languageActions';
+import { setLanguageAction } from "Core/modules/language/languageActions";
 import { CookieService } from "Utils/cookieService";
 import { USER_DATA_COOKIE, LANG } from "Constants/cookieConstants";
 import {
@@ -29,9 +29,9 @@ const topContainerHoc = (WrappedComponent) => {
       const { setUserDataAction } = this.props;
       const userData = CookieService.getJSON(USER_DATA_COOKIE);
       // const bagCount = CookieService.get('BAG_COUNT');
-      // const languageCode = CookieService.get(LANG) || 'en';
+      const languageCode = CookieService.get(LANG) || "en";
       //TODO call backdetails api here
-      // setLanguageAction(languageCode);
+      setLanguageAction(languageCode);
 
       if (userData) {
         // setBagCount(bagCount);
@@ -120,7 +120,7 @@ const topContainerHoc = (WrappedComponent) => {
     return {
       hideFlashMessage: bindActionCreators(hideFlashMessage, dispatch),
       setUserDataAction: bindActionCreators(setUserDataAction, dispatch),
-      // setLanguageAction: bindActionCreators(setLanguageAction, dispatch),
+      setLanguageAction: bindActionCreators(setLanguageAction, dispatch),
       // setBagCount: bindActionCreators(setBagCount, dispatch),
       getActivePlan: bindActionCreators(getActivePlan, dispatch),
       getFeatureUsage: bindActionCreators(getFeatureUsage, dispatch),

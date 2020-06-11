@@ -31,7 +31,9 @@ class FullwidthHeader extends Component {
               className={styles.app_icon}
               onClick={this.onClickAppIcon}
             />
-            {/* <LanguageSelect blackColor={!whiteColor} /> */}
+          </DivRow>
+          <DivRow>
+            <LanguageSelect blackColor={!whiteColor} />
           </DivRow>
           <SectionedHeader whiteColor={whiteColor} />
         </DivRow>
