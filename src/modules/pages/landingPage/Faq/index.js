@@ -6,6 +6,7 @@ import map from "lodash/map";
 import styles from "./faq.module.scss";
 import { faq } from "Constants/faqConstants";
 import closeIcon from "Icons/close-icon-black.svg";
+import { connect } from "react-redux";
 
 class FAQ extends Component {
   state = {
@@ -30,7 +31,9 @@ class FAQ extends Component {
 
   render() {
     const { faq } = this.state;
-
+    const {
+      languageReducer: { languageCode },
+    } = this.props;
     return (
       <DivColumn fillParent className={styles.faq_landing_container}>
         {map(faq, (faqItem, index) => {
@@ -45,11 +48,13 @@ class FAQ extends Component {
                 className={styles.faq_title_container}
                 onClick={() => this.onClickFaqItem(index)}
               >
-                <div className={styles.faq_title}>{faqItem.title}</div>
+                <div className={styles.faq_title}>
+                  {faqItem[languageCode].title}
+                </div>
                 <img src={closeIcon} className={styles.title_close_icon} />
               </DivRow>
               <div className={styles.faq_description}>
-                {faqItem.description}
+                {faqItem[languageCode].description}
               </div>
             </DivColumn>
           );
@@ -59,4 +64,10 @@ class FAQ extends Component {
   }
 }
 
-export default navigatorHoc(FAQ);
+const mapStateToProps = (state) => {
+  return {
+    languageReducer: state.languageReducer,
+  };
+};
+
+export default connect(mapStateToProps, null)(navigatorHoc(FAQ));

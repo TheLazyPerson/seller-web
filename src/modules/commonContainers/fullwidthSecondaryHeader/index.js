@@ -8,7 +8,7 @@ import appIcon from "Icons/app-icon-black.svg";
 //import appIcon from "Icons/logo-image.png";
 import navigatorHoc from "Hoc/navigatorHoc";
 import SearchBar from "CommonContainers/searchBar";
-
+import { connect } from "react-redux";
 import map from "lodash/map";
 
 class FullwidthSecondaryHeader extends Component {
@@ -25,6 +25,7 @@ class FullwidthSecondaryHeader extends Component {
       navItems,
       onClickNavItem,
       selectedTab,
+      languageReducer: { languageCode },
     } = this.props;
 
     return (
@@ -42,7 +43,7 @@ class FullwidthSecondaryHeader extends Component {
           </DivRow>
           <DivRow className={styles.links_container}>
             {map(navItems, (listItem) => {
-              const { title, slug } = listItem;
+              const { slug } = listItem;
               const isSelected = selectedTab === slug;
               return (
                 <a
@@ -54,7 +55,7 @@ class FullwidthSecondaryHeader extends Component {
                   }}
                 >
                   {" "}
-                  {title}
+                  {listItem[languageCode].title}
                 </a>
               );
             })}
@@ -65,8 +66,16 @@ class FullwidthSecondaryHeader extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    languageReducer: state.languageReducer,
+  };
+};
+
 FullwidthSecondaryHeader.defaultProps = {
   whiteColor: false,
 };
-
-export default navigatorHoc(FullwidthSecondaryHeader);
+export default connect(
+  mapStateToProps,
+  null
+)(navigatorHoc(FullwidthSecondaryHeader));
