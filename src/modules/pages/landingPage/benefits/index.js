@@ -12,7 +12,6 @@ class Benefits extends Component {
     const {
       languageReducer: { languageCode },
     } = this.props;
-    console.log(this.props);
     return (
       <DivColumn fillParent className={styles.list_item}>
         <img className={styles.image} src={listItem.heroImage} />
