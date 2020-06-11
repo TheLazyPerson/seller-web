@@ -17,6 +17,7 @@ import navigatorHoc from "Hoc/navigatorHoc";
 import AddressItemComponent from "CommonComponents/addressItemComponent";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import NavHeader from "CommonComponents/navHeader";
+import translatorHoc from 'Hoc/translatorHoc';
 
 class ProfileAddress extends Component {
   onClickNewAddress = () => {
@@ -32,10 +33,10 @@ class ProfileAddress extends Component {
   };
 
   handleRemove = id => {
-    const { removeAddressAction, showSuccessFlashMessage } = this.props;
+    const { removeAddressAction, showSuccessFlashMessage, translate } = this.props;
     removeAddressAction(id).then(({ payload }) => {
       if (payload.code === 200 || payload.code === 201) {
-        showSuccessFlashMessage("Address Deleted");
+        showSuccessFlashMessage(translate('address_page.address_deleted'));
         window.location.reload(false);
       }
     });
@@ -43,7 +44,8 @@ class ProfileAddress extends Component {
   render() {
     const {
       addressReducer: { addressList },
-      getAddressListAction
+      getAddressListAction,
+      translate
     } = this.props;
 
     const default_address = addressList.filter(
@@ -59,7 +61,7 @@ class ProfileAddress extends Component {
         <InitialPageLoader initialPageApi={getAddressListAction}>
           <DivColumn fillParent className={styles.address_container}>
             <DivColumn className={styles.section_container}>
-              <NavHeader title="Default Address">
+              <NavHeader title={translate('address_page.default_adddress')}>
                 <CapsuleButton onClick={() => this.onClickNewAddress()}>
                   + ADD NEW ADDRESS
                 </CapsuleButton>
@@ -119,4 +121,4 @@ const mapDispathToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(ProfileAddress));
+)(navigatorHoc(translatorHoc(ProfileAddress)));

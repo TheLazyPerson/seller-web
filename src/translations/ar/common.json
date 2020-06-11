@@ -122,5 +122,16 @@
     "move_bag": "الانتقال إلى حقيبة",
     "my_wishlist": "قائمة امنياتي",
     "start_shopping": "ابدأ التسوق"
+  },
+
+
+  "address_page":{
+    "default_adddress":"العنوان الافتراضي",
+    "address_deleted":"تم حذف العنوان"
+  },
+  "edit_address_page":{
+    "edit_address":"تعديل العنوان" 
   }
 }
+
+

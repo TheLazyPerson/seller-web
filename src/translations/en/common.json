@@ -166,5 +166,14 @@
     "landmark": "Landmark",
     "home_office": "Home/Office",
     "city": "City"
+  },
+
+
+  "address_page":{
+    "default_adddress":"Default Address",
+    "address_deleted":"Address Deleted"
+  },
+  "edit_address_page":{
+    "edit_address":"Edit Address" 
   }
 }
