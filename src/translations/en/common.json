@@ -192,5 +192,19 @@
     "home_expo": "Home Expo",
     "advantage": "Advantage",
     "subtitle": "Manage Everyting at your fingertips."
+  },
+  "dashboard_home_page": {
+    "title": "Welcome",
+    "subtitle": "MY ACCOUNT"
+  },
+  "exhibition_list_page": {
+    "btn_title": "EXHIBITIONS",
+    "view_details": "View Details",
+    "left_to_enroll": "DAYS LEFT TO ENROLL",
+    "last": "LAST",
+    "category": "Category",
+    "starts_at": "Starts At",
+    "ends_on": "Ends On",
+    "your_exhibition": "Your Exhibitions"
   }
 }

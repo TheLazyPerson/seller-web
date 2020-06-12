@@ -141,5 +141,19 @@
     "home_expo": "معرض المنزل",
     "advantage": "مميزات",
     "subtitle": "إدارة كل شيء في متناول يدك."
+  },
+  "dashboard_home_page": {
+    "title": "أهلا بك",
+    "subtitle": "حسابي"
+  },
+  "exhibition_list_page": {
+    "btn_title": "المعارض",
+    "view_details": "عرض التفاصيل",
+    "left_to_enroll": "الأيام المتبقية للتسجيل",
+    "last": "الاخير",
+    "category": "الفئة",
+    "starts_at": "يبدأ في",
+    "ends_on": "ينتهي",
+    "your_exhibition": "المعارض الخاصة بك"
   }
 }
