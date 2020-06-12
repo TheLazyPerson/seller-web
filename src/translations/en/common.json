@@ -206,5 +206,26 @@
     "starts_at": "Starts At",
     "ends_on": "Ends On",
     "your_exhibition": "Your Exhibitions"
+  },
+  "exhibition_details_page": {
+    "discription": "DESCRIPTION",
+    "exhibition": "Exhibition",
+    "basic_details": "BASIC DETAILS",
+    "overview": "Overview",
+    "date": "DATES",
+    "ends_on": "ENDS ON",
+    "start_at": "STARTS AT:",
+    "category": "CATEGORIES",
+    "add_to_products": "ADD YOUR PRODUCTS"
+  },
+  "your_exhibition_list_page": {
+    "btn_title": "EXHIBITIONS",
+    "view_details": "View Details",
+    "left_to_enroll": "DAYS LEFT TO ENROLL",
+    "last": "LAST",
+    "category": "Category",
+    "starts_at": "Starts At",
+    "ends_on": "Ends On",
+    "your_exhibition": "Your Exhibitions"
   }
 }

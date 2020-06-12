@@ -22,7 +22,7 @@ import {
   attachProductsToExhibition,
   removeProductFromExhibition,
 } from "Core/modules/exhibition/exhibitionActions";
-
+import translatorHoc from "Hoc/translatorHoc";
 import {
   getProductListAction,
   removeProductAction,
@@ -39,9 +39,12 @@ const exhibitionState = {
   ENROLLED_LIVE: "live",
 };
 
-const ProductDescription = ({ exhibitionDetail }) => (
+const ProductDescription = ({ exhibitionDetail, translate }) => (
   <Fragment>
-    <div className={styles.title}>DESCRIPTION:</div>
+    <div className={styles.title}>
+      {" "}
+      {translate("exhibition_details_page.discription")}:
+    </div>
     <div className={styles.description}>{exhibitionDetail.description}</div>
   </Fragment>
 );
@@ -106,6 +109,7 @@ class ExhibitionDetailsPage extends Component {
       getProductListAction,
       match: { params },
       getExhibitionDetailAction,
+      translate,
     } = this.props;
     const { showModal } = this.state;
 
@@ -121,7 +125,7 @@ class ExhibitionDetailsPage extends Component {
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.exhibition_page_container}>
           <NavHeader
-            title="Exhibition"
+            title={translate("exhibition_details_page.exhibition")}
             onBackClick={this.onBackPress}
           ></NavHeader>
           <InitialPageLoader
@@ -171,12 +175,16 @@ class ExhibitionDetailsPage extends Component {
                   </CapsuleButton>
                 )}
               </DivRow>
-              <NavHeader title="BASIC DETAILS"></NavHeader>
+              <NavHeader
+                title={translate("exhibition_details_page.basic_details")}
+              ></NavHeader>
               <DivRow className={styles.full_description_container}>
                 <DivColumn className={styles.left_container}>
                   {exhibitionState.ENROLLED_LIVE == exhibitionDetail.state ? (
                     <Fragment>
-                      <div className={styles.overview}>Overview :</div>
+                      <div className={styles.overview}>
+                        {translate("exhibition_details_page.overview")} :
+                      </div>
                       {!isEmpty(exhibitionDetail.overview.card) && (
                         <DivRow>
                           {map(exhibitionDetail.overview.card, (card) => {
@@ -204,24 +212,32 @@ class ExhibitionDetailsPage extends Component {
                       )}
                     </Fragment>
                   ) : (
-                    <ProductDescription exhibitionDetail={exhibitionDetail} />
+                    <ProductDescription
+                      exhibitionDetail={exhibitionDetail}
+                      translate={translate}
+                    />
                   )}
                 </DivColumn>
 
                 <DivColumn className={styles.right_container}>
                   {exhibitionState.ENROLLED_LIVE == exhibitionDetail.state ? (
-                    <ProductDescription exhibitionDetail={exhibitionDetail} />
+                    <ProductDescription
+                      exhibitionDetail={exhibitionDetail}
+                      translate={translate}
+                    />
                   ) : (
                     <Fragment>
-                      <div className={styles.title}>DATES:</div>
+                      <div className={styles.title}>
+                        {translate("exhibition_details_page.date")}:
+                      </div>
                       <div className={styles.date}>
-                        <b>STARTS AT:</b>{" "}
+                        <b>{translate("exhibition_details_page.start_at")}</b>{" "}
                         {formatUnixTimeStampToDateTime(
                           exhibitionDetail.starts_from
                         )}
                       </div>
                       <div className={styles.date}>
-                        <b>ENDS ON:</b>{" "}
+                        <b>{translate("exhibition_details_page.ends_on")}:</b>{" "}
                         {formatUnixTimeStampToDateTime(
                           exhibitionDetail.ends_till
                         )}
@@ -232,7 +248,9 @@ class ExhibitionDetailsPage extends Component {
               </DivRow>
               {exhibitionState.UPCOMING == exhibitionDetail.state && (
                 <Fragment>
-                  <NavHeader title="CATEGORIES"></NavHeader>
+                  <NavHeader
+                    title={translate("exhibition_details_page.category")}
+                  ></NavHeader>
                   <DivRow fillParent className={styles.category_list_container}>
                     {map(exhibitionDetail.categories, (category) => (
                       <CategoryListItem name={category.name} />
@@ -250,7 +268,7 @@ class ExhibitionDetailsPage extends Component {
                           this.handleAttachProduct(exhibitionDetail.id)
                         }
                       >
-                        ADD YOUR PRODUCTS
+                        {translate("exhibition_details_page.add_to_products")}
                       </CapsuleButton>
                     )}
                   </NavHeader>
@@ -322,4 +340,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(ExhibitionDetailsPage));
+)(navigatorHoc(translatorHoc(ExhibitionDetailsPage)));

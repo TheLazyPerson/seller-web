@@ -155,5 +155,26 @@
     "starts_at": "يبدأ في",
     "ends_on": "ينتهي",
     "your_exhibition": "المعارض الخاصة بك"
+  },
+  "exhibition_details_page": {
+    "discription": "وصف",
+    "exhibition": "معرض",
+    "basic_details": "تفاصيل أساسية",
+    "overview": "نظرة عامة",
+    "date": "تواريخ",
+    "ends_on": "ينتهي",
+    "start_at": "يبدأ في",
+    "category": "التصنيفات",
+    "add_to_products": "أضف منتجاتك"
+  },
+  "your_exhibition_list_page": {
+    "btn_title": "المعارض",
+    "view_details": "عرض التفاصيل",
+    "left_to_enroll": "الأيام المتبقية للتسجيل",
+    "last": "الاخير",
+    "category": "الفئة",
+    "starts_at": "يبدأ في",
+    "ends_on": "ينتهي",
+    "your_exhibition": "المعارض الخاصة بك"
   }
 }

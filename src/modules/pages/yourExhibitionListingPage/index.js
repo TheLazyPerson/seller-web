@@ -18,6 +18,7 @@ import {
   formatUnixTimeStampToDateTime,
   calculateDateDiffFrom,
 } from "Utils/formatHelper";
+import translatorHoc from "Hoc/translatorHoc";
 
 class YourExhibitionListingPage extends Component {
   onClickViewExhibitionDetail = (exhibition) => {
@@ -31,6 +32,8 @@ class YourExhibitionListingPage extends Component {
   };
 
   getListItem = (listItem) => {
+    const { translate } = this.props;
+
     return (
       <DivRow className={styles.item}>
         <img className={styles.image} src={listItem.base_image} />
@@ -40,12 +43,17 @@ class YourExhibitionListingPage extends Component {
           <div className={styles.description}>{listItem.short_description}</div>
 
           <DivRow>
-            <div className={styles.category_header}>Category:</div>
+            <div className={styles.category_header}>
+              {" "}
+              {translate("your_exhibition_list_page.category")}
+            </div>
             <div className={styles.category_value}>{listItem.categories}</div>
           </DivRow>
 
           <DivRow className={styles.date_container}>
-            <div className={styles.date_title}>Starts At:</div>
+            <div className={styles.date_title}>
+              {translate("your_exhibition_list_page.starts_at")}:
+            </div>
             <div className={styles.date_value}>
               {" "}
               {formatUnixTimeStampToDateTime(listItem.starts_from)}
@@ -53,7 +61,9 @@ class YourExhibitionListingPage extends Component {
           </DivRow>
 
           <DivRow className={styles.date_container}>
-            <div className={styles.date_title}>Ends On:</div>
+            <div className={styles.date_title}>
+              {translate("your_exhibition_list_page.ends_on")}:
+            </div>
             <div className={styles.date_value}>
               {" "}
               {formatUnixTimeStampToDateTime(listItem.ends_till)}
@@ -62,12 +72,14 @@ class YourExhibitionListingPage extends Component {
 
           <DivRow className={styles.action_container}>
             <div className={styles.last_date}>
-              LAST {listItem.last_date_of_enrollment} LEFT TO TO SUBMIT PRODUCTS
+              {translate("your_exhibition_list_page.last")}
+              {listItem.last_date_of_enrollment}
+              {translate("your_exhibition_list_page.left_to_enroll")}
             </div>
             <CapsuleButton
               onClick={() => this.onClickViewExhibitionDetail(listItem)}
             >
-              View Details
+              {translate("your_exhibition_list_page.view_details")}
             </CapsuleButton>
           </DivRow>
         </DivColumn>
@@ -78,12 +90,13 @@ class YourExhibitionListingPage extends Component {
     const {
       exhibitionReducer: { subscribedExhibitionList },
       getEnrolledExhibitionAction,
+      translate,
     } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.exhibition_page_container}>
           <NavHeader
-            title="Your Exhibitions"
+            title={translate("your_exhibition_list_page.your_exhibition")}
             onBackClick={this.onBackPress}
           ></NavHeader>
           <DivColumn fillParent className={styles.content_container}>
@@ -120,4 +133,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(YourExhibitionListingPage));
+)(navigatorHoc(translatorHoc(YourExhibitionListingPage)));
