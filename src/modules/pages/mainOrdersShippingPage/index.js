@@ -22,6 +22,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import isEmpty from "lodash/isEmpty";
 import { formatUnixTimeStampToDateTime } from "Utils/formatHelper";
+import translatorHoc from "Hoc/translatorHoc";
 
 class MainOrdersShippingPage extends Component {
   onBackPress = () => {
@@ -83,12 +84,13 @@ class MainOrdersShippingPage extends Component {
       orderReducer: { order },
       match: { params },
       getOrderDetailsAction,
+      translate,
     } = this.props;
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <NavHeader
-          title="Pickup Request Details"
+          title={translate("pickup_request_details.title")}
           onBackClick={this.onBackPress}
         ></NavHeader>
         <InitialPageLoader
@@ -97,18 +99,22 @@ class MainOrdersShippingPage extends Component {
           <DivColumn className={styles.order_page_container}>
             <DivColumn className={styles.order_container}>
               <div className={styles.order_id}>
-                Order ID: <b>{order.id}</b>
+                {translate("pickup_request_details.order_id")}
+                <b>{order.id}</b>
               </div>
               <div className={styles.placed_on}>
-                Placed On: {formatUnixTimeStampToDateTime(order.created_at)}
+                {translate("pickup_request_details.places_on")}
+                {formatUnixTimeStampToDateTime(order.created_at)}
               </div>
               <div className={styles.status}>{order.status_label}</div>
             </DivColumn>
           </DivColumn>
-          <div className={styles.header}>PICKUP INFORMATION</div>
+          <div className={styles.header}>
+            {translate("pickup_request_details.pickup_information")}
+          </div>
           <DivColumn className={styles.normal_container}>
             <DivRow className={styles.title}>
-              Requested Pickup On:{" "}
+              {translate("pickup_request_details.req_pickup_on")}:{" "}
               <div className={styles.value}>
                 {!isEmpty(order.pickup_request)
                   ? order.pickup_request.requested_pickup_on
@@ -117,19 +123,25 @@ class MainOrdersShippingPage extends Component {
             </DivRow>
           </DivColumn>
 
-          <div className={styles.header}>CUSTOMER DETAILS</div>
+          <div className={styles.header}>
+            {translate("pickup_request_details.customer_details")}
+          </div>
           <DivColumn className={styles.normal_container}>
             <DivRow className={styles.title}>
-              Name:{" "}
+              {translate("pickup_request_details.name")}:{" "}
               <div className={styles.value}>
                 {order.customer_first_name} {order.customer_last_name}
               </div>
             </DivRow>
             <DivRow className={styles.title}>
-              Email: <div className={styles.value}>{order.customer_email}</div>
+              {translate("pickup_request_details.email")}:{" "}
+              <div className={styles.value}>{order.customer_email}</div>
             </DivRow>
           </DivColumn>
-          <div className={styles.header}>PRODUCTS ORDERED</div>
+          <div className={styles.header}>
+            {" "}
+            {translate("pickup_request_details.products_order")}
+          </div>
           <DataTable
             columns={columns}
             customStyles={customStyles}
@@ -140,7 +152,9 @@ class MainOrdersShippingPage extends Component {
           <HorizontalBorder />
           <DivRow className={styles.address_container}>
             <DivColumn className={styles.address_item_container}>
-              <div className={styles.title}>SHIPPING ADDRESS</div>
+              <div className={styles.title}>
+                {translate("pickup_request_details.shipping_address")}
+              </div>
               <div className={styles.description}>
                 {!isEmpty(order.shipping_address) && (
                   <span>
@@ -157,7 +171,9 @@ class MainOrdersShippingPage extends Component {
             </DivColumn>
 
             <DivColumn className={styles.address_item_container}>
-              <div className={styles.title}>BILLING ADDRESS</div>
+              <div className={styles.title}>
+                {translate("pickup_request_details.billing_address")}
+              </div>
               <div className={styles.description}>
                 {!isEmpty(order.billing_address) && (
                   <span>
@@ -174,12 +190,16 @@ class MainOrdersShippingPage extends Component {
             </DivColumn>
 
             <DivColumn className={styles.address_item_container}>
-              <div className={styles.title}>SHIPPING METHOD</div>
+              <div className={styles.title}>
+                {translate("pickup_request_details.shipping_methods")}
+              </div>
               <div className={styles.description}>{order.shipping_title}</div>
             </DivColumn>
 
             <DivColumn className={styles.address_item_container}>
-              <div className={styles.title}>PAYMENT METHOD</div>
+              <div className={styles.title}>
+                {translate("pickup_request_details.payment_method")}
+              </div>
               <div className={styles.description}>{order.payment_title}</div>
             </DivColumn>
           </DivRow>
@@ -204,4 +224,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(MainOrdersShippingPage));
+)(navigatorHoc(translatorHoc(MainOrdersShippingPage)));

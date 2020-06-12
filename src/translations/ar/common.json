@@ -176,5 +176,47 @@
     "starts_at": "يبدأ في",
     "ends_on": "ينتهي",
     "your_exhibition": "المعارض الخاصة بك"
+  },
+  "order_details": {
+    "title": "تفاصيل الطلب",
+    "request": "إنشاء طلب الالتقاط",
+    "view_request": "عرض طلب الالتقاط",
+    "order_id": "رقم التعريف الخاص بالطلب",
+    "places_on": "موضوع على",
+    "customer_details": "تفاصيل العميل",
+    "name": "اسم",
+    "product_list": "قائمة المنتجات",
+    "shipping_address": "عنوان الشحن",
+    "billing_address": "عنوان وصول الفواتير",
+    "shipping_methods": "طريقة الشحن",
+    "payment_method": "طريقة الدفع او السداد",
+    "email": "البريد الإلكتروني",
+    "print_invoice": "فاتورة طباعة"
+  },
+  "pickup_request_details": {
+    "title": "تفاصيل الطلب",
+    "req_pickup_on": "مطلوب الاستلام",
+    "pickup_information": "معلومات الالتقاط",
+    "order_id": "رقم التعريف الخاص بالطلب",
+    "places_on": "موضوع على",
+    "customer_details": "تفاصيل العميل",
+    "name": "اسم",
+    "product_list": "قائمة المنتجات",
+    "shipping_address": "عنوان الشحن",
+    "billing_address": "عنوان وصول الفواتير",
+    "shipping_methods": "طريقة الشحن",
+    "payment_method": "طريقة الدفع او السداد",
+    "email": "البريد الإلكتروني",
+    "products_order": "المنتجات المطلوبة"
+  },
+  "transaction_details_page": {
+    "title": "تفاصيل المعاملة",
+    "transaction_id": "رقم المعاملة",
+    "created_on": "تم إنشاؤها على",
+    "payment_details": "بيانات الدفع",
+    "payment_method": " طريقة الدفع او السداد",
+    "total": "مجموع",
+    "comment": "تعليق",
+    "products_order": "المنتجات المطلوبة"
   }
 }

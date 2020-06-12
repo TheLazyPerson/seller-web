@@ -227,5 +227,47 @@
     "starts_at": "Starts At",
     "ends_on": "Ends On",
     "your_exhibition": "Your Exhibitions"
+  },
+  "order_details": {
+    "title": "Order Detail",
+    "request": "Create Pickup Request",
+    "view_request": " View Pickup Request",
+    "order_id": "Order ID",
+    "places_on": " Placed On",
+    "customer_details": "CUSTOMER DETAILS",
+    "name": "Name",
+    "product_list": "PRODUCT LIST",
+    "shipping_address": "SHIPPING ADDRESS",
+    "billing_address": "BILLING ADDRESS",
+    "shipping_methods": "SHIPPING METHOD",
+    "payment_method": "PAYMENT METHOD",
+    "email": "Email",
+    "print_invoice": "Print Invoice"
+  },
+  "pickup_request_details": {
+    "title": "Pickup Request Details",
+    "req_pickup_on": " Requested Pickup On",
+    "pickup_information": "PICKUP INFORMATION",
+    "order_id": "Order ID",
+    "places_on": " Placed On",
+    "customer_details": "CUSTOMER DETAILS",
+    "name": "Name",
+    "product_list": "PRODUCT LIST",
+    "shipping_address": "SHIPPING ADDRESS",
+    "billing_address": "BILLING ADDRESS",
+    "shipping_methods": "SHIPPING METHOD",
+    "payment_method": "PAYMENT METHOD",
+    "email": "Email",
+    "products_order": "PRODUCTS ORDERED"
+  },
+  "transaction_details_page": {
+    "title": "TRASACTION DETAIL",
+    "transaction_id": "TRANSACTION ID",
+    "created_on": "Created On",
+    "payment_details": "PAYMENT DETAILS",
+    "payment_method": " Payment Method",
+    "total": "Total",
+    "comment": "Comment",
+    "products_order": "PRODUCTS ORDERED"
   }
 }
