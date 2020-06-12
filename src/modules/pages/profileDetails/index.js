@@ -39,7 +39,8 @@ class ProfileDetails extends Component {
       getProfileDetailsAction,
       isRTL,
       bankDetailsReducer: { bankDetails },
-      getBankDetailsAction
+      getBankDetailsAction,
+      translate,
     } = this.props;
 
     return (
@@ -52,21 +53,23 @@ class ProfileDetails extends Component {
           </DivColumn>
           <InitialPageLoader initialPageApi={getProfileDetailsAction}>
             <DivColumn fillParent>
-              <NavHeader title="profile details">
+              <NavHeader title={translate("profile_details.title")}>
                 <DivRow className={styles.header_button_container}>
                   <SecondaryCapsuleButton
                     className={styles.reset_password_button}
                     onClick={this.navigateToChangePass}
                   >
-                    Change Password
+                    {translate("profile_details.change_passwword")}
                   </SecondaryCapsuleButton>
                   <CapsuleButton onClick={this.navigateToEditProfile}>
-                    Edit
+                    {translate("profile_details.edit")}
                   </CapsuleButton>
                 </DivRow>
               </NavHeader>
               <DivColumn className={styles.field_container}>
-                <div className={styles.title}>First Name :</div>
+                <div className={styles.title}>
+                  {translate("profile_details.first_name")} :
+                </div>
                 <div className={styles.value}>
                   {userDetails.first_name
                     ? userDetails.first_name
@@ -74,7 +77,9 @@ class ProfileDetails extends Component {
                 </div>
               </DivColumn>
               <DivColumn className={styles.field_container}>
-                <div className={styles.title}>Last Name :</div>
+                <div className={styles.title}>
+                  {translate("profile_details.last_name")} :
+                </div>
                 <div className={styles.value}>
                   {userDetails.last_name
                     ? userDetails.last_name
@@ -82,13 +87,17 @@ class ProfileDetails extends Component {
                 </div>
               </DivColumn>
               <DivColumn className={styles.field_container}>
-                <div className={styles.title}>Email :</div>
+                <div className={styles.title}>
+                  {translate("profile_details.email")} :
+                </div>
                 <div className={styles.value}>
                   {userDetails.email ? userDetails.email : "Not Available"}
                 </div>
               </DivColumn>
               <DivColumn className={styles.field_container}>
-                <div className={styles.title}>Civil ID :</div>
+                <div className={styles.title}>
+                  {translate("profile_details.civil_id")} :
+                </div>
                 <div className={styles.value}>
                   {userDetails.civil_id
                     ? userDetails.civil_id
@@ -96,19 +105,25 @@ class ProfileDetails extends Component {
                 </div>
               </DivColumn>
               <DivColumn className={styles.field_container}>
-                <div className={styles.title}>Phone Number :</div>
+                <div className={styles.title}>
+                  {translate("profile_details.phone_number")} :
+                </div>
                 <div className={styles.value}>
                   {userDetails.phone ? userDetails.phone : "Not Available"}
                 </div>
               </DivColumn>
               <DivColumn className={styles.field_container}>
-                <div className={styles.title}>Gender :</div>
+                <div className={styles.title}>
+                  {translate("profile_details.gender")} :
+                </div>
                 <div className={styles.value}>
                   {userDetails.gender ? userDetails.gender : "Not Available"}
                 </div>
               </DivColumn>
               <DivColumn className={styles.field_container}>
-                <div className={styles.title}>Birthday :</div>
+                <div className={styles.title}>
+                  {translate("profile_details.birthday")} :
+                </div>
                 <div className={styles.value}>
                   {userDetails.birthday
                     ? userDetails.birthday
@@ -118,15 +133,17 @@ class ProfileDetails extends Component {
             </DivColumn>
           </InitialPageLoader>
           <InitialPageLoader initialPageApi={getBankDetailsAction}>
-            <NavHeader title="bank details">
+            <NavHeader title={translate("profile_details.bankdetails")}>
               <DivRow className={styles.header_button_container}>
                 <CapsuleButton onClick={this.navigateToEditBankDetails}>
-                  Edit
+                  {translate("profile_details.edit")}
                 </CapsuleButton>
               </DivRow>
             </NavHeader>
             <DivColumn className={styles.field_container}>
-              <div className={styles.title}>Account Holder :</div>
+              <div className={styles.title}>
+                {translate("profile_details.bankdetails")}:
+              </div>
               <div className={styles.value}>
                 {bankDetails.account_holder
                   ? bankDetails.account_holder
@@ -134,7 +151,9 @@ class ProfileDetails extends Component {
               </div>
             </DivColumn>
             <DivColumn className={styles.field_container}>
-              <div className={styles.title}>Bank Name :</div>
+              <div className={styles.title}>
+                {translate("profile_details.bank_name")} :
+              </div>
               <div className={styles.value}>
                 {bankDetails.bank_name
                   ? bankDetails.bank_name
@@ -142,7 +161,9 @@ class ProfileDetails extends Component {
               </div>
             </DivColumn>
             <DivColumn className={styles.field_container}>
-              <div className={styles.title}>IBAN :</div>
+              <div className={styles.title}>
+                {translate("profile_details.IBAN")} :
+              </div>
               <div className={styles.value}>
                 {bankDetails.iban ? bankDetails.iban : "Not Available"}
               </div>
@@ -154,20 +175,20 @@ class ProfileDetails extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     profileDetailsReducer: state.profileDetailsReducer,
-    bankDetailsReducer: state.bankDetailsReducer
+    bankDetailsReducer: state.bankDetailsReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     getProfileDetailsAction: bindActionCreators(
       getProfileDetailsAction,
       dispatch
     ),
-    getBankDetailsAction: bindActionCreators(getBankDetailsAction, dispatch)
+    getBankDetailsAction: bindActionCreators(getBankDetailsAction, dispatch),
   };
 };
 

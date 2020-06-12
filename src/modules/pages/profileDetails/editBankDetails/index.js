@@ -14,34 +14,35 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { editBankDetailsAction } from "Core/modules/bankDetails/bankDetailsActions";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
+import translatorHoc from "Hoc/translatorHoc";
 
 class EditBankDetails extends Component {
-  validate = values => {
+  validate = (values) => {
     const errors = {};
     const validators = {
       account_holder: isEmptyValidator(values.accountHolder),
       bank_name: isEmptyValidator(values.bankName),
-      iban: isEmptyValidator(values.iban)
+      iban: isEmptyValidator(values.iban),
     };
 
-    Object.keys(validators).forEach(key => {
+    Object.keys(validators).forEach((key) => {
       if (!validators[key].result) errors[key] = validators[key].error;
     });
 
     return errors;
   };
 
-  onSubmit = form => {
+  onSubmit = (form) => {
     const {
       editBankDetailsAction,
       navigateTo,
-      showSuccessFlashMessage
+      showSuccessFlashMessage,
     } = this.props;
 
     editBankDetailsAction({
       account_holder: form.accountHolder,
       bank_name: form.bankName,
-      iban: form.iban
+      iban: form.iban,
     }).then(({ payload }) => {
       if (payload.code === 200 || payload.code === 201) {
         navigateTo("profile-details");
@@ -61,12 +62,16 @@ class EditBankDetails extends Component {
 
   render() {
     const {
-      bankDetailsReducer: { bankDetails }
+      bankDetailsReducer: { bankDetails },
+      translate,
     } = this.props;
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <NavHeader title="Edit Bank Details" onBackClick={this.onBackPress} />
+        <NavHeader
+          title={translate("profile_details.edit_bank_details")}
+          onBackClick={this.onBackPress}
+        />
         <Form
           onSubmit={this.onSubmit}
           validate={this.validate}
@@ -75,7 +80,7 @@ class EditBankDetails extends Component {
               ? bankDetails.account_holder
               : "",
             bankName: bankDetails.bank_name ? bankDetails.bank_name : "",
-            iban: bankDetails.iban ? bankDetails.iban : ""
+            iban: bankDetails.iban ? bankDetails.iban : "",
           }}
           render={({ handleSubmit, form, submitting, pristine, values }) => (
             <form className={styles.form_container} onSubmit={handleSubmit}>
@@ -85,7 +90,7 @@ class EditBankDetails extends Component {
                     meta={meta}
                     {...input}
                     type="text"
-                    placeholder="Account Holder Name"
+                    placeholder={translate("profile_details.account_holder")}
                     className={styles.input_text}
                   />
                 )}
@@ -96,7 +101,7 @@ class EditBankDetails extends Component {
                     meta={meta}
                     {...input}
                     type="text"
-                    placeholder="Bank Name"
+                    placeholder={translate("profile_details.bank_name")}
                     className={styles.input_text}
                   />
                 )}
@@ -107,7 +112,7 @@ class EditBankDetails extends Component {
                     meta={meta}
                     {...input}
                     type="text"
-                    placeholder="IBAN"
+                    placeholder={translate("profile_details.IBAN")}
                     className={styles.input_text}
                   />
                 )}
@@ -115,10 +120,10 @@ class EditBankDetails extends Component {
 
               <DivRow className={styles.form_button_container}>
                 <SecondaryCapsuleButton onClick={this.onClickCancel}>
-                  Cancel
+                  {translate("profile_details.cancle")}
                 </SecondaryCapsuleButton>
                 <CapsuleButton type="submit" disabled={submitting}>
-                  Confirm
+                  {translate("profile_details.submit")}
                 </CapsuleButton>
               </DivRow>
             </form>
@@ -128,23 +133,23 @@ class EditBankDetails extends Component {
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    bankDetailsReducer: state.bankDetailsReducer
+    bankDetailsReducer: state.bankDetailsReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     editBankDetailsAction: bindActionCreators(editBankDetailsAction, dispatch),
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
-    )
+    ),
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(EditBankDetails));
+)(navigatorHoc(translatorHoc(EditBankDetails)));

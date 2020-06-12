@@ -27,7 +27,8 @@ class MarketPlace extends Component {
     const {
       marketplaceProfileReducer: { profile },
       getMarketplaceProfileAction,
-      isRTL
+      isRTL,
+      translate,
     } = this.props;
 
     return (
@@ -36,23 +37,28 @@ class MarketPlace extends Component {
       <DivColumn
         className={`${styles.details_container} ${isRTL ? styles.rtl : ""}`}
       >
-        <NavHeader title="Marketplace Profile details">
+        <NavHeader title={translate("marketplace_profile_details.title")}>
           <DivRow className={styles.header_button_container}>
             <CapsuleButton onClick={this.navigateToMarketplaceEditProfile}>
-              Edit
+              {translate("marketplace_profile_details.edit")}
             </CapsuleButton>
           </DivRow>
         </NavHeader>
         <InitialPageLoader initialPageApi={getMarketplaceProfileAction}>
           <DivColumn fillParent>
             <DivColumn className={styles.field_container}>
-              <div className={styles.title}>Shop Name :</div>
+              <div className={styles.title}>
+                {" "}
+                {translate("marketplace_profile_details.shop_name")} :
+              </div>
               <div className={styles.value}>
                 {profile.shop_name ? profile.shop_name : "Not Available"}
               </div>
             </DivColumn>
             <DivColumn className={styles.field_container}>
-              <div className={styles.title}>Contact Number :</div>
+              <div className={styles.title}>
+                {translate("marketplace_profile_details.contact_number")} :
+              </div>
               <div className={styles.value}>
                 {profile.contact_number
                   ? profile.contact_number
@@ -60,13 +66,17 @@ class MarketPlace extends Component {
               </div>
             </DivColumn>
             <DivColumn className={styles.field_container}>
-              <div className={styles.title}>Email Address :</div>
+              <div className={styles.title}>
+                {translate("marketplace_profile_details.email_address")}:
+              </div>
               <div className={styles.value}>
                 {profile.shop_email ? profile.shop_email : "Not Available"}
               </div>
             </DivColumn>
             <DivColumn className={styles.field_container}>
-              <div className={styles.title}>Address :</div>
+              <div className={styles.title}>
+                {translate("marketplace_profile_details.address")} :
+              </div>
               <div className={styles.value}>
                 <span>
                   {profile.area},{profile.block_number}, {profile.house_number},
@@ -83,18 +93,18 @@ class MarketPlace extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    marketplaceProfileReducer: state.marketplaceProfileReducer
+    marketplaceProfileReducer: state.marketplaceProfileReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     getMarketplaceProfileAction: bindActionCreators(
       getMarketplaceProfileAction,
       dispatch
-    )
+    ),
   };
 };
 

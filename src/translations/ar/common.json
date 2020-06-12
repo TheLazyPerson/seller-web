@@ -218,5 +218,52 @@
     "total": "مجموع",
     "comment": "تعليق",
     "products_order": "المنتجات المطلوبة"
+  },
+  "marketplace_profile_details": {
+    "title": "تفاصيل ملف تعريف السوق",
+    "edit": "تعديل",
+    "shop_name": "اسم المحل",
+    "contact_number": "رقم الاتصال",
+    "email_address": "عنوان بريد الكتروني",
+    "address": "عنوان"
+  },
+  "profile_details": {
+    "title": "تفاصيل الملف الشخصي",
+    "change_passwword": "تغيير كلمة المرور",
+    "edit": "تعديل",
+    "first_name": "الاسم الاول",
+    "last_name": "الكنية",
+    "email": "البريد الإلكتروني",
+    "civil_id": "البطاقة المدنية",
+    "phone_number": "رقم الهاتف",
+    "gender": "جنس",
+    "birthday": "عيد الميلاد",
+    "bankdetails": "التفاصيل المصرفية",
+    "account_holder": "مالك الحساب",
+    "bank_name": "اسم البنك",
+    "IBAN": "رقم الحساب بصيغة IBAN",
+    "edit_bank_details": "تحرير تفاصيل البنك",
+    "cancle": "الإلغاء",
+    "submit": "إرسال"
+  },
+  "edit_profile": {
+    "birthday": "عيد الميلاد",
+    "title": "تعديل تفاصيل الملف الشخصي",
+    "first_name": "الاسم الاول",
+    "last_name": "الكنية",
+    "gender": "جنس",
+    "mobile_number": "رقم الهاتف المحمول",
+    "email": "عنوان بريد الكتروني",
+    "civil_id": "الهوية المدنية",
+    "cancel": "إلغاء",
+    "save_details": "حفظ التفاصيل"
+  },
+  "change_password_page": {
+    "title": "تغيير كلمة المرور",
+    "old_password": "كلمة سر قديمة",
+    "new_passwword": "كلمة السر الجديدة",
+    "confirm_password": "تأكيد كلمة المرور",
+    "cancle": "إلغاء",
+    "confirm": "تؤكد"
   }
 }

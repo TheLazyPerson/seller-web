@@ -15,22 +15,22 @@ import {
   nameValidator,
   emailValidator,
   passwordValidator,
-  isEmptyValidator
+  isEmptyValidator,
 } from "Utils/validators";
 import translatorHoc from "Hoc/translatorHoc";
 
 class MarketplaceDetail extends Component {
-  onSubmit = form => {
+  onSubmit = (form) => {
     const {
       postSignupAction,
       navigateTo,
-      showSuccessFlashMessage
+      showSuccessFlashMessage,
     } = this.props;
 
     postSignupAction({
       shopp_name: form.shopp_name,
       shop_contact_number: form.shop_contact_number,
-      shop_email_addres: form.shop_email_addres
+      shop_email_addres: form.shop_email_addres,
     }).then(({ payload }) => {
       if (payload.code == 200 || payload.code == 201) {
         navigateTo("signin");
@@ -68,7 +68,7 @@ class MarketplaceDetail extends Component {
           className={styles.page_container}
         >
           <div className={styles.signin_title_text}>
-            {translate("marketplace_detail_page.page_title")}
+            {translate("edit_marketplace_detail_page.page_title")}
           </div>
           <Form
             onSubmit={this.onSubmit}
@@ -82,7 +82,7 @@ class MarketplaceDetail extends Component {
                       type="text"
                       {...input}
                       placeholder={translate(
-                        "marketplace_detail_page.shop_name"
+                        "edit_marketplace_detail_page.shop_name"
                       )}
                       className={styles.input_text}
                     />
@@ -96,7 +96,7 @@ class MarketplaceDetail extends Component {
                       type="text"
                       {...input}
                       placeholder={translate(
-                        "marketplace_detail_page.shop_contact_number"
+                        "edit_marketplace_detail_page.shop_contact_number"
                       )}
                       className={styles.input_text}
                     />
@@ -110,7 +110,7 @@ class MarketplaceDetail extends Component {
                       type="email"
                       {...input}
                       placeholder={translate(
-                        "marketplace_detail_page.shop_email_addres"
+                        "edit_marketplace_detail_page.shop_email_addres"
                       )}
                       className={styles.input_text}
                     />
@@ -118,7 +118,7 @@ class MarketplaceDetail extends Component {
                 </Field>
                 <input
                   type="submit"
-                  value={translate("marketplace_detail_page.create")}
+                  value={translate("edit_marketplace_detail_page.create")}
                   className={styles.input_submit}
                   disabled={submitting}
                 />
@@ -131,24 +131,24 @@ class MarketplaceDetail extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     signupReducer: state.signupReducer,
-    signInReducer: state.signInReducer
+    signInReducer: state.signInReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     // postSignupAction: bindActionCreators(postSignupAction, dispatch),
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
-    )
+    ),
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(translatorHoc(navigatorHoc(MarketplaceDetail)));
+)(navigatorHoc(translatorHoc(MarketplaceDetail)));

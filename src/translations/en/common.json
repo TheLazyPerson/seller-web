@@ -141,13 +141,7 @@
     "reset_password_button": "Reset Password",
     "sub_title1": "Your token is expired or password is already updated "
   },
-  "marketplace_detail_page": {
-    "create": "Next",
-    "page_title": "Marketplace Details",
-    "shop_name": "Shop Name",
-    "shop_contact_number": "Shop Contact Number",
-    "shop_email_addres": "Shop Email Address"
-  },
+
   "bank_detail_page": {
     "create": "Next",
     "page_title": "Bank Details",
@@ -269,5 +263,59 @@
     "total": "Total",
     "comment": "Comment",
     "products_order": "PRODUCTS ORDERED"
+  },
+  "marketplace_profile_details": {
+    "title": "Marketplace Profile details",
+    "edit": "Edit",
+    "shop_name": "Shop Name",
+    "contact_number": "Contact Number",
+    "email_address": "Email Address ",
+    "address": "Address"
+  },
+  "edit_marketplace_detail_page": {
+    "create": "Next",
+    "page_title": "Marketplace Details",
+    "shop_name": "Shop Name",
+    "shop_contact_number": "Shop Contact Number",
+    "shop_email_addres": "Shop Email Address"
+  },
+  "profile_details": {
+    "title": "PROFILE DETAILS",
+    "change_passwword": "Change Password",
+    "edit": "Edit",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "email": "Email",
+    "civil_id": "Civil ID",
+    "phone_number": "Phone Number",
+    "gender": "Gender",
+    "birthday": "Birthday",
+    "bankdetails": "Bank Details",
+    "account_holder": "Account Holder ",
+    "bank_name": "Bank Name ",
+    "IBAN": "IBAN",
+    "edit_bank_details": "Edit Bank Details",
+    "cancle": "Cancle",
+    "submit": "Submit"
+  },
+  "edit_profile": {
+    "birthday": "Birthday",
+    "title": "Edit Profile details",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "gender": "Gender",
+    "mobile_number": "Mobile Number",
+    "email": "Email Address",
+    "civil_id": "Civil Id",
+    "cancel": "Cancel",
+    "save_details": "Save Details"
+  },
+  "change_password_page": {
+    "title": "Change password",
+    "old_password": "Old Password",
+    "new_passwword": "New Password",
+    "confirm_password": "Confirm Password",
+    "cancle": "Cancel",
+    "confirm": "Confirm"
   }
 }
