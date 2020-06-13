@@ -23,7 +23,7 @@ import FullwidthSecondaryHeader from "CommonContainers/fullwidthSecondaryHeader"
 import { landingPageHeaderItems } from "Constants/landingPageHeaderConstants";
 import HorizontalBorder from "CommonComponents/horizontalBorder";
 import HostExhibition from "./hostExhibition";
-import translatorHoc from 'Hoc/translatorHoc';
+import translatorHoc from "Hoc/translatorHoc";
 
 class LandingPage extends Component {
   onClickStartSelling = () => {
@@ -52,7 +52,7 @@ class LandingPage extends Component {
     const {
       subscriptionReducer: { subscriptionPlanList },
       getPlanListAction,
-      translate
+      translate,
     } = this.props;
 
     {
@@ -64,7 +64,6 @@ class LandingPage extends Component {
     const { activeTab } = this.state;
 
     return (
-
       <FullWidthContainer whiteColor>
         <DivRow fillParent className={styles.hero_section_container}>
           <DivRow
@@ -75,10 +74,10 @@ class LandingPage extends Component {
           >
             <DivColumn fillParent>
               <h1 className={styles.primary_header}>
-              {translate('main_home_page.title')}
+                {translate("main_home_page.title")}
               </h1>
               <h2 className={styles.secondary_header}>
-              {translate('main_home_page.subtitle')}
+                {translate("main_home_page.subtitle")}
               </h2>
               <DivRow
                 verticalCenter
@@ -86,7 +85,7 @@ class LandingPage extends Component {
                 className={styles.start_selling_button}
                 onClick={this.onClickStartSelling}
               >
-                 {translate('main_home_page.start_selling')}
+                {translate("main_home_page.start_selling")}
               </DivRow>
             </DivColumn>
             <DivColumn fillParent className={styles.app_icon_container}>
@@ -120,7 +119,7 @@ class LandingPage extends Component {
                 className={styles.start_selling_button_pricing}
                 onClick={this.onClickStartSelling}
               >
-               {translate('main_home_page.start_selling')}
+                {translate("main_home_page.start_selling")}
               </DivRow>
             </DivColumn>
 
@@ -154,4 +153,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(translatorHoc(LandingPage)));
+)(translatorHoc(navigatorHoc(LandingPage)));
