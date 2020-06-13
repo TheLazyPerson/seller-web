@@ -107,7 +107,7 @@ class EditMarketplaceProfile extends Component {
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <NavHeader
-          title="Marketplace Profile details"
+          title={translate("edit_marketplace_detail_page.page_title")}
           onBackClick={this.onBackPress}
         />
         <Form
@@ -142,7 +142,9 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="Shop Name"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.shop_name"
+                      )}
                       className={styles.input_text}
                     />
                   )}
@@ -152,7 +154,9 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="Contact Number"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.shop_contact_number"
+                      )}
                       className={styles.input_text}
                     />
                   )}
@@ -163,13 +167,19 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="Shop Email Address"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.shop_email_addres"
+                      )}
                       className={styles.input_text}
                     />
                   )}
                 </Field>
               </DivColumn>
-              <NavHeader title="Address details" />
+              <NavHeader
+                title={translate(
+                  "edit_marketplace_detail_page.address_details"
+                )}
+              />
 
               <DivColumn className={styles.form_container}>
                 <Field name="area">
@@ -177,7 +187,9 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="Area*"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.area"
+                      )}
                       className={styles.input_text}
                     />
                   )}
@@ -187,7 +199,9 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="Block Number*"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.block_number"
+                      )}
                       className={styles.input_text}
                     />
                   )}
@@ -198,7 +212,9 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="House Number*"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.house_number"
+                      )}
                       className={styles.input_text}
                     />
                   )}
@@ -209,7 +225,9 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="Street Number*"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.street_number"
+                      )}
                       className={styles.input_text}
                     />
                   )}
@@ -219,7 +237,9 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="Avenue"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.avenue"
+                      )}
                       className={styles.input_text}
                     />
                   )}
@@ -230,7 +250,9 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="Landmark"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.landmark"
+                      )}
                       className={styles.input_text}
                     />
                   )}
@@ -241,7 +263,9 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="Home/Office*"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.home"
+                      )}
                       className={styles.input_text}
                     />
                   )}
@@ -251,7 +275,9 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="City"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.city"
+                      )}
                       className={styles.input_text}
                     />
                   )}
@@ -275,10 +301,10 @@ class EditMarketplaceProfile extends Component {
 
                 <DivRow className={styles.form_button_container}>
                   <SecondaryCapsuleButton onClick={this.onClickCancel}>
-                    Cancel
+                    {translate("edit_marketplace_detail_page.cancle")}
                   </SecondaryCapsuleButton>
                   <CapsuleButton type="submit" disabled={submitting}>
-                    Save Details
+                    {translate("edit_marketplace_detail_page.save_details")}
                   </CapsuleButton>
                 </DivRow>
               </DivColumn>

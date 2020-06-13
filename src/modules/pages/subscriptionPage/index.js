@@ -32,6 +32,7 @@ import Button from "@material-ui/core/Button";
 import memoize from "memoize-one";
 import BuyPlanModal from "./buyAddtionalPlanModal";
 import isEmpty from "lodash/isEmpty";
+import translatorHoc from "Hoc/translatorHoc";
 
 class SubscriptionPage extends Component {
   state = {
@@ -136,9 +137,9 @@ class SubscriptionPage extends Component {
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.subscription_page_container}>
-          <NavHeader title="Subscription Details">
+          <NavHeader title={translate("subscription_page.title")}>
             <CapsuleButton onClick={() => this.onClickBuyAdditionalPlan()}>
-              BUY ADDITIONAL PLAN
+              {translate("subscription_page.buy_additional_plan")}
             </CapsuleButton>
           </NavHeader>
 
@@ -153,7 +154,7 @@ class SubscriptionPage extends Component {
 
               <DivColumn fillParent className={styles.additional_plans}>
                 <DivColumn className={styles.additional_plans_title}>
-                  Subscribed Plans:
+                  {translate("subscription_page.plan")} :
                 </DivColumn>
                 <DivColumn
                   fillParent
@@ -164,7 +165,9 @@ class SubscriptionPage extends Component {
                       <DivRow>
                         <DataTableContainer
                           data={sellerSubscriptionList}
-                          title="SubscriptionLost"
+                          title={translate(
+                            "subscription_page.subscription_lost"
+                          )}
                           columns={this.columns()}
                         />
                       </DivRow>
@@ -240,4 +243,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(SubscriptionPage));
+)(navigatorHoc(translatorHoc(SubscriptionPage)));

@@ -227,6 +227,24 @@
     "email_address": "عنوان بريد الكتروني",
     "address": "عنوان"
   },
+  "edit_marketplace_detail_page": {
+    "create": "التالى",
+    "page_title": "تفاصيل السوق",
+    "shop_name": "اسم المحل",
+    "shop_contact_number": "رقم الاتصال",
+    "shop_email_addres": "عنوان بريد الكتروني",
+    "area": "منطقة*",
+    "block_number": "حظر الرقم",
+    "house_number": "رقم الدار",
+    "street_number": "رقم الشارع",
+    "avenue": "السبيل",
+    "landmark": "معلم معروف",
+    "home": "مكتب البيت*",
+    "city": "مدينة",
+    "cancle": "إلغاء",
+    "save_details": "حفظ التفاصيل",
+    "address_details": "تفاصيل العنوان"
+  },
   "profile_details": {
     "title": "تفاصيل الملف الشخصي",
     "change_passwword": "تغيير كلمة المرور",
@@ -265,5 +283,23 @@
     "confirm_password": "تأكيد كلمة المرور",
     "cancle": "إلغاء",
     "confirm": "تؤكد"
+  },
+  "subscription_page": {
+    "title": "تفاصيل الاشتراك",
+    "buy_additional_plan": "شراء خطة إضافية ",
+    "plan": " الخطط المكتتبة",
+    "subscription_lost": "الاشتراك"
+  },
+  "setting_page": {
+    "header_title": "الإعدادات",
+    "notification": "تنبيه",
+    "subtitile": "هذا لن يؤثر على تحديثات الطلب."
+  },
+  "help_center": {
+    "header_title": "مركز المساعدة",
+    "more_help": "بحاجة إلى مزيد من المساعدة منا",
+    "your_concern": "موجز عن قلقك؟",
+    "callback": "احصل على رد",
+    "response_message": "تم إرسال التعليقات بنجاح"
   }
 }
