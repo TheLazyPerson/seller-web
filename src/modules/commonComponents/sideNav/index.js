@@ -6,6 +6,8 @@ import styles from "./side_nav.module.scss";
 import map from "lodash/map";
 import navigatorHoc from "Hoc/navigatorHoc";
 import includes from "lodash/includes";
+import translatorHoc from "Hoc/translatorHoc";
+import { connect } from "react-redux";
 
 class SideNav extends Component {
   state = {
@@ -114,6 +116,9 @@ class SideNav extends Component {
   };
 
   getListItem = (isSelected, listItem) => {
+    const {
+      languageReducer: { languageCode },
+    } = this.props;
     return (
       <DivRow
         className={`${styles.nav_item} ${isSelected ? styles.is_selected : ""}`}
@@ -125,8 +130,10 @@ class SideNav extends Component {
           alt="nav"
         />
         <DivColumn>
-          <div className={styles.nav_title}>{listItem.title}</div>
-          <div className={styles.nav_description}>{listItem.description}</div>
+          <div className={styles.nav_title}>{listItem[languageCode].title}</div>
+          <div className={styles.nav_description}>
+            {listItem[languageCode].description}
+          </div>
         </DivColumn>
         <div className={styles.nav_indicator}>></div>
       </DivRow>
@@ -135,7 +142,9 @@ class SideNav extends Component {
 
   render() {
     const { selectedRoute } = this.state;
-
+    const {
+      languageReducer: { languageCode },
+    } = this.props;
     return (
       <DivColumn verticalCenter className={styles.side_nav_container}>
         {map(profileListItem, (listItem) => {
@@ -150,7 +159,9 @@ class SideNav extends Component {
 
           return (
             <DivColumn className={styles.list_container}>
-              <div className={styles.list_header}>{name}</div>
+              <div className={styles.list_header}>
+                {listItem[languageCode].name}
+              </div>
               <DivColumn className={styles.list_container}>
                 {map(subProfileList, (subProfileListItem) => {
                   const isSelected = selectedRoute === subProfileListItem.slug;
@@ -165,4 +176,13 @@ class SideNav extends Component {
   }
 }
 
-export default navigatorHoc(SideNav);
+const mapStateToProps = (state) => {
+  return {
+    languageReducer: state.languageReducer,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(navigatorHoc(translatorHoc(SideNav)));
