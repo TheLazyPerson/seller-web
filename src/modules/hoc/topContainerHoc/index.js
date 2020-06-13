@@ -26,7 +26,7 @@ const topContainerHoc = (WrappedComponent) => {
 
     componentDidMount() {
       //Sets user data from cookie to reducer
-      const { setUserDataAction } = this.props;
+      const { setUserDataAction, setLanguageAction } = this.props;
       const userData = CookieService.getJSON(USER_DATA_COOKIE);
       // const bagCount = CookieService.get('BAG_COUNT');
       const languageCode = CookieService.get(LANG) || "en";
