@@ -1,22 +1,11 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import FullWidthContainer from "CommonContainers/fullwidthContainer";
-import DivColumn from "CommonComponents/divColumn";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import DivRow from "CommonComponents/divRow";
 import styles from "./customer_onboard.module.scss";
-import InputTextComponent from "CommonComponents/InputTextComponent";
-import InputCheckbox from "CommonComponents/InputCheckbox";
-import { Form, Field } from "react-final-form";
 import { postSignupAction } from "Core/modules/signup/signupActions"; //src\seller-core\modules\signup\signupActions.js
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import navigatorHoc from "Hoc/navigatorHoc";
-import {
-  nameValidator,
-  emailValidator,
-  passwordValidator,
-  isEmptyValidator,
-} from "Utils/validators";
 import translatorHoc from "Hoc/translatorHoc";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import { getPlanListAction } from "Core/modules/subscription/subscriptionActions";
@@ -41,9 +30,35 @@ class CustomerOnboard extends Component {
       step: state.step - 1,
     }));
 
+  onSignUp = (postData) => {
+    this.nextStep();
+    // const {
+    //   postSignupAction,
+    //   navigateTo,
+    //   showSuccessFlashMessage,
+    // } = this.props;
+
+    // if (postData) {
+    //   postSignupAction(postData).then(({ payload }) => {
+    //     if (payload.code === 200 || payload.code === 201) {
+    //       const {
+    //         data: { payment_information },
+    //       } = payload;
+    //       if (payload.data.is_free === 1) {
+    //         navigateTo("signin");
+    //       } else {
+    //         window.location.href = payment_information.paymentURL;
+    //       }
+    //       showSuccessFlashMessage("Signed up successfuly");
+    //     }
+    //   });
+    // } else {
+    //   this.setState({ showSubscription: true });
+    // }
+  };
+
   render() {
     const {
-      translate,
       subscriptionReducer: { subscriptionPlanList },
       getPlanListAction,
     } = this.props;
@@ -64,7 +79,7 @@ class CustomerOnboard extends Component {
           />
         </div>
 
-        {step === 0 && <SignUpPage next={this.nextStep} />}
+        {step === 0 && <SignUpPage onSignUp={this.onSignUp} />}
         {step === 1 && (
           <MarketplaceDetail next={this.nextStep} prev={this.prevStep} />
         )}

@@ -12,15 +12,14 @@ import navigatorHoc from "Hoc/navigatorHoc";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import {
   getProfileDetailsAction,
-  editProfileDetailsAction
+  editProfileDetailsAction,
 } from "Core/modules/profiledetails/profileDetailsActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
-  isPhoneNumber,
   nameValidator,
   isEmptyValidator,
-  emailValidator
+  emailValidator,
 } from "Utils/validators";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -29,7 +28,7 @@ import DivColumn from "CommonComponents/divColumn";
 
 class EditProfile extends Component {
   state = {
-    startDate: null
+    startDate: null,
   };
 
   onBackPress = () => {
@@ -37,11 +36,11 @@ class EditProfile extends Component {
     pop();
   };
 
-  onSubmit = form => {
+  onSubmit = (form) => {
     const {
       editProfileDetailsAction,
       navigateTo,
-      showSuccessFlashMessage
+      showSuccessFlashMessage,
     } = this.props;
 
     editProfileDetailsAction({
@@ -51,7 +50,7 @@ class EditProfile extends Component {
       phone: form.mobileNumber,
       email: form.email,
       birthday: form.birthday,
-      civil_id: form.civilId
+      civil_id: form.civilId,
     }).then(({ payload }) => {
       if (payload.code === 200 || payload.code === 201) {
         navigateTo("profile-details");
@@ -69,16 +68,16 @@ class EditProfile extends Component {
     // });
   }
 
-  validate = values => {
+  validate = (values) => {
     const errors = {};
     const validators = {
       firstName: nameValidator(values.firstName),
       lastName: nameValidator(values.lastName),
       email: emailValidator(values.email),
-      civilId: isEmptyValidator(values.civilId)
+      civilId: isEmptyValidator(values.civilId),
     };
 
-    Object.keys(validators).forEach(key => {
+    Object.keys(validators).forEach((key) => {
       if (!validators[key].result) errors[key] = validators[key].error;
     });
 
@@ -91,7 +90,7 @@ class EditProfile extends Component {
 
   render() {
     const {
-      profileDetailsReducer: { userDetails }
+      profileDetailsReducer: { userDetails },
     } = this.props;
     let startDate = null;
 
@@ -103,12 +102,12 @@ class EditProfile extends Component {
 
     const genderOptions = [
       { value: "male", label: "Male" },
-      { value: "female", label: "Female" }
+      { value: "female", label: "Female" },
     ];
     let defaultGender = null;
 
     if (userDetails.gender) {
-      if (userDetails.gender == "male") defaultGender = genderOptions[0];
+      if (userDetails.gender === "male") defaultGender = genderOptions[0];
       else defaultGender = genderOptions[1];
     }
 
@@ -141,16 +140,16 @@ class EditProfile extends Component {
             mobileNumber: userDetails.phone ? userDetails.phone : "",
             email: userDetails.email ? userDetails.email : "",
             civilId: userDetails.civil_id ? userDetails.civil_id : "",
-            birthday: userDetails.birthday ? userDetails.birthday : ""
+            birthday: userDetails.birthday ? userDetails.birthday : "",
           }}
           render={({
             handleSubmit,
             form: {
-              mutators: { mutateValue }
+              mutators: { mutateValue },
             },
             submitting,
             pristine,
-            values
+            values,
           }) => (
             <form className={styles.form_container} onSubmit={handleSubmit}>
               <Field name="firstName">
@@ -179,7 +178,7 @@ class EditProfile extends Component {
                   <DivColumn className="input_select_container">
                     <Select
                       options={genderOptions}
-                      onChange={value => {
+                      onChange={(value) => {
                         input.onChange(value.value);
                       }}
                       className="react-select-container"
@@ -231,7 +230,7 @@ class EditProfile extends Component {
                 {({ input, meta }) => (
                   <DatePicker
                     selected={startDate}
-                    onChange={date => {
+                    onChange={(date) => {
                       this.setState({ startDate: date });
                       input.onChange(date.valueOf());
                     }}
@@ -259,13 +258,13 @@ class EditProfile extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    profileDetailsReducer: state.profileDetailsReducer
+    profileDetailsReducer: state.profileDetailsReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     getProfileDetailsAction: bindActionCreators(
       getProfileDetailsAction,
@@ -278,7 +277,7 @@ const mapDispathToProps = dispatch => {
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
-    )
+    ),
   };
 };
 

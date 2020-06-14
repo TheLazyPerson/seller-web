@@ -1,15 +1,14 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import FullWidthContainer from "CommonContainers/fullwidthContainer";
 import DivColumn from "CommonComponents/divColumn";
 import DivRow from "CommonComponents/divRow";
 import map from "lodash/map";
 import styles from "./landing_page.module.scss";
-import { profileListItem } from "Constants/profileConstants";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import heroImage from "Images/delivering-success.svg";
-import SellerProposition from "./sellerProposition";
 import Benefits from "./benefits";
 import FAQ from "./Faq";
 import Pricing from "../Pricing";
@@ -52,6 +51,7 @@ class LandingPage extends Component {
       getPlanListAction,
     } = this.props;
 
+    // eslint-disable-next-line no-lone-blocks
     {
       map(subscriptionPlanList, (subscription, index) => {
         return (subscription.isSelected = false);
@@ -101,10 +101,10 @@ class LandingPage extends Component {
           selectedTab={activeTab}
         />
 
-        {activeTab == "benefits" ? <Benefits /> : ""}
-        {activeTab == "how-it-works" ? <HowItWorks /> : ""}
-        {activeTab == "delivering-orders" ? <DeliveringOrders /> : ""}
-        {activeTab == "pricing" ? (
+        {activeTab === "benefits" ? <Benefits /> : ""}
+        {activeTab === "how-it-works" ? <HowItWorks /> : ""}
+        {activeTab === "delivering-orders" ? <DeliveringOrders /> : ""}
+        {activeTab === "pricing" ? (
           <InitialPageLoader initialPageApi={getPlanListAction}>
             <Pricing subscriptionPlanList={subscriptionPlanList} />
             <DivColumn
@@ -127,7 +127,7 @@ class LandingPage extends Component {
         ) : (
           ""
         )}
-        {activeTab == "faq" ? <FAQ /> : ""}
+        {activeTab === "faq" ? <FAQ /> : ""}
 
         <HorizontalBorder />
         <DownloadApp />

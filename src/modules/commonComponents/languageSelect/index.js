@@ -9,10 +9,10 @@ import { bindActionCreators } from "redux";
 // import { setLanguageAction } from "Core/modules/language/languageActions";
 
 class LanguageSelect extends Component {
-  changeLanguage = languageCode => {
+  changeLanguage = (languageCode) => {
     const { i18n } = this.props;
     // setLanguageAction
-    
+
     i18n.changeLanguage(languageCode);
     // setLanguageAction(languageCode);
     CookieService.set(LANG, languageCode);
@@ -23,8 +23,8 @@ class LanguageSelect extends Component {
       blackColor,
       // languageReducer: { languageCode }
     } = this.props;
-    const arSelected = false //languageCode == "ar";
-    const enSelected = true //languageCode == "en";
+    const arSelected = false; //languageCode === "ar";
+    const enSelected = true; //languageCode === "en";
 
     return (
       <DivRow
@@ -54,13 +54,13 @@ class LanguageSelect extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    languageReducer: state.languageReducer
+    languageReducer: state.languageReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {};
 };
 

@@ -3,20 +3,13 @@ import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivColumn from "CommonComponents/divColumn";
 import DivRow from "CommonComponents/divRow";
 import NavHeader from "CommonComponents/navHeader";
-import CapsuleButton from "CommonComponents/capsuleButton";
-import map from "lodash/map";
 import styles from "./transaction_details.module.scss";
 import SideNav from "CommonComponents/sideNav";
 import navigatorHoc from "Hoc/navigatorHoc";
-import { logoutAction } from "Core/modules/signin/signinActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import DataTableContainer from "CommonContainers/dataTableContainer";
 import DataTable from "react-data-table-component";
-import {
-  getTransactionDetailsAction,
-  printTransactionInvoice,
-} from "Core/modules/transaction/transactionActions";
+import { getTransactionDetailsAction } from "Core/modules/transaction/transactionActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 
 class TransactionDetailsPage extends Component {
@@ -53,8 +46,8 @@ class TransactionDetailsPage extends Component {
     const { pop } = this.props;
     pop();
   };
+
   render() {
-    const { data } = this.state;
     const rowStyle = {
       fontSize: 12,
       color: "#19202c",
@@ -108,7 +101,6 @@ class TransactionDetailsPage extends Component {
       },
       headCells: {
         style: {
-          color: "#202124",
           fontSize: 12,
           fontWeight: "bold",
           color: "#7c858e",

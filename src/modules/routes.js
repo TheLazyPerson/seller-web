@@ -37,7 +37,7 @@ import TransactionDetailsPage from "./pages/salesPage/transactionDetailPage";
 import ExhibitionSubscriptionOverviewPage from "./pages/exhibitionSuscriptionOverviewPage";
 import ProductDetailsPage from "./pages/productDetailsPage";
 import ForgotPassword from "./pages/forgetPassword";
-import ResetPassword from "./pages/resetPassword";
+// import ResetPassword from "./pages/resetPassword";
 import ResetPasswordSuccess from "./pages/resetPassword/resetPasswordSucess";
 import { connect } from "react-redux";
 import MarketplaceDetail from "./pages/marketplaceDetails";
@@ -98,11 +98,7 @@ const App = ({ isUserSignedIn }) => {
         path="/signup/subscription/payment/success"
         component={SubscriptionPaymentSuccessPage}
       />
-      <Route
-        exact
-        path="/customer-onboard"
-        component={CustomerOnboard}
-      />
+      <Route exact path="/customer-onboard" component={CustomerOnboard} />
       <Route
         exact
         path="/signup/subscription/payment/failure"

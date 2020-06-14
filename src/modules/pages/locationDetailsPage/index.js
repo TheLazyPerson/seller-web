@@ -3,28 +3,19 @@ import FullWidthContainer from "CommonContainers/fullwidthContainer";
 import DivColumn from "CommonComponents/divColumn";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import DivRow from "CommonComponents/divRow";
 import styles from "./location_details.module.scss";
 import InputTextComponent from "CommonComponents/InputTextComponent";
-import InputCheckbox from "CommonComponents/InputCheckbox";
 import { Form, Field } from "react-final-form";
-// import { postSignupAction } from "Core/modules/signup/actions";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import navigatorHoc from "Hoc/navigatorHoc";
-import {
-  nameValidator,
-  emailValidator,
-  passwordValidator,
-  isEmptyValidator
-} from "Utils/validators";
 import translatorHoc from "Hoc/translatorHoc";
 
 class LocationDetails extends Component {
-  onSubmit = form => {
+  onSubmit = (form) => {
     const {
       postSignupAction,
       navigateTo,
-      showSuccessFlashMessage
+      showSuccessFlashMessage,
     } = this.props;
 
     postSignupAction({
@@ -35,9 +26,9 @@ class LocationDetails extends Component {
       avenue: form.avenue,
       landmark: form.landmark,
       home_office: form.home_office,
-      city: form.city
+      city: form.city,
     }).then(({ payload }) => {
-      if (payload.code == 200 || payload.code == 201) {
+      if (payload.code === 200 || payload.code === 201) {
         navigateTo("signin");
         showSuccessFlashMessage("Signed up successfuly");
       }
@@ -199,20 +190,20 @@ class LocationDetails extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     signupReducer: state.signupReducer,
-    signInReducer: state.signInReducer
+    signInReducer: state.signInReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     // postSignupAction: bindActionCreators(postSignupAction, dispatch),
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
-    )
+    ),
   };
 };
 

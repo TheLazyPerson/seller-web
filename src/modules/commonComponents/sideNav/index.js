@@ -141,7 +141,7 @@ class SideNav extends Component {
         {map(profileListItem, (listItem) => {
           const { type, name, items: subProfileList } = listItem;
 
-          if (type == "no-header") {
+          if (type === "no-header") {
             return map(subProfileList, (subProfileListItem) => {
               const isSelected = selectedRoute === subProfileListItem.slug;
               return this.getListItem(isSelected, subProfileListItem);

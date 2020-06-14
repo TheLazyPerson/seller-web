@@ -6,14 +6,11 @@ import NavHeader from "CommonComponents/navHeader";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import map from "lodash/map";
 import styles from "./exhibition_subscription_details.module.scss";
-import { profileListItem } from "Constants/profileConstants";
 import SideNav from "CommonComponents/sideNav";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { logoutAction } from "Core/modules/signin/signinActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { CookieService } from "Utils/cookieService";
-import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import {
   getExhibitionSubscriptionOverview,
   subscribeToExhibition,
@@ -37,7 +34,7 @@ class ExhibitionSubscriptionOverviewPage extends Component {
     subscribeToExhibition(exhibitionId, {
       type: subscriptionOption.type,
     }).then(({ payload }) => {
-      if (payload.code == 200 || payload.code == 201) {
+      if (payload.code === 200 || payload.code === 201) {
         navigateTo("your-exhibitions");
         showSuccessFlashMessage("Subscribed to exhibition successfuly");
       } else {
@@ -51,7 +48,6 @@ class ExhibitionSubscriptionOverviewPage extends Component {
       match: { params },
       getExhibitionSubscriptionOverview,
     } = this.props;
-    const subscriptionTypes = ["both", "flat_fee", "commision", "free"];
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivColumn from "CommonComponents/divColumn";
@@ -24,35 +25,35 @@ class HelpCenter extends Component {
         title: "TRACK, CANCEL, RETURN/EXCHANGE",
         description: "Check your order status",
         image: cartIcon,
-        redirectTo: "orders"
+        redirectTo: "orders",
       },
       {
         title: "FREQUENTLY ASKED QUESTIONS",
         description: "More queries related to your experience",
         image: faqIcon,
-        redirectTo: "faq"
-      }
-    ]
+        redirectTo: "faq",
+      },
+    ],
   };
 
-  validate = values => {
+  validate = (values) => {
     const errors = {};
     const validators = {
-      feedback: isEmptyValidator(values.oldPassword)
+      feedback: isEmptyValidator(values.oldPassword),
     };
 
-    Object.keys(validators).forEach(key => {
+    Object.keys(validators).forEach((key) => {
       if (!validators[key].result) errors[key] = validators[key].error;
     });
 
     return errors;
   };
 
-  onSubmit = form => {
+  onSubmit = (form) => {
     const { sendFeedbackAction, showSuccessFlashMessage } = this.props;
 
     sendFeedbackAction({
-      issue_summary: form.feedback
+      issue_summary: form.feedback,
     }).then(({ payload }) => {
       if (payload.code === 200 || payload.code === 201) {
         showSuccessFlashMessage("Feedback sent successfuly");
@@ -65,7 +66,7 @@ class HelpCenter extends Component {
     pop();
   };
 
-  onHelpCenterItemSelect = redirectTo => {
+  onHelpCenterItemSelect = (redirectTo) => {
     const { navigateTo } = this.props;
     navigateTo(redirectTo);
   };
@@ -79,7 +80,7 @@ class HelpCenter extends Component {
 
         <DivColumn fillParent className={styles.help_center_container}>
           <DivRow className={styles.list_container}>
-            {map(helpCenterList, helpCenterItem => (
+            {map(helpCenterList, (helpCenterItem) => (
               <DivColumn
                 verticalCenter
                 horizontalCenter
@@ -107,7 +108,7 @@ class HelpCenter extends Component {
                 form,
                 submitting,
                 pristine,
-                values
+                values,
               }) => (
                 <form onSubmit={handleSubmit} className={styles.form}>
                   <Field name="feedback">
@@ -139,19 +140,19 @@ class HelpCenter extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    supportReducer: state.supportReducer
+    supportReducer: state.supportReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     sendFeedbackAction: bindActionCreators(sendFeedbackAction, dispatch),
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
-    )
+    ),
   };
 };
 

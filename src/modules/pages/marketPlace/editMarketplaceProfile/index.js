@@ -13,25 +13,14 @@ import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import {
   getMarketplaceProfileAction,
   editMarketplaceProfileAction,
-  selectMarketplaceAddress
+  selectMarketplaceAddress,
 } from "Core/modules/marketplaceprofile/marketplaceProfileActions";
 import { getAddressListAction } from "Core/modules/address/addressActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {
-  isPhoneNumber,
-  nameValidator,
-  isEmptyValidator,
-  emailValidator
-} from "Utils/validators";
-import DatePicker from "react-datepicker";
+import { isPhoneNumber, nameValidator, emailValidator } from "Utils/validators";
 import "react-datepicker/dist/react-datepicker.css";
-import Select from "react-select";
 import DivColumn from "CommonComponents/divColumn";
-import AddressItemComponent from "CommonComponents/addressItemComponent";
-import HorizontalBorder from "CommonComponents/horizontalBorder";
-import map from "lodash/map";
-import InitialPageLoader from "CommonContainers/initialPageLoader";
 
 class EditMarketplaceProfile extends Component {
   onBackPress = () => {
@@ -39,12 +28,11 @@ class EditMarketplaceProfile extends Component {
     pop();
   };
 
-  onSubmit = form => {
+  onSubmit = (form) => {
     const {
       editMarketplaceProfileAction,
       navigateTo,
       showSuccessFlashMessage,
-      marketplaceProfileReducer: { marketplaceAddress }
     } = this.props;
     editMarketplaceProfileAction({
       shop_name: form.shopName,
@@ -57,7 +45,7 @@ class EditMarketplaceProfile extends Component {
       avenue: form.avenue,
       landmark: form.landmark,
       address_type: form.addressType,
-      city: form.city
+      city: form.city,
     }).then(({ payload }) => {
       if (payload.code === 200 || payload.code === 201) {
         navigateTo("profile-details");
@@ -75,15 +63,15 @@ class EditMarketplaceProfile extends Component {
     // });
   }
 
-  validate = values => {
+  validate = (values) => {
     const errors = {};
     const validators = {
       shopName: nameValidator(values.shopName),
       contactNumber: isPhoneNumber(values.contactNumber),
-      shopEmail: emailValidator(values.shopEmail)
+      shopEmail: emailValidator(values.shopEmail),
     };
 
-    Object.keys(validators).forEach(key => {
+    Object.keys(validators).forEach((key) => {
       if (!validators[key].result) errors[key] = validators[key].error;
     });
 
@@ -96,10 +84,7 @@ class EditMarketplaceProfile extends Component {
 
   render() {
     const {
-      getAddressListAction,
-      selectMarketplaceAddress,
-      marketplaceProfileReducer: { profile, marketplaceAddress },
-      addressReducer: { addressList }
+      marketplaceProfileReducer: { profile },
     } = this.props;
 
     return (
@@ -122,16 +107,14 @@ class EditMarketplaceProfile extends Component {
             avenue: profile.avenue ? profile.avenue : "",
             landmark: profile.landmark ? profile.landmark : "",
             addressType: profile.address_type ? profile.address_type : "",
-            city: profile.city ? profile.city : ""
+            city: profile.city ? profile.city : "",
           }}
           render={({
             handleSubmit,
             form: {
-              mutators: { mutateValue }
+              mutators: { mutateValue },
             },
             submitting,
-            pristine,
-            values
           }) => (
             <form onSubmit={handleSubmit}>
               <DivColumn className={styles.form_container}>
@@ -263,7 +246,7 @@ class EditMarketplaceProfile extends Component {
                         address={address}
                         onClickEdit={this.handleEdit}
                         onClickRemove={this.handleRemove}
-                        isSelected={address.id == marketplaceAddress.id}
+                        isSelected={address.id === marketplaceAddress.id}
                         onClickItem={() => selectMarketplaceAddress(address)}
                       />
                     );
@@ -288,14 +271,14 @@ class EditMarketplaceProfile extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     marketplaceProfileReducer: state.marketplaceProfileReducer,
-    addressReducer: state.addressReducer
+    addressReducer: state.addressReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     getMarketplaceProfileAction: bindActionCreators(
       getMarketplaceProfileAction,
@@ -313,7 +296,7 @@ const mapDispathToProps = dispatch => {
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
-    )
+    ),
   };
 };
 

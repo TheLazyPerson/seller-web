@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import FullWidthContainer from "CommonContainers/fullwidthContainer";
 import DivColumn from "CommonComponents/divColumn";
 import styles from "./payment_success.module.scss";
-import InputTextComponent from "CommonComponents/InputTextComponent";
-import InputCheckbox from "CommonComponents/InputCheckbox";
-import CapsuleButton from "CommonComponents/capsuleButton";
 import navigatorHoc from "Hoc/navigatorHoc";
-import queryString from "query-string";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
@@ -24,8 +20,6 @@ class SubscriptionPaymentSuccessPage extends Component {
     clearTimeout(this.id);
   }
   render() {
-    const parsed = queryString.parse(this.props.location.search);
-
     return (
       <FullWidthContainer>
         <DivColumn

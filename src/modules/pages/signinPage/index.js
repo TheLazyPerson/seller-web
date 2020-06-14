@@ -23,7 +23,7 @@ class SignInPage extends Component {
       password: form.password,
     }).then(({ payload }) => {
       const { data, code } = payload;
-      if (code == 200 || code == 201) {
+      if (code === 200 || code === 201) {
         CookieService.set(USER_DATA_COOKIE, data);
         navigateTo("home");
       }

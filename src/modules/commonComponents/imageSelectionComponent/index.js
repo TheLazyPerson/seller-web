@@ -1,4 +1,5 @@
-import React, { Component, createRef } from "react";
+/* eslint-disable jsx-a11y/alt-text */
+import React, { Component } from "react";
 import styles from "./image_selection_component.module.scss";
 import DivColumn from "CommonComponents/divColumn";
 import DivRow from "CommonComponents/divRow";
@@ -6,11 +7,10 @@ import translatorHoc from "Hoc/translatorHoc";
 import Dropzone from "react-dropzone";
 import map from "lodash/map";
 import isEmpty from "lodash/isEmpty";
-import CapsuleButton from "CommonComponents/capsuleButton";
 
 class ImageSelectionComponent extends Component {
   render() {
-    const { onDrop, files, uploadedFiles } = this.props;
+    const { onDrop, uploadedFiles } = this.props;
 
     return (
       <Dropzone onDrop={onDrop} accept={"image/*"} className={styles.dropzone}>

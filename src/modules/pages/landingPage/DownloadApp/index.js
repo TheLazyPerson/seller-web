@@ -1,8 +1,8 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import navigatorHoc from "Hoc/navigatorHoc";
 import DivColumn from "CommonComponents/divColumn";
 import DivRow from "CommonComponents/divRow";
-import map from "lodash/map";
 import styles from "./download_app.module.scss";
 import heroImage from "Images/download-app.svg";
 import playStoreImage from "Images/google-play-badge.png";

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import FullWidthContainer from "CommonContainers/fullwidthContainer";
 import DivColumn from "CommonComponents/divColumn";
@@ -10,17 +11,17 @@ import { faq } from "Constants/faqConstants";
 
 export default class FAQPage extends Component {
   state = {
-    faq
+    faq,
   };
 
-  onClickFaqItem = index => {
+  onClickFaqItem = (index) => {
     const { faq } = this.state;
 
     const updatedFaq = map(faq, (faqItem, itemIndex) => {
       if (itemIndex === index) {
         return {
           ...faqItem,
-          isSelected: !faqItem.isSelected
+          isSelected: !faqItem.isSelected,
         };
       }
 

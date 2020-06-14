@@ -1,12 +1,9 @@
 import React, { Component, Fragment } from "react";
-import FullWidthContainer from "CommonContainers/fullwidthContainer";
 import DivColumn from "CommonComponents/divColumn";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import DivRow from "CommonComponents/divRow";
 import styles from "./signup_page.module.scss";
 import InputTextComponent from "CommonComponents/InputTextComponent";
-import InputCheckbox from "CommonComponents/InputCheckbox";
 import { Form, Field } from "react-final-form";
 import { postSignupAction } from "Core/modules/signup/signupActions"; //src\seller-core\modules\signup\signupActions.js
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
@@ -28,37 +25,15 @@ class SignUpPage extends Component {
   };
 
   onSubmit = (form) => {
-    this.props.next();
-    // const {
-    //   postSignupAction,
-    //   navigateTo,
-    //   showSuccessFlashMessage,
-    //   subscriptionReducer: { selectedSubscription },
-    // } = this.props;
-    // if (selectedSubscription.id) {
-    //   postSignupAction({
-    //     first_name: form.firstName,
-    //     last_name: form.lastName,
-    //     email: form.email,
-    //     password: form.password,
-    //     password_confirmation: form.confirmPassword,
-    //     plan_id: selectedSubscription.id,
-    //   }).then(({ payload }) => {
-    //     if (payload.code == 200 || payload.code == 201) {
-    //       const {
-    //         data: { payment_information },
-    //       } = payload;
-    //       if (payload.data.is_free == 1) {
-    //         navigateTo("signin");
-    //       } else {
-    //         window.location.href = payment_information.paymentURL;
-    //       }
-    //       showSuccessFlashMessage("Signed up successfuly");
-    //     }
-    //   });
-    // } else {
-    //   this.setState({ showSubscription: true });
-    // }
+    const postData = {
+      first_name: form.firstName,
+      last_name: form.lastName,
+      email: form.email,
+      password: form.password,
+      password_confirmation: form.confirmPassword,
+    };
+
+    this.props.onSignUp(postData);
   };
 
   validate = (values) => {

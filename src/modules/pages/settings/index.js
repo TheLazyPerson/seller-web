@@ -5,18 +5,15 @@ import DivRow from "CommonComponents/divRow";
 import SideNav from "CommonComponents/sideNav";
 import styles from "./profile_settings.module.scss";
 import InputCheckbox from "CommonComponents/InputCheckbox";
-import FullWidthContainer from "CommonContainers/fullwidthContainer";
-import InputTextComponent from "CommonComponents/InputTextComponent";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
   getSettingsAction,
-  updateSettingsAction
+  updateSettingsAction,
 } from "Core/modules/settings/settingsActions";
 import translatorHoc from "Hoc/translatorHoc";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
-import queryString from "query-string";
 class Settings extends Component {
   // constructor(props) {
   //   super(props);
@@ -30,16 +27,16 @@ class Settings extends Component {
 
   state = {
     isGoing: true,
-    numberOfGuests: 2
+    numberOfGuests: 2,
   };
 
-  updateNotificationStatus = isInputChecked => {
+  updateNotificationStatus = (isInputChecked) => {
     const { updateSettingsAction } = this.props;
     const formData = {
-      wants_updates: isInputChecked ? 1 : 0
+      wants_updates: isInputChecked ? 1 : 0,
     };
 
-    updateSettingsAction(formData).then(response => {
+    updateSettingsAction(formData).then((response) => {
       const { code } = response.payload;
       if (code === 200 || code === 201) {
       } else if (code === 400 || code === 404) {
@@ -51,7 +48,7 @@ class Settings extends Component {
   render() {
     const {
       getSettingsAction,
-      settingsReducer: { settings }
+      settingsReducer: { settings },
     } = this.props;
 
     return (
@@ -82,16 +79,16 @@ class Settings extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    settingsReducer: state.settingsReducer
+    settingsReducer: state.settingsReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     getSettingsAction: bindActionCreators(getSettingsAction, dispatch),
-    updateSettingsAction: bindActionCreators(updateSettingsAction, dispatch)
+    updateSettingsAction: bindActionCreators(updateSettingsAction, dispatch),
   };
 };
 

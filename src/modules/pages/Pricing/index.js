@@ -9,7 +9,7 @@ import CapsuleButton from "CommonComponents/capsuleButton";
 
 class Pricing extends Component {
   render() {
-    const { subscriptionPlanList, isRTL } = this.props;
+    const { subscriptionPlanList } = this.props;
 
     return (
       <DivColumn>

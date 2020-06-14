@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import DivColumn from "CommonComponents/divColumn";
 import styles from "./category_list_item.module.scss";
-import exhibitionImage from "Images/exhibition-item-2.jpg";
 
 class CategoryListItem extends Component {
   render() {
@@ -13,7 +12,7 @@ class CategoryListItem extends Component {
         className={styles.category_list_item_container}
         style={{
           background: `url(${image}) center no-repeat`,
-          backgroundSize: "cover"
+          backgroundSize: "cover",
         }}
       >
         <DivColumn fillParent className={styles.inner_container}>

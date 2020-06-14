@@ -5,10 +5,8 @@ import styles from "./subscription_component.module.scss";
 import translatorHoc from "Hoc/translatorHoc";
 import exhibitionIconWhite from "Icons/exhibition-white.svg";
 import growthIconWhite from "Icons/growth-white.svg";
-import rocketIconWhite from "Icons/rocket-white.svg";
 import exhibitionIconBlack from "Icons/exhibition-black.svg";
 import growthIconBlack from "Icons/growth-black.svg";
-import rocketIconBlack from "Icons/rocket-black.svg";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { setSelectedSubscription } from "Core/modules/subscription/subscriptionActions";
@@ -18,7 +16,6 @@ import {
   getActivePlan,
   getFeatureUsage,
 } from "Core/modules/subscription/subscriptionActions";
-import InitialPageLoader from "CommonContainers/initialPageLoader";
 import isEmpty from "lodash/isEmpty";
 
 class ActiveSubscription extends Component {
@@ -44,15 +41,7 @@ class ActiveSubscription extends Component {
   render() {
     const {
       subscription,
-      isRTL,
-      subscriptionReducer: {
-        selectedSubscription,
-        isSubscriptionLoading,
-        isSubscriptionError,
-        featuresData,
-      },
-      getActivePlan,
-      getFeatureUsage,
+      subscriptionReducer: { selectedSubscription, featuresData },
     } = this.props;
 
     const ProgressItem = ({ title, value, progress }) => (
@@ -78,7 +67,7 @@ class ActiveSubscription extends Component {
           <div className={styles.subscription_price}>
             KD {subscription.price}
           </div>
-          {subscription.subscription_type == "commission" && (
+          {subscription.subscription_type === "commission" && (
             <div className={styles.subscription_price}>
               Commission: {subscription.commission}
             </div>
@@ -90,7 +79,7 @@ class ActiveSubscription extends Component {
               <img
                 alt="nav"
                 src={
-                  selectedSubscription.id == subscription.id
+                  selectedSubscription.id === subscription.id
                     ? exhibitionIconWhite
                     : exhibitionIconBlack
                 }
@@ -110,7 +99,7 @@ class ActiveSubscription extends Component {
               <img
                 alt="nav"
                 src={
-                  selectedSubscription.id == subscription.id
+                  selectedSubscription.id === subscription.id
                     ? growthIconWhite
                     : growthIconBlack
                 }

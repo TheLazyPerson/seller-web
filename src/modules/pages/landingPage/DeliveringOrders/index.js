@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import navigatorHoc from "Hoc/navigatorHoc";
 import DivColumn from "CommonComponents/divColumn";
@@ -7,7 +8,7 @@ import map from "lodash/map";
 import styles from "./delivering_orders.module.scss";
 
 class DeliveringOrders extends Component {
-  getDeliveringOrdersListItem = listItem => {
+  getDeliveringOrdersListItem = (listItem) => {
     return (
       <DivColumn className={styles.list_item}>
         <img className={styles.image} src={listItem.heroImage} />
@@ -21,7 +22,7 @@ class DeliveringOrders extends Component {
   render() {
     return (
       <DivRow fillParent horizontalCenter className={styles.deliveringOrders}>
-        {map(deliveringOrdersItems, listItem => {
+        {map(deliveringOrdersItems, (listItem) => {
           return this.getDeliveringOrdersListItem(listItem);
         })}
       </DivRow>

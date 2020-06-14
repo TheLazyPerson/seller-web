@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import navigatorHoc from "Hoc/navigatorHoc";
 import DivColumn from "CommonComponents/divColumn";
@@ -7,7 +8,7 @@ import map from "lodash/map";
 import styles from "./benefits.module.scss";
 
 class Benefits extends Component {
-  getBenefitsListItem = listItem => {
+  getBenefitsListItem = (listItem) => {
     return (
       <DivColumn fillParent className={styles.list_item}>
         <img className={styles.image} src={listItem.heroImage} />
@@ -21,7 +22,7 @@ class Benefits extends Component {
   render() {
     return (
       <DivRow fillParent className={styles.benefits}>
-        {map(benefitsListItems, listItem => {
+        {map(benefitsListItems, (listItem) => {
           return this.getBenefitsListItem(listItem);
         })}
       </DivRow>

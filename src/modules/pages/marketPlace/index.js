@@ -1,21 +1,15 @@
 import React, { Component } from "react";
-import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivColumn from "CommonComponents/divColumn";
 import DivRow from "CommonComponents/divRow";
-import SideNav from "CommonComponents/sideNav";
 import styles from "./marketPlace.module.scss";
 import NavHeader from "CommonComponents/navHeader";
-
-import map from "lodash/map";
 import CapsuleButton from "CommonComponents/capsuleButton";
-import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
 import { getMarketplaceProfileAction } from "Core/modules/marketplaceprofile/marketplaceProfileActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import navigatorHoc from "Hoc/navigatorHoc";
 import translatorHoc from "Hoc/translatorHoc";
-import isEmpty from "lodash/isEmpty";
 
 class MarketPlace extends Component {
   navigateToMarketplaceEditProfile = () => {
@@ -27,7 +21,7 @@ class MarketPlace extends Component {
     const {
       marketplaceProfileReducer: { profile },
       getMarketplaceProfileAction,
-      isRTL
+      isRTL,
     } = this.props;
 
     return (
@@ -83,18 +77,18 @@ class MarketPlace extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    marketplaceProfileReducer: state.marketplaceProfileReducer
+    marketplaceProfileReducer: state.marketplaceProfileReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     getMarketplaceProfileAction: bindActionCreators(
       getMarketplaceProfileAction,
       dispatch
-    )
+    ),
   };
 };
 

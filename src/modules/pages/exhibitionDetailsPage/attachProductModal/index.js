@@ -6,10 +6,6 @@ import SearchBarComponent from "CommonComponents/searchBarComponent";
 import DivRow from "CommonComponents/divRow";
 import ProductListItem from "CommonComponents/productListItem";
 import map from "lodash/map";
-import InitialPageLoader from "CommonContainers/initialPageLoader";
-import navigatorHoc from "Hoc/navigatorHoc";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 
 class AttachProductModal extends Component {
   render() {

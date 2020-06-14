@@ -121,9 +121,6 @@ const navigatorHoc = (WrappedComponent) => {
         case "orders":
           return navigationFunction("/orders");
 
-        case "order-details":
-          return navigationFunction(`/order/details/${data.orderId}`);
-
         case "help-center":
           return navigationFunction("/profile/helpcenter");
 

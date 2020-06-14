@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import DivColumn from "CommonComponents/divColumn";
 import styles from "./top_container_hoc.module.scss";
@@ -10,13 +11,12 @@ import { hideFlashMessage } from "Redux/actions/flashMessageActions";
 import { setUserDataAction } from "Core/modules/signin/signinActions";
 // import { setLanguageAction } from 'Core/modules/language/languageActions';
 import { CookieService } from "Utils/cookieService";
-import { USER_DATA_COOKIE, LANG } from "Constants/cookieConstants";
+import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import {
   getActivePlan,
   getFeatureUsage,
 } from "Core/modules/subscription/subscriptionActions";
 import map from "lodash/map";
-import isEmpty from "lodash/isEmpty";
 
 const topContainerHoc = (WrappedComponent) => {
   class topContainer extends Component {

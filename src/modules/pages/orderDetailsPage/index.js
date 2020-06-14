@@ -8,10 +8,8 @@ import isEmpty from "lodash/isEmpty";
 import styles from "./order_details.module.scss";
 import SideNav from "CommonComponents/sideNav";
 import navigatorHoc from "Hoc/navigatorHoc";
-import { logoutAction } from "Core/modules/signin/signinActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import DataTableContainer from "CommonContainers/dataTableContainer";
 import DataTable from "react-data-table-component";
 import {
   getOrderDetailsAction,
@@ -19,7 +17,6 @@ import {
 } from "Core/modules/order/orderActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import HorizontalBorder from "CommonComponents/horizontalBorder";
-import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import { formatUnixTimeStampToDateTime } from "Utils/formatHelper";
 
@@ -47,7 +44,6 @@ class OrdersDetailsPage extends Component {
   onClickPrintInvoice = () => {
     const {
       printOrderInvoice,
-      navigateTo,
       match: { params },
     } = this.props;
     printOrderInvoice(params.orderId).then(({ payload }) => {
@@ -117,14 +113,12 @@ class OrdersDetailsPage extends Component {
       },
       headCells: {
         style: {
-          color: "#202124",
           fontSize: 12,
           fontWeight: "bold",
           color: "#7c858e",
         },
       },
     };
-    const { shipping_address, billing_address } = order;
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
@@ -139,12 +133,12 @@ class OrdersDetailsPage extends Component {
             >
               Print Invoice
             </CapsuleButton>
-            {!isEmpty(order.status) && order.status == "processing" && (
+            {!isEmpty(order.status) && order.status === "processing" && (
               <CapsuleButton onClick={() => this.onCreatePickupRequest()}>
                 Create Pickup Request
               </CapsuleButton>
             )}
-            {!isEmpty(order.status) && order.status == "pickup_requested" && (
+            {!isEmpty(order.status) && order.status === "pickup_requested" && (
               <CapsuleButton onClick={() => this.viewPickupRequest()}>
                 View Pickup Request
               </CapsuleButton>

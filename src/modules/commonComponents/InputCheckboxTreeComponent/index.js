@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import styles from "./input_checkbox_tree.module.scss";
-import DivRow from "CommonComponents/divRow";
 import translatorHoc from "Hoc/translatorHoc";
 import CheckboxTree from "react-checkbox-tree";
 import "react-checkbox-tree/lib/react-checkbox-tree.css";
-import map from "lodash/map";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import {
   CheckBoxOutlineBlankOutlined,

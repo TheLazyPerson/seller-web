@@ -52,12 +52,7 @@ class AddProduct extends Component {
   };
 
   onSubmit = (form) => {
-    const {
-      createProductAction,
-      showSuccessFlashMessage,
-      onSubmitComplete,
-      navigateTo,
-    } = this.props;
+    const { createProductAction, navigateTo } = this.props;
 
     const formData = {
       type: "simple",
@@ -78,38 +73,35 @@ class AddProduct extends Component {
   };
 
   render() {
-    const CustomRenderInput = ({ input, name, value, onClick, meta }) => {
-      return (
-        <InputTextComponent
-          {...input}
-          meta={meta}
-          placeholder={name}
-          value={value}
-          className={styles.input_text}
-          onClick={onClick}
-        />
-      );
-    };
+    // const CustomRenderInput = ({ input, name, value, onClick, meta }) => {
+    //   return (
+    //     <InputTextComponent
+    //       {...input}
+    //       meta={meta}
+    //       placeholder={name}
+    //       value={value}
+    //       className={styles.input_text}
+    //       onClick={onClick}
+    //     />
+    //   );
+    // };
     const {
       onClickCancel,
-      productReducer: { product },
-      productId,
-      basicReducer: { basicData, attributeFamilies },
+      basicReducer: { attributeFamilies },
       getAttributeFamilyAction,
     } = this.props;
 
-    const productTypes = [
-      {
-        value: "simple",
-        label: "Simple",
-      },
-      {
-        value: "configurable",
-        label: "Configurable",
-      },
-    ];
+    // const productTypes = [
+    //   {
+    //     value: "simple",
+    //     label: "Simple",
+    //   },
+    //   {
+    //     value: "configurable",
+    //     label: "Configurable",
+    //   },
+    // ];
 
-    let defaultProductType = null;
     const attributeFamiliesOptions = this.formatSelectorData(attributeFamilies);
     let defaultAttributeFamily = null;
 

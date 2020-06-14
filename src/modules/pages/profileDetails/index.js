@@ -6,7 +6,6 @@ import SideNav from "CommonComponents/sideNav";
 import styles from "./profile_details.module.scss";
 import NavHeader from "CommonComponents/navHeader";
 
-import map from "lodash/map";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
 import { getProfileDetailsAction } from "Core/modules/profiledetails/profileDetailsActions";
@@ -39,7 +38,7 @@ class ProfileDetails extends Component {
       getProfileDetailsAction,
       isRTL,
       bankDetailsReducer: { bankDetails },
-      getBankDetailsAction
+      getBankDetailsAction,
     } = this.props;
 
     return (
@@ -154,20 +153,20 @@ class ProfileDetails extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     profileDetailsReducer: state.profileDetailsReducer,
-    bankDetailsReducer: state.bankDetailsReducer
+    bankDetailsReducer: state.bankDetailsReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     getProfileDetailsAction: bindActionCreators(
       getProfileDetailsAction,
       dispatch
     ),
-    getBankDetailsAction: bindActionCreators(getBankDetailsAction, dispatch)
+    getBankDetailsAction: bindActionCreators(getBankDetailsAction, dispatch),
   };
 };
 

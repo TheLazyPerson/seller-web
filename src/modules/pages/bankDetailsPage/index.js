@@ -1,24 +1,13 @@
 import React, { Component } from "react";
-import FullWidthContainer from "CommonContainers/fullwidthContainer";
 import DivColumn from "CommonComponents/divColumn";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import DivRow from "CommonComponents/divRow";
 import styles from "./bank_details.module.scss";
 import InputTextComponent from "CommonComponents/InputTextComponent";
-import InputCheckbox from "CommonComponents/InputCheckbox";
 import { Form, Field } from "react-final-form";
-// import { postSignupAction } from "Core/modules/signup/actions";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import navigatorHoc from "Hoc/navigatorHoc";
-import { store } from "react-notifications-component";
-import CustomNotification from "CommonComponents/customNotification";
-// import {
-//   nameValidator,
-//   emailValidator,
-//   passwordValidator,
-//   isEmptyValidator
-// } from "Utils/validators";
+
 import translatorHoc from "Hoc/translatorHoc";
 import CapsuleButton from "CommonComponents/capsuleButton";
 
@@ -36,7 +25,7 @@ class BankDetails extends Component {
     //   bank_name: form.bank_name,
     //   iban: form.iban
     // }).then(({ payload }) => {
-    //   if (payload.code == 200 || payload.code == 201) {
+    //   if (payload.code === 200 || payload.code === 201) {
     //     navigateTo("signin");
     //     showSuccessFlashMessage("Signed up successfuly");
     //   }

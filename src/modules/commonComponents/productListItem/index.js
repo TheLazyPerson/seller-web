@@ -1,12 +1,8 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import DivColumn from "CommonComponents/divColumn";
 import styles from "./product_list_item.module.scss";
-import exhibitionImage from "Images/exhibition-item-1.jpg";
 import isEmpty from "lodash/isEmpty";
-
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import navigatorHoc from "Hoc/navigatorHoc";
 
 class ProductListItem extends Component {
   render() {
@@ -33,7 +29,7 @@ class ProductListItem extends Component {
         {!isEmpty(product.thumbnail) && (
           <img src={product.thumbnail.path} className={styles.image} />
         )}
-        {!product.is_attached && actionType == ACTION_TYPE_ATTACH_PRODUCT && (
+        {!product.is_attached && actionType === ACTION_TYPE_ATTACH_PRODUCT && (
           <div
             className={styles.action_button}
             onClick={() => onClickAttachProduct(exhibitionId, product.id)}
@@ -41,7 +37,7 @@ class ProductListItem extends Component {
             ATTACH
           </div>
         )}
-        {(product.is_attached || actionType == ACTION_TYPE_REMOVE_PRODUCT) && (
+        {(product.is_attached || actionType === ACTION_TYPE_REMOVE_PRODUCT) && (
           <div
             className={styles.action_button}
             onClick={() => onClickRemoveProduct(exhibitionId, product.id)}
@@ -50,7 +46,7 @@ class ProductListItem extends Component {
           </div>
         )}
         {!product.is_attached &&
-          actionType == ACTION_TYPE_MARK_OUT_OF_STOCK && (
+          actionType === ACTION_TYPE_MARK_OUT_OF_STOCK && (
             <div className={styles.action_button}>
               MARK PRODUCT OUT OF STOCK
             </div>
