@@ -346,5 +346,29 @@
     "your_concern": "Brief about your concern?",
     "callback": "Get Callback",
     "response_message": "Feedback sent successfuly"
+  },
+  "subscription_item": {
+    "active_plan": "Active Plan",
+    "kd": "KD",
+    "commission": "Commission",
+    "benefits": "Benefits Include",
+    "exhibition": "Exhibitions",
+    "enroll": "You can enroll in",
+    "no_exhibition": " number of exhibitions",
+    "products": "Products",
+    "maintain": " You can maintain",
+    "products1": "products",
+    "usage": "Usage",
+    "seller_fetures": "All Seller Features",
+    "access": "Have access to all seller features."
+  },
+  "product_list_item": {
+    "attach": "ATTACH",
+    "remove": "Remove",
+    "out_of_stock": "MARK PRODUCT OUT OF STOCK"
+  },
+  "page_not_found": {
+    "number": "أربعة مائة و أربعة",
+    "subtitle": "الصفحة المطلوبة غير موجودة. انقر هنا لمتابعة التسوق."
   }
 }

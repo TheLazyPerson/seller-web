@@ -310,5 +310,29 @@
     "password": "كلمه السر",
     "reset_password_button": "إعادة تعيين كلمة المرور",
     "username": "البريد الإلكتروني"
+  },
+  "subscription_item": {
+    "active_plan": "الخطة النشطة",
+    "kd": "دينار كويتي",
+    "commission": "عمولة",
+    "benefits": "تشمل الفوائد",
+    "exhibition": "المعارض",
+    "enroll": "يمكنك التسجيل في",
+    "no_exhibition": "عدد المعارض",
+    "products": "منتجات",
+    "maintain": "يمكنك الحفاظ عليها",
+    "products1": "منتجات",
+    "usage": "الاستخدام",
+    "seller_fetures": "جميع ميزات البائع",
+    "access": "الوصول إلى جميع ميزات البائع."
+  },
+  "product_list_item": {
+    "attach": "يربط",
+    "remove": "إزالة",
+    "out_of_stock": "MARK المنتج خارج المخزون"
+  },
+  "page_not_found": {
+    "number": "404",
+    "subtitle": "The page you requested does not exist. Click here to continue shopping."
   }
 }

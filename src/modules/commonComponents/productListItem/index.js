@@ -7,6 +7,7 @@ import isEmpty from "lodash/isEmpty";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import navigatorHoc from "Hoc/navigatorHoc";
+import translatorHoc from "Hoc/translatorHoc";
 
 class ProductListItem extends Component {
   render() {
@@ -16,6 +17,7 @@ class ProductListItem extends Component {
       actionType,
       onClickAttachProduct,
       onClickRemoveProduct,
+      translate,
     } = this.props;
     const ACTION_TYPE_ATTACH_PRODUCT = "attach_product";
     const ACTION_TYPE_MARK_OUT_OF_STOCK = "mark_product_out_of_stock";
@@ -38,7 +40,7 @@ class ProductListItem extends Component {
             className={styles.action_button}
             onClick={() => onClickAttachProduct(exhibitionId, product.id)}
           >
-            ATTACH
+            {translate("product_list_item.attach")}
           </div>
         )}
         {(product.is_attached || actionType == ACTION_TYPE_REMOVE_PRODUCT) && (
@@ -46,13 +48,13 @@ class ProductListItem extends Component {
             className={styles.action_button}
             onClick={() => onClickRemoveProduct(exhibitionId, product.id)}
           >
-            REMOVE
+            {translate("product_list_item.remove")}
           </div>
         )}
         {!product.is_attached &&
           actionType == ACTION_TYPE_MARK_OUT_OF_STOCK && (
             <div className={styles.action_button}>
-              MARK PRODUCT OUT OF STOCK
+              {translate("product_list_item.out_of_stock")}
             </div>
           )}
       </DivColumn>
@@ -60,4 +62,4 @@ class ProductListItem extends Component {
   }
 }
 
-export default ProductListItem;
+export default translatorHoc(ProductListItem);

@@ -45,6 +45,7 @@ class ActiveSubscription extends Component {
     const {
       subscription,
       isRTL,
+      translate,
       subscriptionReducer: {
         selectedSubscription,
         isSubscriptionLoading,
@@ -73,18 +74,22 @@ class ActiveSubscription extends Component {
       <DivRow className={styles.subscription_container}>
         <DivColumn fillParent center className={`${styles.subscription}`}>
           <div className={styles.subscription_title}>
-            Active Plan: {subscription.plan_name}
+            {translate("subscription_item.active_plan")}:{" "}
+            {subscription.plan_name}
           </div>
           <div className={styles.subscription_price}>
-            KD {subscription.price}
+            {translate("subscription_item.kd")} {subscription.price}
           </div>
           {subscription.subscription_type == "commission" && (
             <div className={styles.subscription_price}>
-              Commission: {subscription.commission}
+              {translate("subscription_item.commission")} :{" "}
+              {subscription.commission}
             </div>
           )}
 
-          <div className={styles.subtitle}>Benefits Include:</div>
+          <div className={styles.subtitle}>
+            {translate("subscription_item.benefits")}:
+          </div>
           <DivRow fillParent className={styles.features}>
             <DivRow className={styles.feature}>
               <img
@@ -98,11 +103,13 @@ class ActiveSubscription extends Component {
               />
               <DivColumn className={styles.feature_details}>
                 <div className={styles.feature_title}>
-                  {subscription.no_of_exhibitions} Exhibitions
+                  {subscription.no_of_exhibitions}{" "}
+                  {translate("subscription_item.exhibition")}
                 </div>
                 <div className={styles.feature_description}>
-                  You can enroll in {subscription.no_of_exhibitions} number of
-                  exhibitions
+                  {translate("subscription_item.enroll")}{" "}
+                  {subscription.no_of_exhibitions}
+                  {translate("subscription_item.no_exhibition")}
                 </div>
               </DivColumn>
             </DivRow>
@@ -118,10 +125,13 @@ class ActiveSubscription extends Component {
               />
               <DivColumn className={styles.feature_details}>
                 <div className={styles.feature_title}>
-                  {subscription.no_of_products} Products
+                  {subscription.no_of_products}{" "}
+                  {translate("subscription_item.products")}
                 </div>
                 <div className={styles.feature_description}>
-                  You can maintain {subscription.no_of_products} products
+                  {translate("subscription_item.maintain")}{" "}
+                  {subscription.no_of_products}{" "}
+                  {translate("subscription_item.products1")}
                 </div>
               </DivColumn>
             </DivRow>
@@ -132,7 +142,7 @@ class ActiveSubscription extends Component {
             className={`${styles.item_container} ${styles.subscription_title}`}
             style={{ cursor: "default" }}
           >
-            Usage
+            {translate("subscription_item.usage")}
           </div>
           <HorizontalBorder />
 

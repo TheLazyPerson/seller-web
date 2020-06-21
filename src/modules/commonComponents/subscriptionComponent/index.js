@@ -23,6 +23,7 @@ class Subscription extends Component {
     const {
       subscription,
       isRTL,
+      translate,
       subscriptionReducer: { selectedSubscription },
     } = this.props;
 
@@ -37,8 +38,13 @@ class Subscription extends Component {
         <div className={styles.subscription_title}>
           {subscription.plan_name}
         </div>
-        <div className={styles.subscription_price}>KD {subscription.price}</div>
-        <div className={styles.subtitle}>Benefits Include:</div>
+        <div className={styles.subscription_price}>
+          {" "}
+          {translate("subscription_item.kd")} {subscription.price}
+        </div>
+        <div className={styles.subtitle}>
+          {translate("subscription_item.benefits")}Benefits Include:
+        </div>
         <DivColumn fillParent className={styles.features}>
           <DivRow className={styles.feature}>
             <img
@@ -52,11 +58,13 @@ class Subscription extends Component {
             />
             <DivColumn className={styles.feature_details}>
               <div className={styles.feature_title}>
-                {subscription.no_of_exhibitions} Exhibitions
+                {subscription.no_of_exhibitions}
+                {translate("subscription_item.exhibitions")}
               </div>
               <div className={styles.feature_description}>
-                You can enroll in {subscription.no_of_exhibitions} number of
-                exhibitions
+                {translate("subscription_item.enroll")}{" "}
+                {subscription.no_of_exhibitions}{" "}
+                {translate("subscription_item.no_exhibition")}
               </div>
             </DivColumn>
           </DivRow>
@@ -72,10 +80,13 @@ class Subscription extends Component {
             />
             <DivColumn className={styles.feature_details}>
               <div className={styles.feature_title}>
-                {subscription.no_of_products} Products
+                {subscription.no_of_products}{" "}
+                {translate("subscription_item.products")}
               </div>
               <div className={styles.feature_description}>
-                You can maintain {subscription.no_of_products} products
+                {translate("subscription_item.maintain")} You can maintain{" "}
+                {subscription.no_of_products}{" "}
+                {translate("subscription_item.products")}products
               </div>
             </DivColumn>
           </DivRow>
@@ -90,9 +101,11 @@ class Subscription extends Component {
               className={styles.feature_icon}
             />
             <DivColumn className={styles.feature_details}>
-              <div className={styles.feature_title}>All Seller Features</div>
+              <div className={styles.feature_title}>
+                {translate("subscription_item.seller_fetures")}
+              </div>
               <div className={styles.feature_description}>
-                Have access to all seller features.
+                {translate("subscription_item.access")}
               </div>
             </DivColumn>
           </DivRow>
