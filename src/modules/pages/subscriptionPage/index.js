@@ -160,7 +160,7 @@ class SubscriptionPage extends Component {
                   fillParent
                   className={styles.additional_plans_container}
                 >
-                  <InitialPageLoader initialPageApi={getSubscriptionListAction}>
+                  {/* <InitialPageLoader initialPageApi={getSubscriptionListAction}>
                     {!isEmpty(activeSubscription) && (
                       <DivRow>
                         <DataTableContainer
@@ -172,7 +172,7 @@ class SubscriptionPage extends Component {
                         />
                       </DivRow>
                     )}
-                  </InitialPageLoader>
+                  </InitialPageLoader> */}
                 </DivColumn>
               </DivColumn>
 

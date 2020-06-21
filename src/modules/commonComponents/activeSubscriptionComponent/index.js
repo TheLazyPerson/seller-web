@@ -70,7 +70,7 @@ class ActiveSubscription extends Component {
       </DivColumn>
     );
     return (
-      <DivRow>
+      <DivRow className={styles.subscription_container}>
         <DivColumn fillParent center className={`${styles.subscription}`}>
           <div className={styles.subscription_title}>
             Active Plan: {subscription.plan_name}
