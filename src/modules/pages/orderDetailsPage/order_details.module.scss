@@ -1,7 +1,11 @@
 @import "~Styles/colors.module";
-
+@import "~Styles/mixins.module";
 .order_page_container {
   overflow-y: auto;
+}
+
+.capsul_button {
+  flex-direction: row;
 }
 
 .header {
@@ -80,6 +84,55 @@
       color: $color-dark;
       margin-top: 14px;
       max-width: 250px;
+    }
+  }
+}
+
+@include small {
+  .header {
+    font-size: 12px;
+    color: $color-dark;
+    padding: 17px 0px 17px 54px;
+  }
+
+  .cancel_button {
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-right: 5px;
+  }
+
+  .order_container {
+    padding: 17px 0px 9px 25px;
+  }
+
+  .header {
+    padding: 17px 0px 17px 25px;
+  }
+
+  .capsul_button {
+    flex-direction: column;
+  }
+  .capsul_button button {
+    margin-bottom: 10px;
+  }
+
+  .normal_container {
+    padding: 18px 0px 18px 25px;
+  }
+
+  .address_container {
+    flex-wrap: wrap;
+    padding: 30px;
+    justify-content: space-between;
+    .address_item_container {
+      margin-right: 16px;
+      width: 150px;
+      margin-bottom: 40px;
+      .title {
+        font-size: 12px;
+        font-weight: bold;
+        color: $color-dark;
+      }
     }
   }
 }

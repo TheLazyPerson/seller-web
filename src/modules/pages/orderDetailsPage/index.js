@@ -134,7 +134,7 @@ class OrdersDetailsPage extends Component {
           title={translate("order_details.title")}
           onBackClick={this.onBackPress}
         >
-          <DivRow>
+          <DivRow className={styles.capsul_button}>
             {/* <SecondaryCapsuleButton className={styles.cancel_button}>
               Cancel Order
             </SecondaryCapsuleButton> */}
@@ -191,14 +191,15 @@ class OrdersDetailsPage extends Component {
             <div className={styles.header}>
               {translate("order_details.product_list")}
             </div>
-
-            <DataTable
-              columns={columns}
-              customStyles={customStyles}
-              data={order.items}
-              style={{ minHeight: 200 }}
-              noHeader={true}
-            />
+            <div>
+              <DataTable
+                columns={columns}
+                customStyles={customStyles}
+                data={order.items}
+                style={{ minHeight: 200 }}
+                noHeader={true}
+              />
+            </div>
             <HorizontalBorder />
             <DivRow className={styles.address_container}>
               <DivColumn className={styles.address_item_container}>
