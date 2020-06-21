@@ -111,6 +111,7 @@ class OrdersPage extends Component {
             //TODO: Configure later
             // selectableRows
             highlightOnHover
+            overflowY={false}
             defaultSortField="name"
             contextActions={contextActions(this.deleteAll)}
             sortIcon={sortIcon}
