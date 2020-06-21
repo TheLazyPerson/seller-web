@@ -177,7 +177,7 @@ class TransactionDetailsPage extends Component {
               {translate("transaction_details_page.products_order")}
             </div>
 
-            {transaction.order && (
+            {/* {transaction.order && (
               <DataTable
                 columns={columns}
                 customStyles={customStyles}
@@ -185,7 +185,7 @@ class TransactionDetailsPage extends Component {
                 style={{ minHeight: 200 }}
                 noHeader={true}
               />
-            )}
+            )} */}
           </DivColumn>
         </InitialPageLoader>
       </SectionedContainer>

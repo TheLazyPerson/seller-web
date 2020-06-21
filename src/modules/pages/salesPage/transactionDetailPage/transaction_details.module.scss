@@ -1,5 +1,5 @@
 @import "~Styles/colors.module";
-
+@import "~Styles/mixins.module";
 .order_page_container {
   overflow-y: auto;
 }
@@ -8,6 +8,10 @@
   font-size: 12px;
   color: $color-dark;
   padding: 17px 0px 17px 54px;
+}
+
+.order_container {
+  padding: 17px 0px 9px 25px;
 }
 
 .order_container {
@@ -69,5 +73,18 @@
       margin-top: 14px;
       max-width: 250px;
     }
+  }
+}
+
+@include small {
+  .order_container {
+    padding: 17px 0px 9px 25px;
+  }
+  .header {
+    padding: 17px 0px 17px 25px;
+  }
+
+  .normal_container {
+    padding: 18px 0px 18px 25px;
   }
 }
