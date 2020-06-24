@@ -9,57 +9,35 @@ import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import navigatorHoc from "Hoc/navigatorHoc";
 
 import translatorHoc from "Hoc/translatorHoc";
-import CapsuleButton from "CommonComponents/capsuleButton";
+import { isEmptyValidator } from "Utils/validators";
 
 class BankDetails extends Component {
   onSubmit = (form) => {
-    this.props.next();
-    // const {
-    //   postSignupAction,
-    //   navigateTo,
-    //   showSuccessFlashMessage
-    // } = this.props;
+    const updatedPostData = {
+      bank_details: {
+        account_holder: form.account_holder,
+        bank_name: form.bank_name,
+        IBAN: form.iban,
+      },
+    };
 
-    // postSignupAction({
-    //   acount_holder: form.acount_holder,
-    //   bank_name: form.bank_name,
-    //   iban: form.iban
-    // }).then(({ payload }) => {
-    //   if (payload.code === 200 || payload.code === 201) {
-    //     navigateTo("signin");
-    //     showSuccessFlashMessage("Signed up successfuly");
-    //   }
-    // });
-
-    // store.addNotification({
-    //   content: CustomNotification, // 👈
-    //   container: "bottom-right",
-    //   insert: "top",
-    //   animationIn: ["animated", "fadeIn"],
-    //   animationOut: ["animated", "fadeOut"],
-    //   dismiss: {
-    //     duration: 3000
-    //   }
-    // });
+    this.props.profileUpdate(updatedPostData);
   };
 
-  // validate = (values) => {
-  //   const errors = {};
-  //   const validators = {
-  //     shopp_name: emailValidator(values.shopp_name),
-  //     password: isEmptyValidator(values.password),
-  //     confirmPassword: passwordValidator(
-  //       values.password,
-  //       values.confirmPassword
-  //     ),
-  //   };
+  validate = (values) => {
+    const errors = {};
+    const validators = {
+      account_holder: isEmptyValidator(values.account_holder),
+      bank_name: isEmptyValidator(values.bank_name),
+      iban: isEmptyValidator(values.iban),
+    };
 
-  //   Object.keys(validators).forEach((key) => {
-  //     if (!validators[key].result) errors[key] = validators[key].error;
-  //   });
+    Object.keys(validators).forEach((key) => {
+      if (!validators[key].result) errors[key] = validators[key].error;
+    });
 
-  //   return errors;
-  // };
+    return errors;
+  };
 
   render() {
     const { translate } = this.props;
@@ -70,15 +48,12 @@ class BankDetails extends Component {
         horizontalCenter
         className={styles.page_container}
       >
-        {/* <div className={styles.signin_title_text}>
-            {translate("bank_detail_page.page_title")}
-          </div> */}
         <Form
           onSubmit={this.onSubmit}
-          // validate={this.validate}
+          validate={this.validate}
           render={({ handleSubmit, form, submitting, pristine, values }) => (
             <form className={styles.form_container} onSubmit={handleSubmit}>
-              <Field name="acount_holder">
+              <Field name="account_holder">
                 {({ input, meta }) => (
                   <InputTextComponent
                     meta={meta}
@@ -122,27 +97,13 @@ class BankDetails extends Component {
             </form>
           )}
         />
-        <CapsuleButton
-          className={styles.capsule_button}
-          onClick={() => this.props.prev()}
-        >
-          Back
-        </CapsuleButton>
       </DivColumn>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    signupReducer: state.signupReducer,
-    signInReducer: state.signInReducer,
-  };
-};
-
 const mapDispathToProps = (dispatch) => {
   return {
-    // postSignupAction: bindActionCreators(postSignupAction, dispatch),
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
@@ -151,6 +112,6 @@ const mapDispathToProps = (dispatch) => {
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispathToProps
 )(translatorHoc(navigatorHoc(BankDetails)));

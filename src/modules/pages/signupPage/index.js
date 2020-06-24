@@ -70,12 +70,9 @@ class SignUpPage extends Component {
         horizontalCenter
         className={styles.page_container}
       >
-        {/* <div className={styles.signin_title_text}>
-            {translate("signup_page.page_title")}
-          </div> */}
         <Form
           onSubmit={this.onSubmit}
-          // validate={this.validate}
+          validate={this.validate}
           render={({ handleSubmit, form, submitting, pristine, values }) => (
             <form className={styles.form_container} onSubmit={handleSubmit}>
               {showSubscription ? (

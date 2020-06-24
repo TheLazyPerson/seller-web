@@ -25,7 +25,11 @@ class SignInPage extends Component {
       const { data, code } = payload;
       if (code === 200 || code === 201) {
         CookieService.set(USER_DATA_COOKIE, data);
-        navigateTo("home");
+        if (data.is_registeration_complete === 0) {
+          navigateTo("customer-onboard");
+        } else {
+          navigateTo("home");
+        }
       }
     });
   };

@@ -8,47 +8,39 @@ import { Form, Field } from "react-final-form";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import navigatorHoc from "Hoc/navigatorHoc";
 import translatorHoc from "Hoc/translatorHoc";
-import CapsuleButton from "CommonComponents/capsuleButton";
+import {
+  isEmptyValidator,
+  isPhoneNumber,
+  emailValidator,
+} from "Utils/validators";
 
 class MarketplaceDetail extends Component {
   onSubmit = (form) => {
-    this.props.next();
-    // const {
-    //   postSignupAction,
-    //   navigateTo,
-    //   showSuccessFlashMessage
-    // } = this.props;
+    const updatedPostData = {
+      marketplace_profile: {
+        shop_name: form.shop_name,
+        shop_email_address: form.shop_email,
+        shop_contact_number: form.contact_number,
+      },
+    };
 
-    // postSignupAction({
-    //   shopp_name: form.shopp_name,
-    //   shop_contact_number: form.shop_contact_number,
-    //   shop_email_addres: form.shop_email_addres
-    // }).then(({ payload }) => {
-    //   if (payload.code === 200 || payload.code === 201) {
-
-    //     // navigateTo("signin");
-    //     // showSuccessFlashMessage("Signed up successfuly");
-    //   }
-    // });
+    this.props.profileUpdate(updatedPostData);
   };
 
-  // validate = (values) => {
-  //   const errors = {};
-  //   const validators = {
-  //     shopp_name: emailValidator(values.shopp_name),
-  //     password: isEmptyValidator(values.password),
-  //     confirmPassword: passwordValidator(
-  //       values.password,
-  //       values.confirmPassword
-  //     ),
-  //   };
+  validate = (values) => {
+    const errors = {};
+    const validators = {
+      shop_name: isEmptyValidator(values.shop_name),
+      shop_email: emailValidator(values.shop_email),
+      contact_number: isPhoneNumber(values.contact_number),
+    };
 
-  //   Object.keys(validators).forEach((key) => {
-  //     if (!validators[key].result) errors[key] = validators[key].error;
-  //   });
+    Object.keys(validators).forEach((key) => {
+      if (!validators[key].result) errors[key] = validators[key].error;
+    });
 
-  //   return errors;
-  // };
+    return errors;
+  };
 
   render() {
     const { translate } = this.props;
@@ -59,15 +51,12 @@ class MarketplaceDetail extends Component {
         horizontalCenter
         className={styles.page_container}
       >
-        {/* <div className={styles.signin_title_text}>
-            {translate("marketplace_detail_page.page_title")}
-          </div> */}
         <Form
           onSubmit={this.onSubmit}
-          // validate={this.validate}
+          validate={this.validate}
           render={({ handleSubmit, submitting }) => (
             <form className={styles.form_container} onSubmit={handleSubmit}>
-              <Field name="shopp_name">
+              <Field name="shop_name">
                 {({ input, meta }) => (
                   <InputTextComponent
                     meta={meta}
@@ -79,7 +68,7 @@ class MarketplaceDetail extends Component {
                 )}
               </Field>
 
-              <Field name="shop_contact_number">
+              <Field name="contact_number">
                 {({ input, meta }) => (
                   <InputTextComponent
                     meta={meta}
@@ -93,7 +82,7 @@ class MarketplaceDetail extends Component {
                 )}
               </Field>
 
-              <Field name="shop_email_addres">
+              <Field name="shop_email">
                 {({ input, meta }) => (
                   <InputTextComponent
                     meta={meta}
@@ -115,12 +104,6 @@ class MarketplaceDetail extends Component {
             </form>
           )}
         />
-        <CapsuleButton
-          className={styles.capsule_button}
-          onClick={() => this.props.prev()}
-        >
-          Back
-        </CapsuleButton>
       </DivColumn>
     );
   }

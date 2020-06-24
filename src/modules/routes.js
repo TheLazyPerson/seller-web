@@ -73,6 +73,7 @@ const App = ({ isUserSignedIn }) => {
         component={SignUpPage}
         validator={() => !isUserSignedIn}
       />
+      <Route exact path="/customer-onboard" component={CustomerOnboard} />
       <ProtectedRoute
         exact
         path="/profile/orders/details/:orderId?"
@@ -98,7 +99,6 @@ const App = ({ isUserSignedIn }) => {
         path="/signup/subscription/payment/success"
         component={SubscriptionPaymentSuccessPage}
       />
-      <Route exact path="/customer-onboard" component={CustomerOnboard} />
       <Route
         exact
         path="/signup/subscription/payment/failure"
