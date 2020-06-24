@@ -6,7 +6,6 @@ class CategoryListItem extends Component {
   render() {
     const { name } = this.props;
     const image = "https://source.unsplash.com/400x300/?" + name;
-    console.log(image);
     return (
       <DivColumn
         className={styles.category_list_item_container}

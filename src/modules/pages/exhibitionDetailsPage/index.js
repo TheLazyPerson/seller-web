@@ -46,7 +46,6 @@ class ExhibitionDetailsPage extends Component {
       products: [productId],
     }).then(() => {
       getProductListAction(exhibitionId);
-      console.log("attachment successful");
     });
   };
   onClickRemoveProduct = (exhibitionId, productId) => {
@@ -55,7 +54,6 @@ class ExhibitionDetailsPage extends Component {
       product: productId,
     }).then(() => {
       getProductListAction(exhibitionId);
-      console.log("removal successful");
     });
   };
   state = {

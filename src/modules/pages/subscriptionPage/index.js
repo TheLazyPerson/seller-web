@@ -59,7 +59,6 @@ class SubscriptionPage extends Component {
     },
     {
       cell: (value) => {
-        console.log("VALUE", value);
         const {
           subscriptionReducer: { activeSubscription },
           activatePlanAction,

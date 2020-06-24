@@ -68,9 +68,7 @@ class OrdersPage extends Component {
     this.setState({ selectedRows: state.selectedRows });
   };
 
-  handleRowClicked = (row) => {
-    console.log(`${row.name} was clicked!`);
-  };
+  handleRowClicked = (row) => {};
 
   deleteAll = () => {
     const { selectedRows } = this.state;
