@@ -9,9 +9,18 @@ import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import navigatorHoc from "Hoc/navigatorHoc";
 
 import translatorHoc from "Hoc/translatorHoc";
-import { isEmptyValidator, isPhoneNumber } from "Utils/validators";
+import {
+  isEmptyValidator,
+  isPhoneNumber,
+  isCivilIdValid,
+} from "Utils/validators";
+import DatePicker from "react-datepicker";
 
 class PersonalDetails extends Component {
+  state = {
+    startDate: null,
+  };
+
   onSubmit = (form) => {
     const updatedPostData = {
       civil_id: form.civil_id,
@@ -25,7 +34,7 @@ class PersonalDetails extends Component {
   validate = (values) => {
     const errors = {};
     const validators = {
-      civil_id: isEmptyValidator(values.civil_id),
+      civil_id: isCivilIdValid(values.civil_id),
       phone_number: isPhoneNumber(values.phone_number),
       birthday: isEmptyValidator(values.birthday),
     };
@@ -38,6 +47,19 @@ class PersonalDetails extends Component {
   };
 
   render() {
+    const CustomRenderInput = ({ input, value, onClick, meta }) => {
+      return (
+        <InputTextComponent
+          {...input}
+          meta={meta}
+          placeholder={translate("personal_detail_page.birthday")}
+          value={value}
+          className={styles.input_text}
+          onClick={onClick}
+        />
+      );
+    };
+
     const { translate } = this.props;
 
     return (
@@ -74,18 +96,22 @@ class PersonalDetails extends Component {
                   />
                 )}
               </Field>
-
               <Field name="birthday">
                 {({ input, meta }) => (
-                  <InputTextComponent
-                    meta={meta}
-                    type="text"
-                    {...input}
-                    placeholder={translate("personal_detail_page.birthday")}
-                    className={styles.input_text}
+                  <DatePicker
+                    selected={this.state.startDate}
+                    onChange={(date) => {
+                      this.setState({ startDate: date });
+                      input.onChange(date.valueOf());
+                    }}
+                    maxDate={new Date()}
+                    customInput={
+                      <CustomRenderInput meta={meta} input={input} />
+                    }
                   />
                 )}
               </Field>
+
               <input
                 type="submit"
                 value={translate("personal_detail_page.create")}
