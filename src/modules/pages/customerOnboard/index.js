@@ -104,28 +104,6 @@ class CustomerOnboard extends Component {
     }
   };
 
-  personalDetailsUpdate = (civil_id, phone_number, birthday) => {
-    const {
-      editProfileDetailsAction,
-      signInReducer: { userDetails },
-    } = this.props;
-    if (userDetails) {
-      const id = userDetails.id;
-      const updateCivilId = { civil_id, id };
-      const updatePhoneNumber = { phone_number, id };
-      const updateBirthday = { birthday, id };
-      const promise_1 = editProfileDetailsAction(updateCivilId);
-      const promise_2 = editProfileDetailsAction(updatePhoneNumber);
-      const promise_3 = editProfileDetailsAction(updateBirthday);
-
-      Promise.all([promise_1, promise_2, promise_3]).then(({ payload }) => {
-        if (payload.code === 200 || payload.code === 201) {
-          this.nextStep();
-        }
-      });
-    }
-  };
-
   initiatePayment = (id) => {
     const { setSubscriptionPlanToUser, navigateTo } = this.props;
     const postData = {
@@ -172,11 +150,7 @@ class CustomerOnboard extends Component {
           </div>
 
           {step === 0 && <SignUpPage onSignUp={this.onSignUp} />}
-          {step === 1 && (
-            <PersonalDetails
-              personalDetailsUpdate={this.personalDetailsUpdate}
-            />
-          )}
+          {step === 1 && <PersonalDetails profileUpdate={this.profileUpdate} />}
           {step === 2 && (
             <MarketplaceDetail profileUpdate={this.profileUpdate} />
           )}

@@ -13,11 +13,13 @@ import { isEmptyValidator, isPhoneNumber } from "Utils/validators";
 
 class PersonalDetails extends Component {
   onSubmit = (form) => {
-    this.props.personalDetailsUpdate(
-      form.civil_id,
-      form.phone_number,
-      form.birthday
-    );
+    const updatedPostData = {
+      civil_id: form.civil_id,
+      phone_number: form.phone_number,
+      birthday: form.birthday,
+    };
+
+    this.props.profileUpdate(updatedPostData);
   };
 
   validate = (values) => {
