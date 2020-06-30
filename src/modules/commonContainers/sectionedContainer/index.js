@@ -31,7 +31,7 @@ class SectionedContainer extends Component {
   };
 
   render() {
-    const { isAbsoluteContent, sideBarContainer, children } = this.props;
+    const { isAbsoluteContent, sideBarContainer, children, isRTL } = this.props;
     const { openDrawer } = this.state;
 
     const sideContainer = (
@@ -62,7 +62,8 @@ class SectionedContainer extends Component {
     );
 
     return (
-      <DivRow className={styles.page_container}>
+      <DivRow className={`${styles.page_container} ${isRTL ? styles.rtl : ""}`}>
+        {/* className={styles.page_container} */}
         <Drawer
           modal
           open={openDrawer}
@@ -111,6 +112,7 @@ class SectionedContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     isUserSignedIn: state.signInReducer.isUserSignedIn,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 

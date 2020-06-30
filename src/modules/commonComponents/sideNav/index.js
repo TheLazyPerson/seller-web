@@ -118,10 +118,11 @@ class SideNav extends Component {
   getListItem = (isSelected, listItem) => {
     const {
       languageReducer: { languageCode },
+      isRTL,
     } = this.props;
     return (
       <DivRow
-        className={`${styles.nav_item} ${isSelected ? styles.is_selected : ""}`}
+        className={styles.nav_item}
         onClick={() => this.onClickNavItemClick(listItem.slug)}
       >
         <img
@@ -129,7 +130,7 @@ class SideNav extends Component {
           src={isSelected ? listItem.blackImage : listItem.whiteImage}
           alt="nav"
         />
-        <DivColumn>
+        <DivColumn className={styles.text_container}>
           <div className={styles.nav_title}>{listItem[languageCode].title}</div>
           <div className={styles.nav_description}>
             {listItem[languageCode].description}
@@ -144,9 +145,13 @@ class SideNav extends Component {
     const { selectedRoute } = this.state;
     const {
       languageReducer: { languageCode },
+      isRTL,
     } = this.props;
     return (
-      <DivColumn verticalCenter className={styles.side_nav_container}>
+      <DivColumn
+        verticalCenter
+        className={` ${isRTL ? styles.rtl : styles.side_nav_container}`}
+      >
         {map(profileListItem, (listItem) => {
           const { type, name, items: subProfileList } = listItem;
 
@@ -179,6 +184,7 @@ class SideNav extends Component {
 const mapStateToProps = (state) => {
   return {
     languageReducer: state.languageReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 
