@@ -65,6 +65,7 @@ class OrdersDetailsPage extends Component {
       match: { params },
       getOrderDetailsAction,
       translate,
+      isRTL,
     } = this.props;
     const rowStyle = {
       fontSize: 12,
@@ -159,7 +160,12 @@ class OrdersDetailsPage extends Component {
         <InitialPageLoader
           initialPageApi={() => getOrderDetailsAction(params.orderId)}
         >
-          <DivColumn fillParent className={styles.order_page_container}>
+          <DivColumn
+            fillParent
+            className={` ${styles.order_page_container} ${
+              isRTL ? styles.rtl : ""
+            }`}
+          >
             <DivColumn className={styles.order_container}>
               <div className={styles.order_id}>
                 {translate("order_details.order_id")} : <b>{order.id}</b>
@@ -264,6 +270,7 @@ class OrdersDetailsPage extends Component {
 const mapStateToProps = (state) => {
   return {
     orderReducer: state.orderReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 

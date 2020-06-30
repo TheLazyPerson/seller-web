@@ -85,6 +85,7 @@ class MainOrdersShippingPage extends Component {
       match: { params },
       getOrderDetailsAction,
       translate,
+      isRTL,
     } = this.props;
 
     return (
@@ -96,7 +97,11 @@ class MainOrdersShippingPage extends Component {
         <InitialPageLoader
           initialPageApi={() => getOrderDetailsAction(params.orderId)}
         >
-          <DivColumn className={styles.order_page_container}>
+          <DivColumn
+            className={` ${styles.order_page_container} ${
+              isRTL ? styles.rtl : ""
+            }`}
+          >
             <DivColumn className={styles.order_container}>
               <div className={styles.order_id}>
                 {translate("pickup_request_details.order_id")}
@@ -108,101 +113,102 @@ class MainOrdersShippingPage extends Component {
               </div>
               <div className={styles.status}>{order.status_label}</div>
             </DivColumn>
-          </DivColumn>
-          <div className={styles.header}>
-            {translate("pickup_request_details.pickup_information")}
-          </div>
-          <DivColumn className={styles.normal_container}>
-            <DivRow className={styles.title}>
-              {translate("pickup_request_details.req_pickup_on")}:{" "}
-              <div className={styles.value}>
-                {!isEmpty(order.pickup_request)
-                  ? order.pickup_request.requested_pickup_on
-                  : ""}
-              </div>
+
+            <div className={styles.header}>
+              {translate("pickup_request_details.pickup_information")}
+            </div>
+            <DivColumn className={styles.normal_container}>
+              <DivRow className={styles.title}>
+                {translate("pickup_request_details.req_pickup_on")}:{" "}
+                <div className={styles.value}>
+                  {!isEmpty(order.pickup_request)
+                    ? order.pickup_request.requested_pickup_on
+                    : ""}
+                </div>
+              </DivRow>
+            </DivColumn>
+
+            <div className={styles.header}>
+              {translate("pickup_request_details.customer_details")}
+            </div>
+            <DivColumn className={styles.normal_container}>
+              <DivRow className={styles.title}>
+                {translate("pickup_request_details.name")}:{" "}
+                <div className={styles.value}>
+                  {order.customer_first_name} {order.customer_last_name}
+                </div>
+              </DivRow>
+              <DivRow className={styles.title}>
+                {translate("pickup_request_details.email")}:{" "}
+                <div className={styles.value}>{order.customer_email}</div>
+              </DivRow>
+            </DivColumn>
+            <div className={styles.header}>
+              {" "}
+              {translate("pickup_request_details.products_order")}
+            </div>
+            <DataTable
+              columns={columns}
+              customStyles={customStyles}
+              data={order.items}
+              style={{ minHeight: 200 }}
+              noHeader={true}
+            />
+            <HorizontalBorder />
+            <DivRow className={styles.address_container}>
+              <DivColumn className={styles.address_item_container}>
+                <div className={styles.title}>
+                  {translate("pickup_request_details.shipping_address")}
+                </div>
+                <div className={styles.description}>
+                  {!isEmpty(order.shipping_address) && (
+                    <span>
+                      {order.shipping_address.area},{" "}
+                      {order.shipping_address.block_number},{" "}
+                      {order.shipping_address.house_number},{" "}
+                      {order.shipping_address.street_number},{" "}
+                      {order.shipping_address.avenue} ,{" "}
+                      {order.shipping_address.landmark}-{" "}
+                      {order.shipping_address.city}
+                    </span>
+                  )}
+                </div>
+              </DivColumn>
+
+              <DivColumn className={styles.address_item_container}>
+                <div className={styles.title}>
+                  {translate("pickup_request_details.billing_address")}
+                </div>
+                <div className={styles.description}>
+                  {!isEmpty(order.billing_address) && (
+                    <span>
+                      {order.shipping_address.area},{" "}
+                      {order.shipping_address.block_number},{" "}
+                      {order.shipping_address.house_number},{" "}
+                      {order.shipping_address.street_number},{" "}
+                      {order.shipping_address.avenue} ,{" "}
+                      {order.shipping_address.landmark}-{" "}
+                      {order.shipping_address.city}
+                    </span>
+                  )}
+                </div>
+              </DivColumn>
+
+              <DivColumn className={styles.address_item_container}>
+                <div className={styles.title}>
+                  {translate("pickup_request_details.shipping_methods")}
+                </div>
+                <div className={styles.description}>{order.shipping_title}</div>
+              </DivColumn>
+
+              <DivColumn className={styles.address_item_container}>
+                <div className={styles.title}>
+                  {translate("pickup_request_details.payment_method")}
+                </div>
+                <div className={styles.description}>{order.payment_title}</div>
+              </DivColumn>
             </DivRow>
           </DivColumn>
-
-          <div className={styles.header}>
-            {translate("pickup_request_details.customer_details")}
-          </div>
-          <DivColumn className={styles.normal_container}>
-            <DivRow className={styles.title}>
-              {translate("pickup_request_details.name")}:{" "}
-              <div className={styles.value}>
-                {order.customer_first_name} {order.customer_last_name}
-              </div>
-            </DivRow>
-            <DivRow className={styles.title}>
-              {translate("pickup_request_details.email")}:{" "}
-              <div className={styles.value}>{order.customer_email}</div>
-            </DivRow>
-          </DivColumn>
-          <div className={styles.header}>
-            {" "}
-            {translate("pickup_request_details.products_order")}
-          </div>
-          <DataTable
-            columns={columns}
-            customStyles={customStyles}
-            data={order.items}
-            style={{ minHeight: 200 }}
-            noHeader={true}
-          />
-          <HorizontalBorder />
-          <DivRow className={styles.address_container}>
-            <DivColumn className={styles.address_item_container}>
-              <div className={styles.title}>
-                {translate("pickup_request_details.shipping_address")}
-              </div>
-              <div className={styles.description}>
-                {!isEmpty(order.shipping_address) && (
-                  <span>
-                    {order.shipping_address.area},{" "}
-                    {order.shipping_address.block_number},{" "}
-                    {order.shipping_address.house_number},{" "}
-                    {order.shipping_address.street_number},{" "}
-                    {order.shipping_address.avenue} ,{" "}
-                    {order.shipping_address.landmark}-{" "}
-                    {order.shipping_address.city}
-                  </span>
-                )}
-              </div>
-            </DivColumn>
-
-            <DivColumn className={styles.address_item_container}>
-              <div className={styles.title}>
-                {translate("pickup_request_details.billing_address")}
-              </div>
-              <div className={styles.description}>
-                {!isEmpty(order.billing_address) && (
-                  <span>
-                    {order.shipping_address.area},{" "}
-                    {order.shipping_address.block_number},{" "}
-                    {order.shipping_address.house_number},{" "}
-                    {order.shipping_address.street_number},{" "}
-                    {order.shipping_address.avenue} ,{" "}
-                    {order.shipping_address.landmark}-{" "}
-                    {order.shipping_address.city}
-                  </span>
-                )}
-              </div>
-            </DivColumn>
-
-            <DivColumn className={styles.address_item_container}>
-              <div className={styles.title}>
-                {translate("pickup_request_details.shipping_methods")}
-              </div>
-              <div className={styles.description}>{order.shipping_title}</div>
-            </DivColumn>
-
-            <DivColumn className={styles.address_item_container}>
-              <div className={styles.title}>
-                {translate("pickup_request_details.payment_method")}
-              </div>
-              <div className={styles.description}>{order.payment_title}</div>
-            </DivColumn>
-          </DivRow>
         </InitialPageLoader>
       </SectionedContainer>
     );
@@ -212,6 +218,7 @@ class MainOrdersShippingPage extends Component {
 const mapStateToProps = (state) => {
   return {
     orderReducer: state.orderReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 

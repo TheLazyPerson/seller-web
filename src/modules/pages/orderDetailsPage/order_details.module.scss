@@ -135,4 +135,37 @@
       }
     }
   }
+
+  .rtl {
+    .address_container {
+      flex-direction: row-reverse;
+      .address_item_container {
+        margin-right: 0px;
+        margin-left: 7px;
+      }
+    }
+  }
+}
+
+.rtl {
+  .order_container {
+    padding: 17px 54px 9px 0px;
+    text-align: right;
+  }
+
+  .header {
+    padding: 17px 54px 17px 0px;
+    text-align: right;
+  }
+
+  .normal_container {
+    padding: 17px 54px 9px 0px;
+    title {
+      text-align: right;
+    }
+  }
+
+  .address_container {
+    flex-direction: row-reverse;
+  }
 }
