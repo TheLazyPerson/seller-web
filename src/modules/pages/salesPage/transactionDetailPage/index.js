@@ -122,6 +122,7 @@ class TransactionDetailsPage extends Component {
       match: { params },
       getTransactionDetailsAction,
       translate,
+      isRTL,
     } = this.props;
 
     return (
@@ -139,7 +140,12 @@ class TransactionDetailsPage extends Component {
             getTransactionDetailsAction(params.transactionId)
           }
         >
-          <DivColumn fillParent className={styles.order_page_container}>
+          <DivColumn
+            fillParent
+            className={` ${styles.order_page_container} ${
+              isRTL ? styles.rtl : ""
+            }`}
+          >
             <DivColumn className={styles.order_container}>
               <div className={styles.order_id}>
                 {translate("transaction_details_page.transaction_id")} :{" "}
@@ -196,6 +202,7 @@ class TransactionDetailsPage extends Component {
 const mapStateToProps = (state) => {
   return {
     transactionReducer: state.transactionReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 
