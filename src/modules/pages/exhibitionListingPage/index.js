@@ -31,18 +31,18 @@ class ExhibitionListingPage extends Component {
   }
 
   getListItem = (listItem) => {
-    const { translate } = this.props;
+    const { translate, isRTL } = this.props;
     return (
-      <DivRow className={styles.item}>
+      <DivRow className={` ${styles.item} ${isRTL ? styles.rtl : ""}`}>
         <img className={styles.image} src={listItem.base_image} />
 
         <div className={styles.item_content}>
           <div className={styles.title}>{listItem.title}</div>
           <div className={styles.description}>{listItem.short_description}</div>
 
-          <DivRow>
+          <DivRow className={styles.category_header_container}>
             <div className={styles.category_header}>
-              {translate("exhibition_list_page.category")}
+              {translate("exhibition_list_page.category")}:
             </div>
             <div className={styles.category_value}>{listItem.categories}</div>
           </DivRow>
@@ -118,6 +118,7 @@ class ExhibitionListingPage extends Component {
 const mapStateToProps = (state) => {
   return {
     exhibitionReducer: state.exhibitionReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 

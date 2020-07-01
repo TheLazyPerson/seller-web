@@ -110,6 +110,7 @@ class ExhibitionDetailsPage extends Component {
       match: { params },
       getExhibitionDetailAction,
       translate,
+      isRTL,
     } = this.props;
     const { showModal } = this.state;
 
@@ -136,7 +137,9 @@ class ExhibitionDetailsPage extends Component {
             <DivColumn
               fillParent
               horizontalCenter
-              className={styles.exhibition_details_container}
+              className={` ${styles.exhibition_details_container} ${
+                isRTL ? styles.rtl : ""
+              }`}
             >
               <DivRow
                 className={styles.exhibition_banner_container}
@@ -186,7 +189,7 @@ class ExhibitionDetailsPage extends Component {
                         {translate("exhibition_details_page.overview")} :
                       </div>
                       {!isEmpty(exhibitionDetail.overview.card) && (
-                        <DivRow>
+                        <DivRow className="overview_box_container">
                           {map(exhibitionDetail.overview.card, (card) => {
                             return (
                               <BoxComponent
@@ -315,6 +318,7 @@ const mapStateToProps = (state) => {
   return {
     exhibitionReducer: state.exhibitionReducer,
     productReducer: state.productReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 

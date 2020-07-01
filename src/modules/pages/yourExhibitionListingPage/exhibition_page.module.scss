@@ -32,14 +32,16 @@
           margin: 11px 0px 20px;
         }
 
-        .category_header {
-          font-size: 14px;
-          font-weight: bold;
-        }
+        .category_header_container {
+          .category_header {
+            font-size: 14px;
+            font-weight: bold;
+          }
 
-        .category_value {
-          font-size: 14px;
-          font-weight: 300;
+          .category_value {
+            font-size: 14px;
+            font-weight: 300;
+          }
         }
 
         .date_container {
@@ -94,6 +96,27 @@
           }
         }
       }
+    }
+  }
+}
+
+.rtl {
+  flex-direction: row-reverse;
+  text-align: right;
+  .category_header {
+    text-align: left;
+  }
+  .date_container {
+    flex-direction: row-reverse;
+  }
+  .category_header_container {
+    flex-direction: row-reverse;
+  }
+  .action_container {
+    flex-direction: row-reverse;
+    .last_date {
+      margin-right: 0px !important;
+      margin-left: 10px !important;
     }
   }
 }

@@ -32,19 +32,18 @@ class YourExhibitionListingPage extends Component {
   };
 
   getListItem = (listItem) => {
-    const { translate } = this.props;
+    const { translate, isRTL } = this.props;
 
     return (
-      <DivRow className={styles.item}>
+      <DivRow className={` ${styles.item} ${isRTL ? styles.rtl : ""}`}>
         <img className={styles.image} src={listItem.base_image} />
 
         <DivColumn className={styles.item_content}>
           <div className={styles.title}>{listItem.title}</div>
           <div className={styles.description}>{listItem.short_description}</div>
 
-          <DivRow>
+          <DivRow className={styles.category_header_container}>
             <div className={styles.category_header}>
-              {" "}
               {translate("your_exhibition_list_page.category")}
             </div>
             <div className={styles.category_value}>{listItem.categories}</div>
@@ -55,7 +54,6 @@ class YourExhibitionListingPage extends Component {
               {translate("your_exhibition_list_page.starts_at")}:
             </div>
             <div className={styles.date_value}>
-              {" "}
               {formatUnixTimeStampToDateTime(listItem.starts_from)}
             </div>
           </DivRow>
@@ -118,6 +116,7 @@ class YourExhibitionListingPage extends Component {
 const mapStateToProps = (state) => {
   return {
     exhibitionReducer: state.exhibitionReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 
