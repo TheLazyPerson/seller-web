@@ -334,5 +334,8 @@
   "page_not_found": {
     "number": "404",
     "subtitle": "The page you requested does not exist. Click here to continue shopping."
+  },
+  "host_your_exhibition": {
+    "call_us": "اتصل بنا على"
   }
 }
