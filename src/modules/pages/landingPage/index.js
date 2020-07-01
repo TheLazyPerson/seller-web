@@ -53,6 +53,7 @@ class LandingPage extends Component {
       subscriptionReducer: { subscriptionPlanList },
       getPlanListAction,
       translate,
+      isRTL,
     } = this.props;
 
     {
@@ -70,7 +71,9 @@ class LandingPage extends Component {
             fillParent
             horizontalCenter
             verticalCenter
-            className={styles.hero_section_inner_container}
+            className={` ${styles.hero_section_inner_container} ${
+              isRTL ? styles.rtl : ""
+            }`}
           >
             <DivColumn fillParent>
               <h1 className={styles.primary_header}>
@@ -141,6 +144,7 @@ class LandingPage extends Component {
 const mapStateToProps = (state) => {
   return {
     subscriptionReducer: state.subscriptionReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 

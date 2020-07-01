@@ -26,6 +26,7 @@ class FullwidthSecondaryHeader extends Component {
       onClickNavItem,
       selectedTab,
       languageReducer: { languageCode },
+      isRTL,
     } = this.props;
 
     return (
@@ -33,7 +34,9 @@ class FullwidthSecondaryHeader extends Component {
         fillSelfHorizontal
         className={`${styles.top_header} ${className}`}
       >
-        <DivRow className={`${styles.header_container}`}>
+        <DivRow
+          className={` ${styles.header_container} ${isRTL ? styles.rtl : ""}`}
+        >
           <DivRow className={styles.header_icon_container}>
             <img
               src={appIcon}
@@ -69,6 +72,7 @@ class FullwidthSecondaryHeader extends Component {
 const mapStateToProps = (state) => {
   return {
     languageReducer: state.languageReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 

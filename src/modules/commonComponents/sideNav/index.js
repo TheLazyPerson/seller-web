@@ -116,6 +116,7 @@ class SideNav extends Component {
   };
 
   getListItem = (isSelected, listItem) => {
+    console.log(isSelected);
     const {
       languageReducer: { languageCode },
       isRTL,
@@ -150,7 +151,7 @@ class SideNav extends Component {
     return (
       <DivColumn
         verticalCenter
-        className={` ${isRTL ? styles.rtl : styles.side_nav_container}`}
+        className={`${styles.side_nav_container}  ${isRTL ? styles.rtl : ""}`}
       >
         {map(profileListItem, (listItem) => {
           const { type, name, items: subProfileList } = listItem;

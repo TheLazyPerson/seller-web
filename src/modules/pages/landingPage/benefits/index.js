@@ -11,6 +11,7 @@ class Benefits extends Component {
   getBenefitsListItem = (listItem) => {
     const {
       languageReducer: { languageCode },
+      isRTL,
     } = this.props;
     return (
       <DivColumn fillParent className={styles.list_item}>
@@ -25,8 +26,12 @@ class Benefits extends Component {
     );
   };
   render() {
+    const { isRTL } = this.props;
     return (
-      <DivRow fillParent className={styles.benefits}>
+      <DivRow
+        fillParent
+        className={` ${styles.benefits} ${isRTL ? styles.rtl : ""}`}
+      >
         {map(benefitsListItems, (listItem) => {
           return this.getBenefitsListItem(listItem);
         })}
@@ -38,6 +43,7 @@ class Benefits extends Component {
 const mapStateToProps = (state) => {
   return {
     languageReducer: state.languageReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 

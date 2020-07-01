@@ -20,11 +20,13 @@ class FullwidthHeader extends Component {
   };
 
   render() {
-    const { children, whiteColor, className } = this.props;
+    const { children, whiteColor, className, isRTL } = this.props;
 
     return (
       <div fillSelfHorizontal className={`${styles.top_header} ${className}`}>
-        <DivRow className={`${styles.header_container}`}>
+        <DivRow
+          className={` ${styles.header_container} ${isRTL ? styles.rtl : ""}`}
+        >
           <DivRow className={styles.header_icon_container}>
             <img
               src={appIcon}
@@ -53,6 +55,7 @@ FullwidthHeader.defaultProps = {
 const mapStateToProps = (state) => {
   return {
     isUserSignedIn: state.signInReducer.isUserSignedIn,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 

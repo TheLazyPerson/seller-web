@@ -33,7 +33,6 @@ class NavHeader extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log("state.languageReducer.isRTL", state.languageReducer.isRTL);
   return {
     isRTL: state.languageReducer.isRTL,
   };

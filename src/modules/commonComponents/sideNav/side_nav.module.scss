@@ -104,16 +104,15 @@
     color: white;
     text-transform: uppercase;
   }
+}
+.is_selected {
+  background: white;
 
-  .is_selected {
-    background: white;
+  .nav_title {
+    color: $primary-text-color;
+  }
 
-    .nav_title {
-      color: $primary-text-color;
-    }
-
-    .nav_description {
-      color: $primary-text-color;
-    }
+  .nav_description {
+    color: $primary-text-color;
   }
 }

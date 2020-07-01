@@ -25,8 +25,13 @@ class DeliveringOrders extends Component {
     );
   };
   render() {
+    const { isRTL } = this.props;
     return (
-      <DivRow fillParent horizontalCenter className={styles.deliveringOrders}>
+      <DivRow
+        fillParent
+        horizontalCenter
+        className={` ${styles.deliveringOrders} ${isRTL ? styles.rtl : ""}`}
+      >
         {map(deliveringOrdersItems, (listItem) => {
           return this.getDeliveringOrdersListItem(listItem);
         })}
@@ -38,6 +43,7 @@ class DeliveringOrders extends Component {
 const mapStateToProps = (state) => {
   return {
     languageReducer: state.languageReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 
