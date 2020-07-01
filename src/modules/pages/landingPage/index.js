@@ -30,9 +30,9 @@ class LandingPage extends Component {
     } = this.props;
 
     if (selectedSubscription.id) {
-      navigateTo("signup");
+      navigateTo("customer-onboard");
     } else {
-      navigateTo("signup");
+      navigateTo("customer-onboard");
     }
   };
   state = {
