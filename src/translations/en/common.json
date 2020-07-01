@@ -373,5 +373,9 @@
   },
   "host_your_exhibition": {
     "call_us": " CALL US AT"
+  },
+  "additional_plan": {
+    "title": "BUY ADDITIONAL PLAN",
+    "buy": "BUY"
   }
 }

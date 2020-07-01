@@ -71,10 +71,14 @@ class ActiveSubscription extends Component {
       </DivColumn>
     );
     return (
-      <DivRow className={styles.subscription_container}>
+      <DivRow
+        className={` ${styles.subscription_container} ${
+          isRTL ? styles.rtl : ""
+        }`}
+      >
         <DivColumn fillParent center className={`${styles.subscription}`}>
           <div className={styles.subscription_title}>
-            {translate("subscription_item.active_plan")}:{" "}
+            <span>{translate("subscription_item.active_plan")}:</span>
             {subscription.plan_name}
           </div>
           <div className={styles.subscription_price}>
@@ -165,6 +169,7 @@ class ActiveSubscription extends Component {
 const mapStateToProps = (state) => {
   return {
     subscriptionReducer: state.subscriptionReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 

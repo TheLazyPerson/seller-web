@@ -13,6 +13,7 @@ import { bindActionCreators } from "redux";
 import Subscription from "CommonComponents/subscriptionComponent";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import { setSelectedSubscription } from "Core/modules/subscription/subscriptionActions";
+import translatorHoc from "Hoc/translatorHoc";
 
 class BuyPlanModal extends Component {
   render() {
@@ -22,6 +23,7 @@ class BuyPlanModal extends Component {
       onClickBuyPlan,
       planList,
       activeSubscription,
+      translate,
       subscriptionReducer: { selectedSubscription },
     } = this.props;
     return (
@@ -42,11 +44,13 @@ class BuyPlanModal extends Component {
             onClick={(event) => event.stopPropagation()}
           >
             <DivRow verticalCenter className={styles.header_container}>
-              <div className={styles.header_title}>BUY ADDITIONAL PLAN</div>
+              <div className={styles.header_title}>
+                {translate("additional_plan.title")}
+              </div>
               <CapsuleButton
                 onClick={() => onClickBuyPlan(selectedSubscription.id)}
               >
-                BUY
+                {translate("additional_plan.buy")}
               </CapsuleButton>
               {/* <SearchBarComponent /> */}
             </DivRow>
@@ -87,4 +91,7 @@ const mapDispathToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispathToProps)(BuyPlanModal);
+export default connect(
+  mapStateToProps,
+  mapDispathToProps
+)(translatorHoc(BuyPlanModal));

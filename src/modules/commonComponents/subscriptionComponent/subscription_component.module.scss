@@ -1,7 +1,7 @@
 @import "~Styles/colors.module";
 @import "~Styles/mixins.module";
 .subscription:first-child {
-  margin-right: 21px;
+  margin-right: 41px;
 }
 .subscription:last-child {
   margin-left: 21px;
@@ -151,4 +151,26 @@
       margin-bottom: 20px;
     }
   }
+}
+
+.rtl {
+  text-align: right;
+  margin-right: 21px;
+  .features {
+    .feature {
+      flex-direction: row-reverse;
+      margin-bottom: 40px;
+      .feature_details {
+        margin-left: 0px;
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+.rtl:first-child {
+  margin-right: 0px !important;
+}
+.rtl:last-child {
+  margin-left: 0px !important;
 }

@@ -30,9 +30,9 @@ class Subscription extends Component {
     return (
       <DivColumn
         fillParent
-        className={`${styles.subscription} ${
+        className={`${styles.subscription} ${isRTL ? styles.rtl : ""} ${
           selectedSubscription.id == subscription.id ? styles.is_selected : ""
-        }`}
+        }  `}
         onClick={this.selectSubscription}
       >
         <div className={styles.subscription_title}>
@@ -43,7 +43,7 @@ class Subscription extends Component {
           {translate("subscription_item.kd")} {subscription.price}
         </div>
         <div className={styles.subtitle}>
-          {translate("subscription_item.benefits")}Benefits Include:
+          {translate("subscription_item.benefits")}:
         </div>
         <DivColumn fillParent className={styles.features}>
           <DivRow className={styles.feature}>
@@ -58,8 +58,8 @@ class Subscription extends Component {
             />
             <DivColumn className={styles.feature_details}>
               <div className={styles.feature_title}>
-                {subscription.no_of_exhibitions}
-                {translate("subscription_item.exhibitions")}
+                {subscription.no_of_exhibitions} &nbsp;
+                {translate("subscription_item.exhibition")}
               </div>
               <div className={styles.feature_description}>
                 {translate("subscription_item.enroll")}{" "}
@@ -117,6 +117,7 @@ class Subscription extends Component {
 const mapStateToProps = (state) => {
   return {
     subscriptionReducer: state.subscriptionReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 
