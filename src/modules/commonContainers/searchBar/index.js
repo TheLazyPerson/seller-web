@@ -1,21 +1,13 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import styles from "./search_bar.module.scss";
 import DivRow from "CommonComponents/divRow";
 import DivColumn from "CommonComponents/divColumn";
 import searchIcon from "Icons/search-icon-black.svg";
 import searchIconWhite from "Icons/search-icon-white.svg";
-import hamburgerMenuIcon from "Icons/hamburger-menu-icon-black.svg";
-import bagIcon from "Icons/cart-bag-icon-black.svg";
-import bagIconWhite from "Icons/cart-bag-icon-white.svg";
-import bookmarkIcon from "Icons/bookmark-icon-black.svg";
-import bookmarkIconWhite from "Icons/bookmark-icon-white.svg";
-import arrowDownIcon from "Icons/arrow-down-icon-black.svg";
 import navigatorHoc from "Hoc/navigatorHoc";
-import profileIconBlack from "Icons/profile-icon-black.svg";
-import profileIconWhite from "Icons/profile-icon-white.svg";
 import HorizontalBorder from "CommonComponents/horizontalBorder";
 import { searchTypes } from "Constants/searchConstants";
-import { connect } from "react-redux";
 import translatorHoc from "Hoc/translatorHoc";
 
 class SearchBar extends Component {
@@ -23,10 +15,10 @@ class SearchBar extends Component {
 
   state = {
     searchText: "",
-    showSearchResult: false
+    showSearchResult: false,
   };
 
-  onSearchItemSelected = type => {
+  onSearchItemSelected = (type) => {
     this.clickedOnSearchItem = true;
     this.navigateToSearchPage(type);
   };
@@ -35,25 +27,25 @@ class SearchBar extends Component {
     this.navigateToSearchPage(searchTypes.ALL);
   };
 
-  navigateToSearchPage = searchType => {
+  navigateToSearchPage = (searchType) => {
     const { navigateTo } = this.props;
     const { searchText } = this.state;
 
     this.setState({
-      showSearchResult: false
+      showSearchResult: false,
     });
 
     navigateTo("search", {
       searchType,
-      searchText
+      searchText,
     });
   };
 
-  onChangeSearchText = event => {
+  onChangeSearchText = (event) => {
     const text = event.target.value;
 
     this.setState({
-      searchText: text
+      searchText: text,
     });
   };
 
@@ -70,7 +62,7 @@ class SearchBar extends Component {
     setTimeout(() => {
       if (showSearchResult && !this.clickedOnSearchItem) {
         this.setState({
-          showSearchResult: false
+          showSearchResult: false,
         });
       }
     }, 300);
@@ -81,7 +73,11 @@ class SearchBar extends Component {
     const { translate, whiteColor, className, isRTL } = this.props;
 
     return (
-      <div className={`${isRTL ? styles.rtl : ''} ${styles.search_container} ${className}`}>
+      <div
+        className={`${isRTL ? styles.rtl : ""} ${
+          styles.search_container
+        } ${className}`}
+      >
         <DivRow
           className={`${styles.search_wrapper} ${
             searchText && showSearchResult ? styles.search_wrapper_expanded : ""

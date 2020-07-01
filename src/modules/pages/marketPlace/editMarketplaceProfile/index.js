@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivRow from "CommonComponents/divRow";
+import DivColumn from "CommonComponents/divColumn";
 import SideNav from "CommonComponents/sideNav";
 import styles from "./edit_marketplace_profile.module.scss";
 import NavHeader from "CommonComponents/navHeader";
@@ -13,25 +14,14 @@ import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import {
   getMarketplaceProfileAction,
   editMarketplaceProfileAction,
-  selectMarketplaceAddress
+  selectMarketplaceAddress,
 } from "Core/modules/marketplaceprofile/marketplaceProfileActions";
 import { getAddressListAction } from "Core/modules/address/addressActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {
-  isPhoneNumber,
-  nameValidator,
-  isEmptyValidator,
-  emailValidator
-} from "Utils/validators";
-import DatePicker from "react-datepicker";
+import { isPhoneNumber, nameValidator, emailValidator } from "Utils/validators";
 import "react-datepicker/dist/react-datepicker.css";
-import Select from "react-select";
-import DivColumn from "CommonComponents/divColumn";
-import AddressItemComponent from "CommonComponents/addressItemComponent";
-import HorizontalBorder from "CommonComponents/horizontalBorder";
-import map from "lodash/map";
-import InitialPageLoader from "CommonContainers/initialPageLoader";
+import translatorHoc from "Hoc/translatorHoc";
 
 class EditMarketplaceProfile extends Component {
   onBackPress = () => {
@@ -39,12 +29,12 @@ class EditMarketplaceProfile extends Component {
     pop();
   };
 
-  onSubmit = form => {
+  onSubmit = (form) => {
     const {
       editMarketplaceProfileAction,
       navigateTo,
       showSuccessFlashMessage,
-      marketplaceProfileReducer: { marketplaceAddress }
+      marketplaceProfileReducer: { marketplaceAddress },
     } = this.props;
     editMarketplaceProfileAction({
       shop_name: form.shopName,
@@ -57,7 +47,7 @@ class EditMarketplaceProfile extends Component {
       avenue: form.avenue,
       landmark: form.landmark,
       address_type: form.addressType,
-      city: form.city
+      city: form.city,
     }).then(({ payload }) => {
       if (payload.code === 200 || payload.code === 201) {
         navigateTo("profile-details");
@@ -75,15 +65,15 @@ class EditMarketplaceProfile extends Component {
     // });
   }
 
-  validate = values => {
+  validate = (values) => {
     const errors = {};
     const validators = {
       shopName: nameValidator(values.shopName),
       contactNumber: isPhoneNumber(values.contactNumber),
-      shopEmail: emailValidator(values.shopEmail)
+      shopEmail: emailValidator(values.shopEmail),
     };
 
-    Object.keys(validators).forEach(key => {
+    Object.keys(validators).forEach((key) => {
       if (!validators[key].result) errors[key] = validators[key].error;
     });
 
@@ -99,13 +89,14 @@ class EditMarketplaceProfile extends Component {
       getAddressListAction,
       selectMarketplaceAddress,
       marketplaceProfileReducer: { profile, marketplaceAddress },
-      addressReducer: { addressList }
+      addressReducer: { addressList },
+      translate,
     } = this.props;
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <NavHeader
-          title="Marketplace Profile details"
+          title={translate("edit_marketplace_detail_page.page_title")}
           onBackClick={this.onBackPress}
         />
         <Form
@@ -122,16 +113,16 @@ class EditMarketplaceProfile extends Component {
             avenue: profile.avenue ? profile.avenue : "",
             landmark: profile.landmark ? profile.landmark : "",
             addressType: profile.address_type ? profile.address_type : "",
-            city: profile.city ? profile.city : ""
+            city: profile.city ? profile.city : "",
           }}
           render={({
             handleSubmit,
             form: {
-              mutators: { mutateValue }
+              mutators: { mutateValue },
             },
             submitting,
             pristine,
-            values
+            values,
           }) => (
             <form onSubmit={handleSubmit}>
               <DivColumn className={styles.form_container}>
@@ -140,7 +131,9 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="Shop Name"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.shop_name"
+                      )}
                       className={styles.input_text}
                     />
                   )}
@@ -150,7 +143,9 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="Contact Number"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.shop_contact_number"
+                      )}
                       className={styles.input_text}
                     />
                   )}
@@ -161,13 +156,19 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="Shop Email Address"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.shop_email_addres"
+                      )}
                       className={styles.input_text}
                     />
                   )}
                 </Field>
               </DivColumn>
-              <NavHeader title="Address details" />
+              <NavHeader
+                title={translate(
+                  "edit_marketplace_detail_page.address_details"
+                )}
+              />
 
               <DivColumn className={styles.form_container}>
                 <Field name="area">
@@ -175,7 +176,9 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="Area*"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.area"
+                      )}
                       className={styles.input_text}
                     />
                   )}
@@ -185,7 +188,9 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="Block Number*"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.block_number"
+                      )}
                       className={styles.input_text}
                     />
                   )}
@@ -196,7 +201,9 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="House Number*"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.house_number"
+                      )}
                       className={styles.input_text}
                     />
                   )}
@@ -207,7 +214,9 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="Street Number*"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.street_number"
+                      )}
                       className={styles.input_text}
                     />
                   )}
@@ -217,7 +226,9 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="Avenue"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.avenue"
+                      )}
                       className={styles.input_text}
                     />
                   )}
@@ -228,7 +239,9 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="Landmark"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.landmark"
+                      )}
                       className={styles.input_text}
                     />
                   )}
@@ -239,7 +252,9 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="Home/Office*"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.home"
+                      )}
                       className={styles.input_text}
                     />
                   )}
@@ -249,7 +264,9 @@ class EditMarketplaceProfile extends Component {
                     <InputTextComponent
                       meta={meta}
                       {...input}
-                      placeholder="City"
+                      placeholder={translate(
+                        "edit_marketplace_detail_page.city"
+                      )}
                       className={styles.input_text}
                     />
                   )}
@@ -263,7 +280,7 @@ class EditMarketplaceProfile extends Component {
                         address={address}
                         onClickEdit={this.handleEdit}
                         onClickRemove={this.handleRemove}
-                        isSelected={address.id == marketplaceAddress.id}
+                        isSelected={address.id === marketplaceAddress.id}
                         onClickItem={() => selectMarketplaceAddress(address)}
                       />
                     );
@@ -273,10 +290,10 @@ class EditMarketplaceProfile extends Component {
 
                 <DivRow className={styles.form_button_container}>
                   <SecondaryCapsuleButton onClick={this.onClickCancel}>
-                    Cancel
+                    {translate("edit_marketplace_detail_page.cancle")}
                   </SecondaryCapsuleButton>
                   <CapsuleButton type="submit" disabled={submitting}>
-                    Save Details
+                    {translate("edit_marketplace_detail_page.save_details")}
                   </CapsuleButton>
                 </DivRow>
               </DivColumn>
@@ -288,14 +305,14 @@ class EditMarketplaceProfile extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     marketplaceProfileReducer: state.marketplaceProfileReducer,
-    addressReducer: state.addressReducer
+    addressReducer: state.addressReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     getMarketplaceProfileAction: bindActionCreators(
       getMarketplaceProfileAction,
@@ -313,11 +330,11 @@ const mapDispathToProps = dispatch => {
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
-    )
+    ),
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(EditMarketplaceProfile));
+)(navigatorHoc(translatorHoc(EditMarketplaceProfile)));

@@ -1,17 +1,18 @@
+/* eslint-disable jsx-a11y/anchor-has-content */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component, Fragment } from "react";
 import SectionedHeader from "CommonContainers/sectionedHeader";
 import DivRow from "CommonComponents/divRow";
 import DivColumn from "CommonComponents/divColumn";
 import styles from "./sectioned_container.module.scss";
 import appIcon from "Icons/app-icon-white.svg";
-import LanguageSelect from "CommonComponents/languageSelect";
 import navigatorHoc from "Hoc/navigatorHoc";
 import Drawer from "@material/react-drawer";
 import "@material/react-drawer/dist/drawer.css";
 import hamburgerIconBlack from "Icons/hamburger-menu-icon-black.svg";
-import SearchBar from "CommonContainers/searchBar";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import LanguageSelect from "CommonComponents/languageSelect";
 
 class SectionedContainer extends Component {
   state = {
@@ -31,7 +32,7 @@ class SectionedContainer extends Component {
   };
 
   render() {
-    const { isAbsoluteContent, sideBarContainer, children } = this.props;
+    const { isAbsoluteContent, sideBarContainer, children, isRTL } = this.props;
     const { openDrawer } = this.state;
 
     const sideContainer = (
@@ -51,18 +52,19 @@ class SectionedContainer extends Component {
         <DivColumn className={styles.side_content_container}>
           {sideBarContainer}
         </DivColumn>
-        {/* <DivRow
+        <DivRow
           verticalCenter
           horizontalCenter
           className={styles.side_footer_container}
         >
           <LanguageSelect />
-        </DivRow> */}
+        </DivRow>
       </Fragment>
     );
 
     return (
-      <DivRow className={styles.page_container}>
+      <DivRow className={`${styles.page_container} ${isRTL ? styles.rtl : ""}`}>
+        {/* className={styles.page_container} */}
         <Drawer
           modal
           open={openDrawer}
@@ -111,6 +113,7 @@ class SectionedContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     isUserSignedIn: state.signInReducer.isUserSignedIn,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 

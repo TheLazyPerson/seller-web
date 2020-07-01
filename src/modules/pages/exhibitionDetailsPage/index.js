@@ -6,15 +6,11 @@ import NavHeader from "CommonComponents/navHeader";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import map from "lodash/map";
 import styles from "./exhibition_details.module.scss";
-import { profileListItem } from "Constants/profileConstants";
 import SideNav from "CommonComponents/sideNav";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { logoutAction } from "Core/modules/signin/signinActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { CookieService } from "Utils/cookieService";
-import { USER_DATA_COOKIE } from "Constants/cookieConstants";
-import exhibitionImage from "Images/exhibition-item-3.png";
 import ProductListItem from "CommonComponents/productListItem";
 import CategoryListItem from "CommonComponents/categoryListItem";
 import {
@@ -22,11 +18,8 @@ import {
   attachProductsToExhibition,
   removeProductFromExhibition,
 } from "Core/modules/exhibition/exhibitionActions";
-
-import {
-  getProductListAction,
-  removeProductAction,
-} from "Core/modules/product/productActions";
+import translatorHoc from "Hoc/translatorHoc";
+import { getProductListAction } from "Core/modules/product/productActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import AttachProductModal from "./attachProductModal";
 import BoxComponent from "CommonComponents/boxComponent";
@@ -39,38 +32,31 @@ const exhibitionState = {
   ENROLLED_LIVE: "live",
 };
 
-const ProductDescription = ({ exhibitionDetail }) => (
+const ProductDescription = ({ exhibitionDetail, translate }) => (
   <Fragment>
-    <div className={styles.title}>DESCRIPTION:</div>
+    <div className={styles.title}>
+      {" "}
+      {translate("exhibition_details_page.discription")}:
+    </div>
     <div className={styles.description}>{exhibitionDetail.description}</div>
   </Fragment>
 );
 
 class ExhibitionDetailsPage extends Component {
   onClickAttachProduct = (exhibitionId, productId) => {
-    const {
-      attachProductsToExhibition,
-      getProductListAction,
-      exhibitionReducer: { exhibitionDetail },
-    } = this.props;
+    const { attachProductsToExhibition, getProductListAction } = this.props;
     attachProductsToExhibition(exhibitionId, {
       products: [productId],
     }).then(() => {
       getProductListAction(exhibitionId);
-      console.log("attachment successful");
     });
   };
   onClickRemoveProduct = (exhibitionId, productId) => {
-    const {
-      removeProductFromExhibition,
-      getProductListAction,
-      exhibitionReducer: { exhibitionDetail },
-    } = this.props;
+    const { removeProductFromExhibition, getProductListAction } = this.props;
     removeProductFromExhibition(exhibitionId, {
       product: productId,
     }).then(() => {
       getProductListAction(exhibitionId);
-      console.log("removal successful");
     });
   };
   state = {
@@ -106,14 +92,16 @@ class ExhibitionDetailsPage extends Component {
       getProductListAction,
       match: { params },
       getExhibitionDetailAction,
+      translate,
+      isRTL,
     } = this.props;
     const { showModal } = this.state;
 
     let headerTitle = "ENROLL";
 
-    if (exhibitionState.UPCOMING_ENROLLED == exhibitionDetail.state) {
+    if (exhibitionState.UPCOMING_ENROLLED === exhibitionDetail.state) {
       headerTitle = "LIST YOUR PRODUCTS";
-    } else if (exhibitionState.ENROLLED_LIVE == exhibitionDetail.state) {
+    } else if (exhibitionState.ENROLLED_LIVE === exhibitionDetail.state) {
       headerTitle = "VIEW LISTED PRODUCTS";
     }
 
@@ -121,7 +109,7 @@ class ExhibitionDetailsPage extends Component {
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.exhibition_page_container}>
           <NavHeader
-            title="Exhibition"
+            title={translate("exhibition_details_page.exhibition")}
             onBackClick={this.onBackPress}
           ></NavHeader>
           <InitialPageLoader
@@ -132,7 +120,9 @@ class ExhibitionDetailsPage extends Component {
             <DivColumn
               fillParent
               horizontalCenter
-              className={styles.exhibition_details_container}
+              className={` ${styles.exhibition_details_container} ${
+                isRTL ? styles.rtl : ""
+              }`}
             >
               <DivRow
                 className={styles.exhibition_banner_container}
@@ -151,18 +141,18 @@ class ExhibitionDetailsPage extends Component {
                     {exhibitionDetail.short_description}
                   </div>
                   <div className={styles.exhibition_date}>
-                    {exhibitionState.UPCOMING_ENROLLED ==
+                    {exhibitionState.UPCOMING_ENROLLED ===
                       exhibitionDetail.state &&
                       `LAST ${calculateDateDiffFrom(
                         exhibitionDetail.starts_from
                       )} DAYS LEFT TO SUBMIT PRODUCTS`}
-                    {exhibitionState.UPCOMING == exhibitionDetail.state &&
+                    {exhibitionState.UPCOMING === exhibitionDetail.state &&
                       `LAST ${calculateDateDiff(
                         exhibitionDetail.last_date_of_enrollment
                       )} DAYS LEFT TO ENROLL`}
                   </div>
                 </DivColumn>
-                {exhibitionState.UPCOMING == exhibitionDetail.state && (
+                {exhibitionState.UPCOMING === exhibitionDetail.state && (
                   <CapsuleButton
                     onClick={() => this.onClickSubscribe(exhibitionDetail.id)}
                     style={{ zIndex: 1 }}
@@ -171,14 +161,18 @@ class ExhibitionDetailsPage extends Component {
                   </CapsuleButton>
                 )}
               </DivRow>
-              <NavHeader title="BASIC DETAILS"></NavHeader>
+              <NavHeader
+                title={translate("exhibition_details_page.basic_details")}
+              ></NavHeader>
               <DivRow className={styles.full_description_container}>
                 <DivColumn className={styles.left_container}>
-                  {exhibitionState.ENROLLED_LIVE == exhibitionDetail.state ? (
+                  {exhibitionState.ENROLLED_LIVE === exhibitionDetail.state ? (
                     <Fragment>
-                      <div className={styles.overview}>Overview :</div>
+                      <div className={styles.overview}>
+                        {translate("exhibition_details_page.overview")} :
+                      </div>
                       {!isEmpty(exhibitionDetail.overview.card) && (
-                        <DivRow>
+                        <DivRow className="overview_box_container">
                           {map(exhibitionDetail.overview.card, (card) => {
                             return (
                               <BoxComponent
@@ -194,7 +188,7 @@ class ExhibitionDetailsPage extends Component {
                                   fontSize: 12,
                                 }}
                                 title={`${
-                                  card.card_type == "price-card" ? "KD " : ""
+                                  card.card_type === "price-card" ? "KD " : ""
                                 } ${card.value}`}
                                 description={card.title}
                               />
@@ -204,24 +198,32 @@ class ExhibitionDetailsPage extends Component {
                       )}
                     </Fragment>
                   ) : (
-                    <ProductDescription exhibitionDetail={exhibitionDetail} />
+                    <ProductDescription
+                      exhibitionDetail={exhibitionDetail}
+                      translate={translate}
+                    />
                   )}
                 </DivColumn>
 
                 <DivColumn className={styles.right_container}>
                   {exhibitionState.ENROLLED_LIVE == exhibitionDetail.state ? (
-                    <ProductDescription exhibitionDetail={exhibitionDetail} />
+                    <ProductDescription
+                      exhibitionDetail={exhibitionDetail}
+                      translate={translate}
+                    />
                   ) : (
                     <Fragment>
-                      <div className={styles.title}>DATES:</div>
+                      <div className={styles.title}>
+                        {translate("exhibition_details_page.date")}:
+                      </div>
                       <div className={styles.date}>
-                        <b>STARTS AT:</b>{" "}
+                        <b>{translate("exhibition_details_page.start_at")}</b>{" "}
                         {formatUnixTimeStampToDateTime(
                           exhibitionDetail.starts_from
                         )}
                       </div>
                       <div className={styles.date}>
-                        <b>ENDS ON:</b>{" "}
+                        <b>{translate("exhibition_details_page.ends_on")}:</b>{" "}
                         {formatUnixTimeStampToDateTime(
                           exhibitionDetail.ends_till
                         )}
@@ -230,9 +232,11 @@ class ExhibitionDetailsPage extends Component {
                   )}
                 </DivColumn>
               </DivRow>
-              {exhibitionState.UPCOMING == exhibitionDetail.state && (
+              {exhibitionState.UPCOMING === exhibitionDetail.state && (
                 <Fragment>
-                  <NavHeader title="CATEGORIES"></NavHeader>
+                  <NavHeader
+                    title={translate("exhibition_details_page.category")}
+                  ></NavHeader>
                   <DivRow fillParent className={styles.category_list_container}>
                     {map(exhibitionDetail.categories, (category) => (
                       <CategoryListItem name={category.name} />
@@ -240,17 +244,17 @@ class ExhibitionDetailsPage extends Component {
                   </DivRow>
                 </Fragment>
               )}
-              {exhibitionState.UPCOMING != exhibitionDetail.state && (
+              {exhibitionState.UPCOMING !== exhibitionDetail.state && (
                 <Fragment>
                   <NavHeader title="PRODUCT DETAILS">
-                    {exhibitionState.UPCOMING_ENROLLED ==
+                    {exhibitionState.UPCOMING_ENROLLED ===
                       exhibitionDetail.state && (
                       <CapsuleButton
                         onClick={() =>
                           this.handleAttachProduct(exhibitionDetail.id)
                         }
                       >
-                        ADD YOUR PRODUCTS
+                        {translate("exhibition_details_page.add_to_products")}
                       </CapsuleButton>
                     )}
                   </NavHeader>
@@ -259,7 +263,7 @@ class ExhibitionDetailsPage extends Component {
                       <ProductListItem
                         product={product}
                         actionType={
-                          exhibitionState.ENROLLED_LIVE ==
+                          exhibitionState.ENROLLED_LIVE ===
                           exhibitionDetail.state
                             ? "mark_product_out_of_stock"
                             : "remove_product"
@@ -297,6 +301,7 @@ const mapStateToProps = (state) => {
   return {
     exhibitionReducer: state.exhibitionReducer,
     productReducer: state.productReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 
@@ -322,4 +327,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(ExhibitionDetailsPage));
+)(navigatorHoc(translatorHoc(ExhibitionDetailsPage)));

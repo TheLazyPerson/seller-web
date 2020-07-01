@@ -1,16 +1,11 @@
 import orderBlackIcon from "Icons/order-icon-black.svg";
 import helpCenterBlackIcon from "Icons/help-center-icon-black.svg";
-import wishlistBlackIcon from "Icons/wishlist-icon-black.svg";
-import addressBlackIcon from "Icons/address-icon-black.svg";
 import profileBlackIcon from "Icons/profile-icon-black.svg";
 import settingsBlackIcon from "Icons/settings-icon-black.svg";
-import logoutBlackIcon from "Icons/logout-icon-black.svg";
 import overviewBlackIcon from "Icons/overview-icon-black.svg";
 
 import orderWhiteIcon from "Icons/order-icon-white.svg";
 import helpCenterWhiteIcon from "Icons/help-center-icon-white.svg";
-import wishlistWhiteIcon from "Icons/wishlist-icon-white.svg";
-import addressWhiteIcon from "Icons/address-icon-white.svg";
 import profileWhiteIcon from "Icons/profile-icon-white.svg";
 import settingsWhiteIcon from "Icons/settings-icon-white.svg";
 import overviewWhiteIcon from "Icons/overview-icon-white.svg";
@@ -20,8 +15,6 @@ import productWhiteIcon from "Icons/product-icon-white.svg";
 import productBlackIcon from "Icons/product-icon-black.svg";
 import salesWhiteIcon from "Icons/sales-icon-white.svg";
 import salesBlackIcon from "Icons/sales-icon-black.svg";
-import marketplaceProfileWhiteIcon from "Icons/marketplace-profile-icon-white.svg";
-import marketplaceProfileBlackIcon from "Icons/marketplace-profile-icon-black.svg";
 import subscriptionWhiteIcon from "Icons/subscription-icon-white.svg";
 import subscriptionBlackIcon from "Icons/subscription-icon-black.svg";
 
@@ -32,36 +25,66 @@ export const profileListItem = [
       {
         whiteImage: overviewWhiteIcon,
         blackImage: overviewBlackIcon,
-        title: "Overview",
         slug: "overview",
-        description: "See everyting at a glance"
-      }
-    ]
+        en: {
+          title: "Overview",
+          description: "See everyting at a glance",
+        },
+        ar: {
+          title: "نظرة عامة",
+          description: "انظر كل شيء في لمحة",
+        },
+      },
+    ],
   },
   {
     type: "header",
-    name: "MarketPlace",
+    en: {
+      name: "MarketPlace",
+    },
+    ar: {
+      name: "المتجر",
+    },
     items: [
       {
         blackImage: exhibitionBlackIcon,
         whiteImage: exhibitionWhiteIcon,
-        title: "Exhibitions",
         slug: "exhibitions",
-        description: "Check different exhibition currently live"
+        en: {
+          title: "Exhibitions",
+          description: "Check different exhibition currently live",
+        },
+        ar: {
+          title: "المعارض",
+          description: "تحقق من المعارض المختلفة على الهواء مباشرة",
+        },
       },
       {
         blackImage: orderBlackIcon,
         whiteImage: orderWhiteIcon,
-        title: "Orders",
         slug: "orders",
-        description: "Check your order status"
+
+        en: {
+          title: "Orders",
+          description: "Check your order status",
+        },
+        ar: {
+          title: "الطلب #٪ s",
+          description: "تحقق من حالة طلبك",
+        },
       },
       {
         blackImage: salesBlackIcon,
         whiteImage: salesWhiteIcon,
-        title: "Sales",
         slug: "sales",
-        description: "See your sales overview"
+        en: {
+          title: "Sales",
+          description: "See your sales overview",
+        },
+        ar: {
+          title: "مبيعات",
+          description: "انظر نظرة عامة على المبيعات الخاصة بك",
+        },
       },
       // {
       //   blackImage: marketplaceProfileBlackIcon,
@@ -73,15 +96,26 @@ export const profileListItem = [
       {
         blackImage: productBlackIcon,
         whiteImage: productWhiteIcon,
-        title: "Products",
         slug: "products",
-        description: "Manage listed products"
-      }
-    ]
+        en: {
+          title: "Products",
+          description: "Manage listed products",
+        },
+        ar: {
+          title: "منتجات",
+          description: "إدارة المنتجات المدرجة",
+        },
+      },
+    ],
   },
   {
     type: "header",
-    name: "Account",
+    en: {
+      name: "Account",
+    },
+    ar: {
+      name: "الحساب",
+    },
     items: [
       // {
       //   blackImage: addressBlackIcon,
@@ -93,37 +127,67 @@ export const profileListItem = [
       {
         blackImage: profileBlackIcon,
         whiteImage: profileWhiteIcon,
-        title: "Profile Details",
         slug: "profile-details",
-        description: "Change your personal details and password"
+        en: {
+          title: "Profile",
+          description: "Change your personal details and password",
+        },
+        ar: {
+          title: "الملف الشخصي",
+          description: "قم بتغيير التفاصيل الشخصية وكلمة المرور الخاصة بك",
+        },
       },
       {
         blackImage: subscriptionBlackIcon,
         whiteImage: subscriptionWhiteIcon,
-        title: "Subscription",
         slug: "subscription",
-        description: "Check your subscription details"
+
+        en: {
+          title: "Subscription",
+          description: "Check your subscription details",
+        },
+        ar: {
+          title: "اشتراك",
+          description: "تحقق من تفاصيل اشتراكك",
+        },
       },
       {
         blackImage: settingsBlackIcon,
         whiteImage: settingsWhiteIcon,
-        title: "Settings",
         slug: "settings",
-        description: "Manage notifications & other settings"
-      }
-    ]
+        en: {
+          title: "Settings",
+          description: "Manage notifications & other settings",
+        },
+        ar: {
+          title: "الإعدادات",
+          description: "إدارة الإخطارات والإعدادات الأخرى",
+        },
+      },
+    ],
   },
   {
     type: "header",
-    name: "Help",
+    en: {
+      name: "Help",
+    },
+    ar: {
+      name: "مساعدة",
+    },
     items: [
       {
         blackImage: helpCenterBlackIcon,
         whiteImage: helpCenterWhiteIcon,
-        title: "Help Center",
         slug: "help-center",
-        description: "All in one stop for any help"
-      }
-    ]
-  }
+        en: {
+          title: "Help Center",
+          description: "Help regarding your recent purchases",
+        },
+        ar: {
+          title: "مركز المساعدة",
+          description: "مساعدة بخصوص مشترياتك الأخيرة",
+        },
+      },
+    ],
+  },
 ];

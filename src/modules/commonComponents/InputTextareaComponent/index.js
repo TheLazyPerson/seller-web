@@ -4,9 +4,6 @@ import DivColumn from "CommonComponents/divColumn";
 import tranlatorHoc from "Hoc/translatorHoc";
 
 class InputTextareaComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     const { className, type, meta = {}, isRTL, ...rest } = this.props;
 

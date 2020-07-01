@@ -1,18 +1,13 @@
 import React, { Component } from "react";
 import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivColumn from "CommonComponents/divColumn";
-import DivRow from "CommonComponents/divRow";
 import NavHeader from "CommonComponents/navHeader";
 import CapsuleButton from "CommonComponents/capsuleButton";
-import map from "lodash/map";
 import styles from "./subscription.module.scss";
 import SideNav from "CommonComponents/sideNav";
 import navigatorHoc from "Hoc/navigatorHoc";
-import { logoutAction } from "Core/modules/signin/signinActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { CookieService } from "Utils/cookieService";
-import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import {
   getPlanListAction,
@@ -21,17 +16,13 @@ import {
   buyAdditionalPlanAction,
   activatePlanAction,
 } from "Core/modules/subscription/subscriptionActions";
-import Pricing from "../landingPage/Pricing";
 import ActiveSubscription from "CommonComponents/activeSubscriptionComponent";
-import Subscription from "CommonComponents/subscriptionComponent";
-import HorizontalBorder from "CommonComponents/horizontalBorder";
-import SubscribedComponent from "CommonComponents/subscribedComponent";
 import DataTableContainer from "CommonContainers/dataTableContainer";
-import DataTable from "react-data-table-component";
 import Button from "@material-ui/core/Button";
 import memoize from "memoize-one";
 import BuyPlanModal from "./buyAddtionalPlanModal";
 import isEmpty from "lodash/isEmpty";
+import translatorHoc from "Hoc/translatorHoc";
 
 class SubscriptionPage extends Component {
   state = {
@@ -68,7 +59,6 @@ class SubscriptionPage extends Component {
     },
     {
       cell: (value) => {
-        console.log("VALUE", value);
         const {
           subscriptionReducer: { activeSubscription },
           activatePlanAction,
@@ -97,7 +87,7 @@ class SubscriptionPage extends Component {
   onClickBuyPlan = (planId) => {
     const { buyAdditionalPlanAction } = this.props;
     buyAdditionalPlanAction(planId).then(({ payload }) => {
-      if (payload.code == 200 || payload.code == 201) {
+      if (payload.code === 200 || payload.code === 201) {
         const {
           data: { payment_information },
         } = payload;
@@ -121,7 +111,6 @@ class SubscriptionPage extends Component {
 
   render() {
     const {
-      translate,
       subscriptionReducer: {
         subscriptionPlanList,
         activeSubscription,
@@ -130,15 +119,16 @@ class SubscriptionPage extends Component {
       getPlanListAction,
       getActivePlan,
       getSubscriptionListAction,
+      translate,
     } = this.props;
     const { showModal } = this.state;
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.subscription_page_container}>
-          <NavHeader title="Subscription Details">
+          <NavHeader title={translate("subscription_page.title")}>
             <CapsuleButton onClick={() => this.onClickBuyAdditionalPlan()}>
-              BUY ADDITIONAL PLAN
+              {translate("subscription_page.buy_additional_plan")}
             </CapsuleButton>
           </NavHeader>
 
@@ -153,23 +143,25 @@ class SubscriptionPage extends Component {
 
               <DivColumn fillParent className={styles.additional_plans}>
                 <DivColumn className={styles.additional_plans_title}>
-                  Subscribed Plans:
+                  {translate("subscription_page.plan")} :
                 </DivColumn>
                 <DivColumn
                   fillParent
                   className={styles.additional_plans_container}
                 >
-                  <InitialPageLoader initialPageApi={getSubscriptionListAction}>
+                  {/* <InitialPageLoader initialPageApi={getSubscriptionListAction}>
                     {!isEmpty(activeSubscription) && (
                       <DivRow>
                         <DataTableContainer
                           data={sellerSubscriptionList}
-                          title="SubscriptionLost"
+                          title={translate(
+                            "subscription_page.subscription_lost"
+                          )}
                           columns={this.columns()}
                         />
                       </DivRow>
                     )}
-                  </InitialPageLoader>
+                  </InitialPageLoader> */}
                 </DivColumn>
               </DivColumn>
 
@@ -240,4 +232,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(SubscriptionPage));
+)(navigatorHoc(translatorHoc(SubscriptionPage)));

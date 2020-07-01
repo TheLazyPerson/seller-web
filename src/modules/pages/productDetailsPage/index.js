@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivColumn from "CommonComponents/divColumn";
@@ -9,11 +10,8 @@ import map from "lodash/map";
 import styles from "./product_details.module.scss";
 import SideNav from "CommonComponents/sideNav";
 import navigatorHoc from "Hoc/navigatorHoc";
-import { logoutAction } from "Core/modules/signin/signinActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import DataTableContainer from "CommonContainers/dataTableContainer";
-import DataTable from "react-data-table-component";
 import {
   getProductDetailsAction,
   removeProductAction,
@@ -23,7 +21,6 @@ import {
 
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
-import HorizontalBorder from "CommonComponents/horizontalBorder";
 import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
 
 class ProductDetailsPage extends Component {
@@ -62,7 +59,7 @@ class ProductDetailsPage extends Component {
 
   getViewItem = (attribute, product) => {
     const { type, slug, name, is_translatable } = attribute;
-    if (type == "file") {
+    if (type === "file") {
       return (
         <DivRow className={styles.image_container}>
           {map(product.image, (file) => {
@@ -77,7 +74,7 @@ class ProductDetailsPage extends Component {
       );
     }
 
-    if (type == "tree-checkbox") {
+    if (type === "tree-checkbox") {
       return (
         <DivRow className={styles.title}>
           {name}:
@@ -113,34 +110,32 @@ class ProductDetailsPage extends Component {
 
   render() {
     const {
-      productReducer: { product, prouctForm, editProduct },
+      productReducer: { prouctForm, editProduct },
       match: { params },
-      getProductDetailsAction,
       editProductAction,
     } = this.props;
 
-    const rowStyle = {
-      fontSize: 12,
-      color: "#19202c",
-    };
+    // const rowStyle = {
+    //   fontSize: 12,
+    //   color: "#19202c",
+    // };
 
-    const customStyles = {
-      headRow: {
-        style: {
-          borderTop: "1px solid #ededed",
-          borderBottom: "1px solid #ededed",
-          backgroundColor: "#f4f7fa",
-        },
-      },
-      headCells: {
-        style: {
-          color: "#202124",
-          fontSize: 12,
-          fontWeight: "bold",
-          color: "#7c858e",
-        },
-      },
-    };
+    // const customStyles = {
+    //   headRow: {
+    //     style: {
+    //       borderTop: "1px solid #ededed",
+    //       borderBottom: "1px solid #ededed",
+    //       backgroundColor: "#f4f7fa",
+    //     },
+    //   },
+    //   headCells: {
+    //     style: {
+    //       fontSize: 12,
+    //       fontWeight: "bold",
+    //       color: "#7c858e",
+    //     },
+    //   },
+    // };
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>

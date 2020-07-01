@@ -1,15 +1,17 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import navigatorHoc from "Hoc/navigatorHoc";
 import DivColumn from "CommonComponents/divColumn";
 import DivRow from "CommonComponents/divRow";
-import map from "lodash/map";
 import styles from "./download_app.module.scss";
 import heroImage from "Images/download-app.svg";
 import playStoreImage from "Images/google-play-badge.png";
 import appStoreImage from "Images/app-store-badge.svg";
+import translatorHoc from "Hoc/translatorHoc";
 
 class DownloadApp extends Component {
   render() {
+    const { translate } = this.props;
     return (
       <DivColumn
         fillParent
@@ -17,10 +19,15 @@ class DownloadApp extends Component {
         className={styles.download_app_container}
       >
         <div className={styles.title}>
-          The <span className={styles.highlighted}>Home Expo</span> Advantage
+          {translate("download_app.the")}{" "}
+          <span className={styles.highlighted}>
+            {" "}
+            {translate("download_app.home_expo")}
+          </span>{" "}
+          {translate("download_app.advantage")}
         </div>
         <div className={styles.description}>
-          Manage Everyting at your fingertips.
+          {translate("download_app.subtitle")}
         </div>
 
         <img className={styles.image} src={heroImage} />
@@ -34,4 +41,4 @@ class DownloadApp extends Component {
   }
 }
 
-export default navigatorHoc(DownloadApp);
+export default navigatorHoc(translatorHoc(DownloadApp));

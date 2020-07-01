@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import FullWidthContainer from "CommonContainers/fullwidthContainer";
 import DivColumn from "CommonComponents/divColumn";

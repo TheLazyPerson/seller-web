@@ -1,5 +1,3 @@
-import isEmpty from "lodash/isEmpty";
-
 export const nameValidator = (value) => {
   const nameRegex = /^[A-Za-z]+$/;
   let error = "";
@@ -36,6 +34,7 @@ export const passwordValidator = (password, confirmPassword) => {
   let error = "";
 
   if (!confirmPassword) error = "Please fill in these details to continue";
+  else if (password.length < 8) error = "Password must be 8 characters long";
   else if (password !== confirmPassword) error = "Password did not match";
 
   return error
@@ -68,7 +67,7 @@ export function isEmptyArrayValidator(value) {
 
 export const isPhoneNumber = (value) => {
   let error = "";
-  const numberRegex = /^\d+$/;
+  const numberRegex = /^((0*|\+)965[569]\d{7})$/;
 
   if (!value) error = "Please fill in these details to continue";
   else if (value.length !== 10 || !numberRegex.test(value))
