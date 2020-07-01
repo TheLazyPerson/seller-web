@@ -18,6 +18,7 @@ import resetPasswordReducer from "Core/modules/resetpassword/resetPasswordReduce
 import settingsReducer from "Core/modules/settings/settingsReducer";
 import categoryReducer from "Core/modules/category/categoryReducer";
 import transactionReducer from "Core/modules/transaction/transactionReducer";
+import languageReducer from "Core/modules/language/languageReducer";
 
 const appReducer = (history) =>
   combineReducers({
@@ -40,6 +41,7 @@ const appReducer = (history) =>
     settingsReducer,
     categoryReducer,
     transactionReducer,
+    languageReducer,
   });
 
 /* const rootReducer = ( state, action ) => {

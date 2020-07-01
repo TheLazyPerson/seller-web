@@ -6,7 +6,7 @@ import DivColumn from "CommonComponents/divColumn";
 import styles from "./fullwidth_secondary_header.module.scss";
 import appIcon from "Icons/app-icon-black.svg";
 import navigatorHoc from "Hoc/navigatorHoc";
-
+import { connect } from "react-redux";
 import map from "lodash/map";
 
 class FullwidthSecondaryHeader extends Component {
@@ -16,14 +16,25 @@ class FullwidthSecondaryHeader extends Component {
   };
 
   render() {
-    const { className, navItems, onClickNavItem, selectedTab } = this.props;
+    const {
+      children,
+      whiteColor,
+      className,
+      navItems,
+      onClickNavItem,
+      selectedTab,
+      languageReducer: { languageCode },
+      isRTL,
+    } = this.props;
 
     return (
       <DivColumn
         fillSelfHorizontal
         className={`${styles.top_header} ${className}`}
       >
-        <DivRow className={`${styles.header_container}`}>
+        <DivRow
+          className={` ${styles.header_container} ${isRTL ? styles.rtl : ""}`}
+        >
           <DivRow className={styles.header_icon_container}>
             <img
               src={appIcon}
@@ -33,7 +44,7 @@ class FullwidthSecondaryHeader extends Component {
           </DivRow>
           <DivRow className={styles.links_container}>
             {map(navItems, (listItem) => {
-              const { title, slug } = listItem;
+              const { slug } = listItem;
               const isSelected = selectedTab === slug;
               return (
                 <a
@@ -45,7 +56,7 @@ class FullwidthSecondaryHeader extends Component {
                   }}
                 >
                   {" "}
-                  {title}
+                  {listItem[languageCode].title}
                 </a>
               );
             })}
@@ -56,8 +67,17 @@ class FullwidthSecondaryHeader extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    languageReducer: state.languageReducer,
+    isRTL: state.languageReducer.isRTL,
+  };
+};
+
 FullwidthSecondaryHeader.defaultProps = {
   whiteColor: false,
 };
-
-export default navigatorHoc(FullwidthSecondaryHeader);
+export default connect(
+  mapStateToProps,
+  null
+)(navigatorHoc(FullwidthSecondaryHeader));

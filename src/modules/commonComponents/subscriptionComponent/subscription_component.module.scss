@@ -1,7 +1,7 @@
 @import "~Styles/colors.module";
 @import "~Styles/mixins.module";
 .subscription:first-child {
-  margin-right: 21px;
+  margin-right: 41px;
 }
 .subscription:last-child {
   margin-left: 21px;
@@ -11,6 +11,7 @@
   border-radius: 5px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   padding: 30px;
+  flex-wrap: wrap;
   .subscription_title {
     font-family: Lato;
     font-size: 24px;
@@ -115,14 +116,21 @@
 @include small {
   .subscription:first-child {
     margin-right: 0px;
+    flex-wrap: wrap;
   }
   .subscription:last-child {
     margin-left: 0px;
   }
 
+  .is_selected {
+    flex-wrap: wrap;
+  }
+
   .subscription {
     border-radius: 5px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    flex-wrap: wrap;
+    flex-direction: row;
     padding: 10px;
     width: 100%;
     margin-bottom: 20px;
@@ -143,4 +151,26 @@
       margin-bottom: 20px;
     }
   }
+}
+
+.rtl {
+  text-align: right;
+  margin-right: 21px;
+  .features {
+    .feature {
+      flex-direction: row-reverse;
+      margin-bottom: 40px;
+      .feature_details {
+        margin-left: 0px;
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+.rtl:first-child {
+  margin-right: 0px !important;
+}
+.rtl:last-child {
+  margin-left: 0px !important;
 }

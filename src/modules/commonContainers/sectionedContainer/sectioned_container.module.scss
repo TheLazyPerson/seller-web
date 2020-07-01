@@ -1,6 +1,10 @@
 @import "~Styles/colors.module";
 @import "~Styles/mixins.module";
 
+.rtl {
+  flex-direction: row-reverse;
+}
+
 .drawer_container {
   background: $primary-color;
 }
@@ -30,7 +34,6 @@
   background: $primary-color;
   box-shadow: 0 60px 80px 0 rgba(0, 0, 0, 0.05);
   position: relative;
-
   .left_container {
     width: 25%;
   }

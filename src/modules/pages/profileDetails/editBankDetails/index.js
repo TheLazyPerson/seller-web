@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { editBankDetailsAction } from "Core/modules/bankDetails/bankDetailsActions";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
+import translatorHoc from "Hoc/translatorHoc";
 
 class EditBankDetails extends Component {
   validate = (values) => {
@@ -62,11 +63,15 @@ class EditBankDetails extends Component {
   render() {
     const {
       bankDetailsReducer: { bankDetails },
+      translate,
     } = this.props;
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <NavHeader title="Edit Bank Details" onBackClick={this.onBackPress} />
+        <NavHeader
+          title={translate("profile_details.edit_bank_details")}
+          onBackClick={this.onBackPress}
+        />
         <Form
           onSubmit={this.onSubmit}
           validate={this.validate}
@@ -85,7 +90,7 @@ class EditBankDetails extends Component {
                     meta={meta}
                     {...input}
                     type="text"
-                    placeholder="Account Holder Name"
+                    placeholder={translate("profile_details.account_holder")}
                     className={styles.input_text}
                   />
                 )}
@@ -96,7 +101,7 @@ class EditBankDetails extends Component {
                     meta={meta}
                     {...input}
                     type="text"
-                    placeholder="Bank Name"
+                    placeholder={translate("profile_details.bank_name")}
                     className={styles.input_text}
                   />
                 )}
@@ -107,7 +112,7 @@ class EditBankDetails extends Component {
                     meta={meta}
                     {...input}
                     type="text"
-                    placeholder="IBAN"
+                    placeholder={translate("profile_details.IBAN")}
                     className={styles.input_text}
                   />
                 )}
@@ -115,10 +120,10 @@ class EditBankDetails extends Component {
 
               <DivRow className={styles.form_button_container}>
                 <SecondaryCapsuleButton onClick={this.onClickCancel}>
-                  Cancel
+                  {translate("profile_details.cancle")}
                 </SecondaryCapsuleButton>
                 <CapsuleButton type="submit" disabled={submitting}>
-                  Confirm
+                  {translate("profile_details.submit")}
                 </CapsuleButton>
               </DivRow>
             </form>
@@ -147,4 +152,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(EditBankDetails));
+)(navigatorHoc(translatorHoc(EditBankDetails)));

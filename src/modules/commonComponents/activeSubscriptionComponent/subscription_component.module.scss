@@ -158,6 +158,9 @@
     margin-left: 0px;
   }
 
+  .subscription_container {
+    flex-wrap: wrap;
+  }
   .subscription {
     border-radius: 5px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
@@ -179,6 +182,67 @@
       font-family: Lato;
       font-size: 14px;
       margin-bottom: 20px;
+    }
+  }
+
+  .rtl {
+    flex-direction: row-reverse;
+    .subscription:first-child {
+      margin-right: 0px !important;
+      margin-left: 0px !important;
+    }
+    .subscription {
+      text-align: right;
+      .subscription_title {
+        text-align: right;
+      }
+
+      .features {
+        flex-direction: row-reverse;
+        justify-content: space-around;
+        .feature {
+          margin-bottom: 40px;
+          margin-left: 0px;
+          margin-right: 40px;
+        }
+      }
+    }
+
+    .item_container {
+      .display_container {
+        flex-direction: row-reverse;
+      }
+      .progress_bar_container {
+        flex-direction: row-reverse;
+      }
+    }
+  }
+}
+
+.rtl {
+  flex-direction: row-reverse;
+  .subscription:first-child {
+    margin-right: 0px;
+    margin-left: 21px;
+  }
+  .subscription {
+    text-align: right;
+    .subscription_title {
+      text-align: right;
+    }
+
+    .features {
+      flex-direction: row-reverse;
+      justify-content: space-around;
+    }
+  }
+
+  .item_container {
+    .display_container {
+      flex-direction: row-reverse;
+    }
+    .progress_bar_container {
+      flex-direction: row-reverse;
     }
   }
 }

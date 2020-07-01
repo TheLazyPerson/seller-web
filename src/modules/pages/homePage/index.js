@@ -14,6 +14,7 @@ import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import { getOverviewAction } from "Core/modules/overview/overviewAction";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import isEmpty from "lodash/isEmpty";
+import translatorHoc from "Hoc/translatorHoc";
 
 class HomePage extends Component {
   onClickNavItemClick = (slug) => {
@@ -38,7 +39,7 @@ class HomePage extends Component {
     return (
       <DivColumn verticalCenter horizontalCenter className={styles.box}>
         <div className={styles.title}>
-          {listItem.card_type === "price-card" ? "KD " : ""}
+          <span>{listItem.card_type == "price-card" ? "KD " : ""}</span>
           {listItem.value}
         </div>
         <div className={styles.description}>{listItem.title}</div>
@@ -51,6 +52,7 @@ class HomePage extends Component {
       overviewReducer: { overviewData },
       signInReducer: { userDetails },
       getOverviewAction,
+      translate,
     } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
@@ -60,9 +62,13 @@ class HomePage extends Component {
             horizontalCenter
             className={styles.header_container}
           >
-            <div className={styles.header_title}>MY ACCOUNT</div>
+            <div className={styles.header_title}>
+              {" "}
+              {translate("dashboard_home_page.subtitle")}
+            </div>
             <div className={styles.header_message}>
-              Welcome, {!isEmpty(userDetails) && userDetails.first_name}.
+              {translate("dashboard_home_page.title")},{" "}
+              {!isEmpty(userDetails) && userDetails.first_name}.
             </div>
           </DivColumn>
           <InitialPageLoader
@@ -98,4 +104,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(HomePage));
+)(navigatorHoc(translatorHoc(HomePage)));

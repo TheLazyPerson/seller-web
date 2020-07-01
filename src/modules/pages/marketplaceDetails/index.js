@@ -129,4 +129,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(translatorHoc(navigatorHoc(MarketplaceDetail)));
+)(navigatorHoc(translatorHoc(MarketplaceDetail)));

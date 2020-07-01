@@ -17,19 +17,32 @@ import { sendFeedbackAction } from "Core/modules/support/supportActions";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import map from "lodash/map";
 import navigatorHoc from "Hoc/navigatorHoc";
+import translatorHoc from "Hoc/translatorHoc";
 
 class HelpCenter extends Component {
   state = {
     helpCenterList: [
       {
-        title: "TRACK, CANCEL, RETURN/EXCHANGE",
-        description: "Check your order status",
+        en: {
+          title: "TRACK, CANCEL, RETURN/EXCHANGE",
+          description: "Check your order status",
+        },
+        ar: {
+          title: "المسار ، الإلغاء ، العودة / التبادل",
+          description: "تحقق من حالة طلبك",
+        },
         image: cartIcon,
         redirectTo: "orders",
       },
       {
-        title: "FREQUENTLY ASKED QUESTIONS",
-        description: "More queries related to your experience",
+        en: {
+          title: "FREQUENTLY ASKED QUESTIONS",
+          description: "More queries related to your experience",
+        },
+        ar: {
+          title: "أسئلة مكررة",
+          description: "المزيد من الاستفسارات المتعلقة بتجربتك",
+        },
         image: faqIcon,
         redirectTo: "faq",
       },
@@ -73,10 +86,13 @@ class HelpCenter extends Component {
 
   render() {
     const { helpCenterList } = this.state;
-
+    const {
+      translate,
+      languageReducer: { languageCode },
+    } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <NavHeader title="Help Center" />
+        <NavHeader title={translate("help_center.header_title")} />
 
         <DivColumn fillParent className={styles.help_center_container}>
           <DivRow className={styles.list_container}>
@@ -90,14 +106,18 @@ class HelpCenter extends Component {
                 }
               >
                 <img src={helpCenterItem.image} className={styles.item_icon} />
-                <div className={styles.item_title}>{helpCenterItem.title}</div>
+                <div className={styles.item_title}>
+                  {helpCenterItem[languageCode].title}
+                </div>
                 <div className={styles.item_description}>
-                  {helpCenterItem.description}
+                  {helpCenterItem[languageCode].description}
                 </div>
               </DivColumn>
             ))}
           </DivRow>
-          <div className={styles.form_header}>NEED MORE HELP FROM US</div>
+          <div className={styles.form_header}>
+            {translate("help_center.more_help")}
+          </div>
 
           <DivColumn className={styles.form_container}>
             <Form
@@ -116,7 +136,7 @@ class HelpCenter extends Component {
                       <textarea
                         meta={meta}
                         {...input}
-                        placeholder="Brief about your concern?"
+                        placeholder={translate("help_center.your_concern")}
                         className={styles.text_area}
                       />
                     )}
@@ -127,7 +147,7 @@ class HelpCenter extends Component {
                       disabled={submitting}
                       onClick={() => this.onSubmit(values)}
                     >
-                      Get Callback
+                      {translate("help_center.callback")}
                     </CapsuleButton>
                   </DivRow>
                 </form>
@@ -143,6 +163,7 @@ class HelpCenter extends Component {
 const mapStateToProps = (state) => {
   return {
     supportReducer: state.supportReducer,
+    languageReducer: state.languageReducer,
   };
 };
 
@@ -159,4 +180,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(HelpCenter));
+)(navigatorHoc(translatorHoc(HelpCenter)));

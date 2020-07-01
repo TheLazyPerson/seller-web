@@ -1,5 +1,5 @@
 @import "~Styles/colors.module";
-
+@import "~Styles/mixins.module";
 .order_page_container {
   overflow-y: auto;
 }
@@ -8,6 +8,10 @@
   font-size: 12px;
   color: $color-dark;
   padding: 17px 0px 17px 54px;
+}
+
+.order_container {
+  padding: 17px 0px 9px 25px;
 }
 
 .order_container {
@@ -68,6 +72,42 @@
       color: $color-dark;
       margin-top: 14px;
       max-width: 250px;
+    }
+  }
+}
+
+@include small {
+  .order_container {
+    padding: 17px 0px 9px 25px;
+  }
+  .header {
+    padding: 17px 0px 17px 25px;
+  }
+
+  .normal_container {
+    padding: 18px 0px 18px 25px;
+  }
+}
+
+.rtl {
+  .order_container {
+    padding: 17px 54px 9px 0px;
+    text-align: right;
+  }
+
+  .header {
+    padding: 17px 54px 17px 0px;
+    text-align: right;
+  }
+
+  .address_container {
+    flex-direction: row-reverse;
+  }
+
+  .normal_container {
+    padding: 17px 54px 9px 0px;
+    title {
+      text-align: right;
     }
   }
 }

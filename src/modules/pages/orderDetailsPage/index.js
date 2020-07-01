@@ -19,6 +19,7 @@ import InitialPageLoader from "CommonContainers/initialPageLoader";
 import HorizontalBorder from "CommonComponents/horizontalBorder";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import { formatUnixTimeStampToDateTime } from "Utils/formatHelper";
+import translatorHoc from "Hoc/translatorHoc";
 
 class OrdersDetailsPage extends Component {
   onBackPress = () => {
@@ -59,6 +60,8 @@ class OrdersDetailsPage extends Component {
       orderReducer: { order },
       match: { params },
       getOrderDetailsAction,
+      translate,
+      isRTL,
     } = this.props;
     const rowStyle = {
       fontSize: 12,
@@ -122,8 +125,11 @@ class OrdersDetailsPage extends Component {
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <NavHeader title="Order Detail" onBackClick={this.onBackPress}>
-          <DivRow>
+        <NavHeader
+          title={translate("order_details.title")}
+          onBackClick={this.onBackPress}
+        >
+          <DivRow className={styles.capsul_button}>
             {/* <SecondaryCapsuleButton className={styles.cancel_button}>
               Cancel Order
             </SecondaryCapsuleButton> */}
@@ -131,16 +137,16 @@ class OrdersDetailsPage extends Component {
               onClick={() => this.onClickPrintInvoice()}
               className={styles.print_invoice_button}
             >
-              Print Invoice
+              {translate("order_details.print_invoice")}
             </CapsuleButton>
             {!isEmpty(order.status) && order.status === "processing" && (
               <CapsuleButton onClick={() => this.onCreatePickupRequest()}>
-                Create Pickup Request
+                {translate("order_details.request")}
               </CapsuleButton>
             )}
             {!isEmpty(order.status) && order.status === "pickup_requested" && (
               <CapsuleButton onClick={() => this.viewPickupRequest()}>
-                View Pickup Request
+                {translate("order_details.view_request")}
               </CapsuleButton>
             )}
           </DivRow>
@@ -148,45 +154,58 @@ class OrdersDetailsPage extends Component {
         <InitialPageLoader
           initialPageApi={() => getOrderDetailsAction(params.orderId)}
         >
-          <DivColumn fillParent className={styles.order_page_container}>
+          <DivColumn
+            fillParent
+            className={` ${styles.order_page_container} ${
+              isRTL ? styles.rtl : ""
+            }`}
+          >
             <DivColumn className={styles.order_container}>
               <div className={styles.order_id}>
-                Order ID: <b>{order.id}</b>
+                {translate("order_details.order_id")} : <b>{order.id}</b>
               </div>
               <div className={styles.placed_on}>
-                Placed On: {formatUnixTimeStampToDateTime(order.created_at)}
+                {translate("order_details.places_on")} :{" "}
+                {formatUnixTimeStampToDateTime(order.created_at)}
               </div>
               <div className={styles.status}>{order.status_label}</div>
             </DivColumn>
 
-            <div className={styles.header}>CUSTOMER DETAILS</div>
+            <div className={styles.header}>
+              {translate("order_details.customer_details")}{" "}
+            </div>
 
             <DivColumn className={styles.normal_container}>
               <DivRow className={styles.title}>
-                Name:{" "}
+                {translate("order_details.name")} :{" "}
                 <div className={styles.value}>
                   {order.customer_first_name} {order.customer_last_name}
                 </div>
               </DivRow>
               <DivRow className={styles.title}>
-                Email:{" "}
+                {translate("order_details.name")}:{" "}
                 <div className={styles.value}>{order.customer_email}</div>
               </DivRow>
             </DivColumn>
 
-            <div className={styles.header}>PRODUCT LIST</div>
-
-            <DataTable
-              columns={columns}
-              customStyles={customStyles}
-              data={order.items}
-              style={{ minHeight: 200 }}
-              noHeader={true}
-            />
+            <div className={styles.header}>
+              {translate("order_details.product_list")}
+            </div>
+            <div>
+              <DataTable
+                columns={columns}
+                customStyles={customStyles}
+                data={order.items}
+                style={{ minHeight: 200 }}
+                noHeader={true}
+              />
+            </div>
             <HorizontalBorder />
             <DivRow className={styles.address_container}>
               <DivColumn className={styles.address_item_container}>
-                <div className={styles.title}>SHIPPING ADDRESS</div>
+                <div className={styles.title}>
+                  {translate("order_details.shipping_address")}{" "}
+                </div>
                 <div className={styles.description}>
                   {!isEmpty(order.shipping_address) && (
                     <span>
@@ -203,7 +222,9 @@ class OrdersDetailsPage extends Component {
               </DivColumn>
 
               <DivColumn className={styles.address_item_container}>
-                <div className={styles.title}>BILLING ADDRESS</div>
+                <div className={styles.title}>
+                  {translate("order_details.billing_address")}
+                </div>
                 <div className={styles.description}>
                   {!isEmpty(order.billing_address) && (
                     <span>
@@ -220,12 +241,16 @@ class OrdersDetailsPage extends Component {
               </DivColumn>
 
               <DivColumn className={styles.address_item_container}>
-                <div className={styles.title}>SHIPPING METHOD</div>
+                <div className={styles.title}>
+                  {translate("order_details.shipping_methods")}
+                </div>
                 <div className={styles.description}>{order.shipping_title}</div>
               </DivColumn>
 
               <DivColumn className={styles.address_item_container}>
-                <div className={styles.title}>PAYMENT METHOD</div>
+                <div className={styles.title}>
+                  {translate("order_details.payment_method")}
+                </div>
                 <div className={styles.description}>{order.payment_title}</div>
               </DivColumn>
             </DivRow>
@@ -239,6 +264,7 @@ class OrdersDetailsPage extends Component {
 const mapStateToProps = (state) => {
   return {
     orderReducer: state.orderReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 
@@ -256,4 +282,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(OrdersDetailsPage));
+)(navigatorHoc(translatorHoc(OrdersDetailsPage)));

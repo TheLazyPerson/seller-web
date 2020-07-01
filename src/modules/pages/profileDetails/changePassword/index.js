@@ -14,9 +14,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { changePasswordAction } from "Core/modules/changepassword/changePasswordActions";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
+import translatorHoc from "Hoc/translatorHoc";
 
 class ChangePassword extends Component {
-  validate = values => {
+  validate = (values) => {
     const errors = {};
     const validators = {
       oldPassword: isEmptyValidator(values.oldPassword),
@@ -24,27 +25,27 @@ class ChangePassword extends Component {
       confirmPassword: passwordValidator(
         values.newPassword,
         values.confirmPassword
-      )
+      ),
     };
 
-    Object.keys(validators).forEach(key => {
+    Object.keys(validators).forEach((key) => {
       if (!validators[key].result) errors[key] = validators[key].error;
     });
 
     return errors;
   };
 
-  onSubmit = form => {
+  onSubmit = (form) => {
     const {
       changePasswordAction,
       navigateTo,
-      showSuccessFlashMessage
+      showSuccessFlashMessage,
     } = this.props;
 
     changePasswordAction({
       old_password: form.oldPassword,
       new_password: form.newPassword,
-      new_password_confirmation: form.confirmPassword
+      new_password_confirmation: form.confirmPassword,
     }).then(({ payload }) => {
       if (payload.code === 200 || payload.code === 201) {
         navigateTo("signin");
@@ -63,9 +64,14 @@ class ChangePassword extends Component {
   };
 
   render() {
+    const { translate } = this.props;
+
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <NavHeader title="Change password" onBackClick={this.onBackPress} />
+        <NavHeader
+          title={translate("change_password_page.title")}
+          onBackClick={this.onBackPress}
+        />
         <Form
           onSubmit={this.onSubmit}
           validate={this.validate}
@@ -77,7 +83,7 @@ class ChangePassword extends Component {
                     meta={meta}
                     {...input}
                     type="password"
-                    placeholder="Old Password"
+                    placeholder={translate("change_password_page.old_password")}
                     className={styles.input_text}
                   />
                 )}
@@ -88,7 +94,9 @@ class ChangePassword extends Component {
                     meta={meta}
                     {...input}
                     type="password"
-                    placeholder="New Password"
+                    placeholder={translate(
+                      "change_password_page.new_passwword"
+                    )}
                     className={styles.input_text}
                   />
                 )}
@@ -99,7 +107,9 @@ class ChangePassword extends Component {
                     meta={meta}
                     {...input}
                     type="password"
-                    placeholder="Confirm Password"
+                    placeholder={translate(
+                      "change_password_page.confirm_password"
+                    )}
                     className={styles.input_text}
                   />
                 )}
@@ -107,10 +117,10 @@ class ChangePassword extends Component {
 
               <DivRow className={styles.form_button_container}>
                 <SecondaryCapsuleButton onClick={this.onClickCancel}>
-                  Cancel
+                  {translate("change_password_page.cancle")}
                 </SecondaryCapsuleButton>
                 <CapsuleButton type="submit" disabled={submitting}>
-                  Confirm
+                  {translate("change_password_page.confirm")}
                 </CapsuleButton>
               </DivRow>
             </form>
@@ -120,23 +130,23 @@ class ChangePassword extends Component {
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    changePasswordReducer: state.changePasswordReducer
+    changePasswordReducer: state.changePasswordReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     changePasswordAction: bindActionCreators(changePasswordAction, dispatch),
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
-    )
+    ),
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(ChangePassword));
+)(navigatorHoc(translatorHoc(ChangePassword)));

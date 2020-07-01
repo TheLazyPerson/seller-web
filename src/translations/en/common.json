@@ -141,13 +141,7 @@
     "reset_password_button": "Reset Password",
     "sub_title1": "Your token is expired or password is already updated "
   },
-  "marketplace_detail_page": {
-    "create": "Next",
-    "page_title": "Marketplace Details",
-    "shop_name": "Shop Name",
-    "shop_contact_number": "Shop Contact Number",
-    "shop_email_addres": "Shop Email Address"
-  },
+
   "bank_detail_page": {
     "create": "Next",
     "page_title": "Bank Details",
@@ -166,5 +160,222 @@
     "landmark": "Landmark",
     "home_office": "Home/Office",
     "city": "City"
+  },
+
+  "address_page": {
+    "default_adddress": "Default Address",
+    "address_deleted": "Address Deleted"
+  },
+  "edit_address_page": {
+    "edit_address": "Edit Address"
+  },
+  "main_home_page": {
+    "title": "Sell your products to customers across Kuwait",
+    "subtitle": "Shake hand with the most reputed company known for hosting exhibitions. We reached around all the corners of Kuwait.",
+    "start_selling": "Start Selling"
+  },
+  "home_nav": {
+    "benefits": "BENEFITS",
+    "how_it_works": "HOW IT WORKS?",
+    "delivering_orders": "DELIVERING ORDERS",
+    "pricing": "PRICING",
+    "faq": "FAQ"
+  },
+  "download_app": {
+    "the": "The",
+    "home_expo": "Home Expo",
+    "advantage": "Advantage",
+    "subtitle": "Manage Everyting at your fingertips."
+  },
+  "dashboard_home_page": {
+    "title": "Welcome",
+    "subtitle": "MY ACCOUNT"
+  },
+  "exhibition_list_page": {
+    "btn_title": "EXHIBITIONS",
+    "view_details": "View Details",
+    "left_to_enroll": "DAYS LEFT TO ENROLL",
+    "last": "LAST",
+    "category": "Category",
+    "starts_at": "Starts At",
+    "ends_on": "Ends On",
+    "your_exhibition": "Your Exhibitions"
+  },
+  "exhibition_details_page": {
+    "discription": "DESCRIPTION",
+    "exhibition": "Exhibition",
+    "basic_details": "BASIC DETAILS",
+    "overview": "Overview",
+    "date": "DATES",
+    "ends_on": "ENDS ON",
+    "start_at": "STARTS AT:",
+    "category": "CATEGORIES",
+    "add_to_products": "ADD YOUR PRODUCTS"
+  },
+  "your_exhibition_list_page": {
+    "btn_title": "EXHIBITIONS",
+    "view_details": "View Details",
+    "left_to_enroll": "DAYS LEFT TO ENROLL",
+    "last": "LAST",
+    "category": "Category",
+    "starts_at": "Starts At",
+    "ends_on": "Ends On",
+    "your_exhibition": "Your Exhibitions"
+  },
+  "order_details": {
+    "title": "Order Detail",
+    "request": "Create Pickup Request",
+    "view_request": " View Pickup Request",
+    "order_id": "Order ID",
+    "places_on": " Placed On",
+    "customer_details": "CUSTOMER DETAILS",
+    "name": "Name",
+    "product_list": "PRODUCT LIST",
+    "shipping_address": "SHIPPING ADDRESS",
+    "billing_address": "BILLING ADDRESS",
+    "shipping_methods": "SHIPPING METHOD",
+    "payment_method": "PAYMENT METHOD",
+    "email": "Email",
+    "print_invoice": "Print Invoice"
+  },
+  "pickup_request_details": {
+    "title": "Pickup Request Details",
+    "req_pickup_on": " Requested Pickup On",
+    "pickup_information": "PICKUP INFORMATION",
+    "order_id": "Order ID",
+    "places_on": " Placed On",
+    "customer_details": "CUSTOMER DETAILS",
+    "name": "Name",
+    "product_list": "PRODUCT LIST",
+    "shipping_address": "SHIPPING ADDRESS",
+    "billing_address": "BILLING ADDRESS",
+    "shipping_methods": "SHIPPING METHOD",
+    "payment_method": "PAYMENT METHOD",
+    "email": "Email",
+    "products_order": "PRODUCTS ORDERED"
+  },
+  "transaction_details_page": {
+    "title": "TRASACTION DETAIL",
+    "transaction_id": "TRANSACTION ID",
+    "created_on": "Created On",
+    "payment_details": "PAYMENT DETAILS",
+    "payment_method": " Payment Method",
+    "total": "Total",
+    "comment": "Comment",
+    "products_order": "PRODUCTS ORDERED"
+  },
+  "marketplace_profile_details": {
+    "title": "Marketplace Profile details",
+    "edit": "Edit",
+    "shop_name": "Shop Name",
+    "contact_number": "Contact Number",
+    "email_address": "Email Address ",
+    "address": "Address"
+  },
+  "edit_marketplace_detail_page": {
+    "create": "Next",
+    "page_title": "Marketplace Details",
+    "shop_name": "Shop Name",
+    "shop_contact_number": "Shop Contact Number",
+    "shop_email_addres": "Shop Email Address",
+    "area": "Area*",
+    "block_number": "Block Number",
+    "house_number": "House Number",
+    "street_number": "Street Number",
+    "avenue": "Avenue",
+    "landmark": "Landmark",
+    "home": "Home/Office*",
+    "city": "City",
+    "cancle": "Cancel",
+    "save_details": "Save Details",
+    "address_details": "Address details"
+  },
+  "profile_details": {
+    "title": "PROFILE DETAILS",
+    "change_passwword": "Change Password",
+    "edit": "Edit",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "email": "Email",
+    "civil_id": "Civil ID",
+    "phone_number": "Phone Number",
+    "gender": "Gender",
+    "birthday": "Birthday",
+    "bankdetails": "Bank Details",
+    "account_holder": "Account Holder ",
+    "bank_name": "Bank Name ",
+    "IBAN": "IBAN",
+    "edit_bank_details": "Edit Bank Details",
+    "cancle": "Cancle",
+    "submit": "Submit"
+  },
+  "edit_profile": {
+    "birthday": "Birthday",
+    "title": "Edit Profile details",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "gender": "Gender",
+    "mobile_number": "Mobile Number",
+    "email": "Email Address",
+    "civil_id": "Civil Id",
+    "cancel": "Cancel",
+    "save_details": "Save Details"
+  },
+  "change_password_page": {
+    "title": "Change password",
+    "old_password": "Old Password",
+    "new_passwword": "New Password",
+    "confirm_password": "Confirm Password",
+    "cancle": "Cancel",
+    "confirm": "Confirm"
+  },
+  "subscription_page": {
+    "title": "Subscription Details",
+    "buy_additional_plan": "BUY ADDITIONAL PLAN ",
+    "plan": " Subscribed Plans",
+    "subscription_lost": "SubscriptionLost"
+  },
+  "setting_page": {
+    "header_title": "Settings",
+    "notification": "Notification",
+    "subtitile": "This will not affect order updates."
+  },
+  "help_center": {
+    "header_title": "HELP CENTER",
+    "more_help": "NEED MORE HELP FROM US",
+    "your_concern": "Brief about your concern?",
+    "callback": "Get Callback",
+    "response_message": "Feedback sent successfuly"
+  },
+  "subscription_item": {
+    "active_plan": "Active Plan",
+    "kd": "KD",
+    "commission": "Commission",
+    "benefits": "Benefits Include",
+    "exhibition": "Exhibitions",
+    "enroll": "You can enroll in",
+    "no_exhibition": " number of exhibitions",
+    "products": "Products",
+    "maintain": " You can maintain",
+    "products1": "products",
+    "usage": "Usage",
+    "seller_fetures": "All Seller Features",
+    "access": "Have access to all seller features."
+  },
+  "product_list_item": {
+    "attach": "ATTACH",
+    "remove": "Remove",
+    "out_of_stock": "MARK PRODUCT OUT OF STOCK"
+  },
+  "page_not_found": {
+    "number": "أربعة مائة و أربعة",
+    "subtitle": "الصفحة المطلوبة غير موجودة. انقر هنا لمتابعة التسوق."
+  },
+  "host_your_exhibition": {
+    "call_us": " CALL US AT"
+  },
+  "additional_plan": {
+    "title": "BUY ADDITIONAL PLAN",
+    "buy": "BUY"
   }
 }

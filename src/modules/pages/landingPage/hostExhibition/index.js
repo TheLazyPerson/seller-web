@@ -6,9 +6,14 @@ import DivRow from "CommonComponents/divRow";
 import { hostExhibitionConstants } from "Constants/hostExhibitionConstants";
 import map from "lodash/map";
 import styles from "./host_exhibition.module.scss";
+import translatorHoc from "Hoc/translatorHoc";
 
 class HostExhibition extends Component {
   hostExhibitionConstants = (listItem, index) => {
+    const {
+      languageReducer: { languageCode },
+      translate,
+    } = this.props;
     return (
       <DivRow
         fillParent
@@ -20,10 +25,12 @@ class HostExhibition extends Component {
           <img className={styles.image} src={listItem.heroImage} />
         </DivColumn>
         <DivColumn className={styles.title_group}>
-          <div className={styles.title}>{listItem.title}</div>
-          <div className={styles.description}>{listItem.description}</div>
+          <div className={styles.title}>{listItem[languageCode].title}</div>
+          <div className={styles.description}>
+            {listItem[languageCode].description}
+          </div>
           <div className={styles.contact_number}>
-            CALL US AT: {listItem.contact}
+            {translate("download_app.home_expo")} : {listItem.contact}
           </div>
         </DivColumn>
       </DivRow>
@@ -40,4 +47,4 @@ class HostExhibition extends Component {
   }
 }
 
-export default navigatorHoc(HostExhibition);
+export default navigatorHoc(translatorHoc(HostExhibition));

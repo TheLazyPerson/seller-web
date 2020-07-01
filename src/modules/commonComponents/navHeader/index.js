@@ -1,15 +1,18 @@
-/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import DivRow from "CommonComponents/divRow";
 import styles from "./nav_header.module.scss";
 import arrowLeftIcon from "Icons/arrow-right-icon-black.svg";
+import { connect } from "react-redux";
+import navigatorHoc from "Hoc/navigatorHoc";
 
-export default class NavHeader extends Component {
+class NavHeader extends Component {
   render() {
-    const { title, children, onBackClick } = this.props;
+    const { title, children, onBackClick, isRTL } = this.props;
 
     return (
-      <DivRow className={styles.header_container}>
+      <DivRow
+        className={` ${styles.header_container} ${isRTL ? styles.rtl : ""}`}
+      >
         <DivRow
           onClick={onBackClick ? onBackClick : null}
           horizontalCenter
@@ -27,3 +30,11 @@ export default class NavHeader extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    isRTL: state.languageReducer.isRTL,
+  };
+};
+
+export default connect(mapStateToProps, null)(navigatorHoc(NavHeader));

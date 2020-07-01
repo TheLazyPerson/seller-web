@@ -25,6 +25,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 import DivColumn from "CommonComponents/divColumn";
+import translatorHoc from "Hoc/translatorHoc";
 
 class EditProfile extends Component {
   state = {
@@ -91,6 +92,7 @@ class EditProfile extends Component {
   render() {
     const {
       profileDetailsReducer: { userDetails },
+      translate,
     } = this.props;
     let startDate = null;
 
@@ -116,7 +118,7 @@ class EditProfile extends Component {
         <InputTextComponent
           {...input}
           meta={meta}
-          placeholder="Birthday"
+          placeholder={translate("edit_profile.birthday")}
           value={value}
           className={styles.input_text}
           onClick={onClick}
@@ -127,7 +129,7 @@ class EditProfile extends Component {
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <NavHeader
-          title="Edit Profile details"
+          title={translate("edit_profile.title")}
           onBackClick={this.onBackPress}
         />
         <Form
@@ -157,7 +159,7 @@ class EditProfile extends Component {
                   <InputTextComponent
                     meta={meta}
                     {...input}
-                    placeholder="First Name"
+                    placeholder={translate("edit_profile.first_name")}
                     className={styles.input_text}
                   />
                 )}
@@ -167,7 +169,7 @@ class EditProfile extends Component {
                   <InputTextComponent
                     meta={meta}
                     {...input}
-                    placeholder="Last Name"
+                    placeholder={translate("edit_profile.last_name")}
                     className={styles.input_text}
                   />
                 )}
@@ -183,7 +185,7 @@ class EditProfile extends Component {
                       }}
                       className="react-select-container"
                       classNamePrefix="react-select"
-                      placeholder="Gender"
+                      placeholder={translate("edit_profile.gender")}
                       defaultValue={defaultGender}
                     />
                     {meta.error && meta.touched && (
@@ -198,7 +200,7 @@ class EditProfile extends Component {
                   <InputTextComponent
                     meta={meta}
                     {...input}
-                    placeholder="Mobile Number"
+                    placeholder={translate("edit_profile.mobile_number")}
                     className={styles.input_text}
                   />
                 )}
@@ -209,7 +211,7 @@ class EditProfile extends Component {
                   <InputTextComponent
                     meta={meta}
                     {...input}
-                    placeholder="Email Address"
+                    placeholder={translate("edit_profile.email")}
                     className={styles.input_text}
                   />
                 )}
@@ -220,7 +222,7 @@ class EditProfile extends Component {
                   <InputTextComponent
                     meta={meta}
                     {...input}
-                    placeholder="Civil Id"
+                    placeholder={translate("edit_profile.civil_id")}
                     className={styles.input_text}
                   />
                 )}
@@ -244,10 +246,10 @@ class EditProfile extends Component {
 
               <DivRow className={styles.form_button_container}>
                 <SecondaryCapsuleButton onClick={this.onClickCancel}>
-                  Cancel
+                  {translate("edit_profile.cancel")}
                 </SecondaryCapsuleButton>
                 <CapsuleButton type="submit" disabled={submitting}>
-                  Save Details
+                  {translate("edit_profile.save_details")}
                 </CapsuleButton>
               </DivRow>
             </form>
@@ -284,4 +286,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(EditProfile));
+)(navigatorHoc(translatorHoc(EditProfile)));

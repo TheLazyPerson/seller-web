@@ -11,6 +11,7 @@ import { bindActionCreators } from "redux";
 import DataTable from "react-data-table-component";
 import { getTransactionDetailsAction } from "Core/modules/transaction/transactionActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
+import translatorHoc from "Hoc/translatorHoc";
 
 class TransactionDetailsPage extends Component {
   state = {
@@ -112,11 +113,16 @@ class TransactionDetailsPage extends Component {
       transactionReducer: { transaction },
       match: { params },
       getTransactionDetailsAction,
+      translate,
+      isRTL,
     } = this.props;
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <NavHeader title="Trasaction Detail" onBackClick={this.onBackPress}>
+        <NavHeader
+          title={translate("transaction_details_page.title")}
+          onBackClick={this.onBackPress}
+        >
           {/* <DivRow>
             <CapsuleButton>Print Invoice</CapsuleButton>
           </DivRow> */}
@@ -126,37 +132,50 @@ class TransactionDetailsPage extends Component {
             getTransactionDetailsAction(params.transactionId)
           }
         >
-          <DivColumn fillParent className={styles.order_page_container}>
+          <DivColumn
+            fillParent
+            className={` ${styles.order_page_container} ${
+              isRTL ? styles.rtl : ""
+            }`}
+          >
             <DivColumn className={styles.order_container}>
               <div className={styles.order_id}>
-                TRANSACTION ID: <b>{transaction.transaction_id}</b>
+                {translate("transaction_details_page.transaction_id")} :{" "}
+                <b>{transaction.transaction_id}</b>
               </div>
               <div className={styles.placed_on}>
-                Created On: {transaction.created_on}{" "}
+                {translate("transaction_details_page.created_on")} :{" "}
+                {transaction.created_on}{" "}
               </div>
               {/* <div className={styles.status}>SUCCESSFUL</div> */}
             </DivColumn>
 
-            <div className={styles.header}>PAYMENT DETAILS</div>
+            <div className={styles.header}>
+              {" "}
+              {translate("transaction_details_page.payment_details")}
+            </div>
 
             <DivColumn className={styles.normal_container}>
               <DivRow className={styles.title}>
-                Payment Method:{" "}
+                {translate("transaction_details_page.payment_method")} :{" "}
                 <div className={styles.value}>{transaction.payment_method}</div>
               </DivRow>
               <DivRow className={styles.title}>
-                Total:{" "}
+                {translate("transaction_details_page.total")} :{" "}
                 <div className={styles.value}>{transaction.payout_amount}</div>
               </DivRow>
               <DivRow className={styles.title}>
-                Comment:{" "}
+                {translate("transaction_details_page.comment")} :{" "}
                 <div className={styles.value}>{transaction.comment}</div>
               </DivRow>
             </DivColumn>
 
-            <div className={styles.header}>PRODUCTS ORDERED</div>
+            <div className={styles.header}>
+              {" "}
+              {translate("transaction_details_page.products_order")}
+            </div>
 
-            {transaction.order && (
+            {/* {transaction.order && (
               <DataTable
                 columns={columns}
                 customStyles={customStyles}
@@ -164,7 +183,7 @@ class TransactionDetailsPage extends Component {
                 style={{ minHeight: 200 }}
                 noHeader={true}
               />
-            )}
+            )} */}
           </DivColumn>
         </InitialPageLoader>
       </SectionedContainer>
@@ -175,6 +194,7 @@ class TransactionDetailsPage extends Component {
 const mapStateToProps = (state) => {
   return {
     transactionReducer: state.transactionReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 
@@ -190,4 +210,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(TransactionDetailsPage));
+)(navigatorHoc(translatorHoc(TransactionDetailsPage)));
