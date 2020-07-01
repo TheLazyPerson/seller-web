@@ -123,7 +123,7 @@ class SideNav extends Component {
     } = this.props;
     return (
       <DivRow
-        className={styles.nav_item}
+        className={`${styles.nav_item} ${isSelected ? styles.is_selected : ""}`}
         onClick={() => this.onClickNavItemClick(listItem.slug)}
       >
         <img
@@ -131,7 +131,7 @@ class SideNav extends Component {
           src={isSelected ? listItem.blackImage : listItem.whiteImage}
           alt="nav"
         />
-        <DivColumn className={styles.text_container}>
+        <DivColumn>
           <div className={styles.nav_title}>{listItem[languageCode].title}</div>
           <div className={styles.nav_description}>
             {listItem[languageCode].description}

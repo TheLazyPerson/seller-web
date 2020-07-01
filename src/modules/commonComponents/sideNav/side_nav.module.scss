@@ -6,48 +6,18 @@
   text-align: right;
 
   .nav_item {
-    border-bottom: 0.5px solid rgba($color-light-blue-grey, 0.5);
-    padding: 8px 14px 8px 20px;
-    @include on_click_button;
-
     .nav_image {
-      width: 32px;
-      height: 32px;
-      opacity: 0.8;
       margin-left: 10px;
     }
 
-    .nav_title {
-      font-size: 12px;
-      font-weight: bold;
-      color: white;
-    }
-
-    .nav_description {
-      font-size: 10px;
-      font-weight: 300;
-      color: white;
-    }
-
     .nav_indicator {
-      font-size: 16px;
-      font-weight: 100;
-      color: white;
+      margin-left: 0px !important;
       margin-right: auto;
     }
   }
 
-  .list_container {
-    align-self: stretch;
-  }
-
   .list_header {
-    margin: 31px 20px 5px 0px;
-    opacity: 0.7;
-    font-size: 10px;
-    font-weight: bold;
-    color: white;
-    text-transform: uppercase;
+    margin: 31px 20px 5px 0px !important;
   }
 }
 
@@ -104,15 +74,16 @@
     color: white;
     text-transform: uppercase;
   }
-}
-.is_selected {
-  background: white;
 
-  .nav_title {
-    color: $primary-text-color;
-  }
+  .is_selected {
+    background: white;
 
-  .nav_description {
-    color: $primary-text-color;
+    .nav_title {
+      color: $primary-text-color;
+    }
+
+    .nav_description {
+      color: $primary-text-color;
+    }
   }
 }
