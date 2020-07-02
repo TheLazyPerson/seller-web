@@ -225,7 +225,8 @@
     "shop_name": "اسم المحل",
     "contact_number": "رقم الاتصال",
     "email_address": "عنوان بريد الكتروني",
-    "address": "عنوان"
+    "address": "عنوان",
+    "create": "التالى"
   },
   "edit_marketplace_detail_page": {
     "create": "التالى",

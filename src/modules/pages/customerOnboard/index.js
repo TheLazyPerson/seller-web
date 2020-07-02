@@ -14,6 +14,7 @@ import SignUpPage from "../signupPage";
 import MarketplaceDetail from "../marketplaceDetails";
 import LocationDetails from "../locationDetailsPage";
 import BankDetails from "../bankDetailsPage";
+import PersonalDetails from "../personalDetailsPage";
 import Stepper from "react-stepper-horizontal";
 import FullWidthContainer from "CommonContainers/fullwidthContainer";
 import { editProfileDetailsAction } from "Core/modules/profiledetails/profileDetailsActions";
@@ -35,22 +36,29 @@ class CustomerOnboard extends Component {
         editProfileDetailsAction({ id }).then(({ payload }) => {
           if (payload.code === 200 || payload.code === 201) {
             const missingData = this.props.profileDetailsReducer.missingData;
-            // Logic to check from array
-            if (missingData.includes("marketplace_profile")) {
+            if (
+              missingData.includes("civil_id") |
+              missingData.includes("phone_number") |
+              missingData.includes("birthday")
+            ) {
               this.setState({
                 step: 1,
               });
-            } else if (missingData.includes("shop_location")) {
+            } else if (missingData.includes("marketplace_profile")) {
               this.setState({
                 step: 2,
               });
-            } else if (missingData.includes("bank_details")) {
+            } else if (missingData.includes("shop_location")) {
               this.setState({
                 step: 3,
               });
-            } else if (missingData.includes("subscription")) {
+            } else if (missingData.includes("bank_details")) {
               this.setState({
                 step: 4,
+              });
+            } else if (missingData.includes("subscription")) {
+              this.setState({
+                step: 5,
               });
             }
           }
@@ -131,6 +139,7 @@ class CustomerOnboard extends Component {
               completeColor="#d59d15"
               steps={[
                 { title: "Sign Up" },
+                { title: "Personal Details" },
                 { title: "Marketplace Details" },
                 { title: "Location Details" },
                 { title: "Bank Details" },
@@ -141,12 +150,13 @@ class CustomerOnboard extends Component {
           </div>
 
           {step === 0 && <SignUpPage onSignUp={this.onSignUp} />}
-          {step === 1 && (
+          {step === 1 && <PersonalDetails profileUpdate={this.profileUpdate} />}
+          {step === 2 && (
             <MarketplaceDetail profileUpdate={this.profileUpdate} />
           )}
-          {step === 2 && <LocationDetails profileUpdate={this.profileUpdate} />}
-          {step === 3 && <BankDetails profileUpdate={this.profileUpdate} />}
-          {step === 4 && (
+          {step === 3 && <LocationDetails profileUpdate={this.profileUpdate} />}
+          {step === 4 && <BankDetails profileUpdate={this.profileUpdate} />}
+          {step === 5 && (
             <InitialPageLoader initialPageApi={getPlanListAction}>
               <Pricing
                 subscriptionPlanList={subscriptionPlanList}
