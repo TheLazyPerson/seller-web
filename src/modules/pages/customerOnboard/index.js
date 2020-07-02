@@ -22,7 +22,7 @@ import { setSubscriptionPlanToUser } from "Core/modules/subscription/subscriptio
 
 class CustomerOnboard extends Component {
   state = {
-    step: 1,
+    step: 0,
   };
 
   componentDidMount() {
