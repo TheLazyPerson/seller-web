@@ -70,7 +70,7 @@ export const isPhoneNumber = (value) => {
   const numberRegex = /^((0*|\+)965[569]\d{7})$/;
 
   if (!value) error = "Please fill in these details to continue";
-  else if (value.length !== 10 || !numberRegex.test(value))
+  else if (!numberRegex.test(value))
     error = "Please enter a valid phone number";
 
   return error
