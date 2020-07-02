@@ -270,7 +270,8 @@
     "shop_name": "Shop Name",
     "contact_number": "Contact Number",
     "email_address": "Email Address ",
-    "address": "Address"
+    "address": "Address",
+    "create": "Next"
   },
   "edit_marketplace_detail_page": {
     "create": "Next",
