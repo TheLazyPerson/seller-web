@@ -115,6 +115,7 @@
   }
   .action_container {
     flex-direction: row-reverse;
+    justify-content: space-between;
     .last_date {
       margin-right: 0px !important;
       margin-left: 10px !important;

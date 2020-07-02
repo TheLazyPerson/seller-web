@@ -88,12 +88,18 @@ class HelpCenter extends Component {
     const {
       translate,
       languageReducer: { languageCode },
+      isRTL,
     } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <NavHeader title={translate("help_center.header_title")} />
 
-        <DivColumn fillParent className={styles.help_center_container}>
+        <DivColumn
+          fillParent
+          className={` ${styles.help_center_container} ${
+            isRTL ? styles.rtl : ""
+          }`}
+        >
           <DivRow className={styles.list_container}>
             {map(helpCenterList, (helpCenterItem) => (
               <DivColumn
@@ -163,6 +169,7 @@ const mapStateToProps = (state) => {
   return {
     supportReducer: state.supportReducer,
     languageReducer: state.languageReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 

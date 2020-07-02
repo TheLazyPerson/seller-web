@@ -141,3 +141,16 @@
     }
   }
 }
+
+.rtl {
+  .list_container {
+    flex-direction: row-reverse;
+  }
+  .form_header {
+    text-align: right;
+  }
+  .form_container {
+    text-align: right;
+    direction: rtl;
+  }
+}

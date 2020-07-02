@@ -53,6 +53,7 @@ class Settings extends Component {
       getSettingsAction,
       settingsReducer: { settings },
       translate,
+      isRTL,
     } = this.props;
 
     return (
@@ -64,21 +65,23 @@ class Settings extends Component {
             </div>
           </DivRow>
           <InitialPageLoader initialPageApi={() => getSettingsAction()}>
-            <DivRow verticalCenter className={styles.settings_item_container}>
-              <DivColumn>
-                <div className={styles.item_title}>
-                  {translate("setting_page.notification")}
-                </div>
-                <div className={styles.item_description}>
-                  {translate("setting_page.subtitile")}
-                </div>
-              </DivColumn>
-              <InputCheckbox
-                name="isGoing"
-                type="checkbox"
-                isChecked={settings.wants_updates}
-                handleCheckBoxUpdate={this.updateNotificationStatus}
-              />
+            <DivRow className={`${isRTL ? styles.rtl : ""}`}>
+              <DivRow verticalCenter className={styles.settings_item_container}>
+                <DivColumn>
+                  <div className={styles.item_title}>
+                    {translate("setting_page.notification")}
+                  </div>
+                  <div className={styles.item_description}>
+                    {translate("setting_page.subtitile")}
+                  </div>
+                </DivColumn>
+                <InputCheckbox
+                  name="isGoing"
+                  type="checkbox"
+                  isChecked={settings.wants_updates}
+                  handleCheckBoxUpdate={this.updateNotificationStatus}
+                />
+              </DivRow>
             </DivRow>
           </InitialPageLoader>
         </DivColumn>
@@ -90,6 +93,7 @@ class Settings extends Component {
 const mapStateToProps = (state) => {
   return {
     settingsReducer: state.settingsReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 

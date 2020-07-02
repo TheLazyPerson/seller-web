@@ -1,10 +1,6 @@
 @import "~Styles/colors.module";
 @import "~Styles/mixins.module";
 
-.rtl {
-  flex-direction: row-reverse;
-}
-
 .drawer_container {
   background: $primary-color;
 }
@@ -126,6 +122,18 @@
           }
         }
       }
+    }
+  }
+}
+
+.rtl {
+  flex-direction: row-reverse;
+  .header_container {
+    direction: rtl;
+
+    .app_icon {
+      height: 16px;
+      cursor: pointer;
     }
   }
 }

@@ -1,5 +1,5 @@
 @import "~Styles/colors.module";
-@import '~Styles/mixins.module';
+@import "~Styles/mixins.module";
 
 .form_container {
   display: flex;
@@ -18,8 +18,7 @@
 }
 
 :global {
-
-  .input_select_container {  
+  .input_select_container {
     margin-bottom: 10px;
 
     .error_text {
@@ -40,7 +39,6 @@
         font-size: 18px;
         color: $primary-text-color;
       }
-
 
       .react-select__value-container::placeholder {
         color: rgba($primary-text-color, 0.3);
@@ -71,5 +69,9 @@
       }
     }
   }
+}
 
+.rtl {
+  direction: rtl;
+  padding: 22px 33px 0px 0px;
 }

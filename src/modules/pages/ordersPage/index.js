@@ -83,11 +83,17 @@ class OrdersPage extends Component {
     const {
       orderReducer: { overview, orderList },
       getOrderListAction,
+      isRTL,
     } = this.props;
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <DivColumn fillParent className={styles.orders_page_container}>
+        <DivColumn
+          fillParent
+          className={` ${styles.orders_page_container} ${
+            isRTL ? styles.rtl : ""
+          }`}
+        >
           <DivRow className={styles.box_container}>
             {map(overview, (item) => {
               return this.getListItem(item);
@@ -112,6 +118,7 @@ class OrdersPage extends Component {
 const mapStateToProps = (state) => {
   return {
     orderReducer: state.orderReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 

@@ -109,3 +109,10 @@ $bag-count-background: $color-pale;
     }
   }
 }
+
+.rtl {
+  .arrow_down_icon {
+    margin-left: 0px !important;
+    margin-right: 10px !important;
+  }
+}
