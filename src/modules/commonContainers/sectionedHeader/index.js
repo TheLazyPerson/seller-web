@@ -42,7 +42,7 @@ class SectionedHeader extends Component {
 
   onClickSignup = () => {
     const { navigateTo } = this.props;
-    navigateTo("signup");
+    navigateTo("customer-onboard");
   };
 
   render() {

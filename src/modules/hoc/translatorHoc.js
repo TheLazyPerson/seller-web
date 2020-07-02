@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withTranslation } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import { connect } from "react-redux";
 
 const translatorHoc = (WrappedComponent) => {
@@ -11,23 +11,23 @@ const translatorHoc = (WrappedComponent) => {
     };
 
     render() {
-      // const {
-      //   languageReducer //{languageCode,}
-      // } = this.props;
+      const {
+        languageReducer: { languageCode },
+      } = this.props;
 
       return (
         <WrappedComponent
           {...this.props}
           translate={this.translate}
-          isRTL={false}
+          isRTL={languageCode == "ar"}
         />
-      ); //languageCode === 'ar'}
+      );
     }
   }
 
   const mapStateToProps = (state) => {
     return {
-      // languageReducer: state.languageReducer,
+      languageReducer: state.languageReducer,
     };
   };
 

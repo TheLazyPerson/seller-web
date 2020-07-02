@@ -49,20 +49,25 @@ class Settings extends Component {
     const {
       getSettingsAction,
       settingsReducer: { settings },
+      translate,
     } = this.props;
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent>
           <DivRow className={styles.header}>
-            <div className={styles.header_text}>Settings</div>
+            <div className={styles.header_text}>
+              {translate("setting_page.header_title")}
+            </div>
           </DivRow>
           <InitialPageLoader initialPageApi={() => getSettingsAction()}>
             <DivRow verticalCenter className={styles.settings_item_container}>
               <DivColumn>
-                <div className={styles.item_title}>Notification</div>
+                <div className={styles.item_title}>
+                  {translate("setting_page.notification")}
+                </div>
                 <div className={styles.item_description}>
-                  This will not affect order updates.
+                  {translate("setting_page.subtitile")}
                 </div>
               </DivColumn>
               <InputCheckbox

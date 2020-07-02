@@ -35,7 +35,7 @@
 
 @include medium {
   .top_header {
-    padding: 10px 28px;
+    padding: 10px 15px;
   }
 
   .header_container {
@@ -59,7 +59,7 @@
 
 @include small {
   .top_header {
-    padding: 8px 20px 12px;
+    padding: 8px 10px 12px;
   }
 
   .header_container {
@@ -82,5 +82,12 @@
 
   .search_bar_container {
     display: flex;
+  }
+}
+
+.rtl {
+  flex-direction: row-reverse;
+  .header_icon_container {
+    justify-content: flex-end;
   }
 }

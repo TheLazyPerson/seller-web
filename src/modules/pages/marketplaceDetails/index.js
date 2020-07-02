@@ -62,7 +62,9 @@ class MarketplaceDetail extends Component {
                     meta={meta}
                     type="text"
                     {...input}
-                    placeholder={translate("marketplace_detail_page.shop_name")}
+                    placeholder={translate(
+                      "marketplace_profile_details.shop_name"
+                    )}
                     className={styles.input_text}
                   />
                 )}
@@ -75,7 +77,7 @@ class MarketplaceDetail extends Component {
                     type="text"
                     {...input}
                     placeholder={translate(
-                      "marketplace_detail_page.shop_contact_number"
+                      "marketplace_profile_details.contact_number"
                     )}
                     className={styles.input_text}
                   />
@@ -89,7 +91,7 @@ class MarketplaceDetail extends Component {
                     type="email"
                     {...input}
                     placeholder={translate(
-                      "marketplace_detail_page.shop_email_addres"
+                      "marketplace_profile_details.email_address"
                     )}
                     className={styles.input_text}
                   />
@@ -97,7 +99,7 @@ class MarketplaceDetail extends Component {
               </Field>
               <input
                 type="submit"
-                value={translate("marketplace_detail_page.create")}
+                value={translate("marketplace_profile_details.create")}
                 className={styles.input_submit}
                 disabled={submitting}
               />
@@ -129,4 +131,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(translatorHoc(navigatorHoc(MarketplaceDetail)));
+)(navigatorHoc(translatorHoc(MarketplaceDetail)));

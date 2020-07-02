@@ -22,6 +22,8 @@ import FullwidthSecondaryHeader from "CommonContainers/fullwidthSecondaryHeader"
 import { landingPageHeaderItems } from "Constants/landingPageHeaderConstants";
 import HorizontalBorder from "CommonComponents/horizontalBorder";
 import HostExhibition from "./hostExhibition";
+import translatorHoc from "Hoc/translatorHoc";
+
 class LandingPage extends Component {
   onClickStartSelling = () => {
     const {
@@ -30,9 +32,9 @@ class LandingPage extends Component {
     } = this.props;
 
     if (selectedSubscription.id) {
-      navigateTo("signup");
+      navigateTo("customer-onboard");
     } else {
-      navigateTo("signup");
+      navigateTo("customer-onboard");
     }
   };
   state = {
@@ -49,6 +51,8 @@ class LandingPage extends Component {
     const {
       subscriptionReducer: { subscriptionPlanList },
       getPlanListAction,
+      translate,
+      isRTL,
     } = this.props;
 
     // eslint-disable-next-line no-lone-blocks
@@ -67,15 +71,16 @@ class LandingPage extends Component {
             fillParent
             horizontalCenter
             verticalCenter
-            className={styles.hero_section_inner_container}
+            className={` ${styles.hero_section_inner_container} ${
+              isRTL ? styles.rtl : ""
+            }`}
           >
             <DivColumn fillParent>
               <h1 className={styles.primary_header}>
-                Sell your products to customers across Kuwait
+                {translate("main_home_page.title")}
               </h1>
               <h2 className={styles.secondary_header}>
-                Shake hand with the most reputed company known for hosting
-                exhibitions. We reached around all the corners of Kuwait.
+                {translate("main_home_page.subtitle")}
               </h2>
               <DivRow
                 verticalCenter
@@ -83,7 +88,7 @@ class LandingPage extends Component {
                 className={styles.start_selling_button}
                 onClick={this.onClickStartSelling}
               >
-                Start Selling
+                {translate("main_home_page.start_selling")}
               </DivRow>
             </DivColumn>
             <DivColumn fillParent className={styles.app_icon_container}>
@@ -117,7 +122,7 @@ class LandingPage extends Component {
                 className={styles.start_selling_button_pricing}
                 onClick={this.onClickStartSelling}
               >
-                Start Selling
+                {translate("main_home_page.start_selling")}
               </DivRow>
             </DivColumn>
 
@@ -139,6 +144,7 @@ class LandingPage extends Component {
 const mapStateToProps = (state) => {
   return {
     subscriptionReducer: state.subscriptionReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 
@@ -151,4 +157,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(LandingPage));
+)(translatorHoc(navigatorHoc(LandingPage)));

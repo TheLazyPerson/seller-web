@@ -1,17 +1,24 @@
-@import '~Styles/colors.module';
-@import '~Styles/mixins.module';
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
 
-.list_container {
-  align-self: stretch;
-}
+.rtl {
+  direction: rtl;
+  text-align: right;
 
-.list_header {
-  margin: 31px 0px 5px 20px;
-  opacity: 0.7;
-  font-size: 10px;
-  font-weight: bold;
-  color: white;
-  text-transform: uppercase;
+  .nav_item {
+    .nav_image {
+      margin-left: 10px;
+    }
+
+    .nav_indicator {
+      margin-left: 0px !important;
+      margin-right: auto;
+    }
+  }
+
+  .list_header {
+    margin: 31px 20px 5px 0px !important;
+  }
 }
 
 .side_nav_container {
@@ -55,13 +62,26 @@
     }
   }
 
+  .list_container {
+    align-self: stretch;
+  }
+
+  .list_header {
+    margin: 31px 0px 5px 20px;
+    opacity: 0.7;
+    font-size: 10px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+  }
+
   .is_selected {
     background: white;
 
     .nav_title {
       color: $primary-text-color;
     }
-    
+
     .nav_description {
       color: $primary-text-color;
     }
