@@ -15,6 +15,7 @@ import {
   isCivilIdValid,
 } from "Utils/validators";
 import DatePicker from "react-datepicker";
+import { subtractFromDate } from "Utils/formatHelper";
 
 class PersonalDetails extends Component {
   state = {
@@ -99,12 +100,17 @@ class PersonalDetails extends Component {
               <Field name="birthday">
                 {({ input, meta }) => (
                   <DatePicker
+                    dateFormat="dd/MM/yyyy"
                     selected={this.state.startDate}
                     onChange={(date) => {
                       this.setState({ startDate: date });
-                      input.onChange(date.valueOf());
+                      input.onChange(date);
                     }}
-                    maxDate={new Date()}
+                    peekNextMonth
+                    showMonthDropdown
+                    showYearDropdown
+                    openToDate={subtractFromDate(new Date(), 18, "years")}
+                    maxDate={subtractFromDate(new Date(), 18, "years")}
                     customInput={
                       <CustomRenderInput meta={meta} input={input} />
                     }
