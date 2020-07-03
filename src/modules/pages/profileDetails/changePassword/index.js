@@ -48,7 +48,7 @@ class ChangePassword extends Component {
       new_password_confirmation: form.confirmPassword,
     }).then(({ payload }) => {
       if (payload.code === 200 || payload.code === 201) {
-        navigateTo("profile");
+        navigateTo("signin");
         showSuccessFlashMessage("Password Changed successfuly");
       }
     });

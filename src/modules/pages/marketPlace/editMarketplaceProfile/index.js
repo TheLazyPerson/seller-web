@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivRow from "CommonComponents/divRow";
+import DivColumn from "CommonComponents/divColumn";
 import SideNav from "CommonComponents/sideNav";
 import styles from "./edit_marketplace_profile.module.scss";
 import NavHeader from "CommonComponents/navHeader";
@@ -18,20 +19,8 @@ import {
 import { getAddressListAction } from "Core/modules/address/addressActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {
-  isPhoneNumber,
-  nameValidator,
-  isEmptyValidator,
-  emailValidator,
-} from "Utils/validators";
-import DatePicker from "react-datepicker";
+import { isPhoneNumber, nameValidator, emailValidator } from "Utils/validators";
 import "react-datepicker/dist/react-datepicker.css";
-import Select from "react-select";
-import DivColumn from "CommonComponents/divColumn";
-import AddressItemComponent from "CommonComponents/addressItemComponent";
-import HorizontalBorder from "CommonComponents/horizontalBorder";
-import map from "lodash/map";
-import InitialPageLoader from "CommonContainers/initialPageLoader";
 import translatorHoc from "Hoc/translatorHoc";
 
 class EditMarketplaceProfile extends Component {
@@ -295,7 +284,7 @@ class EditMarketplaceProfile extends Component {
                         address={address}
                         onClickEdit={this.handleEdit}
                         onClickRemove={this.handleRemove}
-                        isSelected={address.id == marketplaceAddress.id}
+                        isSelected={address.id === marketplaceAddress.id}
                         onClickItem={() => selectMarketplaceAddress(address)}
                       />
                     );

@@ -14,7 +14,7 @@ import InputTextareaComponent from "CommonComponents/InputTextareaComponent";
 import navigatorHoc from "Hoc/navigatorHoc";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import { uploadImage } from "Core/modules/product/productActions";
-import { isEmptyValidator, isEmptyArrayValidator } from "Utils/validators";
+import { isEmptyValidator } from "Utils/validators";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
@@ -42,7 +42,6 @@ class EditProduct extends Component {
   componentDidMount() {
     const {
       editProductAction,
-      productReducer: { prouctForm, editProduct },
       match: { params },
     } = this.props;
 
@@ -90,15 +89,15 @@ class EditProduct extends Component {
 
     const reduced = prouctForm.reduce((prev, element) => {
       element.attributes.forEach((attribute) => {
-        const { type, slug, name, is_translatable } = attribute;
+        const { type, is_translatable } = attribute;
         const validatorResponse =
-          type == "file" || type == "tree-checkbox"
+          type === "file" || type === "tree-checkbox"
             ? { result: true }
             : isEmptyValidator(values[attribute.slug]);
         prev[attribute.slug] = validatorResponse;
         if (is_translatable === 1) {
           const validatorForTranslatableResponse =
-            type == "file" || type == "tree-checkbox"
+            type === "file" || type === "tree-checkbox"
               ? { result: true }
               : isEmptyValidator(values[attribute.slug.concat("_ar")]);
           prev[attribute.slug.concat("_ar")] = validatorForTranslatableResponse;
@@ -117,7 +116,6 @@ class EditProduct extends Component {
     const {
       editProductAction,
       showSuccessFlashMessage,
-      onSubmitComplete,
       productReducer: { prouctForm },
       match: { params },
     } = this.props;
@@ -380,23 +378,22 @@ class EditProduct extends Component {
   };
 
   render() {
-    const CustomRenderInput = ({ input, name, value, onClick, meta }) => {
-      return (
-        <InputTextComponent
-          {...input}
-          meta={meta}
-          placeholder={name}
-          value={value}
-          className={styles.input_text}
-          onClick={onClick}
-        />
-      );
-    };
+    // const CustomRenderInput = ({ input, name, value, onClick, meta }) => {
+    //   return (
+    //     <InputTextComponent
+    //       {...input}
+    //       meta={meta}
+    //       placeholder={name}
+    //       value={value}
+    //       className={styles.input_text}
+    //       onClick={onClick}
+    //     />
+    //   );
+    // };
     const {
       onClickCancel,
       productReducer: { prouctForm },
       match: { params },
-      basicReducer: { basicData, attributeFamilies },
       getProductFormAction,
     } = this.props;
     return (

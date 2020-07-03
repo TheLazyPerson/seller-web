@@ -22,7 +22,7 @@ import translatorHoc from 'Hoc/translatorHoc';
 class ProfileAddress extends Component {
   onClickNewAddress = () => {
     const { navigateTo } = this.props;
-    navigateTo("add-address");
+    navigateTo("add-address ");
   };
 
   handleEdit = id => {

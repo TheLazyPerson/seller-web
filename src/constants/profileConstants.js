@@ -1,16 +1,11 @@
 import orderBlackIcon from "Icons/order-icon-black.svg";
 import helpCenterBlackIcon from "Icons/help-center-icon-black.svg";
-import wishlistBlackIcon from "Icons/wishlist-icon-black.svg";
-import addressBlackIcon from "Icons/address-icon-black.svg";
 import profileBlackIcon from "Icons/profile-icon-black.svg";
 import settingsBlackIcon from "Icons/settings-icon-black.svg";
-import logoutBlackIcon from "Icons/logout-icon-black.svg";
 import overviewBlackIcon from "Icons/overview-icon-black.svg";
 
 import orderWhiteIcon from "Icons/order-icon-white.svg";
 import helpCenterWhiteIcon from "Icons/help-center-icon-white.svg";
-import wishlistWhiteIcon from "Icons/wishlist-icon-white.svg";
-import addressWhiteIcon from "Icons/address-icon-white.svg";
 import profileWhiteIcon from "Icons/profile-icon-white.svg";
 import settingsWhiteIcon from "Icons/settings-icon-white.svg";
 import overviewWhiteIcon from "Icons/overview-icon-white.svg";
@@ -20,8 +15,6 @@ import productWhiteIcon from "Icons/product-icon-white.svg";
 import productBlackIcon from "Icons/product-icon-black.svg";
 import salesWhiteIcon from "Icons/sales-icon-white.svg";
 import salesBlackIcon from "Icons/sales-icon-black.svg";
-import marketplaceProfileWhiteIcon from "Icons/marketplace-profile-icon-white.svg";
-import marketplaceProfileBlackIcon from "Icons/marketplace-profile-icon-black.svg";
 import subscriptionWhiteIcon from "Icons/subscription-icon-white.svg";
 import subscriptionBlackIcon from "Icons/subscription-icon-black.svg";
 

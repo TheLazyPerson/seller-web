@@ -37,7 +37,7 @@ import TransactionDetailsPage from "./pages/salesPage/transactionDetailPage";
 import ExhibitionSubscriptionOverviewPage from "./pages/exhibitionSuscriptionOverviewPage";
 import ProductDetailsPage from "./pages/productDetailsPage";
 import ForgotPassword from "./pages/forgetPassword";
-import ResetPassword from "./pages/resetPassword";
+// import ResetPassword from "./pages/resetPassword";
 import ResetPasswordSuccess from "./pages/resetPassword/resetPasswordSucess";
 import { connect } from "react-redux";
 import MarketplaceDetail from "./pages/marketplaceDetails";
@@ -50,6 +50,7 @@ import ProfileSubscriptionPaymentSuccessPage from "./pages/subscriptionPage/prof
 import ProfileSubscriptionPaymentFailurePage from "./pages/subscriptionPage/profileSubscriptionPaymentFailurePage";
 import MainOrdersDetailsPage from "./pages/mainOrdersShippingPage";
 import OrderShippingInformationPage from "./pages/ordersShippingInfomationPage";
+import CustomerOnboard from "./pages/customerOnboard";
 const App = ({ isUserSignedIn }) => {
   return (
     <Switch>
@@ -72,6 +73,7 @@ const App = ({ isUserSignedIn }) => {
         component={SignUpPage}
         validator={() => !isUserSignedIn}
       />
+      <Route exact path="/customer-onboard" component={CustomerOnboard} />
       <ProtectedRoute
         exact
         path="/profile/orders/details/:orderId?"

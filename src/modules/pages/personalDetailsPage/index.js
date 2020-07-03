@@ -2,26 +2,31 @@ import React, { Component } from "react";
 import DivColumn from "CommonComponents/divColumn";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import styles from "./marketplace_details.module.scss";
+import styles from "./personal_details.module.scss";
 import InputTextComponent from "CommonComponents/InputTextComponent";
 import { Form, Field } from "react-final-form";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import navigatorHoc from "Hoc/navigatorHoc";
+
 import translatorHoc from "Hoc/translatorHoc";
 import {
   isEmptyValidator,
   isPhoneNumber,
-  emailValidator,
+  isCivilIdValid,
 } from "Utils/validators";
+import DatePicker from "react-datepicker";
+import { subtractFromDate } from "Utils/formatHelper";
 
-class MarketplaceDetail extends Component {
+class PersonalDetails extends Component {
+  state = {
+    startDate: null,
+  };
+
   onSubmit = (form) => {
     const updatedPostData = {
-      marketplace_profile: {
-        shop_name: form.shop_name,
-        shop_email_address: form.shop_email,
-        shop_contact_number: form.contact_number,
-      },
+      civil_id: form.civil_id,
+      phone_number: form.phone_number,
+      birthday: form.birthday,
     };
 
     this.props.profileUpdate(updatedPostData);
@@ -30,9 +35,9 @@ class MarketplaceDetail extends Component {
   validate = (values) => {
     const errors = {};
     const validators = {
-      shop_name: isEmptyValidator(values.shop_name),
-      shop_email: emailValidator(values.shop_email),
-      contact_number: isPhoneNumber(values.contact_number),
+      civil_id: isCivilIdValid(values.civil_id),
+      phone_number: isPhoneNumber(values.phone_number),
+      birthday: isEmptyValidator(values.birthday),
     };
 
     Object.keys(validators).forEach((key) => {
@@ -43,6 +48,19 @@ class MarketplaceDetail extends Component {
   };
 
   render() {
+    const CustomRenderInput = ({ input, value, onClick, meta }) => {
+      return (
+        <InputTextComponent
+          {...input}
+          meta={meta}
+          placeholder={translate("personal_detail_page.birthday")}
+          value={value}
+          className={styles.input_text}
+          onClick={onClick}
+        />
+      );
+    };
+
     const { translate } = this.props;
 
     return (
@@ -54,52 +72,55 @@ class MarketplaceDetail extends Component {
         <Form
           onSubmit={this.onSubmit}
           validate={this.validate}
-          render={({ handleSubmit, submitting }) => (
+          render={({ handleSubmit, form, submitting, pristine, values }) => (
             <form className={styles.form_container} onSubmit={handleSubmit}>
-              <Field name="shop_name">
+              <Field name="civil_id">
                 {({ input, meta }) => (
                   <InputTextComponent
                     meta={meta}
                     type="text"
                     {...input}
-                    placeholder={translate(
-                      "marketplace_profile_details.shop_name"
-                    )}
+                    placeholder={translate("personal_detail_page.civil_id")}
                     className={styles.input_text}
                   />
                 )}
               </Field>
 
-              <Field name="contact_number">
+              <Field name="phone_number">
                 {({ input, meta }) => (
                   <InputTextComponent
                     meta={meta}
                     type="text"
                     {...input}
-                    placeholder={translate(
-                      "marketplace_profile_details.contact_number"
-                    )}
+                    placeholder={translate("personal_detail_page.phone_number")}
                     className={styles.input_text}
+                  />
+                )}
+              </Field>
+              <Field name="birthday">
+                {({ input, meta }) => (
+                  <DatePicker
+                    dateFormat="dd/MM/yyyy"
+                    selected={this.state.startDate}
+                    onChange={(date) => {
+                      this.setState({ startDate: date });
+                      input.onChange(date);
+                    }}
+                    peekNextMonth
+                    showMonthDropdown
+                    showYearDropdown
+                    openToDate={subtractFromDate(new Date(), 18, "years")}
+                    maxDate={subtractFromDate(new Date(), 18, "years")}
+                    customInput={
+                      <CustomRenderInput meta={meta} input={input} />
+                    }
                   />
                 )}
               </Field>
 
-              <Field name="shop_email">
-                {({ input, meta }) => (
-                  <InputTextComponent
-                    meta={meta}
-                    type="email"
-                    {...input}
-                    placeholder={translate(
-                      "marketplace_profile_details.email_address"
-                    )}
-                    className={styles.input_text}
-                  />
-                )}
-              </Field>
               <input
                 type="submit"
-                value={translate("marketplace_profile_details.create")}
+                value={translate("personal_detail_page.create")}
                 className={styles.input_submit}
                 disabled={submitting}
               />
@@ -111,16 +132,8 @@ class MarketplaceDetail extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    signupReducer: state.signupReducer,
-    signInReducer: state.signInReducer,
-  };
-};
-
 const mapDispathToProps = (dispatch) => {
   return {
-    // postSignupAction: bindActionCreators(postSignupAction, dispatch),
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
@@ -129,6 +142,6 @@ const mapDispathToProps = (dispatch) => {
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispathToProps
-)(navigatorHoc(translatorHoc(MarketplaceDetail)));
+)(translatorHoc(navigatorHoc(PersonalDetails)));

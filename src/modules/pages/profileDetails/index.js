@@ -6,7 +6,6 @@ import SideNav from "CommonComponents/sideNav";
 import styles from "./profile_details.module.scss";
 import NavHeader from "CommonComponents/navHeader";
 
-import map from "lodash/map";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
 import { getProfileDetailsAction } from "Core/modules/profiledetails/profileDetailsActions";

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import DivColumn from "CommonComponents/divColumn";
 import styles from "./top_container_hoc.module.scss";
@@ -16,7 +17,6 @@ import {
   getFeatureUsage,
 } from "Core/modules/subscription/subscriptionActions";
 import map from "lodash/map";
-import isEmpty from "lodash/isEmpty";
 
 const topContainerHoc = (WrappedComponent) => {
   class topContainer extends Component {

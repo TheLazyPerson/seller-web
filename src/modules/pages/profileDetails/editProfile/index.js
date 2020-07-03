@@ -17,7 +17,6 @@ import {
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
-  isPhoneNumber,
   nameValidator,
   isEmptyValidator,
   emailValidator,
@@ -111,7 +110,7 @@ class EditProfile extends Component {
     let defaultGender = null;
 
     if (userDetails.gender) {
-      if (userDetails.gender == "male") defaultGender = genderOptions[0];
+      if (userDetails.gender === "male") defaultGender = genderOptions[0];
       else defaultGender = genderOptions[1];
     }
 

@@ -8,7 +8,7 @@ import CapsuleButton from "CommonComponents/capsuleButton";
 import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
 import InputTextComponent from "CommonComponents/InputTextComponent";
 import navigatorHoc from "Hoc/navigatorHoc";
-import { passwordValidator, isEmptyValidator } from "Utils/validators";
+import { isEmptyValidator } from "Utils/validators";
 import { Form, Field } from "react-final-form";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";

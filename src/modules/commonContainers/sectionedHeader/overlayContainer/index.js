@@ -4,7 +4,6 @@ import HorizontalBorder from "CommonComponents/horizontalBorder";
 import DivColumn from "CommonComponents/divColumn";
 import DivRow from "CommonComponents/divRow";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import map from "lodash/map";
 
 class OverlayContainer extends Component {

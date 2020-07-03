@@ -3,22 +3,16 @@ import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivColumn from "CommonComponents/divColumn";
 import DivRow from "CommonComponents/divRow";
 import NavHeader from "CommonComponents/navHeader";
-import CapsuleButton from "CommonComponents/capsuleButton";
 import styles from "./main_orders_shipping.module.scss";
 import SideNav from "CommonComponents/sideNav";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import DataTable from "react-data-table-component";
-import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 
 import { getOrderDetailsAction } from "Core/modules/order/orderActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import HorizontalBorder from "CommonComponents/horizontalBorder";
-import { Form, Field } from "react-final-form";
-import InputTextComponent from "CommonComponents/InputTextComponent";
-import { isEmptyValidator } from "Utils/validators";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import isEmpty from "lodash/isEmpty";
 import { formatUnixTimeStampToDateTime } from "Utils/formatHelper";
@@ -73,7 +67,6 @@ class MainOrdersShippingPage extends Component {
       },
       headCells: {
         style: {
-          color: "#202124",
           fontSize: 12,
           fontWeight: "bold",
           color: "#7c858e",

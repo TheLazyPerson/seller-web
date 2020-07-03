@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivColumn from "CommonComponents/divColumn";
@@ -6,7 +7,6 @@ import NavHeader from "CommonComponents/navHeader";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import map from "lodash/map";
 import styles from "./exhibition_page.module.scss";
-import { profileListItem } from "Constants/profileConstants";
 import SideNav from "CommonComponents/sideNav";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { connect } from "react-redux";
@@ -35,7 +35,6 @@ class ExhibitionListingPage extends Component {
     return (
       <DivRow className={` ${styles.item} ${isRTL ? styles.rtl : ""}`}>
         <img className={styles.image} src={listItem.base_image} />
-
         <div className={styles.item_content}>
           <div className={styles.title}>{listItem.title}</div>
           <div className={styles.description}>{listItem.short_description}</div>

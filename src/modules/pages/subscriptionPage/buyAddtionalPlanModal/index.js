@@ -2,12 +2,8 @@ import React, { Component } from "react";
 import DivColumn from "CommonComponents/divColumn";
 import Modal from "@material-ui/core/Modal";
 import styles from "./buy_plan.module.scss";
-import SearchBarComponent from "CommonComponents/searchBarComponent";
 import DivRow from "CommonComponents/divRow";
-import ProductListItem from "CommonComponents/productListItem";
 import map from "lodash/map";
-import InitialPageLoader from "CommonContainers/initialPageLoader";
-import navigatorHoc from "Hoc/navigatorHoc";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Subscription from "CommonComponents/subscriptionComponent";
@@ -22,7 +18,6 @@ class BuyPlanModal extends Component {
       onClose,
       onClickBuyPlan,
       planList,
-      activeSubscription,
       translate,
       subscriptionReducer: { selectedSubscription },
     } = this.props;

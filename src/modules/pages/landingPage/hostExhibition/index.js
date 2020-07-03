@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import navigatorHoc from "Hoc/navigatorHoc";
 import DivColumn from "CommonComponents/divColumn";
@@ -17,7 +18,7 @@ class HostExhibition extends Component {
       <DivRow
         fillParent
         className={`${styles.list_item} ${
-          index % 2 == 0 ? styles.reverse_directions : ""
+          index % 2 === 0 ? styles.reverse_directions : ""
         }`}
       >
         <DivColumn className={styles.image_container}>

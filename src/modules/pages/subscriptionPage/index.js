@@ -1,18 +1,13 @@
 import React, { Component } from "react";
 import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivColumn from "CommonComponents/divColumn";
-import DivRow from "CommonComponents/divRow";
 import NavHeader from "CommonComponents/navHeader";
 import CapsuleButton from "CommonComponents/capsuleButton";
-import map from "lodash/map";
 import styles from "./subscription.module.scss";
 import SideNav from "CommonComponents/sideNav";
 import navigatorHoc from "Hoc/navigatorHoc";
-import { logoutAction } from "Core/modules/signin/signinActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { CookieService } from "Utils/cookieService";
-import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import {
   getPlanListAction,
@@ -21,13 +16,8 @@ import {
   buyAdditionalPlanAction,
   activatePlanAction,
 } from "Core/modules/subscription/subscriptionActions";
-import Pricing from "../landingPage/Pricing";
 import ActiveSubscription from "CommonComponents/activeSubscriptionComponent";
-import Subscription from "CommonComponents/subscriptionComponent";
-import HorizontalBorder from "CommonComponents/horizontalBorder";
-import SubscribedComponent from "CommonComponents/subscribedComponent";
 import DataTableContainer from "CommonContainers/dataTableContainer";
-import DataTable from "react-data-table-component";
 import Button from "@material-ui/core/Button";
 import memoize from "memoize-one";
 import BuyPlanModal from "./buyAddtionalPlanModal";
@@ -69,7 +59,6 @@ class SubscriptionPage extends Component {
     },
     {
       cell: (value) => {
-        console.log("VALUE", value);
         const {
           subscriptionReducer: { activeSubscription },
           activatePlanAction,
@@ -98,7 +87,7 @@ class SubscriptionPage extends Component {
   onClickBuyPlan = (planId) => {
     const { buyAdditionalPlanAction } = this.props;
     buyAdditionalPlanAction(planId).then(({ payload }) => {
-      if (payload.code == 200 || payload.code == 201) {
+      if (payload.code === 200 || payload.code === 201) {
         const {
           data: { payment_information },
         } = payload;
@@ -122,7 +111,6 @@ class SubscriptionPage extends Component {
 
   render() {
     const {
-      translate,
       subscriptionReducer: {
         subscriptionPlanList,
         activeSubscription,
@@ -131,6 +119,7 @@ class SubscriptionPage extends Component {
       getPlanListAction,
       getActivePlan,
       getSubscriptionListAction,
+      translate,
     } = this.props;
     const { showModal } = this.state;
 

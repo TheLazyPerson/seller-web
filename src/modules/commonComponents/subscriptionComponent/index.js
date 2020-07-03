@@ -50,7 +50,7 @@ class Subscription extends Component {
             <img
               alt="nav"
               src={
-                selectedSubscription.id == subscription.id
+                selectedSubscription.id === subscription.id
                   ? exhibitionIconWhite
                   : exhibitionIconBlack
               }
@@ -72,7 +72,7 @@ class Subscription extends Component {
             <img
               alt="nav"
               src={
-                selectedSubscription.id == subscription.id
+                selectedSubscription.id === subscription.id
                   ? growthIconWhite
                   : growthIconBlack
               }
@@ -94,7 +94,7 @@ class Subscription extends Component {
             <img
               alt="nav"
               src={
-                selectedSubscription.id == subscription.id
+                selectedSubscription.id === subscription.id
                   ? rocketIconWhite
                   : rocketIconBlack
               }

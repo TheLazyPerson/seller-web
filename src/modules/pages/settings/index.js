@@ -5,8 +5,6 @@ import DivRow from "CommonComponents/divRow";
 import SideNav from "CommonComponents/sideNav";
 import styles from "./profile_settings.module.scss";
 import InputCheckbox from "CommonComponents/InputCheckbox";
-import FullWidthContainer from "CommonContainers/fullwidthContainer";
-import InputTextComponent from "CommonComponents/InputTextComponent";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -16,7 +14,6 @@ import {
 } from "Core/modules/settings/settingsActions";
 import translatorHoc from "Hoc/translatorHoc";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
-import queryString from "query-string";
 class Settings extends Component {
   // constructor(props) {
   //   super(props);

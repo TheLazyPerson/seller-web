@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivColumn from "CommonComponents/divColumn";
@@ -6,7 +7,6 @@ import NavHeader from "CommonComponents/navHeader";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import map from "lodash/map";
 import styles from "./exhibition_page.module.scss";
-import { profileListItem } from "Constants/profileConstants";
 import SideNav from "CommonComponents/sideNav";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { connect } from "react-redux";
@@ -14,10 +14,7 @@ import { bindActionCreators } from "redux";
 import { getEnrolledExhibitionAction } from "Core/modules/exhibition/exhibitionActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import isEmpty from "lodash/isEmpty";
-import {
-  formatUnixTimeStampToDateTime,
-  calculateDateDiffFrom,
-} from "Utils/formatHelper";
+import { formatUnixTimeStampToDateTime } from "Utils/formatHelper";
 import translatorHoc from "Hoc/translatorHoc";
 
 class YourExhibitionListingPage extends Component {

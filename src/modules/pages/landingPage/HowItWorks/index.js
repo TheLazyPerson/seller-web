@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import navigatorHoc from "Hoc/navigatorHoc";
 import DivColumn from "CommonComponents/divColumn";
@@ -16,7 +17,7 @@ class HowItWorks extends Component {
       <DivRow
         fillParent
         className={`${styles.list_item} ${
-          index % 2 == 0 ? styles.reverse_directions : ""
+          index % 2 === 0 ? styles.reverse_directions : ""
         }`}
       >
         <DivColumn className={styles.image_container}>
@@ -32,7 +33,6 @@ class HowItWorks extends Component {
     );
   };
   render() {
-    let inde;
     return (
       <DivColumn fillParent className={styles.how_it_works}>
         {map(howItWorksListItems, (listItem, index) => {

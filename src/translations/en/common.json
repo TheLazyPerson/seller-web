@@ -149,6 +149,13 @@
     "bank_name": "Bank Name",
     "iban": "IBAN"
   },
+  "personal_detail_page": {
+    "create": "Next",
+    "page_title": "Personal Details",
+    "civil_id": "Civil ID ",
+    "phone_number": "Contact Number",
+    "birthday": "Birthday"
+  },
   "location_detail_page": {
     "create": "Next",
     "page_title": "Location Details",
@@ -270,7 +277,8 @@
     "shop_name": "Shop Name",
     "contact_number": "Contact Number",
     "email_address": "Email Address ",
-    "address": "Address"
+    "address": "Address",
+    "create": "Next"
   },
   "edit_marketplace_detail_page": {
     "create": "Next",

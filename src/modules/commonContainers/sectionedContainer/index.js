@@ -1,17 +1,18 @@
+/* eslint-disable jsx-a11y/anchor-has-content */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component, Fragment } from "react";
 import SectionedHeader from "CommonContainers/sectionedHeader";
 import DivRow from "CommonComponents/divRow";
 import DivColumn from "CommonComponents/divColumn";
 import styles from "./sectioned_container.module.scss";
 import appIcon from "Icons/app-icon-white.svg";
-import LanguageSelect from "CommonComponents/languageSelect";
 import navigatorHoc from "Hoc/navigatorHoc";
 import Drawer from "@material/react-drawer";
 import "@material/react-drawer/dist/drawer.css";
 import hamburgerIconBlack from "Icons/hamburger-menu-icon-black.svg";
-import SearchBar from "CommonContainers/searchBar";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import LanguageSelect from "CommonComponents/languageSelect";
 
 class SectionedContainer extends Component {
   state = {

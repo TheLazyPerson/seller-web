@@ -1,21 +1,15 @@
 import React, { Component } from "react";
-import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivColumn from "CommonComponents/divColumn";
 import DivRow from "CommonComponents/divRow";
-import SideNav from "CommonComponents/sideNav";
 import styles from "./marketPlace.module.scss";
 import NavHeader from "CommonComponents/navHeader";
-
-import map from "lodash/map";
 import CapsuleButton from "CommonComponents/capsuleButton";
-import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
 import { getMarketplaceProfileAction } from "Core/modules/marketplaceprofile/marketplaceProfileActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import navigatorHoc from "Hoc/navigatorHoc";
 import translatorHoc from "Hoc/translatorHoc";
-import isEmpty from "lodash/isEmpty";
 
 class MarketPlace extends Component {
   navigateToMarketplaceEditProfile = () => {

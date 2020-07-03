@@ -24,10 +24,7 @@ import { isEmptyValidator } from "Utils/validators";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import isEmpty from "lodash/isEmpty";
-import {
-  formatUnixTimeStampToDateTime,
-  momentToDate,
-} from "Utils/formatHelper";
+import { formatUnixTimeStampToDateTime } from "Utils/formatHelper";
 
 class OrderShippingInformationPage extends Component {
   state = {
@@ -113,7 +110,6 @@ class OrderShippingInformationPage extends Component {
       },
       headCells: {
         style: {
-          color: "#202124",
           fontSize: 12,
           fontWeight: "bold",
           color: "#7c858e",
