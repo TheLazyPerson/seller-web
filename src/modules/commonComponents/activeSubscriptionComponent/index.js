@@ -43,14 +43,7 @@ class ActiveSubscription extends Component {
       subscription,
       isRTL,
       translate,
-      subscriptionReducer: {
-        selectedSubscription,
-        isSubscriptionLoading,
-        isSubscriptionError,
-        featuresData,
-      },
-      getActivePlan,
-      getFeatureUsage,
+      subscriptionReducer: { selectedSubscription, featuresData },
     } = this.props;
 
     const ProgressItem = ({ title, value, progress }) => (

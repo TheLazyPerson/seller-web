@@ -34,7 +34,6 @@ class EditMarketplaceProfile extends Component {
       editMarketplaceProfileAction,
       navigateTo,
       showSuccessFlashMessage,
-      marketplaceProfileReducer: { marketplaceAddress },
     } = this.props;
     editMarketplaceProfileAction({
       shop_name: form.shopName,
@@ -86,10 +85,7 @@ class EditMarketplaceProfile extends Component {
 
   render() {
     const {
-      getAddressListAction,
-      selectMarketplaceAddress,
-      marketplaceProfileReducer: { profile, marketplaceAddress },
-      addressReducer: { addressList },
+      marketplaceProfileReducer: { profile },
       translate,
       isRTL,
     } = this.props;

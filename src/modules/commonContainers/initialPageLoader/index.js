@@ -34,7 +34,6 @@ class InitialPageLoader extends Component {
         else this.setState({ loading: false, isError: true });
       })
       .catch((error) => {
-        console.log("initialPageLoader Error:", error);
         this.setState({ loading: false, isError: true });
       });
   };

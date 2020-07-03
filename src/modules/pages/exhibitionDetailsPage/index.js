@@ -206,7 +206,7 @@ class ExhibitionDetailsPage extends Component {
                 </DivColumn>
 
                 <DivColumn className={styles.right_container}>
-                  {exhibitionState.ENROLLED_LIVE == exhibitionDetail.state ? (
+                  {exhibitionState.ENROLLED_LIVE === exhibitionDetail.state ? (
                     <ProductDescription
                       exhibitionDetail={exhibitionDetail}
                       translate={translate}

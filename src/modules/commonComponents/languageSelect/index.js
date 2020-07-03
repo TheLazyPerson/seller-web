@@ -22,8 +22,8 @@ class LanguageSelect extends Component {
       blackColor,
       languageReducer: { languageCode },
     } = this.props;
-    const arSelected = languageCode == "ar";
-    const enSelected = languageCode == "en";
+    const arSelected = languageCode === "ar";
+    const enSelected = languageCode === "en";
 
     return (
       <DivRow

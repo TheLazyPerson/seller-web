@@ -12,7 +12,6 @@ class Benefits extends Component {
   getBenefitsListItem = (listItem) => {
     const {
       languageReducer: { languageCode },
-      isRTL,
     } = this.props;
     return (
       <DivColumn fillParent className={styles.list_item}>

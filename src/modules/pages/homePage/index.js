@@ -39,7 +39,7 @@ class HomePage extends Component {
     return (
       <DivColumn verticalCenter horizontalCenter className={styles.box}>
         <div className={styles.title}>
-          <span>{listItem.card_type == "price-card" ? "KD " : ""}</span>
+          <span>{listItem.card_type === "price-card" ? "KD " : ""}</span>
           {listItem.value}
         </div>
         <div className={styles.description}>{listItem.title}</div>

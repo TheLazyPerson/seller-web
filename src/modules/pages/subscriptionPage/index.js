@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivColumn from "CommonComponents/divColumn";
+import DivRow from "CommonComponents/divRow";
 import NavHeader from "CommonComponents/navHeader";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import styles from "./subscription.module.scss";
@@ -149,7 +150,7 @@ class SubscriptionPage extends Component {
                   fillParent
                   className={styles.additional_plans_container}
                 >
-                  {/* <InitialPageLoader initialPageApi={getSubscriptionListAction}>
+                  <InitialPageLoader initialPageApi={getSubscriptionListAction}>
                     {!isEmpty(activeSubscription) && (
                       <DivRow>
                         <DataTableContainer
@@ -161,7 +162,7 @@ class SubscriptionPage extends Component {
                         />
                       </DivRow>
                     )}
-                  </InitialPageLoader> */}
+                  </InitialPageLoader>
                 </DivColumn>
               </DivColumn>
 

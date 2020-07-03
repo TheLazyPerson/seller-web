@@ -40,7 +40,6 @@ class Settings extends Component {
       const { code } = response.payload;
       if (code === 200 || code === 201) {
       } else if (code === 400 || code === 404) {
-        console.log("error");
       }
     });
   };

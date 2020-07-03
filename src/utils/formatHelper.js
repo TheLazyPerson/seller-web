@@ -34,6 +34,8 @@ export const subtractFromDate = (date, number, type) => {
       return date.setMonth(date.getMonth() - number) && date;
     case "years":
       return date.setFullYear(date.getFullYear() - number) && date;
+    default:
+      return;
   }
 };
 

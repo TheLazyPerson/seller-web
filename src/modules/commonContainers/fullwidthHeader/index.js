@@ -19,7 +19,7 @@ class FullwidthHeader extends Component {
   };
 
   render() {
-    const { children, whiteColor, className, isRTL } = this.props;
+    const { whiteColor, className, isRTL } = this.props;
 
     return (
       <div fillSelfHorizontal className={`${styles.top_header} ${className}`}>
