@@ -91,6 +91,7 @@ class EditMarketplaceProfile extends Component {
       marketplaceProfileReducer: { profile, marketplaceAddress },
       addressReducer: { addressList },
       translate,
+      isRTL,
     } = this.props;
 
     return (
@@ -99,180 +100,183 @@ class EditMarketplaceProfile extends Component {
           title={translate("edit_marketplace_detail_page.page_title")}
           onBackClick={this.onBackPress}
         />
-        <Form
-          onSubmit={this.onSubmit}
-          validate={this.validate}
-          initialValues={{
-            shopName: profile.shop_name ? profile.shop_name : "",
-            contactNumber: profile.contact_number ? profile.contact_number : "",
-            shopEmail: profile.shop_email ? profile.shop_email : "",
-            area: profile.area ? profile.area : "",
-            blockNumber: profile.block_number ? profile.block_number : "",
-            houseNumber: profile.house_number ? profile.house_number : "",
-            streetNumber: profile.street_number ? profile.street_number : "",
-            avenue: profile.avenue ? profile.avenue : "",
-            landmark: profile.landmark ? profile.landmark : "",
-            addressType: profile.address_type ? profile.address_type : "",
-            city: profile.city ? profile.city : "",
-          }}
-          render={({
-            handleSubmit,
-            form: {
-              mutators: { mutateValue },
-            },
-            submitting,
-            pristine,
-            values,
-          }) => (
-            <form onSubmit={handleSubmit}>
-              <DivColumn className={styles.form_container}>
-                <Field name="shopName">
-                  {({ input, meta }) => (
-                    <InputTextComponent
-                      meta={meta}
-                      {...input}
-                      placeholder={translate(
-                        "edit_marketplace_detail_page.shop_name"
-                      )}
-                      className={styles.input_text}
-                    />
-                  )}
-                </Field>
-                <Field name="contactNumber">
-                  {({ input, meta }) => (
-                    <InputTextComponent
-                      meta={meta}
-                      {...input}
-                      placeholder={translate(
-                        "edit_marketplace_detail_page.shop_contact_number"
-                      )}
-                      className={styles.input_text}
-                    />
-                  )}
-                </Field>
+        <DivRow className={` ${isRTL ? styles.rtl : ""}`}>
+          <Form
+            onSubmit={this.onSubmit}
+            validate={this.validate}
+            initialValues={{
+              shopName: profile.shop_name ? profile.shop_name : "",
+              contactNumber: profile.contact_number
+                ? profile.contact_number
+                : "",
+              shopEmail: profile.shop_email ? profile.shop_email : "",
+              area: profile.area ? profile.area : "",
+              blockNumber: profile.block_number ? profile.block_number : "",
+              houseNumber: profile.house_number ? profile.house_number : "",
+              streetNumber: profile.street_number ? profile.street_number : "",
+              avenue: profile.avenue ? profile.avenue : "",
+              landmark: profile.landmark ? profile.landmark : "",
+              addressType: profile.address_type ? profile.address_type : "",
+              city: profile.city ? profile.city : "",
+            }}
+            render={({
+              handleSubmit,
+              form: {
+                mutators: { mutateValue },
+              },
+              submitting,
+              pristine,
+              values,
+            }) => (
+              <form onSubmit={handleSubmit}>
+                <DivColumn className={styles.form_container}>
+                  <Field name="shopName">
+                    {({ input, meta }) => (
+                      <InputTextComponent
+                        meta={meta}
+                        {...input}
+                        placeholder={translate(
+                          "edit_marketplace_detail_page.shop_name"
+                        )}
+                        className={styles.input_text}
+                      />
+                    )}
+                  </Field>
+                  <Field name="contactNumber">
+                    {({ input, meta }) => (
+                      <InputTextComponent
+                        meta={meta}
+                        {...input}
+                        placeholder={translate(
+                          "edit_marketplace_detail_page.shop_contact_number"
+                        )}
+                        className={styles.input_text}
+                      />
+                    )}
+                  </Field>
 
-                <Field name="shopEmail">
-                  {({ input, meta }) => (
-                    <InputTextComponent
-                      meta={meta}
-                      {...input}
-                      placeholder={translate(
-                        "edit_marketplace_detail_page.shop_email_addres"
-                      )}
-                      className={styles.input_text}
-                    />
+                  <Field name="shopEmail">
+                    {({ input, meta }) => (
+                      <InputTextComponent
+                        meta={meta}
+                        {...input}
+                        placeholder={translate(
+                          "edit_marketplace_detail_page.shop_email_addres"
+                        )}
+                        className={styles.input_text}
+                      />
+                    )}
+                  </Field>
+                </DivColumn>
+                <NavHeader
+                  title={translate(
+                    "edit_marketplace_detail_page.address_details"
                   )}
-                </Field>
-              </DivColumn>
-              <NavHeader
-                title={translate(
-                  "edit_marketplace_detail_page.address_details"
-                )}
-              />
+                />
 
-              <DivColumn className={styles.form_container}>
-                <Field name="area">
-                  {({ input, meta }) => (
-                    <InputTextComponent
-                      meta={meta}
-                      {...input}
-                      placeholder={translate(
-                        "edit_marketplace_detail_page.area"
-                      )}
-                      className={styles.input_text}
-                    />
-                  )}
-                </Field>
-                <Field name="blockNumber">
-                  {({ input, meta }) => (
-                    <InputTextComponent
-                      meta={meta}
-                      {...input}
-                      placeholder={translate(
-                        "edit_marketplace_detail_page.block_number"
-                      )}
-                      className={styles.input_text}
-                    />
-                  )}
-                </Field>
+                <DivColumn className={styles.form_container}>
+                  <Field name="area">
+                    {({ input, meta }) => (
+                      <InputTextComponent
+                        meta={meta}
+                        {...input}
+                        placeholder={translate(
+                          "edit_marketplace_detail_page.area"
+                        )}
+                        className={styles.input_text}
+                      />
+                    )}
+                  </Field>
+                  <Field name="blockNumber">
+                    {({ input, meta }) => (
+                      <InputTextComponent
+                        meta={meta}
+                        {...input}
+                        placeholder={translate(
+                          "edit_marketplace_detail_page.block_number"
+                        )}
+                        className={styles.input_text}
+                      />
+                    )}
+                  </Field>
 
-                <Field name="houseNumber">
-                  {({ input, meta }) => (
-                    <InputTextComponent
-                      meta={meta}
-                      {...input}
-                      placeholder={translate(
-                        "edit_marketplace_detail_page.house_number"
-                      )}
-                      className={styles.input_text}
-                    />
-                  )}
-                </Field>
+                  <Field name="houseNumber">
+                    {({ input, meta }) => (
+                      <InputTextComponent
+                        meta={meta}
+                        {...input}
+                        placeholder={translate(
+                          "edit_marketplace_detail_page.house_number"
+                        )}
+                        className={styles.input_text}
+                      />
+                    )}
+                  </Field>
 
-                <Field name="streetNumber">
-                  {({ input, meta }) => (
-                    <InputTextComponent
-                      meta={meta}
-                      {...input}
-                      placeholder={translate(
-                        "edit_marketplace_detail_page.street_number"
-                      )}
-                      className={styles.input_text}
-                    />
-                  )}
-                </Field>
-                <Field name="avenue">
-                  {({ input, meta }) => (
-                    <InputTextComponent
-                      meta={meta}
-                      {...input}
-                      placeholder={translate(
-                        "edit_marketplace_detail_page.avenue"
-                      )}
-                      className={styles.input_text}
-                    />
-                  )}
-                </Field>
+                  <Field name="streetNumber">
+                    {({ input, meta }) => (
+                      <InputTextComponent
+                        meta={meta}
+                        {...input}
+                        placeholder={translate(
+                          "edit_marketplace_detail_page.street_number"
+                        )}
+                        className={styles.input_text}
+                      />
+                    )}
+                  </Field>
+                  <Field name="avenue">
+                    {({ input, meta }) => (
+                      <InputTextComponent
+                        meta={meta}
+                        {...input}
+                        placeholder={translate(
+                          "edit_marketplace_detail_page.avenue"
+                        )}
+                        className={styles.input_text}
+                      />
+                    )}
+                  </Field>
 
-                <Field name="landmark">
-                  {({ input, meta }) => (
-                    <InputTextComponent
-                      meta={meta}
-                      {...input}
-                      placeholder={translate(
-                        "edit_marketplace_detail_page.landmark"
-                      )}
-                      className={styles.input_text}
-                    />
-                  )}
-                </Field>
+                  <Field name="landmark">
+                    {({ input, meta }) => (
+                      <InputTextComponent
+                        meta={meta}
+                        {...input}
+                        placeholder={translate(
+                          "edit_marketplace_detail_page.landmark"
+                        )}
+                        className={styles.input_text}
+                      />
+                    )}
+                  </Field>
 
-                <Field name="addressType">
-                  {({ input, meta }) => (
-                    <InputTextComponent
-                      meta={meta}
-                      {...input}
-                      placeholder={translate(
-                        "edit_marketplace_detail_page.home"
-                      )}
-                      className={styles.input_text}
-                    />
-                  )}
-                </Field>
-                <Field name="city">
-                  {({ input, meta }) => (
-                    <InputTextComponent
-                      meta={meta}
-                      {...input}
-                      placeholder={translate(
-                        "edit_marketplace_detail_page.city"
-                      )}
-                      className={styles.input_text}
-                    />
-                  )}
-                </Field>
+                  <Field name="addressType">
+                    {({ input, meta }) => (
+                      <InputTextComponent
+                        meta={meta}
+                        {...input}
+                        placeholder={translate(
+                          "edit_marketplace_detail_page.home"
+                        )}
+                        className={styles.input_text}
+                      />
+                    )}
+                  </Field>
+                  <Field name="city">
+                    {({ input, meta }) => (
+                      <InputTextComponent
+                        meta={meta}
+                        {...input}
+                        placeholder={translate(
+                          "edit_marketplace_detail_page.city"
+                        )}
+                        className={styles.input_text}
+                      />
+                    )}
+                  </Field>
 
-                {/* <InitialPageLoader initialPageApi={getAddressListAction}>
+                  {/* <InitialPageLoader initialPageApi={getAddressListAction}>
                 <DivColumn>
                   {map(addressList, (address, index) => {
                     return (
@@ -288,18 +292,19 @@ class EditMarketplaceProfile extends Component {
                 </DivColumn>
               </InitialPageLoader> */}
 
-                <DivRow className={styles.form_button_container}>
-                  <SecondaryCapsuleButton onClick={this.onClickCancel}>
-                    {translate("edit_marketplace_detail_page.cancle")}
-                  </SecondaryCapsuleButton>
-                  <CapsuleButton type="submit" disabled={submitting}>
-                    {translate("edit_marketplace_detail_page.save_details")}
-                  </CapsuleButton>
-                </DivRow>
-              </DivColumn>
-            </form>
-          )}
-        />
+                  <DivRow className={styles.form_button_container}>
+                    <SecondaryCapsuleButton onClick={this.onClickCancel}>
+                      {translate("edit_marketplace_detail_page.cancle")}
+                    </SecondaryCapsuleButton>
+                    <CapsuleButton type="submit" disabled={submitting}>
+                      {translate("edit_marketplace_detail_page.save_details")}
+                    </CapsuleButton>
+                  </DivRow>
+                </DivColumn>
+              </form>
+            )}
+          />
+        </DivRow>
       </SectionedContainer>
     );
   }
@@ -309,6 +314,7 @@ const mapStateToProps = (state) => {
   return {
     marketplaceProfileReducer: state.marketplaceProfileReducer,
     addressReducer: state.addressReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 

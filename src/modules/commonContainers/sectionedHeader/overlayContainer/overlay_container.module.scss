@@ -1,5 +1,5 @@
-@import '~Styles/colors.module';
-@import '~Styles/mixins.module';
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
 
 .overlay_container {
   position: absolute;
@@ -20,9 +20,8 @@
       font-weight: bold;
       color: #7c858e;
     }
-
   }
-  
+
   .item_container {
     padding: 9px 15px 10px 12px;
 
@@ -49,7 +48,12 @@
 
     .progress_bar_filled {
       background-color: $color-dark;
-      align-self: stretch; 
+      align-self: stretch;
     }
   }
+}
+
+.rtl {
+  right: auto;
+  left: 0 !important;
 }

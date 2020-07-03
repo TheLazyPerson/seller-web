@@ -46,12 +46,12 @@ class SectionedHeader extends Component {
   };
 
   render() {
-    const { isUserSignedIn, whiteColor, translate } = this.props;
+    const { isUserSignedIn, whiteColor, translate, isRTL } = this.props;
     const { showOverlayComponent } = this.state;
 
     return (
       <DivRow className={styles.header_container}>
-        <DivRow>
+        <DivRow className={` ${isRTL ? styles.rtl : ""}`}>
           {isUserSignedIn ? (
             <div
               style={{ height: "unset" }}
@@ -108,6 +108,7 @@ const mapStateToProps = (state) => {
   return {
     isUserSignedIn: state.signInReducer.isUserSignedIn,
     bagCount: 0, //state.bagReducer.bagCount
+    isRTL: state.languageReducer.isRTL,
   };
 };
 

@@ -1,18 +1,6 @@
 @import "~Styles/colors.module";
 @import "~Styles/mixins.module";
 
-.rtl {
-  .field_container {
-    .title {
-      text-align: right;
-    }
-
-    .value {
-      text-align: right;
-    }
-  }
-}
-
 .details_container {
   overflow: auto;
 
@@ -90,6 +78,19 @@
       .value {
         font-size: 14px;
       }
+    }
+  }
+}
+
+.rtl {
+  .field_container {
+    direction: rtl;
+    .title {
+      text-align: right;
+    }
+
+    .value {
+      text-align: right;
     }
   }
 }

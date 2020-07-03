@@ -64,6 +64,7 @@ class EditBankDetails extends Component {
     const {
       bankDetailsReducer: { bankDetails },
       translate,
+      isRTL,
     } = this.props;
 
     return (
@@ -72,63 +73,65 @@ class EditBankDetails extends Component {
           title={translate("profile_details.edit_bank_details")}
           onBackClick={this.onBackPress}
         />
-        <Form
-          onSubmit={this.onSubmit}
-          validate={this.validate}
-          initialValues={{
-            accountHolder: bankDetails.account_holder
-              ? bankDetails.account_holder
-              : "",
-            bankName: bankDetails.bank_name ? bankDetails.bank_name : "",
-            iban: bankDetails.iban ? bankDetails.iban : "",
-          }}
-          render={({ handleSubmit, form, submitting, pristine, values }) => (
-            <form className={styles.form_container} onSubmit={handleSubmit}>
-              <Field name="accountHolder">
-                {({ input, meta }) => (
-                  <InputTextComponent
-                    meta={meta}
-                    {...input}
-                    type="text"
-                    placeholder={translate("profile_details.account_holder")}
-                    className={styles.input_text}
-                  />
-                )}
-              </Field>
-              <Field name="bankName">
-                {({ input, meta }) => (
-                  <InputTextComponent
-                    meta={meta}
-                    {...input}
-                    type="text"
-                    placeholder={translate("profile_details.bank_name")}
-                    className={styles.input_text}
-                  />
-                )}
-              </Field>
-              <Field name="iban">
-                {({ input, meta }) => (
-                  <InputTextComponent
-                    meta={meta}
-                    {...input}
-                    type="text"
-                    placeholder={translate("profile_details.IBAN")}
-                    className={styles.input_text}
-                  />
-                )}
-              </Field>
+        <DivRow className={` ${isRTL ? styles.rtl : ""}`}>
+          <Form
+            onSubmit={this.onSubmit}
+            validate={this.validate}
+            initialValues={{
+              accountHolder: bankDetails.account_holder
+                ? bankDetails.account_holder
+                : "",
+              bankName: bankDetails.bank_name ? bankDetails.bank_name : "",
+              iban: bankDetails.iban ? bankDetails.iban : "",
+            }}
+            render={({ handleSubmit, form, submitting, pristine, values }) => (
+              <form className={styles.form_container} onSubmit={handleSubmit}>
+                <Field name="accountHolder">
+                  {({ input, meta }) => (
+                    <InputTextComponent
+                      meta={meta}
+                      {...input}
+                      type="text"
+                      placeholder={translate("profile_details.account_holder")}
+                      className={styles.input_text}
+                    />
+                  )}
+                </Field>
+                <Field name="bankName">
+                  {({ input, meta }) => (
+                    <InputTextComponent
+                      meta={meta}
+                      {...input}
+                      type="text"
+                      placeholder={translate("profile_details.bank_name")}
+                      className={styles.input_text}
+                    />
+                  )}
+                </Field>
+                <Field name="iban">
+                  {({ input, meta }) => (
+                    <InputTextComponent
+                      meta={meta}
+                      {...input}
+                      type="text"
+                      placeholder={translate("profile_details.IBAN")}
+                      className={styles.input_text}
+                    />
+                  )}
+                </Field>
 
-              <DivRow className={styles.form_button_container}>
-                <SecondaryCapsuleButton onClick={this.onClickCancel}>
-                  {translate("profile_details.cancle")}
-                </SecondaryCapsuleButton>
-                <CapsuleButton type="submit" disabled={submitting}>
-                  {translate("profile_details.submit")}
-                </CapsuleButton>
-              </DivRow>
-            </form>
-          )}
-        />
+                <DivRow className={styles.form_button_container}>
+                  <SecondaryCapsuleButton onClick={this.onClickCancel}>
+                    {translate("profile_details.cancle")}
+                  </SecondaryCapsuleButton>
+                  <CapsuleButton type="submit" disabled={submitting}>
+                    {translate("profile_details.submit")}
+                  </CapsuleButton>
+                </DivRow>
+              </form>
+            )}
+          />
+        </DivRow>
       </SectionedContainer>
     );
   }
@@ -136,6 +139,7 @@ class EditBankDetails extends Component {
 const mapStateToProps = (state) => {
   return {
     bankDetailsReducer: state.bankDetailsReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 

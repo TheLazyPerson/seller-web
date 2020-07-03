@@ -10,6 +10,7 @@ class OverlayContainer extends Component {
   render() {
     const {
       onClickLogout,
+      isRTL,
       onClickBilling,
       subscriptionReducer: {
         isSubscriptionLoading,
@@ -33,7 +34,9 @@ class OverlayContainer extends Component {
     );
 
     return (
-      <DivColumn className={styles.overlay_container}>
+      <DivColumn
+        className={` ${styles.overlay_container} ${isRTL ? styles.rtl : ""}`}
+      >
         <div
           className={`${styles.item_container} ${styles.title}`}
           style={{ cursor: "default" }}
@@ -78,6 +81,7 @@ class OverlayContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     subscriptionReducer: state.subscriptionReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 
