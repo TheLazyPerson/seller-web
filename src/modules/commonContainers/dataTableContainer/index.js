@@ -84,8 +84,7 @@ class OrdersPage extends Component {
 
   render() {
     const { toggleCleared } = this.state;
-    const { data, columns, title } = this.props;
-
+    const { data, columns, title, isRTL } = this.props;
     return (
       <DivColumn className={styles.date_container}>
         <div style={{ marginBottom: 20 }}>
@@ -111,6 +110,7 @@ class OrdersPage extends Component {
             onRowClicked={this.handleRowClicked}
             pagination
             noHeader={true}
+            direction={isRTL ? "rtl" : "ltr"}
             //TODO: Configure later
             // expandableRows
           />
@@ -120,10 +120,19 @@ class OrdersPage extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    isRTL: state.languageReducer.isRTL,
+  };
+};
+
 const mapDispathToProps = (dispatch) => {
   return {
     logoutAction: bindActionCreators(logoutAction, dispatch),
   };
 };
 
-export default connect(null, mapDispathToProps)(navigatorHoc(OrdersPage));
+export default connect(
+  mapStateToProps,
+  mapDispathToProps
+)(navigatorHoc(OrdersPage));
