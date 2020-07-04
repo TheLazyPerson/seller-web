@@ -193,6 +193,11 @@
     "email": "البريد الإلكتروني",
     "print_invoice": "فاتورة طباعة"
   },
+  "product_list": {
+    "title": "منتجات",
+    "add_new_product": "إضافة منتج جديد",
+    "search": "Search"
+  },
   "pickup_request_details": {
     "title": "تفاصيل الطلب",
     "req_pickup_on": "مطلوب الاستلام",
@@ -289,7 +294,14 @@
     "title": "تفاصيل الاشتراك",
     "buy_additional_plan": "شراء خطة إضافية ",
     "plan": " الخطط المكتتبة",
-    "subscription_lost": "الاشتراك"
+    "subscription_lost": "الاشتراك",
+    "table": {
+      "id": "هوية شخصية",
+      "plan_name": "اسم الخطة",
+      "plan_description": "وصف الخطة",
+      "no_of_products": "عدد المنتجات",
+      "no_of_exhibitions": "عدد المعارض"
+    }
   },
   "setting_page": {
     "header_title": "الإعدادات",

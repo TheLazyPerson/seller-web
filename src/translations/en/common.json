@@ -245,6 +245,11 @@
     "email": "Email",
     "print_invoice": "Print Invoice"
   },
+  "product_list": {
+    "title": "PRODUCTS",
+    "add_new_product": "ADD NEW PRODUCT",
+    "search": "Search"
+  },
   "pickup_request_details": {
     "title": "Pickup Request Details",
     "req_pickup_on": " Requested Pickup On",
@@ -341,7 +346,14 @@
     "title": "Subscription Details",
     "buy_additional_plan": "BUY ADDITIONAL PLAN ",
     "plan": " Subscribed Plans",
-    "subscription_lost": "SubscriptionLost"
+    "subscription_lost": "SubscriptionLost",
+    "table": {
+      "id": "ID",
+      "plan_name": "PLAN NAME",
+      "plan_description": "PLAN DESCRIPTION",
+      "no_of_products": "NO OF PRODUCTS",
+      "no_of_exhibitions": "NO OF EXHIBITIONS"
+    }
   },
   "setting_page": {
     "header_title": "Settings",
