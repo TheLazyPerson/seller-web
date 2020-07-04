@@ -30,61 +30,6 @@ class SubscriptionPage extends Component {
     showModal: false,
   };
 
-  columns = memoize(() => [
-    {
-      name: "ID",
-      selector: "id",
-      sortable: true,
-    },
-    {
-      name: "PLAN NAME",
-      selector: "name",
-      sortable: true,
-      grow: 2,
-    },
-    {
-      name: "PLAN DESCRIPTION",
-      selector: "description",
-      sortable: true,
-      grow: 2,
-    },
-    {
-      name: "NO OF PRODUCTS",
-      selector: "plan.no_of_products",
-      sortable: true,
-    },
-    {
-      name: "NO OF EXHIBITIONS",
-      selector: "plan.no_of_exhibitions",
-      sortable: true,
-    },
-    {
-      cell: (value) => {
-        const {
-          subscriptionReducer: { activeSubscription },
-          activatePlanAction,
-        } = this.props;
-        if (value.plan.id === activeSubscription.plan.id) {
-          return <span> Active</span>;
-        } else {
-          return (
-            <Button
-              variant="contained"
-              color="primary"
-              className={styles.custom_button}
-              onClick={() => {
-                activatePlanAction(value.id);
-              }}
-            >
-              Activate
-            </Button>
-          );
-        }
-      },
-      button: true,
-    },
-  ]);
-
   onClickBuyPlan = (planId) => {
     const { buyAdditionalPlanAction } = this.props;
     buyAdditionalPlanAction(planId).then(({ payload }) => {
@@ -123,7 +68,60 @@ class SubscriptionPage extends Component {
       translate,
     } = this.props;
     const { showModal } = this.state;
-
+    const columns = memoize(() => [
+      {
+        name: `${translate("subscription_page.table.id")}`,
+        selector: "id",
+        sortable: true,
+      },
+      {
+        name: `${translate("subscription_page.table.plan_name")}`,
+        selector: "name",
+        sortable: true,
+        grow: 2,
+      },
+      {
+        name: `${translate("subscription_page.table.plan_description")}`,
+        selector: "description",
+        sortable: true,
+        grow: 2,
+      },
+      {
+        name: `${translate("subscription_page.table.no_of_products")}`,
+        selector: "plan.no_of_products",
+        sortable: true,
+      },
+      {
+        name: `${translate("subscription_page.table.no_of_exhibitions")}`,
+        selector: "plan.no_of_exhibitions",
+        sortable: true,
+      },
+      {
+        cell: (value) => {
+          const {
+            subscriptionReducer: { activeSubscription },
+            activatePlanAction,
+          } = this.props;
+          if (value.plan.id === activeSubscription.plan.id) {
+            return <span> Active</span>;
+          } else {
+            return (
+              <Button
+                variant="contained"
+                color="primary"
+                className={styles.custom_button}
+                onClick={() => {
+                  activatePlanAction(value.id);
+                }}
+              >
+                Activate
+              </Button>
+            );
+          }
+        },
+        button: true,
+      },
+    ]);
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.subscription_page_container}>
@@ -158,7 +156,7 @@ class SubscriptionPage extends Component {
                           title={translate(
                             "subscription_page.subscription_lost"
                           )}
-                          columns={this.columns()}
+                          columns={columns()}
                         />
                       </DivRow>
                     )}
