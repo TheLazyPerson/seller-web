@@ -198,6 +198,7 @@ class OrdersDetailsPage extends Component {
                 data={order.items}
                 style={{ minHeight: 200 }}
                 noHeader={true}
+                direction={isRTL ? "rtl" : "ltr"}
               />
             </div>
             <HorizontalBorder />
