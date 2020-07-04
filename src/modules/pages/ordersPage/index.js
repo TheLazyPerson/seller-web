@@ -62,13 +62,16 @@ class OrdersPage extends Component {
   ]);
 
   getListItem = (listItem) => {
+    const {
+      languageReducer: { languageCode },
+    } = this.props;
     return (
       <DivColumn verticalCenter horizontalCenter className={styles.box}>
         <div className={styles.title}>
           {listItem.card_type === "price-card" ? "KD " : ""}
           {listItem.value}
         </div>
-        <div className={styles.description}>{listItem.title}</div>
+        <div className={styles.description}>{listItem.title[languageCode]}</div>
       </DivColumn>
     );
   };
@@ -112,6 +115,7 @@ class OrdersPage extends Component {
 const mapStateToProps = (state) => {
   return {
     orderReducer: state.orderReducer,
+    languageReducer: state.languageReducer,
     isRTL: state.languageReducer.isRTL,
   };
 };

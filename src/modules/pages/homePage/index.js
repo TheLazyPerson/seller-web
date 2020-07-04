@@ -36,13 +36,16 @@ class HomePage extends Component {
   };
 
   getListItem = (listItem) => {
+    const {
+      languageReducer: { languageCode },
+    } = this.props;
     return (
       <DivColumn verticalCenter horizontalCenter className={styles.box}>
         <div className={styles.title}>
           <span>{listItem.card_type === "price-card" ? "KD " : ""}</span>
           {listItem.value}
         </div>
-        <div className={styles.description}>{listItem.title}</div>
+        <div className={styles.description}>{listItem.title[languageCode]}</div>
       </DivColumn>
     );
   };
@@ -91,6 +94,7 @@ const mapStateToProps = (state) => {
   return {
     overviewReducer: state.overviewReducer,
     signInReducer: state.signInReducer,
+    languageReducer: state.languageReducer,
   };
 };
 
