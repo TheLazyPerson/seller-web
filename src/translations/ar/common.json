@@ -196,7 +196,18 @@
   "product_list": {
     "title": "منتجات",
     "add_new_product": "إضافة منتج جديد",
-    "search": "Search"
+    "search": "بحث"
+  },
+  "sales_list": {
+    "title": "المعاملات",
+    "search": "بحث",
+    "table": {
+      "id": "هوية شخصية",
+      "transaction_id": "رقم المعاملة",
+      "comment": "تعليق",
+      "grand_total": "المبلغ الإجمالي",
+      "view_button": "رأي"
+    }
   },
   "pickup_request_details": {
     "title": "تفاصيل الطلب",

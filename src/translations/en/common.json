@@ -250,6 +250,17 @@
     "add_new_product": "ADD NEW PRODUCT",
     "search": "Search"
   },
+  "sales_list": {
+    "title": "Transactions",
+    "search": "Search",
+    "table": {
+      "id": "ID",
+      "transaction_id": "TRANSACTION ID",
+      "comment": "Comment",
+      "grand_total": "GRAND TOTAL",
+      "view_button": "View"
+    }
+  },
   "pickup_request_details": {
     "title": "Pickup Request Details",
     "req_pickup_on": " Requested Pickup On",
