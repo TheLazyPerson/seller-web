@@ -17,6 +17,7 @@ import {
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import Button from "@material-ui/core/Button";
+import translatorHoc from "Hoc/translatorHoc";
 
 class ProductsPage extends Component {
   columns = memoize(() => [
@@ -72,13 +73,14 @@ class ProductsPage extends Component {
     const {
       productReducer: { productList },
       getProductListAction,
+      translate,
     } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.products_page_container}>
-          <NavHeader title="Products">
+          <NavHeader title={translate("product_list.title")}>
             <CapsuleButton onClick={() => this.onClickNewProduct()}>
-              ADD NEW PRODUCT
+              {translate("product_list.add_new_product")}
             </CapsuleButton>
           </NavHeader>
           <DivColumn fillParent className={styles.content_container}>
@@ -116,4 +118,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(ProductsPage));
+)(translatorHoc(navigatorHoc(ProductsPage)));
