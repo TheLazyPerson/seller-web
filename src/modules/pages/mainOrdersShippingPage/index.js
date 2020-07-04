@@ -146,6 +146,7 @@ class MainOrdersShippingPage extends Component {
               data={order.items}
               style={{ minHeight: 200 }}
               noHeader={true}
+              direction={isRTL ? "rtl" : "ltr"}
             />
             <HorizontalBorder />
             <DivRow className={styles.address_container}>
