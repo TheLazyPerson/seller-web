@@ -12,7 +12,7 @@ export const howItWorksListItems = [
     en: {
       title: "1. Register your Seller account",
       description:
-        "To become an Home Expo seller, all you need is your basic information and an active bank account.Once you register, you will have access to Seller Central, your one- stop portal for all your selling needs.",
+        "To become an Home Expo seller, all you need is your basic information and an active bank account. Once you register, you will have access to Seller Central, your one- stop portal for all your selling needs.",
     },
     ar: {
       title: "1. تسجيل حساب البائع الخاص بك",
