@@ -20,20 +20,31 @@ class SubscriptionPaymentSuccessPage extends Component {
     clearTimeout(this.id);
   }
   render() {
+    const { translate, isRTL } = this.props;
     return (
       <FullWidthContainer>
         <DivColumn
           verticalCenter
           horizontalCenter
-          className={styles.page_container}
+          className={` ${styles.page_container} ${isRTL ? styles.rtl : ""}`}
         >
-          <div className={styles.title}>Payment Successful</div>
-          <div className={styles.description}>Welcome to the family.</div>
+          <div className={styles.title}>
+            {translate("exhibition_overview.payment1")}
+          </div>
+          <div className={styles.description}>
+            {translate("exhibition_overview.description1")}.
+          </div>
         </DivColumn>
       </FullWidthContainer>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    isRTL: state.languageReducer.isRTL,
+  };
+};
 
 const mapDispathToProps = (dispatch) => {
   return {
@@ -45,6 +56,6 @@ const mapDispathToProps = (dispatch) => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispathToProps
 )(navigatorHoc(SubscriptionPaymentSuccessPage));

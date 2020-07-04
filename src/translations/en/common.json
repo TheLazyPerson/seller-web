@@ -408,5 +408,21 @@
   "additional_plan": {
     "title": "BUY ADDITIONAL PLAN",
     "buy": "BUY"
+  },
+  "exhibition_overview": {
+    "name": "NAME",
+    "description": "SHORT DESCRIPTION",
+    "dates": "DATES",
+    "starts_at": "Starts At",
+    "ends_on": "ENDS ON",
+    "enroll": "ENROLL",
+    "overview": "Overview"
+  },
+  "subscription_success": {
+    "payment": "Payment Failed",
+    "description": "There was problem while accepting your payment.",
+    "retry": "retry",
+    "payment1": "Payment Successful",
+    "description1": "Welcome to the family"
   }
 }
