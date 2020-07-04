@@ -10046,10 +10046,10 @@ react-checkbox-tree@^1.6.0:
     nanoid "^2.0.0"
     prop-types "^15.5.8"
 
-react-data-table-component@^6.3.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/react-data-table-component/-/react-data-table-component-6.3.0.tgz#5d166ec5339d3d6536fd2dcec6e307e26e363209"
-  integrity sha512-iiakknZZWg/WQ+OaSxPhIeng87UtINRVwuWvKc/GvN8ydEE2sBwDENQIPTuSqh1GqKj1O2Y/cuq4o1MBNN/HVA==
+react-data-table-component@^6.9.3:
+  version "6.9.3"
+  resolved "https://registry.yarnpkg.com/react-data-table-component/-/react-data-table-component-6.9.3.tgz#f987b8a2766cc84ab08d7837b4192af85de610d3"
+  integrity sha512-6Z0dlzr60mXMbxxPEVCCER/XwYp3UWSil9OmFnZGZ68LSIzfmUI5txoX9JKyNoyxayCDF40f6V3ysWsXMaKDQQ==
   dependencies:
     deepmerge "^4.2.2"
     lodash.orderby "^4.6.0"
