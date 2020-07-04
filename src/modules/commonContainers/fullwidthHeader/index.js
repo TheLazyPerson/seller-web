@@ -27,13 +27,17 @@ class FullwidthHeader extends Component {
           className={` ${styles.header_container} ${isRTL ? styles.rtl : ""}`}
         >
           <DivRow className={styles.header_icon_container}>
-            <img
-              src={appIcon}
-              className={styles.app_icon}
+            <div
+              style={whiteColor ? { color: "white" } : null}
+              className={styles.app_name}
               onClick={this.onClickAppIcon}
-            />
-          </DivRow>
-          <DivRow>
+            >
+              <img
+                src={appIcon}
+                className={styles.app_icon}
+                onClick={this.onClickAppIcon}
+              />
+            </div>
             <LanguageSelect blackColor={!whiteColor} />
           </DivRow>
           <SectionedHeader whiteColor={whiteColor} />
