@@ -6,6 +6,12 @@ import CapsuleButton from "CommonComponents/capsuleButton";
 import navigatorHoc from "Hoc/navigatorHoc";
 
 class SubscriptionPaymentFailurePage extends Component {
+  componentDidMount() {
+    const { navigateTo, showSuccessFlashMessage } = this.props;
+    setTimeout(() => {
+      navigateTo("customer-onboard");
+    }, 10000);
+  }
   render() {
     return (
       <FullWidthContainer>
@@ -15,10 +21,7 @@ class SubscriptionPaymentFailurePage extends Component {
           className={styles.page_container}
         >
           <div className={styles.title}>Payment Failed</div>
-          <div className={styles.description}>
-            There was problem while accepting your payment.
-          </div>
-          <CapsuleButton>Retry</CapsuleButton>
+          <div className={styles.description}>Redirecting</div>
         </DivColumn>
       </FullWidthContainer>
     );

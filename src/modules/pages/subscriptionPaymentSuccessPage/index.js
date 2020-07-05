@@ -11,7 +11,7 @@ class SubscriptionPaymentSuccessPage extends Component {
   componentDidMount() {
     const { navigateTo, showSuccessFlashMessage } = this.props;
     this.id = setTimeout(() => {
-      navigateTo("signin");
+      navigateTo("customer-onboard");
       showSuccessFlashMessage("Signed up successfuly");
     }, 10000);
   }
