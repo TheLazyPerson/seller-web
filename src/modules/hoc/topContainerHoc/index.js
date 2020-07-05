@@ -28,13 +28,11 @@ const topContainerHoc = (WrappedComponent) => {
       //Sets user data from cookie to reducer
       const { setUserDataAction, setLanguageAction } = this.props;
       const userData = CookieService.getJSON(USER_DATA_COOKIE);
-      // const bagCount = CookieService.get('BAG_COUNT');
       const languageCode = CookieService.get(LANG) || "en";
       //TODO call backdetails api here
       setLanguageAction(languageCode);
 
       if (userData) {
-        // setBagCount(bagCount);
         setUserDataAction(userData);
         this.getSubscriptionApi();
 
@@ -121,7 +119,6 @@ const topContainerHoc = (WrappedComponent) => {
       hideFlashMessage: bindActionCreators(hideFlashMessage, dispatch),
       setUserDataAction: bindActionCreators(setUserDataAction, dispatch),
       setLanguageAction: bindActionCreators(setLanguageAction, dispatch),
-      // setBagCount: bindActionCreators(setBagCount, dispatch),
       getActivePlan: bindActionCreators(getActivePlan, dispatch),
       getFeatureUsage: bindActionCreators(getFeatureUsage, dispatch),
     };
