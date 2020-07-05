@@ -5,10 +5,8 @@ import styles from "./subscription_component.module.scss";
 import translatorHoc from "Hoc/translatorHoc";
 import exhibitionIconWhite from "Icons/exhibition-white.svg";
 import growthIconWhite from "Icons/growth-white.svg";
-import rocketIconWhite from "Icons/rocket-white.svg";
 import exhibitionIconBlack from "Icons/exhibition-black.svg";
 import growthIconBlack from "Icons/growth-black.svg";
-import rocketIconBlack from "Icons/rocket-black.svg";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { setSelectedSubscription } from "Core/modules/subscription/subscriptionActions";
@@ -18,7 +16,6 @@ import {
   getActivePlan,
   getFeatureUsage,
 } from "Core/modules/subscription/subscriptionActions";
-import InitialPageLoader from "CommonContainers/initialPageLoader";
 import isEmpty from "lodash/isEmpty";
 
 class ActiveSubscription extends Component {
@@ -45,14 +42,8 @@ class ActiveSubscription extends Component {
     const {
       subscription,
       isRTL,
-      subscriptionReducer: {
-        selectedSubscription,
-        isSubscriptionLoading,
-        isSubscriptionError,
-        featuresData,
-      },
-      getActivePlan,
-      getFeatureUsage,
+      translate,
+      subscriptionReducer: { selectedSubscription, featuresData },
     } = this.props;
 
     const ProgressItem = ({ title, value, progress }) => (
@@ -70,27 +61,35 @@ class ActiveSubscription extends Component {
       </DivColumn>
     );
     return (
-      <DivRow>
+      <DivRow
+        className={` ${styles.subscription_container} ${
+          isRTL ? styles.rtl : ""
+        }`}
+      >
         <DivColumn fillParent center className={`${styles.subscription}`}>
           <div className={styles.subscription_title}>
-            Active Plan: {subscription.plan_name}
+            <span>{translate("subscription_item.active_plan")}:</span>
+            {subscription.plan_name}
           </div>
           <div className={styles.subscription_price}>
-            KD {subscription.price}
+            {translate("subscription_item.kd")} {subscription.price}
           </div>
-          {subscription.subscription_type == "commission" && (
+          {subscription.subscription_type === "commission" && (
             <div className={styles.subscription_price}>
-              Commission: {subscription.commission}
+              {translate("subscription_item.commission")} :{" "}
+              {subscription.commission}
             </div>
           )}
 
-          <div className={styles.subtitle}>Benefits Include:</div>
+          <div className={styles.subtitle}>
+            {translate("subscription_item.benefits")}:
+          </div>
           <DivRow fillParent className={styles.features}>
             <DivRow className={styles.feature}>
               <img
                 alt="nav"
                 src={
-                  selectedSubscription.id == subscription.id
+                  selectedSubscription.id === subscription.id
                     ? exhibitionIconWhite
                     : exhibitionIconBlack
                 }
@@ -98,11 +97,13 @@ class ActiveSubscription extends Component {
               />
               <DivColumn className={styles.feature_details}>
                 <div className={styles.feature_title}>
-                  {subscription.no_of_exhibitions} Exhibitions
+                  {subscription.no_of_exhibitions}{" "}
+                  {translate("subscription_item.exhibition")}
                 </div>
                 <div className={styles.feature_description}>
-                  You can enroll in {subscription.no_of_exhibitions} number of
-                  exhibitions
+                  {translate("subscription_item.enroll")}{" "}
+                  {subscription.no_of_exhibitions}
+                  {translate("subscription_item.no_exhibition")}
                 </div>
               </DivColumn>
             </DivRow>
@@ -110,7 +111,7 @@ class ActiveSubscription extends Component {
               <img
                 alt="nav"
                 src={
-                  selectedSubscription.id == subscription.id
+                  selectedSubscription.id === subscription.id
                     ? growthIconWhite
                     : growthIconBlack
                 }
@@ -118,10 +119,13 @@ class ActiveSubscription extends Component {
               />
               <DivColumn className={styles.feature_details}>
                 <div className={styles.feature_title}>
-                  {subscription.no_of_products} Products
+                  {subscription.no_of_products}{" "}
+                  {translate("subscription_item.products")}
                 </div>
                 <div className={styles.feature_description}>
-                  You can maintain {subscription.no_of_products} products
+                  {translate("subscription_item.maintain")}{" "}
+                  {subscription.no_of_products}{" "}
+                  {translate("subscription_item.products1")}
                 </div>
               </DivColumn>
             </DivRow>
@@ -132,7 +136,7 @@ class ActiveSubscription extends Component {
             className={`${styles.item_container} ${styles.subscription_title}`}
             style={{ cursor: "default" }}
           >
-            Usage
+            {translate("subscription_item.usage")}
           </div>
           <HorizontalBorder />
 
@@ -155,6 +159,7 @@ class ActiveSubscription extends Component {
 const mapStateToProps = (state) => {
   return {
     subscriptionReducer: state.subscriptionReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 

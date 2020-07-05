@@ -112,3 +112,12 @@
     flex: 1;
   }
 }
+
+.rtl {
+  flex-direction: row-reverse;
+
+  .header_icon_container {
+    width: 0%;
+    justify-content: flex-end;
+  }
+}

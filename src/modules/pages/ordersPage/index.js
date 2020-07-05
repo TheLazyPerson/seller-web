@@ -2,18 +2,12 @@ import React, { Component } from "react";
 import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivColumn from "CommonComponents/divColumn";
 import DivRow from "CommonComponents/divRow";
-import NavHeader from "CommonComponents/navHeader";
-import CapsuleButton from "CommonComponents/capsuleButton";
 import map from "lodash/map";
 import styles from "./orders.module.scss";
 import SideNav from "CommonComponents/sideNav";
 import navigatorHoc from "Hoc/navigatorHoc";
-import { logoutAction } from "Core/modules/signin/signinActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { CookieService } from "Utils/cookieService";
-import { USER_DATA_COOKIE } from "Constants/cookieConstants";
-import DataTable, { createTheme } from "react-data-table-component";
 import Button from "@material-ui/core/Button";
 import memoize from "memoize-one";
 import DataTableContainer from "CommonContainers/dataTableContainer";
@@ -68,13 +62,16 @@ class OrdersPage extends Component {
   ]);
 
   getListItem = (listItem) => {
+    const {
+      languageReducer: { languageCode },
+    } = this.props;
     return (
       <DivColumn verticalCenter horizontalCenter className={styles.box}>
         <div className={styles.title}>
-          {listItem.card_type == "price-card" ? "KD " : ""}
+          {listItem.card_type === "price-card" ? "KD " : ""}
           {listItem.value}
         </div>
-        <div className={styles.description}>{listItem.title}</div>
+        <div className={styles.description}>{listItem.title[languageCode]}</div>
       </DivColumn>
     );
   };
@@ -83,11 +80,17 @@ class OrdersPage extends Component {
     const {
       orderReducer: { overview, orderList },
       getOrderListAction,
+      isRTL,
     } = this.props;
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <DivColumn fillParent className={styles.orders_page_container}>
+        <DivColumn
+          fillParent
+          className={` ${styles.orders_page_container} ${
+            isRTL ? styles.rtl : ""
+          }`}
+        >
           <DivRow className={styles.box_container}>
             {map(overview, (item) => {
               return this.getListItem(item);
@@ -112,6 +115,8 @@ class OrdersPage extends Component {
 const mapStateToProps = (state) => {
   return {
     orderReducer: state.orderReducer,
+    languageReducer: state.languageReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 

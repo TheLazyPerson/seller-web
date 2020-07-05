@@ -1,26 +1,17 @@
 import React, { Component } from "react";
-import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivColumn from "CommonComponents/divColumn";
-import DivRow from "CommonComponents/divRow";
-import NavHeader from "CommonComponents/navHeader";
-import CapsuleButton from "CommonComponents/capsuleButton";
-import map from "lodash/map";
 import styles from "./data_table_container.module.scss";
-import SideNav from "CommonComponents/sideNav";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { logoutAction } from "Core/modules/signin/signinActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { CookieService } from "Utils/cookieService";
-import { USER_DATA_COOKIE } from "Constants/cookieConstants";
-import DataTable, { createTheme } from "react-data-table-component";
+import DataTable from "react-data-table-component";
 import differenceBy from "lodash/differenceBy";
 import Card from "@material-ui/core/Card";
 import IconButton from "@material-ui/core/IconButton";
 import Checkbox from "@material-ui/core/Checkbox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import Delete from "@material-ui/icons/Delete";
-import Add from "@material-ui/icons/Add";
 import memoize from "memoize-one";
 import SearchBarComponent from "CommonComponents/searchBarComponent";
 
@@ -33,39 +24,39 @@ const contextActions = memoize((deleteHandler) => (
   </IconButton>
 ));
 
-const columns = memoize(() => [
-  {
-    name: "ID",
-    selector: "id",
-    sortable: true,
-  },
-  {
-    name: "ORDER DATE",
-    selector: "order_date",
-    sortable: true,
-  },
-  {
-    name: "EXHIBITION NAME",
-    selector: "exhibition_name",
-    sortable: true,
-    grow: 2,
-  },
-  {
-    name: "GRAND TOTAL",
-    selector: "grand_total",
-    sortable: true,
-  },
-  {
-    name: "TOTAL ITEMS",
-    selector: "total_items",
-    sortable: true,
-  },
-  {
-    name: "STATUS",
-    selector: "status",
-    sortable: true,
-  },
-]);
+// const columns = memoize(() => [
+//   {
+//     name: "ID",
+//     selector: "id",
+//     sortable: true,
+//   },
+//   {
+//     name: "ORDER DATE",
+//     selector: "order_date",
+//     sortable: true,
+//   },
+//   {
+//     name: "EXHIBITION NAME",
+//     selector: "exhibition_name",
+//     sortable: true,
+//     grow: 2,
+//   },
+//   {
+//     name: "GRAND TOTAL",
+//     selector: "grand_total",
+//     sortable: true,
+//   },
+//   {
+//     name: "TOTAL ITEMS",
+//     selector: "total_items",
+//     sortable: true,
+//   },
+//   {
+//     name: "STATUS",
+//     selector: "status",
+//     sortable: true,
+//   },
+// ]);
 
 class OrdersPage extends Component {
   state = {
@@ -77,9 +68,7 @@ class OrdersPage extends Component {
     this.setState({ selectedRows: state.selectedRows });
   };
 
-  handleRowClicked = (row) => {
-    console.log(`${row.name} was clicked!`);
-  };
+  handleRowClicked = (row) => {};
 
   deleteAll = () => {
     const { selectedRows } = this.state;
@@ -95,8 +84,7 @@ class OrdersPage extends Component {
 
   render() {
     const { toggleCleared } = this.state;
-    const { data, columns, title } = this.props;
-
+    const { data, columns, title, isRTL } = this.props;
     return (
       <DivColumn className={styles.date_container}>
         <div style={{ marginBottom: 20 }}>
@@ -111,6 +99,7 @@ class OrdersPage extends Component {
             //TODO: Configure later
             // selectableRows
             highlightOnHover
+            overflowY={false}
             defaultSortField="name"
             contextActions={contextActions(this.deleteAll)}
             sortIcon={sortIcon}
@@ -121,6 +110,7 @@ class OrdersPage extends Component {
             onRowClicked={this.handleRowClicked}
             pagination
             noHeader={true}
+            direction={isRTL ? "rtl" : "ltr"}
             //TODO: Configure later
             // expandableRows
           />
@@ -130,10 +120,19 @@ class OrdersPage extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    isRTL: state.languageReducer.isRTL,
+  };
+};
+
 const mapDispathToProps = (dispatch) => {
   return {
     logoutAction: bindActionCreators(logoutAction, dispatch),
   };
 };
 
-export default connect(null, mapDispathToProps)(navigatorHoc(OrdersPage));
+export default connect(
+  mapStateToProps,
+  mapDispathToProps
+)(navigatorHoc(OrdersPage));

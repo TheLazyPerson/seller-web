@@ -14,9 +14,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { changePasswordAction } from "Core/modules/changepassword/changePasswordActions";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
+import translatorHoc from "Hoc/translatorHoc";
 
 class ChangePassword extends Component {
-  validate = values => {
+  validate = (values) => {
     const errors = {};
     const validators = {
       oldPassword: isEmptyValidator(values.oldPassword),
@@ -24,30 +25,30 @@ class ChangePassword extends Component {
       confirmPassword: passwordValidator(
         values.newPassword,
         values.confirmPassword
-      )
+      ),
     };
 
-    Object.keys(validators).forEach(key => {
+    Object.keys(validators).forEach((key) => {
       if (!validators[key].result) errors[key] = validators[key].error;
     });
 
     return errors;
   };
 
-  onSubmit = form => {
+  onSubmit = (form) => {
     const {
       changePasswordAction,
       navigateTo,
-      showSuccessFlashMessage
+      showSuccessFlashMessage,
     } = this.props;
 
     changePasswordAction({
       old_password: form.oldPassword,
       new_password: form.newPassword,
-      new_password_confirmation: form.confirmPassword
+      new_password_confirmation: form.confirmPassword,
     }).then(({ payload }) => {
       if (payload.code === 200 || payload.code === 201) {
-        navigateTo("profile");
+        navigateTo("signin");
         showSuccessFlashMessage("Password Changed successfuly");
       }
     });
@@ -63,80 +64,94 @@ class ChangePassword extends Component {
   };
 
   render() {
+    const { translate, isRTL } = this.props;
+
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <NavHeader title="Change password" onBackClick={this.onBackPress} />
-        <Form
-          onSubmit={this.onSubmit}
-          validate={this.validate}
-          render={({ handleSubmit, form, submitting, pristine, values }) => (
-            <form className={styles.form_container} onSubmit={handleSubmit}>
-              <Field name="oldPassword">
-                {({ input, meta }) => (
-                  <InputTextComponent
-                    meta={meta}
-                    {...input}
-                    type="password"
-                    placeholder="Old Password"
-                    className={styles.input_text}
-                  />
-                )}
-              </Field>
-              <Field name="newPassword">
-                {({ input, meta }) => (
-                  <InputTextComponent
-                    meta={meta}
-                    {...input}
-                    type="password"
-                    placeholder="New Password"
-                    className={styles.input_text}
-                  />
-                )}
-              </Field>
-              <Field name="confirmPassword">
-                {({ input, meta }) => (
-                  <InputTextComponent
-                    meta={meta}
-                    {...input}
-                    type="password"
-                    placeholder="Confirm Password"
-                    className={styles.input_text}
-                  />
-                )}
-              </Field>
-
-              <DivRow className={styles.form_button_container}>
-                <SecondaryCapsuleButton onClick={this.onClickCancel}>
-                  Cancel
-                </SecondaryCapsuleButton>
-                <CapsuleButton type="submit" disabled={submitting}>
-                  Confirm
-                </CapsuleButton>
-              </DivRow>
-            </form>
-          )}
+        <NavHeader
+          title={translate("change_password_page.title")}
+          onBackClick={this.onBackPress}
         />
+        <DivRow className={` ${isRTL ? styles.rtl : ""}`}>
+          <Form
+            onSubmit={this.onSubmit}
+            validate={this.validate}
+            render={({ handleSubmit, form, submitting, pristine, values }) => (
+              <form className={styles.form_container} onSubmit={handleSubmit}>
+                <Field name="oldPassword">
+                  {({ input, meta }) => (
+                    <InputTextComponent
+                      meta={meta}
+                      {...input}
+                      type="password"
+                      placeholder={translate(
+                        "change_password_page.old_password"
+                      )}
+                      className={styles.input_text}
+                    />
+                  )}
+                </Field>
+                <Field name="newPassword">
+                  {({ input, meta }) => (
+                    <InputTextComponent
+                      meta={meta}
+                      {...input}
+                      type="password"
+                      placeholder={translate(
+                        "change_password_page.new_passwword"
+                      )}
+                      className={styles.input_text}
+                    />
+                  )}
+                </Field>
+                <Field name="confirmPassword">
+                  {({ input, meta }) => (
+                    <InputTextComponent
+                      meta={meta}
+                      {...input}
+                      type="password"
+                      placeholder={translate(
+                        "change_password_page.confirm_password"
+                      )}
+                      className={styles.input_text}
+                    />
+                  )}
+                </Field>
+
+                <DivRow className={styles.form_button_container}>
+                  <SecondaryCapsuleButton onClick={this.onClickCancel}>
+                    {translate("change_password_page.cancle")}
+                  </SecondaryCapsuleButton>
+                  <CapsuleButton type="submit" disabled={submitting}>
+                    {translate("change_password_page.confirm")}
+                  </CapsuleButton>
+                </DivRow>
+              </form>
+            )}
+          />
+        </DivRow>
       </SectionedContainer>
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    changePasswordReducer: state.changePasswordReducer
+    changePasswordReducer: state.changePasswordReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     changePasswordAction: bindActionCreators(changePasswordAction, dispatch),
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
-    )
+    ),
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(ChangePassword));
+)(navigatorHoc(translatorHoc(ChangePassword)));

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivColumn from "CommonComponents/divColumn";
@@ -16,43 +17,56 @@ import { sendFeedbackAction } from "Core/modules/support/supportActions";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import map from "lodash/map";
 import navigatorHoc from "Hoc/navigatorHoc";
+import translatorHoc from "Hoc/translatorHoc";
 
 class HelpCenter extends Component {
   state = {
     helpCenterList: [
       {
-        title: "TRACK, CANCEL, RETURN/EXCHANGE",
-        description: "Check your order status",
+        en: {
+          title: "TRACK, CANCEL, RETURN/EXCHANGE",
+          description: "Check your order status",
+        },
+        ar: {
+          title: "المسار ، الإلغاء ، العودة / التبادل",
+          description: "تحقق من حالة طلبك",
+        },
         image: cartIcon,
-        redirectTo: "orders"
+        redirectTo: "orders",
       },
       {
-        title: "FREQUENTLY ASKED QUESTIONS",
-        description: "More queries related to your experience",
+        en: {
+          title: "FREQUENTLY ASKED QUESTIONS",
+          description: "More queries related to your experience",
+        },
+        ar: {
+          title: "أسئلة مكررة",
+          description: "المزيد من الاستفسارات المتعلقة بتجربتك",
+        },
         image: faqIcon,
-        redirectTo: "faq"
-      }
-    ]
+        redirectTo: "faq",
+      },
+    ],
   };
 
-  validate = values => {
+  validate = (values) => {
     const errors = {};
     const validators = {
-      feedback: isEmptyValidator(values.oldPassword)
+      feedback: isEmptyValidator(values.oldPassword),
     };
 
-    Object.keys(validators).forEach(key => {
+    Object.keys(validators).forEach((key) => {
       if (!validators[key].result) errors[key] = validators[key].error;
     });
 
     return errors;
   };
 
-  onSubmit = form => {
+  onSubmit = (form) => {
     const { sendFeedbackAction, showSuccessFlashMessage } = this.props;
 
     sendFeedbackAction({
-      issue_summary: form.feedback
+      issue_summary: form.feedback,
     }).then(({ payload }) => {
       if (payload.code === 200 || payload.code === 201) {
         showSuccessFlashMessage("Feedback sent successfuly");
@@ -65,21 +79,30 @@ class HelpCenter extends Component {
     pop();
   };
 
-  onHelpCenterItemSelect = redirectTo => {
+  onHelpCenterItemSelect = (redirectTo) => {
     const { navigateTo } = this.props;
     navigateTo(redirectTo);
   };
 
   render() {
     const { helpCenterList } = this.state;
-
+    const {
+      translate,
+      languageReducer: { languageCode },
+      isRTL,
+    } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <NavHeader title="Help Center" />
+        <NavHeader title={translate("help_center.header_title")} />
 
-        <DivColumn fillParent className={styles.help_center_container}>
+        <DivColumn
+          fillParent
+          className={` ${styles.help_center_container} ${
+            isRTL ? styles.rtl : ""
+          }`}
+        >
           <DivRow className={styles.list_container}>
-            {map(helpCenterList, helpCenterItem => (
+            {map(helpCenterList, (helpCenterItem) => (
               <DivColumn
                 verticalCenter
                 horizontalCenter
@@ -89,14 +112,18 @@ class HelpCenter extends Component {
                 }
               >
                 <img src={helpCenterItem.image} className={styles.item_icon} />
-                <div className={styles.item_title}>{helpCenterItem.title}</div>
+                <div className={styles.item_title}>
+                  {helpCenterItem[languageCode].title}
+                </div>
                 <div className={styles.item_description}>
-                  {helpCenterItem.description}
+                  {helpCenterItem[languageCode].description}
                 </div>
               </DivColumn>
             ))}
           </DivRow>
-          <div className={styles.form_header}>NEED MORE HELP FROM US</div>
+          <div className={styles.form_header}>
+            {translate("help_center.more_help")}
+          </div>
 
           <DivColumn className={styles.form_container}>
             <Form
@@ -107,7 +134,7 @@ class HelpCenter extends Component {
                 form,
                 submitting,
                 pristine,
-                values
+                values,
               }) => (
                 <form onSubmit={handleSubmit} className={styles.form}>
                   <Field name="feedback">
@@ -115,7 +142,7 @@ class HelpCenter extends Component {
                       <textarea
                         meta={meta}
                         {...input}
-                        placeholder="Brief about your concern?"
+                        placeholder={translate("help_center.your_concern")}
                         className={styles.text_area}
                       />
                     )}
@@ -126,7 +153,7 @@ class HelpCenter extends Component {
                       disabled={submitting}
                       onClick={() => this.onSubmit(values)}
                     >
-                      Get Callback
+                      {translate("help_center.callback")}
                     </CapsuleButton>
                   </DivRow>
                 </form>
@@ -139,23 +166,25 @@ class HelpCenter extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    supportReducer: state.supportReducer
+    supportReducer: state.supportReducer,
+    languageReducer: state.languageReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 
-const mapDispathToProps = dispatch => {
+const mapDispathToProps = (dispatch) => {
   return {
     sendFeedbackAction: bindActionCreators(sendFeedbackAction, dispatch),
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
-    )
+    ),
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(HelpCenter));
+)(navigatorHoc(translatorHoc(HelpCenter)));

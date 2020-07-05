@@ -1,14 +1,12 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
-import SectionedHeader from "CommonContainers/sectionedHeader";
 import DivRow from "CommonComponents/divRow";
 import DivColumn from "CommonComponents/divColumn";
 import styles from "./fullwidth_secondary_header.module.scss";
-import LanguageSelect from "CommonComponents/languageSelect";
 import appIcon from "Icons/app-icon-black.svg";
-//import appIcon from "Icons/logo-image.png";
 import navigatorHoc from "Hoc/navigatorHoc";
-import SearchBar from "CommonContainers/searchBar";
-
+import { connect } from "react-redux";
 import map from "lodash/map";
 
 class FullwidthSecondaryHeader extends Component {
@@ -19,12 +17,12 @@ class FullwidthSecondaryHeader extends Component {
 
   render() {
     const {
-      children,
-      whiteColor,
       className,
       navItems,
       onClickNavItem,
       selectedTab,
+      languageReducer: { languageCode },
+      isRTL,
     } = this.props;
 
     return (
@@ -32,7 +30,9 @@ class FullwidthSecondaryHeader extends Component {
         fillSelfHorizontal
         className={`${styles.top_header} ${className}`}
       >
-        <DivRow className={`${styles.header_container}`}>
+        <DivRow
+          className={` ${styles.header_container} ${isRTL ? styles.rtl : ""}`}
+        >
           <DivRow className={styles.header_icon_container}>
             <img
               src={appIcon}
@@ -42,7 +42,7 @@ class FullwidthSecondaryHeader extends Component {
           </DivRow>
           <DivRow className={styles.links_container}>
             {map(navItems, (listItem) => {
-              const { title, slug } = listItem;
+              const { slug } = listItem;
               const isSelected = selectedTab === slug;
               return (
                 <a
@@ -54,7 +54,7 @@ class FullwidthSecondaryHeader extends Component {
                   }}
                 >
                   {" "}
-                  {title}
+                  {listItem[languageCode].title}
                 </a>
               );
             })}
@@ -65,8 +65,17 @@ class FullwidthSecondaryHeader extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    languageReducer: state.languageReducer,
+    isRTL: state.languageReducer.isRTL,
+  };
+};
+
 FullwidthSecondaryHeader.defaultProps = {
   whiteColor: false,
 };
-
-export default navigatorHoc(FullwidthSecondaryHeader);
+export default connect(
+  mapStateToProps,
+  null
+)(navigatorHoc(FullwidthSecondaryHeader));

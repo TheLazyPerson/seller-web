@@ -53,3 +53,9 @@
     width: 50%;
   }
 }
+
+.rtl {
+  .box_container {
+    flex-direction: row-reverse;
+  }
+}

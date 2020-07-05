@@ -62,26 +62,27 @@
   }
 }
 
-
 @include medium {
   .help_center_container {
     .list_container {
       padding: 25px;
-  
+      justify-content: space-between;
+      flex-direction: row;
+
       .item_container {
-        width: 207px;
+        width: 190px;
         height: 207px;
         margin-right: 20px;
-  
+
         .item_icon {
           height: 38px;
         }
-  
+
         .item_title {
           font-size: 12px;
           margin: 18px 0px 9px;
         }
-  
+
         .item_description {
           font-size: 11px;
         }
@@ -94,41 +95,41 @@
   .help_center_container {
     .list_container {
       padding: 18px;
-      align-items: center;
-      flex-direction: column;
-  
+      justify-content: space-between;
+      flex-direction: row;
+
       .item_container {
-        width: 180px;
+        width: 155px;
         height: 180px;
         margin-right: 0px;
         margin-top: 20px;
-  
+
         .item_icon {
           height: 32px;
         }
-  
+
         .item_title {
           font-size: 12px;
           margin: 18px 0px 9px;
         }
-  
+
         .item_description {
           font-size: 11px;
         }
       }
     }
-  
+
     .form_header {
       font-size: 12px;
       padding: 12px 46px;
     }
-  
+
     .form_container {
-      padding: 22px 35px;      
-      
+      padding: 22px 35px;
+
       .form {
-       display: flex;
-       flex-direction: column; 
+        display: flex;
+        flex-direction: column;
       }
 
       .text_area {
@@ -138,5 +139,18 @@
         font-size: 12px;
       }
     }
+  }
+}
+
+.rtl {
+  .list_container {
+    flex-direction: row-reverse;
+  }
+  .form_header {
+    text-align: right;
+  }
+  .form_container {
+    text-align: right;
+    direction: rtl;
   }
 }

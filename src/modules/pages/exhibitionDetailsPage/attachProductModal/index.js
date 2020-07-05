@@ -6,10 +6,6 @@ import SearchBarComponent from "CommonComponents/searchBarComponent";
 import DivRow from "CommonComponents/divRow";
 import ProductListItem from "CommonComponents/productListItem";
 import map from "lodash/map";
-import InitialPageLoader from "CommonContainers/initialPageLoader";
-import navigatorHoc from "Hoc/navigatorHoc";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 
 class AttachProductModal extends Component {
   render() {
@@ -17,7 +13,7 @@ class AttachProductModal extends Component {
       open,
       onClose,
       onClickAttachProduct,
-      onClickRemoveProduct
+      onClickRemoveProduct,
     } = this.props;
     const { productList, exhibitionId } = this.props;
     return (
@@ -35,7 +31,7 @@ class AttachProductModal extends Component {
         >
           <DivColumn
             className={styles.modal_container}
-            onClick={event => event.stopPropagation()}
+            onClick={(event) => event.stopPropagation()}
           >
             <DivRow verticalCenter className={styles.header_container}>
               <div className={styles.header_title}>ATTACH PRODUCTS</div>
@@ -43,8 +39,8 @@ class AttachProductModal extends Component {
             </DivRow>
 
             <DivColumn fillParent className={styles.content_container}>
-              <DivRow fillParent className={styles.item_container}>
-                {map(productList, product => (
+              <DivRow className={styles.item_container}>
+                {map(productList, (product) => (
                   <ProductListItem
                     product={product}
                     actionType={"attach_product"}

@@ -122,5 +122,274 @@
     "move_bag": "الانتقال إلى حقيبة",
     "my_wishlist": "قائمة امنياتي",
     "start_shopping": "ابدأ التسوق"
+  },
+
+  "address_page": {
+    "default_adddress": "العنوان الافتراضي",
+    "address_deleted": "تم حذف العنوان"
+  },
+  "edit_address_page": {
+    "edit_address": "تعديل العنوان"
+  },
+  "main_home_page": {
+    "title": "بيع منتجاتك للعملاء عبر الكويت",
+    "subtitle": "مصافحة مع أكثر الشركات المشهورة باستضافة المعارض. وصلنا إلى جميع أنحاء الكويت.",
+    "start_selling": "ابدأ بالبيع"
+  },
+  "download_app": {
+    "the": "ال",
+    "home_expo": "معرض المنزل",
+    "advantage": "مميزات",
+    "subtitle": "إدارة كل شيء في متناول يدك."
+  },
+  "dashboard_home_page": {
+    "title": "أهلا بك",
+    "subtitle": "حسابي"
+  },
+  "exhibition_list_page": {
+    "btn_title": "المعارض",
+    "view_details": "عرض التفاصيل",
+    "left_to_enroll": "الأيام المتبقية للتسجيل",
+    "last": "الاخير",
+    "category": "الفئة",
+    "starts_at": "يبدأ في",
+    "ends_on": "ينتهي",
+    "your_exhibition": "المعارض الخاصة بك"
+  },
+  "exhibition_details_page": {
+    "discription": "وصف",
+    "exhibition": "معرض",
+    "basic_details": "تفاصيل أساسية",
+    "overview": "نظرة عامة",
+    "date": "تواريخ",
+    "ends_on": "ينتهي",
+    "start_at": "يبدأ في",
+    "category": "التصنيفات",
+    "add_to_products": "أضف منتجاتك"
+  },
+  "your_exhibition_list_page": {
+    "btn_title": "المعارض",
+    "view_details": "عرض التفاصيل",
+    "left_to_enroll": "الأيام المتبقية للتسجيل",
+    "last": "الاخير",
+    "category": "الفئة",
+    "starts_at": "يبدأ في",
+    "ends_on": "ينتهي",
+    "your_exhibition": "المعارض الخاصة بك"
+  },
+  "order_details": {
+    "title": "تفاصيل الطلب",
+    "request": "إنشاء طلب الالتقاط",
+    "view_request": "عرض طلب الالتقاط",
+    "order_id": "رقم التعريف الخاص بالطلب",
+    "places_on": "موضوع على",
+    "customer_details": "تفاصيل العميل",
+    "name": "اسم",
+    "product_list": "قائمة المنتجات",
+    "shipping_address": "عنوان الشحن",
+    "billing_address": "عنوان وصول الفواتير",
+    "shipping_methods": "طريقة الشحن",
+    "payment_method": "طريقة الدفع او السداد",
+    "email": "البريد الإلكتروني",
+    "print_invoice": "فاتورة طباعة"
+  },
+  "product_list": {
+    "title": "منتجات",
+    "add_new_product": "إضافة منتج جديد",
+    "search": "بحث",
+    "table": {
+      "id": "هوية شخصية",
+      "sku": "وحدة حفظ الأوراق المالية",
+      "name": "اسم",
+      "price": "السعر",
+      "quantity": "كمية"
+    }
+  },
+  "sales_list": {
+    "title": "المعاملات",
+    "search": "بحث",
+    "table": {
+      "id": "هوية شخصية",
+      "transaction_id": "رقم المعاملة",
+      "comment": "تعليق",
+      "grand_total": "المبلغ الإجمالي",
+      "view_button": "رأي"
+    }
+  },
+  "pickup_request_details": {
+    "title": "تفاصيل الطلب",
+    "req_pickup_on": "مطلوب الاستلام",
+    "pickup_information": "معلومات الالتقاط",
+    "order_id": "رقم التعريف الخاص بالطلب",
+    "places_on": "موضوع على",
+    "customer_details": "تفاصيل العميل",
+    "name": "اسم",
+    "product_list": "قائمة المنتجات",
+    "shipping_address": "عنوان الشحن",
+    "billing_address": "عنوان وصول الفواتير",
+    "shipping_methods": "طريقة الشحن",
+    "payment_method": "طريقة الدفع او السداد",
+    "email": "البريد الإلكتروني",
+    "products_order": "المنتجات المطلوبة"
+  },
+  "transaction_details_page": {
+    "title": "تفاصيل المعاملة",
+    "transaction_id": "رقم المعاملة",
+    "created_on": "تم إنشاؤها على",
+    "payment_details": "بيانات الدفع",
+    "payment_method": " طريقة الدفع او السداد",
+    "total": "مجموع",
+    "comment": "تعليق",
+    "products_order": "المنتجات المطلوبة"
+  },
+  "marketplace_profile_details": {
+    "title": "تفاصيل ملف تعريف السوق",
+    "edit": "تعديل",
+    "shop_name": "اسم المحل",
+    "contact_number": "رقم الاتصال",
+    "email_address": "عنوان بريد الكتروني",
+    "address": "عنوان",
+    "create": "التالى"
+  },
+  "edit_marketplace_detail_page": {
+    "create": "التالى",
+    "page_title": "تفاصيل السوق",
+    "shop_name": "اسم المحل",
+    "shop_contact_number": "رقم الاتصال",
+    "shop_email_addres": "عنوان بريد الكتروني",
+    "area": "منطقة*",
+    "block_number": "حظر الرقم",
+    "house_number": "رقم الدار",
+    "street_number": "رقم الشارع",
+    "avenue": "السبيل",
+    "landmark": "معلم معروف",
+    "home": "مكتب البيت*",
+    "city": "مدينة",
+    "cancle": "إلغاء",
+    "save_details": "حفظ التفاصيل",
+    "address_details": "تفاصيل العنوان"
+  },
+  "profile_details": {
+    "title": "تفاصيل الملف الشخصي",
+    "change_passwword": "تغيير كلمة المرور",
+    "edit": "تعديل",
+    "first_name": "الاسم الاول",
+    "last_name": "الكنية",
+    "email": "البريد الإلكتروني",
+    "civil_id": "البطاقة المدنية",
+    "phone_number": "رقم الهاتف",
+    "gender": "جنس",
+    "birthday": "عيد الميلاد",
+    "bankdetails": "التفاصيل المصرفية",
+    "account_holder": "مالك الحساب",
+    "bank_name": "اسم البنك",
+    "IBAN": "رقم الحساب بصيغة IBAN",
+    "edit_bank_details": "تحرير تفاصيل البنك",
+    "cancle": "الإلغاء",
+    "submit": "إرسال"
+  },
+  "edit_profile": {
+    "birthday": "عيد الميلاد",
+    "title": "تعديل تفاصيل الملف الشخصي",
+    "first_name": "الاسم الاول",
+    "last_name": "الكنية",
+    "gender": "جنس",
+    "mobile_number": "رقم الهاتف المحمول",
+    "email": "عنوان بريد الكتروني",
+    "civil_id": "الهوية المدنية",
+    "cancel": "إلغاء",
+    "save_details": "حفظ التفاصيل"
+  },
+  "change_password_page": {
+    "title": "تغيير كلمة المرور",
+    "old_password": "كلمة سر قديمة",
+    "new_passwword": "كلمة السر الجديدة",
+    "confirm_password": "تأكيد كلمة المرور",
+    "cancle": "إلغاء",
+    "confirm": "تؤكد"
+  },
+  "subscription_page": {
+    "title": "تفاصيل الاشتراك",
+    "buy_additional_plan": "شراء خطة إضافية ",
+    "plan": " الخطط المكتتبة",
+    "subscription_lost": "الاشتراك",
+    "table": {
+      "id": "هوية شخصية",
+      "plan_name": "اسم الخطة",
+      "plan_description": "وصف الخطة",
+      "no_of_products": "عدد المنتجات",
+      "no_of_exhibitions": "عدد المعارض"
+    }
+  },
+  "setting_page": {
+    "header_title": "الإعدادات",
+    "notification": "تنبيه",
+    "subtitile": "هذا لن يؤثر على تحديثات الطلب."
+  },
+  "help_center": {
+    "header_title": "مركز المساعدة",
+    "more_help": "بحاجة إلى مزيد من المساعدة منا",
+    "your_concern": "موجز عن قلقك؟",
+    "callback": "احصل على رد",
+    "response_message": "تم إرسال التعليقات بنجاح"
+  },
+  "reset_password_page": {
+    "new": "هل لديك حساب؟",
+    "create": "تسجيل الدخول",
+    "page_title": "إعادة تعيين كلمة المرور",
+    "sub_title": "سنرسل لك بريدًا إلكترونيًا لإعادة تعيين كلمة المرور الخاصة بك.",
+    "password": "كلمه السر",
+    "reset_password_button": "إعادة تعيين كلمة المرور",
+    "username": "البريد الإلكتروني"
+  },
+  "subscription_item": {
+    "active_plan": "الخطة النشطة",
+    "kd": "دينار كويتي",
+    "commission": "عمولة",
+    "benefits": "تشمل الفوائد",
+    "exhibition": "المعارض",
+    "enroll": "يمكنك التسجيل في",
+    "no_exhibition": "عدد المعارض",
+    "products": "منتجات",
+    "maintain": "يمكنك الحفاظ عليها",
+    "products1": "منتجات",
+    "usage": "الاستخدام",
+    "seller_fetures": "جميع ميزات البائع",
+    "access": "الوصول إلى جميع ميزات البائع."
+  },
+  "product_list_item": {
+    "attach": "يربط",
+    "remove": "إزالة",
+    "out_of_stock": "MARK المنتج خارج المخزون"
+  },
+  "page_not_found": {
+    "number": "404",
+    "subtitle": "The page you requested does not exist. Click here to continue shopping."
+  },
+  "host_your_exhibition": {
+    "call_us": "اتصل بنا على"
+  },
+  "additional_plan": {
+    "title": "شراء خطة إضافية",
+    "buy": "يشترى"
+  },
+  "exhibition_overview": {
+    "name": "اسم",
+    "description": "وصف قصير",
+    "dates": "تواريخ",
+    "starts_at": "يبدأ في",
+    "ends_on": "ينتهي",
+    "enroll": "يتسجل، يلتحق",
+    "overview": "نظرة عامة"
+  },
+  "subscription_success": {
+    "retry": "أعد المحاولة",
+    "payment": "تم الدفع بنجاح",
+    "description": "اهلا بك في العائلة"
+  },
+  "subscription_failure": {
+    "payment": "عملية الدفع فشلت",
+    "description": "حدثت مشكلة أثناء قبول دفعتك.",
+    "retry": "أعد المحاولة"
   }
 }

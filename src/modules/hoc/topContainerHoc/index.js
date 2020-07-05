@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import DivColumn from "CommonComponents/divColumn";
 import styles from "./top_container_hoc.module.scss";
@@ -8,7 +9,7 @@ import { bindActionCreators } from "redux";
 import { hideFlashMessage } from "Redux/actions/flashMessageActions";
 // import { setBagCount } from 'Core/modules/bag/bagActions';
 import { setUserDataAction } from "Core/modules/signin/signinActions";
-// import { setLanguageAction } from 'Core/modules/language/languageActions';
+import { setLanguageAction } from "Core/modules/language/languageActions";
 import { CookieService } from "Utils/cookieService";
 import { USER_DATA_COOKIE, LANG } from "Constants/cookieConstants";
 import {
@@ -16,7 +17,6 @@ import {
   getFeatureUsage,
 } from "Core/modules/subscription/subscriptionActions";
 import map from "lodash/map";
-import isEmpty from "lodash/isEmpty";
 
 const topContainerHoc = (WrappedComponent) => {
   class topContainer extends Component {
@@ -26,15 +26,13 @@ const topContainerHoc = (WrappedComponent) => {
 
     componentDidMount() {
       //Sets user data from cookie to reducer
-      const { setUserDataAction } = this.props;
+      const { setUserDataAction, setLanguageAction } = this.props;
       const userData = CookieService.getJSON(USER_DATA_COOKIE);
-      // const bagCount = CookieService.get('BAG_COUNT');
-      // const languageCode = CookieService.get(LANG) || 'en';
+      const languageCode = CookieService.get(LANG) || "en";
       //TODO call backdetails api here
-      // setLanguageAction(languageCode);
+      setLanguageAction(languageCode);
 
       if (userData) {
-        // setBagCount(bagCount);
         setUserDataAction(userData);
         this.getSubscriptionApi();
 
@@ -120,8 +118,7 @@ const topContainerHoc = (WrappedComponent) => {
     return {
       hideFlashMessage: bindActionCreators(hideFlashMessage, dispatch),
       setUserDataAction: bindActionCreators(setUserDataAction, dispatch),
-      // setLanguageAction: bindActionCreators(setLanguageAction, dispatch),
-      // setBagCount: bindActionCreators(setBagCount, dispatch),
+      setLanguageAction: bindActionCreators(setLanguageAction, dispatch),
       getActivePlan: bindActionCreators(getActivePlan, dispatch),
       getFeatureUsage: bindActionCreators(getFeatureUsage, dispatch),
     };

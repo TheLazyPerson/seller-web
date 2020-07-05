@@ -1,22 +1,47 @@
 export const landingPageHeaderItems = [
   {
-    title: "Benefits",
-    slug: "benefits"
+    en: {
+      title: "Benefits",
+    },
+    ar: {
+      title: "فوائد",
+    },
+    slug: "benefits",
   },
   {
-    title: "How It Works?",
-    slug: "how-it-works"
+    en: {
+      title: "How It Works?",
+    },
+    ar: {
+      title: "كيف تعمل؟",
+    },
+    slug: "how-it-works",
   },
   {
-    title: "Delivering Orders",
-    slug: "delivering-orders"
+    en: {
+      title: "Delivering Orders",
+    },
+    ar: {
+      title: "تسليم الطلبات",
+    },
+    slug: "delivering-orders",
   },
   {
-    title: "Pricing",
-    slug: "pricing"
+    en: {
+      title: "Pricing",
+    },
+    ar: {
+      title: "التسعير",
+    },
+    slug: "pricing",
   },
   {
-    title: "FAQ",
-    slug: "faq"
-  }
+    en: {
+      title: "FAQ",
+    },
+    ar: {
+      title: "التعليمات",
+    },
+    slug: "faq",
+  },
 ];

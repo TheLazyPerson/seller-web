@@ -1,16 +1,23 @@
-import React, { Component, Fragment } from 'react';
-import styles from './overlay_container.module.scss';
-import HorizontalBorder from 'CommonComponents/horizontalBorder';
-import DivColumn from 'CommonComponents/divColumn';
-import DivRow from 'CommonComponents/divRow';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import map from 'lodash/map';
+import React, { Component, Fragment } from "react";
+import styles from "./overlay_container.module.scss";
+import HorizontalBorder from "CommonComponents/horizontalBorder";
+import DivColumn from "CommonComponents/divColumn";
+import DivRow from "CommonComponents/divRow";
+import { connect } from "react-redux";
+import map from "lodash/map";
 
 class OverlayContainer extends Component {
-
   render() {
-    const { onClickLogout, onClickBilling, subscriptionReducer: { isSubscriptionLoading, isSubscriptionError, featuresData } } = this.props;
+    const {
+      onClickLogout,
+      isRTL,
+      onClickBilling,
+      subscriptionReducer: {
+        isSubscriptionLoading,
+        isSubscriptionError,
+        featuresData,
+      },
+    } = this.props;
     const ProgressItem = ({ title, value, progress }) => (
       <DivColumn className={`${styles.item_container} ${styles.click}`}>
         <DivRow className={styles.display_container}>
@@ -18,40 +25,45 @@ class OverlayContainer extends Component {
           <div className={styles.value}>{value}</div>
         </DivRow>
         <DivRow className={styles.progress_bar_container}>
-          <div style={{ width: `${progress}%` }} className={styles.progress_bar_filled}></div>
+          <div
+            style={{ width: `${progress}%` }}
+            className={styles.progress_bar_filled}
+          ></div>
         </DivRow>
       </DivColumn>
-    )
+    );
 
     return (
-      <DivColumn className={styles.overlay_container}>
-
-        <div className={`${styles.item_container} ${styles.title}`} style={{ cursor: 'default' }}>
+      <DivColumn
+        className={` ${styles.overlay_container} ${isRTL ? styles.rtl : ""}`}
+      >
+        <div
+          className={`${styles.item_container} ${styles.title}`}
+          style={{ cursor: "default" }}
+        >
           USAGE
         </div>
         <HorizontalBorder />
 
-        {
-          (!isSubscriptionLoading && !isSubscriptionError) && (
-            map(featuresData, feature => (
-              <Fragment>
-                <ProgressItem
-                  title={feature.title}
-                  value={`${feature.used}/${feature.total}`}
-                  progress={feature.percentage}
-                />
+        {!isSubscriptionLoading &&
+          !isSubscriptionError &&
+          map(featuresData, (feature) => (
+            <Fragment>
+              <ProgressItem
+                title={feature.title}
+                value={`${feature.used}/${feature.total}`}
+                progress={feature.percentage}
+              />
 
-                <HorizontalBorder />
-              </Fragment>
-            ))
-          )
-        }
+              <HorizontalBorder />
+            </Fragment>
+          ))}
         <div
           className={`${styles.item_container} ${styles.click}`}
           onClick={onClickBilling}
         >
           Billing
-            </div>
+        </div>
         <HorizontalBorder />
 
         <div
@@ -59,18 +71,18 @@ class OverlayContainer extends Component {
           onClick={onClickLogout}
         >
           Logout
-            </div>
+        </div>
         <HorizontalBorder />
-
       </DivColumn>
-    )
+    );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     subscriptionReducer: state.subscriptionReducer,
-  }
-}
+    isRTL: state.languageReducer.isRTL,
+  };
+};
 
 export default connect(mapStateToProps, null)(OverlayContainer);

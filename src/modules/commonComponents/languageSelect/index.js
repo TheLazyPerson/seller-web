@@ -6,25 +6,24 @@ import { LANG } from "Constants/cookieConstants";
 import { CookieService } from "Utils/cookieService";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import { setLanguageAction } from "Core/modules/language/languageActions";
+import { setLanguageAction } from "Core/modules/language/languageActions";
 
 class LanguageSelect extends Component {
-  changeLanguage = languageCode => {
-    const { i18n } = this.props;
-    // setLanguageAction
-    
+  changeLanguage = (languageCode) => {
+    const { i18n, setLanguageAction } = this.props;
+
     i18n.changeLanguage(languageCode);
-    // setLanguageAction(languageCode);
+    setLanguageAction(languageCode);
     CookieService.set(LANG, languageCode);
   };
 
   render() {
     const {
       blackColor,
-      // languageReducer: { languageCode }
+      languageReducer: { languageCode },
     } = this.props;
-    const arSelected = false //languageCode == "ar";
-    const enSelected = true //languageCode == "en";
+    const arSelected = languageCode === "ar";
+    const enSelected = languageCode === "en";
 
     return (
       <DivRow
@@ -54,14 +53,16 @@ class LanguageSelect extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    languageReducer: state.languageReducer
+    languageReducer: state.languageReducer,
   };
 };
 
-const mapDispathToProps = dispatch => {
-  return {};
+const mapDispathToProps = (dispatch) => {
+  return {
+    setLanguageAction: bindActionCreators(setLanguageAction, dispatch),
+  };
 };
 
 export default connect(

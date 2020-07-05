@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import DivColumn from "CommonComponents/divColumn";
-import DivRow from "CommonComponents/divRow";
 import styles from "./subscription_option_component.module.scss";
 import translatorHoc from "Hoc/translatorHoc";
 import { connect } from "react-redux";
@@ -16,7 +15,6 @@ class SubscriptionOption extends Component {
   render() {
     const {
       option,
-      isRTL,
       exhibitionReducer: { selectedSubscriptionOption },
     } = this.props;
 
@@ -25,26 +23,26 @@ class SubscriptionOption extends Component {
         verticalCenter
         horizontalCenter
         className={`${styles.subscription_option} ${
-          selectedSubscriptionOption.type == option.type
+          selectedSubscriptionOption.type === option.type
             ? styles.is_selected
             : ""
         }`}
         onClick={this.selectSubscriptionOption}
       >
         <div className={styles.subscription_option_price}>
-          {option.type == "flat_type" || option.type == "free" ? "KD" : ""}{" "}
+          {option.type === "flat_type" || option.type === "free" ? "KD" : ""}{" "}
           {option.value}{" "}
-          {option.type == "flat_type" || option.type == "free" ? "" : "%"}
+          {option.type === "flat_type" || option.type === "free" ? "" : "%"}
         </div>
         <div className={styles.subscription_option_title}>
-          {option.type == "flat_type" && "Flat Fee"}
-          {option.type == "commission" && "Commission"}
-          {option.type == "free" && "Free"}
+          {option.type === "flat_type" && "Flat Fee"}
+          {option.type === "commission" && "Commission"}
+          {option.type === "free" && "Free"}
         </div>
         <div className={styles.subscription_option_subtitle}>
-          {option.type == "flat_type" && "Ony have to pay once"}
-          {option.type == "commission" && "On each product you sale"}
-          {option.type == "free" && "Free to enter"}
+          {option.type === "flat_type" && "Ony have to pay once"}
+          {option.type === "commission" && "On each product you sale"}
+          {option.type === "free" && "Free to enter"}
         </div>
       </DivColumn>
     );

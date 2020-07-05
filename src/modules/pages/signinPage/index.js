@@ -23,9 +23,13 @@ class SignInPage extends Component {
       password: form.password,
     }).then(({ payload }) => {
       const { data, code } = payload;
-      if (code == 200 || code == 201) {
+      if (code === 200 || code === 201) {
         CookieService.set(USER_DATA_COOKIE, data);
-        navigateTo("home");
+        if (data.is_registeration_complete === 0) {
+          navigateTo("customer-onboard");
+        } else {
+          navigateTo("home");
+        }
       }
     });
   };
@@ -86,7 +90,7 @@ class SignInPage extends Component {
                     )}
                   </Field>
 
-                  <Field name="remeberMe">
+                  {/* <Field name="remeberMe">
                     {({ input, meta }) => (
                       <InputCheckbox
                         meta={meta}
@@ -94,7 +98,7 @@ class SignInPage extends Component {
                         text={translate("signin_page.remember_me")}
                       />
                     )}
-                  </Field>
+                  </Field> */}
                 </Fragment>
                 <input
                   type="submit"
@@ -112,7 +116,7 @@ class SignInPage extends Component {
             <span className={styles.new_description_text}>
               {translate("signin_page.new")}&nbsp;
             </span>
-            <a className={styles.hyper_link} href="/signup">
+            <a className={styles.hyper_link} href="/customer-onboard">
               {translate("signin_page.create")}
             </a>
           </div>

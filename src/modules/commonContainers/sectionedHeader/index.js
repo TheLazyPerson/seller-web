@@ -1,24 +1,14 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import styles from "./sectioned_header.module.scss";
 import DivRow from "CommonComponents/divRow";
-import DivColumn from "CommonComponents/divColumn";
-import searchIcon from "Icons/search-icon-black.svg";
-import searchIconWhite from "Icons/search-icon-white.svg";
-import hamburgerMenuIcon from "Icons/hamburger-menu-icon-black.svg";
-import bagIcon from "Icons/cart-bag-icon-black.svg";
-import bagIconWhite from "Icons/cart-bag-icon-white.svg";
-import bookmarkIcon from "Icons/bookmark-icon-black.svg";
-import bookmarkIconWhite from "Icons/bookmark-icon-white.svg";
 import arrowDownIcon from "Icons/arrow-down-icon-black.svg";
 import navigatorHoc from "Hoc/navigatorHoc";
 import profileIconBlack from "Icons/profile-icon-black.svg";
 import profileIconWhite from "Icons/profile-icon-white.svg";
-import HorizontalBorder from "CommonComponents/horizontalBorder";
-import { searchTypes } from "Constants/searchConstants";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import translatorHoc from "Hoc/translatorHoc";
-import SearchBar from "../searchBar";
 import { CookieService } from "Utils/cookieService";
 import OverlayContainer from "./overlayContainer";
 import { logoutAction } from "Core/modules/signin/signinActions";
@@ -30,14 +20,14 @@ class SectionedHeader extends Component {
 
   state = {
     searchText: "",
-    showOverlayComponent: false
+    showOverlayComponent: false,
   };
 
   onClickProfile = () => {
     const { showOverlayComponent } = this.state;
 
     this.setState({
-      showOverlayComponent: !showOverlayComponent
+      showOverlayComponent: !showOverlayComponent,
     });
   };
 
@@ -52,16 +42,16 @@ class SectionedHeader extends Component {
 
   onClickSignup = () => {
     const { navigateTo } = this.props;
-    navigateTo("signup");
+    navigateTo("customer-onboard");
   };
 
   render() {
-    const { isUserSignedIn, whiteColor, translate } = this.props;
+    const { isUserSignedIn, whiteColor, translate, isRTL } = this.props;
     const { showOverlayComponent } = this.state;
 
     return (
       <DivRow className={styles.header_container}>
-        <DivRow>
+        <DivRow className={` ${isRTL ? styles.rtl : ""}`}>
           {isUserSignedIn ? (
             <div
               style={{ height: "unset" }}
@@ -114,16 +104,17 @@ class SectionedHeader extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isUserSignedIn: state.signInReducer.isUserSignedIn,
-    bagCount: 0 //state.bagReducer.bagCount
+    bagCount: 0, //state.bagReducer.bagCount
+    isRTL: state.languageReducer.isRTL,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    logoutAction: bindActionCreators(logoutAction, dispatch)
+    logoutAction: bindActionCreators(logoutAction, dispatch),
   };
 };
 

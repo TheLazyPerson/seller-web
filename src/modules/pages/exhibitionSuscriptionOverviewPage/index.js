@@ -6,14 +6,11 @@ import NavHeader from "CommonComponents/navHeader";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import map from "lodash/map";
 import styles from "./exhibition_subscription_details.module.scss";
-import { profileListItem } from "Constants/profileConstants";
 import SideNav from "CommonComponents/sideNav";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { logoutAction } from "Core/modules/signin/signinActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { CookieService } from "Utils/cookieService";
-import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 import {
   getExhibitionSubscriptionOverview,
   subscribeToExhibition,
@@ -22,6 +19,7 @@ import InitialPageLoader from "CommonContainers/initialPageLoader";
 import HorizontalBorder from "CommonComponents/horizontalBorder";
 import SubscriptionOption from "CommonComponents/subscriptionOptionComponent";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
+import translatorHoc from "Hoc/translatorHoc";
 
 class ExhibitionSubscriptionOverviewPage extends Component {
   onBackPress = () => {
@@ -37,7 +35,7 @@ class ExhibitionSubscriptionOverviewPage extends Component {
     subscribeToExhibition(exhibitionId, {
       type: subscriptionOption.type,
     }).then(({ payload }) => {
-      if (payload.code == 200 || payload.code == 201) {
+      if (payload.code === 200 || payload.code === 201) {
         navigateTo("your-exhibitions");
         showSuccessFlashMessage("Subscribed to exhibition successfuly");
       } else {
@@ -50,14 +48,17 @@ class ExhibitionSubscriptionOverviewPage extends Component {
       exhibitionReducer: { subscriptionOverview, selectedSubscriptionOption },
       match: { params },
       getExhibitionSubscriptionOverview,
+      translate,
+      isRTL,
     } = this.props;
-    const subscriptionTypes = ["both", "flat_fee", "commision", "free"];
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn
           fillParent
-          className={styles.exhibition_subscription_page_container}
+          className={` ${styles.exhibition_subscription_page_container} ${
+            isRTL ? styles.rtl : ""
+          }`}
         >
           <InitialPageLoader
             initialPageApi={() =>
@@ -68,11 +69,15 @@ class ExhibitionSubscriptionOverviewPage extends Component {
               title={subscriptionOverview.title}
               onBackClick={this.onBackPress}
             ></NavHeader>
-            <NavHeader title="Overview"></NavHeader>
+            <NavHeader
+              title={translate("exhibition_overview.overview")}
+            ></NavHeader>
             <div className={styles.overview_container}>
               <DivRow className={styles.text_wrapper}>
                 <DivColumn>
-                  <div className={styles.title}>NAME:</div>
+                  <div className={styles.title}>
+                    {translate("exhibition_overview.name")}:
+                  </div>
                   <div className={styles.description}>
                     {subscriptionOverview.title}
                   </div>
@@ -80,7 +85,9 @@ class ExhibitionSubscriptionOverviewPage extends Component {
               </DivRow>
               <DivRow className={styles.text_wrapper}>
                 <DivColumn>
-                  <div className={styles.title}>SHORT DESCRIPTION:</div>
+                  <div className={styles.title}>
+                    {translate("exhibition_overview.description")} :
+                  </div>
                   <div className={styles.description}>
                     {subscriptionOverview.short_description}
                   </div>
@@ -88,13 +95,20 @@ class ExhibitionSubscriptionOverviewPage extends Component {
               </DivRow>
               <DivRow className={styles.text_wrapper}>
                 <DivColumn>
-                  <div className={styles.title}>DATES:</div>
+                  <div className={styles.title}>
+                    {" "}
+                    {translate("exhibition_overview.dates")}:
+                  </div>
                   <div className={styles.description}>
-                    <span className={styles.title}>STARTS AT:</span>{" "}
+                    <span className={styles.title}>
+                      {translate("exhibition_overview.starts_at")}:
+                    </span>{" "}
                     {subscriptionOverview.start_date}
                   </div>
                   <div className={styles.description}>
-                    <span className={styles.title}>ENDS ON:</span>{" "}
+                    <span className={styles.title}>
+                      {translate("exhibition_overview.ends_on")}:
+                    </span>{" "}
                     {subscriptionOverview.end_date}
                   </div>
                 </DivColumn>
@@ -124,7 +138,7 @@ class ExhibitionSubscriptionOverviewPage extends Component {
                 }
                 className={styles.enroll_button}
               >
-                ENROLL
+                {translate("exhibition_overview.enroll")}
               </CapsuleButton>
             </DivRow>
           </InitialPageLoader>
@@ -137,6 +151,7 @@ class ExhibitionSubscriptionOverviewPage extends Component {
 const mapStateToProps = (state) => {
   return {
     exhibitionReducer: state.exhibitionReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 
@@ -159,4 +174,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(ExhibitionSubscriptionOverviewPage));
+)(navigatorHoc(translatorHoc(ExhibitionSubscriptionOverviewPage)));

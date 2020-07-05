@@ -1,5 +1,5 @@
-@import '~Styles/colors.module';
-@import '~Styles/mixins.module';
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
 
 .header {
   border-bottom: 0.5px solid #ededed;
@@ -7,7 +7,7 @@
 
   .header_text {
     font-size: 15px;
-    color: $primary-text-color ;
+    color: $primary-text-color;
   }
 }
 
@@ -17,7 +17,7 @@
   padding: 26px 17px;
   justify-content: space-between;
   margin: 36px;
-  
+
   .item_title {
     font-size: 12px;
     font-weight: bold;
@@ -32,7 +32,6 @@
   }
 }
 
-
 @include medium {
   .settings_item_container {
     margin: 28px;
@@ -44,4 +43,8 @@
     width: unset;
     margin: 20px;
   }
+}
+
+.rtl {
+  direction: rtl;
 }

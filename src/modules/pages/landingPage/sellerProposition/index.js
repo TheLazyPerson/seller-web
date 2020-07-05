@@ -1,13 +1,11 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import SectionedHeader from "CommonContainers/sectionedHeader";
 import DivRow from "CommonComponents/divRow";
 import DivColumn from "CommonComponents/divColumn";
 import styles from "./seller_proposition.module.scss";
-import LanguageSelect from "CommonComponents/languageSelect";
 import appIcon from "Icons/app-icon-black.svg";
-//import appIcon from "Icons/logo-image.png";
 import navigatorHoc from "Hoc/navigatorHoc";
-import SearchBar from "CommonContainers/searchBar";
 
 class SellerProposition extends Component {
   onClickAppIcon = () => {
@@ -16,7 +14,7 @@ class SellerProposition extends Component {
   };
 
   render() {
-    const { children, whiteColor, className } = this.props;
+    const { className } = this.props;
 
     return (
       <DivColumn
@@ -44,7 +42,7 @@ class SellerProposition extends Component {
 }
 
 SellerProposition.defaultProps = {
-  whiteColor: false
+  whiteColor: false,
 };
 
 export default navigatorHoc(SellerProposition);

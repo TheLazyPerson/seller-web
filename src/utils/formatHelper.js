@@ -24,6 +24,21 @@ export const formatUnixTimeStampToDateTime = (
   return initMoment(timeStamp).format(formatter);
 };
 
+export const subtractFromDate = (date, number, type) => {
+  switch (type) {
+    case "days":
+      return date.setDate(date.getDate() - number) && date;
+    case "weeks":
+      return date.setDate(date.getDate() - 7 * number) && date;
+    case "months":
+      return date.setMonth(date.getMonth() - number) && date;
+    case "years":
+      return date.setFullYear(date.getFullYear() - number) && date;
+    default:
+      return;
+  }
+};
+
 export const calculateDateDiff = (date) => {
   var cardDate = initMoment(date);
   var currentDate = moment();
@@ -44,5 +59,6 @@ export const timeFormats = {
   utcTimeStamp: "YYYY-MM-DD HH:mm:ss [UTC]",
   dateAndTime: "DD/MM/YYYY HH:mm",
   date: "dd/MM/yyyy",
+  dateAdvanced: "DD/MM/YYYY",
   //add the rest of the date format for the project and use formatTimestamp with this
 };

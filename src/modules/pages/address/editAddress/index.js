@@ -17,6 +17,8 @@ import {
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import AddAddressForm from "CommonContainers/addAddressForm";
 import isEmpty from "lodash/isEmpty";
+import translatorHoc from 'Hoc/translatorHoc';
+
 
 class EditAddress extends Component {
   constructor(props) {
@@ -46,7 +48,7 @@ class EditAddress extends Component {
 
   render() {
     const { id } = queryString.parse(this.props.location.search);
-    const { getAddressListAction } = this.props;
+    const { getAddressListAction, translate } = this.props;
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
@@ -56,7 +58,7 @@ class EditAddress extends Component {
           callApiOnMount={false}
         >
           <DivColumn fillParent className={styles.page_container}>
-            <NavHeader title="Edit Address" onBackClick={this.onBackPress} />
+            <NavHeader title={translate('edit_address_page.edit_address')} onBackClick={this.onBackPress} />
             <AddAddressForm
               addressId={id}
               onSubmitComplete={this.onSubmitComplete}
@@ -89,4 +91,4 @@ const mapDispathToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(EditAddress));
+)(navigatorHoc(translatorHoc(EditAddress)));
