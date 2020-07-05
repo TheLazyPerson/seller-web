@@ -19,7 +19,8 @@ import Stepper from "react-stepper-horizontal";
 import FullWidthContainer from "CommonContainers/fullwidthContainer";
 import { editProfileDetailsAction } from "Core/modules/profiledetails/profileDetailsActions";
 import { setSubscriptionPlanToUser } from "Core/modules/subscription/subscriptionActions";
-
+import { CookieService } from "Utils/cookieService";
+import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 class CustomerOnboard extends Component {
   state = {
     step: 0,
@@ -82,6 +83,7 @@ class CustomerOnboard extends Component {
     if (postData) {
       postSignupAction(postData).then(({ payload }) => {
         if (payload.code === 200 || payload.code === 201) {
+          CookieService.set(USER_DATA_COOKIE, payload.data);
           this.nextStep();
         }
       });
