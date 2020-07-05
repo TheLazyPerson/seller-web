@@ -248,7 +248,14 @@
   "product_list": {
     "title": "PRODUCTS",
     "add_new_product": "ADD NEW PRODUCT",
-    "search": "Search"
+    "search": "Search",
+    "table": {
+      "id": "ID",
+      "sku": "SKU",
+      "name": "NAME",
+      "price": "PRICE",
+      "quantity": "QUANTITY"
+    }
   },
   "sales_list": {
     "title": "Transactions",

@@ -196,7 +196,14 @@
   "product_list": {
     "title": "منتجات",
     "add_new_product": "إضافة منتج جديد",
-    "search": "بحث"
+    "search": "بحث",
+    "table": {
+      "id": "هوية شخصية",
+      "sku": "وحدة حفظ الأوراق المالية",
+      "name": "اسم",
+      "price": "السعر",
+      "quantity": "كمية"
+    }
   },
   "sales_list": {
     "title": "المعاملات",
