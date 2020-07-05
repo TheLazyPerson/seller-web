@@ -4,7 +4,6 @@ import DivColumn from "CommonComponents/divColumn";
 import styles from "./payment_failure.module.scss";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import navigatorHoc from "Hoc/navigatorHoc";
-import { SignalCellularNull } from "material-ui-icons";
 import translatorHoc from "Hoc/translatorHoc";
 import { connect } from "react-redux";
 
