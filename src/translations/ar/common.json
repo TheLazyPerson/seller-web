@@ -365,5 +365,24 @@
   "additional_plan": {
     "title": "شراء خطة إضافية",
     "buy": "يشترى"
+  },
+  "exhibition_overview": {
+    "name": "اسم",
+    "description": "وصف قصير",
+    "dates": "تواريخ",
+    "starts_at": "يبدأ في",
+    "ends_on": "ينتهي",
+    "enroll": "يتسجل، يلتحق",
+    "overview": "نظرة عامة"
+  },
+  "subscription_success": {
+    "retry": "أعد المحاولة",
+    "payment": "تم الدفع بنجاح",
+    "description": "اهلا بك في العائلة"
+  },
+  "subscription_failure": {
+    "payment": "عملية الدفع فشلت",
+    "description": "حدثت مشكلة أثناء قبول دفعتك.",
+    "retry": "أعد المحاولة"
   }
 }
