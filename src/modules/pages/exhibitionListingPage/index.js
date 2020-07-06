@@ -31,47 +31,71 @@ class ExhibitionListingPage extends Component {
   }
 
   getListItem = (listItem) => {
-    const { translate, isRTL } = this.props;
+    const {
+      translate,
+      isRTL,
+      languageReducer: { languageCode },
+    } = this.props;
     return (
       <DivRow className={` ${styles.item} ${isRTL ? styles.rtl : ""}`}>
         <img className={styles.image} src={listItem.base_image} />
         <div className={styles.item_content}>
-          <div className={styles.title}>{listItem.title}</div>
-          <div className={styles.description}>{listItem.short_description}</div>
+          <div className={styles.title}>
+            {listItem.translations[languageCode].title}
+          </div>
+          <div className={styles.description}>
+            {listItem.translations[languageCode].short_description}
+          </div>
 
           <DivRow className={styles.category_header_container}>
             <div className={styles.category_header}>
-              {translate("exhibition_list_page.category")}:
+              {isRTL ? ":" : ""}
+              {translate("exhibition_list_page.category")}
+              {!isRTL ? ":" : ""}
             </div>
-            <div className={styles.category_value}>{listItem.categories}</div>
-          </DivRow>
-
-          <DivRow className={styles.date_container}>
-            <div className={styles.date_title}>
-              {translate("exhibition_list_page.starts_at")}:
-            </div>
-            <div className={styles.date_value}>
-              {" "}
-              {formatUnixTimeStampToDateTime(listItem.starts_from)}
+            <div className={styles.category_value}>
+              &nbsp; {listItem.categories[languageCode]} &nbsp;
             </div>
           </DivRow>
 
-          <DivRow className={styles.date_container}>
-            <div className={styles.date_title}>
-              {translate("exhibition_list_page.ends_on")}:
-            </div>
-            <div className={styles.date_value}>
-              {" "}
-              {formatUnixTimeStampToDateTime(listItem.ends_till)}
-            </div>
-          </DivRow>
-
+          <DivColumn className={styles.date_container}>
+            <DivRow>
+              <div className={styles.date_title}>
+                {isRTL ? ":" : ""}
+                {translate("exhibition_list_page.starts_at")}
+                {!isRTL ? ":" : ""}
+              </div>
+              <div className={styles.date_value}>
+                &nbsp;
+                {formatUnixTimeStampToDateTime(listItem.starts_from)} &nbsp;
+              </div>
+            </DivRow>
+            <DivRow>
+              <div className={styles.date_title}>
+                {isRTL ? ":" : ""}
+                {translate("exhibition_list_page.ends_on")}
+                {!isRTL ? ":" : ""}
+              </div>
+              <div className={styles.date_value}>
+                &nbsp;
+                {formatUnixTimeStampToDateTime(listItem.ends_till)} &nbsp;
+              </div>
+            </DivRow>
+          </DivColumn>
           <DivRow className={styles.action_container}>
             <div className={styles.last_date}>
-              {translate("exhibition_list_page.last")}
-              {calculateDateDiff(listItem.last_date_of_enrollment)}
-              {translate("exhibition_list_page.left_to_enroll")}
+              &nbsp; {translate("exhibition_list_page.last")}
+              &nbsp; {calculateDateDiff(listItem.last_date_of_enrollment)}
+              &nbsp; {translate("exhibition_list_page.left_to_enroll")} &nbsp;
             </div>
+            <CapsuleButton
+              className={styles.action_button}
+              onClick={() => this.onClickViewExhibitionDetail(listItem)}
+            >
+              {translate("exhibition_list_page.view_details")}
+            </CapsuleButton>
+          </DivRow>
+          <DivRow className={styles.mobile_action_button}>
             <CapsuleButton
               onClick={() => this.onClickViewExhibitionDetail(listItem)}
             >
@@ -118,6 +142,7 @@ const mapStateToProps = (state) => {
   return {
     exhibitionReducer: state.exhibitionReducer,
     isRTL: state.languageReducer.isRTL,
+    languageReducer: state.languageReducer,
   };
 };
 
