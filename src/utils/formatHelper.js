@@ -42,7 +42,7 @@ export const subtractFromDate = (date, number, type) => {
 export const calculateDateDiff = (date) => {
   var cardDate = initMoment(date);
   var currentDate = moment();
-  return currentDate.diff(cardDate, "days");
+  return cardDate.diff(currentDate, "days");
 };
 
 export const calculateDateDiffFrom = (date) => {
