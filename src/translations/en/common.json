@@ -222,7 +222,9 @@
   "your_exhibition_list_page": {
     "btn_title": "EXHIBITIONS",
     "view_details": "View Details",
-    "left_to_enroll": "DAYS LEFT TO ENROLL",
+    "left_to_enroll": "DAYS LEFT TO SUBMIT PRODUCTS",
+    "live_now": "LIVE NOW: ENDS IN ",
+    "days": "DAYS",
     "last": "LAST",
     "category": "Category",
     "starts_at": "Starts At",

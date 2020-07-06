@@ -170,7 +170,9 @@
   "your_exhibition_list_page": {
     "btn_title": "المعارض",
     "view_details": "عرض التفاصيل",
-    "left_to_enroll": "الأيام المتبقية للتسجيل",
+    "left_to_enroll": "الأيام المتبقية لتقديم المنتجات",
+    "live_now": "عش الآن: انتهى",
+    "days": "أيام",
     "last": "الاخير",
     "category": "الفئة",
     "starts_at": "يبدأ في",
