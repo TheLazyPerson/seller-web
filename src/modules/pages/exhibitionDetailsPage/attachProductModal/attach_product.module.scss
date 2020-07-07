@@ -1,4 +1,5 @@
 @import "~Styles/colors.module";
+@import "~Styles/mixins.module";
 
 .modal_container {
   width: 70%;
@@ -21,10 +22,33 @@
     .item_container {
       overflow: auto;
       flex-wrap: wrap;
-      justify-content: center;
+      padding-bottom: 10px;
     }
   }
   .product_loader {
     overflow: auto;
+  }
+}
+
+@include small {
+  .modal_container {
+    width: 95%;
+    .content_container {
+      .item_container {
+        justify-content: center;
+      }
+    }
+  }
+}
+
+.rtl {
+  .header_container {
+    flex-direction: row-reverse;
+  }
+
+  .content_container {
+    .item_container {
+      justify-content: flex-end;
+    }
   }
 }
