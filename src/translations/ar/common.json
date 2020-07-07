@@ -165,7 +165,24 @@
     "ends_on": "ينتهي",
     "start_at": "يبدأ في",
     "category": "التصنيفات",
-    "add_to_products": "أضف منتجاتك"
+    "last": "الاخير",
+    "days": "أيام",
+    "add_to_products": "أضف منتجاتك",
+    "product_details": "تفاصيل المنتج",
+    "left_to_enroll": "الأيام المتبقية للتسجيل",
+    "left_to_submit_products": "الأيام المتبقية لتقديم المنتجات",
+    "live_now": "عش الآن: انتهى",
+    "attach_modal": {
+      "title": "إرفاق المنتجات"
+    },
+    "subscription_option": {
+      "free": "مجانا",
+      "free_subtitle": "الدخول مجاني",
+      "flat_fee": "رسم موحد",
+      "flat_fee_subtitle": "يجب على أوني أن يدفع مرة واحدة",
+      "commission": "عمولة",
+      "commission_subtitle": "على كل منتج تبيعه"
+    }
   },
   "your_exhibition_list_page": {
     "btn_title": "المعارض",

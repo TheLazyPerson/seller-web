@@ -217,7 +217,24 @@
     "ends_on": "ENDS ON",
     "start_at": "STARTS AT:",
     "category": "CATEGORIES",
-    "add_to_products": "ADD YOUR PRODUCTS"
+    "last": "LAST",
+    "days": "DAYS",
+    "add_to_products": "ADD YOUR PRODUCTS",
+    "product_details": "PRODUCT DETAILS",
+    "left_to_enroll": "DAYS LEFT TO ENROLL",
+    "left_to_submit_products": "DAYS LEFT TO SUBMIT PRODUCTS",
+    "live_now": "LIVE NOW: ENDS IN ",
+    "attach_modal": {
+      "title": "ATTACH PRODUCTS"
+    },
+    "subscription_option": {
+      "free": "Free",
+      "free_subtitle": "Free to enter",
+      "flat_fee": "Flat Fee",
+      "flat_fee_subtitle": "Ony have to pay once",
+      "commission": "Commission",
+      "commission_subtitle": "On each product you sale"
+    }
   },
   "your_exhibition_list_page": {
     "btn_title": "EXHIBITIONS",
