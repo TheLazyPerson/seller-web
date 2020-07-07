@@ -62,6 +62,7 @@ class OrdersDetailsPage extends Component {
       getOrderDetailsAction,
       translate,
       isRTL,
+      languageReducer: { languageCode },
     } = this.props;
     const rowStyle = {
       fontSize: 12,
@@ -69,38 +70,40 @@ class OrdersDetailsPage extends Component {
     };
     const columns = [
       {
-        name: "ITEM CODE",
+        name: `${translate("order_details.table.item_code")}`,
         selector: "sku",
         style: rowStyle,
       },
       {
-        name: "NAME",
+        name: `${translate("order_details.table.name")}`,
         selector: "name",
         style: rowStyle,
+        cell: (value) => value.product.translations[languageCode].name,
       },
       {
-        name: "EXHIBITION NAME",
+        name: `${translate("order_details.table.exhibition_name")}`,
         selector: "exhibition.title",
         grow: 2,
         style: rowStyle,
+        cell: (value) => value.exhibition.translations[languageCode].title,
       },
       {
-        name: "PRICE",
+        name: `${translate("order_details.table.price")}`,
         selector: "price",
         style: rowStyle,
       },
       {
-        name: "QUANTITY",
+        name: `${translate("order_details.table.quantity")}`,
         selector: "qty_ordered",
         style: rowStyle,
       },
       {
-        name: "COMMISSION",
+        name: `${translate("order_details.table.commission")}`,
         selector: "commission",
         style: rowStyle,
       },
       {
-        name: "GRAND TOTAL",
+        name: `${translate("order_details.table.grand_total")}`,
         selector: "formated_base_total",
         style: rowStyle,
       },
@@ -162,13 +165,16 @@ class OrdersDetailsPage extends Component {
           >
             <DivColumn className={styles.order_container}>
               <div className={styles.order_id}>
-                {translate("order_details.order_id")} : <b>{order.id}</b>
+                {translate("order_details.order_id")} {isRTL ? ":" : ""}
+                <b>{order.id}</b> {!isRTL ? ":" : ""}
               </div>
               <div className={styles.placed_on}>
-                {translate("order_details.places_on")} :{" "}
+                {translate("order_details.places_on")} :
                 {formatUnixTimeStampToDateTime(order.created_at)}
               </div>
-              <div className={styles.status}>{order.status_label}</div>
+              <div className={styles.status}>
+                {translate("order_list.table." + order.status)}
+              </div>
             </DivColumn>
 
             <div className={styles.header}>
@@ -177,13 +183,16 @@ class OrdersDetailsPage extends Component {
 
             <DivColumn className={styles.normal_container}>
               <DivRow className={styles.title}>
-                {translate("order_details.name")} :{" "}
+                {isRTL ? ":" : ""}
+                {translate("order_details.name")}
+                {!isRTL ? ":" : ""}
                 <div className={styles.value}>
                   {order.customer_first_name} {order.customer_last_name}
                 </div>
               </DivRow>
               <DivRow className={styles.title}>
-                {translate("order_details.name")}:{" "}
+                {isRTL ? ":" : ""}
+                {translate("order_details.name")} {!isRTL ? ":" : ""}
                 <div className={styles.value}>{order.customer_email}</div>
               </DivRow>
             </DivColumn>
@@ -191,7 +200,7 @@ class OrdersDetailsPage extends Component {
             <div className={styles.header}>
               {translate("order_details.product_list")}
             </div>
-            <div>
+            <div className={styles.datatable_container}>
               <DataTable
                 columns={columns}
                 customStyles={customStyles}
@@ -266,6 +275,7 @@ const mapStateToProps = (state) => {
   return {
     orderReducer: state.orderReducer,
     isRTL: state.languageReducer.isRTL,
+    languageReducer: state.languageReducer,
   };
 };
 
