@@ -1,1 +1,8 @@
-@import '~Styles/colors.module';
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
+
+@include small {
+  .date_container {
+    width: 80vw;
+  }
+}

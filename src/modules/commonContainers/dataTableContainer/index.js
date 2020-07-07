@@ -24,40 +24,6 @@ const contextActions = memoize((deleteHandler) => (
   </IconButton>
 ));
 
-// const columns = memoize(() => [
-//   {
-//     name: "ID",
-//     selector: "id",
-//     sortable: true,
-//   },
-//   {
-//     name: "ORDER DATE",
-//     selector: "order_date",
-//     sortable: true,
-//   },
-//   {
-//     name: "EXHIBITION NAME",
-//     selector: "exhibition_name",
-//     sortable: true,
-//     grow: 2,
-//   },
-//   {
-//     name: "GRAND TOTAL",
-//     selector: "grand_total",
-//     sortable: true,
-//   },
-//   {
-//     name: "TOTAL ITEMS",
-//     selector: "total_items",
-//     sortable: true,
-//   },
-//   {
-//     name: "STATUS",
-//     selector: "status",
-//     sortable: true,
-//   },
-// ]);
-
 class OrdersPage extends Component {
   state = {
     selectedRows: [],
@@ -111,6 +77,7 @@ class OrdersPage extends Component {
             pagination
             noHeader={true}
             direction={isRTL ? "rtl" : "ltr"}
+            responsive={true}
             //TODO: Configure later
             // expandableRows
           />
