@@ -14,6 +14,7 @@ class ProductListItem extends Component {
       onClickAttachProduct,
       onClickRemoveProduct,
       translate,
+      languageCode,
     } = this.props;
     const ACTION_TYPE_ATTACH_PRODUCT = "attach_product";
     const ACTION_TYPE_MARK_OUT_OF_STOCK = "mark_product_out_of_stock";
@@ -24,9 +25,15 @@ class ProductListItem extends Component {
         horizontalCenter
         className={styles.product_list_item_container}
       >
-        <div className={styles.title}>{product.translations.en.name}</div>
+        <div className={styles.title}>
+          {!isEmpty(languageCode)
+            ? product.translations[languageCode].name
+            : product.translations.en.name}
+        </div>
         <div className={styles.description}>
-          {product.translations.en.short_description}
+          {!isEmpty(languageCode)
+            ? product.translations[languageCode].short_description
+            : product.translations.en.short_description}
         </div>
         {!isEmpty(product.thumbnail) && (
           <img src={product.thumbnail.path} className={styles.image} />
