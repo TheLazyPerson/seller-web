@@ -66,7 +66,7 @@ class YourExhibitionListingPage extends Component {
           <DivRow className={styles.date_container}>
             <div className={styles.date_title}>
               {isRTL ? ":" : ""}
-              {translate("your_exhibition_list_page.starts_at")}:
+              {translate("your_exhibition_list_page.starts_at")}
               {!isRTL ? ":" : ""}
             </div>
             <div className={styles.date_value}>

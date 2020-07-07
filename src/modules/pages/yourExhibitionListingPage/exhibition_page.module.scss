@@ -137,7 +137,11 @@
   }
   .action_container {
     flex-direction: row-reverse;
+    .action_button {
+      margin-right: auto;
+    }
     .last_date {
+      direction: rtl;
       margin-right: 0px !important;
       margin-left: 10px !important;
     }
