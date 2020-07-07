@@ -192,7 +192,7 @@ class OrdersDetailsPage extends Component {
               </DivRow>
               <DivRow className={styles.title}>
                 {isRTL ? ":" : ""}
-                {translate("order_details.name")} {!isRTL ? ":" : ""}
+                {translate("order_details.email")} {!isRTL ? ":" : ""}
                 <div className={styles.value}>{order.customer_email}</div>
               </DivRow>
             </DivColumn>
