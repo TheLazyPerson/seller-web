@@ -210,7 +210,33 @@
     "shipping_methods": "طريقة الشحن",
     "payment_method": "طريقة الدفع او السداد",
     "email": "البريد الإلكتروني",
-    "print_invoice": "فاتورة طباعة"
+    "print_invoice": "فاتورة طباعة",
+    "table": {
+      "item_code": "رمز الصنف",
+      "name": "اسم",
+      "exhibition_name": "اسم المعرض",
+      "price": "السعر",
+      "quantity": "كمية",
+      "commission": "سمسرة",
+      "grand_total": "المبلغ الإجمالي"
+    }
+  },
+  "order_list": {
+    "table": {
+      "id": "هوية شخصية",
+      "order_date": "تاريخ الطلب",
+      "grand_total": "المبلغ الإجمالي",
+      "total_items": "البنود الإجمالية",
+      "status": "الحالة",
+      "view": "رأي",
+      "pending": "قيد الانتظار",
+      "pending_payment": "قيد الانتظار",
+      "processing": "معالجة",
+      "pickup_requested": "معالجة",
+      "shipped": "شحنها",
+      "out_for_delivery": "خارج للتوصيل",
+      "completed": "منجز"
+    }
   },
   "product_list": {
     "title": "منتجات",

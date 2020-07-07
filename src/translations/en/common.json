@@ -262,7 +262,33 @@
     "shipping_methods": "SHIPPING METHOD",
     "payment_method": "PAYMENT METHOD",
     "email": "Email",
-    "print_invoice": "Print Invoice"
+    "print_invoice": "Print Invoice",
+    "table": {
+      "item_code": "ITEM CODE",
+      "name": "NAME",
+      "exhibition_name": "EXHIBITION NAME",
+      "price": "PRICE",
+      "quantity": "QUANTITY",
+      "commission": "COMMISSION",
+      "grand_total": "GRAND TOTAL"
+    }
+  },
+  "order_list": {
+    "table": {
+      "id": "ID",
+      "order_date": "ORDER DATE",
+      "grand_total": "GRAND TOTAL",
+      "total_items": "TOTAL ITEMS",
+      "status": "STATUS",
+      "view": "View",
+      "pending": "Pending",
+      "pending_payment": "Pending",
+      "processing": "Processing",
+      "pickup_requested": "Processing",
+      "shipped": "Shipped",
+      "out_for_delivery": "Out For Delivery",
+      "completed": "Completed"
+    }
   },
   "product_list": {
     "title": "PRODUCTS",
