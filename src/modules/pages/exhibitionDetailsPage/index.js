@@ -32,13 +32,15 @@ const exhibitionState = {
   ENROLLED_LIVE: "live",
 };
 
-const ProductDescription = ({ exhibitionDetail, translate }) => (
+const ProductDescription = ({ exhibitionDetail, translate, languageCode }) => (
   <Fragment>
     <div className={styles.title}>
-      {" "}
       {translate("exhibition_details_page.discription")}:
     </div>
-    <div className={styles.description}>{exhibitionDetail.description}</div>
+    <div className={styles.description}>
+      {!isEmpty(exhibitionDetail) &&
+        exhibitionDetail.translations[languageCode].description}
+    </div>
   </Fragment>
 );
 
@@ -94,6 +96,7 @@ class ExhibitionDetailsPage extends Component {
       getExhibitionDetailAction,
       translate,
       isRTL,
+      languageReducer: { languageCode },
     } = this.props;
     const { showModal } = this.state;
 
@@ -135,21 +138,38 @@ class ExhibitionDetailsPage extends Component {
 
                 <DivColumn className={styles.banner_content}>
                   <div className={styles.exhibition_name}>
-                    {exhibitionDetail.title}
+                    {!isEmpty(exhibitionDetail) &&
+                      exhibitionDetail.translations[languageCode].title}
                   </div>
                   <div className={styles.exhibition_description}>
-                    {exhibitionDetail.short_description}
+                    {!isEmpty(exhibitionDetail) &&
+                      exhibitionDetail.translations[languageCode]
+                        .short_description}
                   </div>
                   <div className={styles.exhibition_date}>
                     {exhibitionState.UPCOMING_ENROLLED ===
                       exhibitionDetail.state &&
-                      `LAST ${calculateDateDiffFrom(
+                      ` ${translate(
+                        "exhibition_details_page.last"
+                      )} ${calculateDateDiffFrom(
                         exhibitionDetail.starts_from
-                      )} DAYS LEFT TO SUBMIT PRODUCTS`}
+                      )} ${translate(
+                        "exhibition_details_page.left_to_submit_products"
+                      )}`}
                     {exhibitionState.UPCOMING === exhibitionDetail.state &&
-                      `LAST ${calculateDateDiff(
+                      ` ${translate(
+                        "exhibition_details_page.last"
+                      )} ${calculateDateDiff(
                         exhibitionDetail.last_date_of_enrollment
-                      )} DAYS LEFT TO ENROLL`}
+                      )} ${translate(
+                        "exhibition_details_page.left_to_enroll"
+                      )}`}
+                    {exhibitionState.ENROLLED_LIVE === exhibitionDetail.state &&
+                      ` ${translate(
+                        "exhibition_details_page.live_now"
+                      )} ${calculateDateDiff(
+                        exhibitionDetail.ends_till
+                      )} ${translate("exhibition_details_page.days")}`}
                   </div>
                 </DivColumn>
                 {exhibitionState.UPCOMING === exhibitionDetail.state && (
@@ -172,7 +192,7 @@ class ExhibitionDetailsPage extends Component {
                         {translate("exhibition_details_page.overview")} :
                       </div>
                       {!isEmpty(exhibitionDetail.overview.card) && (
-                        <DivRow className="overview_box_container">
+                        <DivRow className={styles.overview_box_container}>
                           {map(exhibitionDetail.overview.card, (card) => {
                             return (
                               <BoxComponent
@@ -190,7 +210,7 @@ class ExhibitionDetailsPage extends Component {
                                 title={`${
                                   card.card_type === "price-card" ? "KD " : ""
                                 } ${card.value}`}
-                                description={card.title}
+                                description={card.title[languageCode]}
                               />
                             );
                           })}
@@ -201,6 +221,7 @@ class ExhibitionDetailsPage extends Component {
                     <ProductDescription
                       exhibitionDetail={exhibitionDetail}
                       translate={translate}
+                      languageCode={languageCode}
                     />
                   )}
                 </DivColumn>
@@ -210,6 +231,7 @@ class ExhibitionDetailsPage extends Component {
                     <ProductDescription
                       exhibitionDetail={exhibitionDetail}
                       translate={translate}
+                      languageCode={languageCode}
                     />
                   ) : (
                     <Fragment>
@@ -246,7 +268,9 @@ class ExhibitionDetailsPage extends Component {
               )}
               {exhibitionState.UPCOMING !== exhibitionDetail.state && (
                 <Fragment>
-                  <NavHeader title="PRODUCT DETAILS">
+                  <NavHeader
+                    title={translate("exhibition_details_page.product_details")}
+                  >
                     {exhibitionState.UPCOMING_ENROLLED ===
                       exhibitionDetail.state && (
                       <CapsuleButton
@@ -271,6 +295,7 @@ class ExhibitionDetailsPage extends Component {
                         onClickAttachProduct={this.onClickAttachProduct}
                         onClickRemoveProduct={this.onClickRemoveProduct}
                         exhibitionId={exhibitionDetail.id}
+                        languageCode={languageCode}
                       />
                     ))}
                   </DivRow>
@@ -288,6 +313,9 @@ class ExhibitionDetailsPage extends Component {
                 onClickAttachProduct={this.onClickAttachProduct}
                 onClickRemoveProduct={this.onClickRemoveProduct}
                 productList={productList}
+                languageCode={languageCode}
+                translate={translate}
+                isRTL={isRTL}
               />
             </InitialPageLoader>
           </InitialPageLoader>
@@ -302,6 +330,7 @@ const mapStateToProps = (state) => {
     exhibitionReducer: state.exhibitionReducer,
     productReducer: state.productReducer,
     isRTL: state.languageReducer.isRTL,
+    languageReducer: state.languageReducer,
   };
 };
 
