@@ -37,6 +37,9 @@
     }
   }
 }
+.rtl {
+  flex-direction: row-reverse;
+}
 
 @include small {
   .deliveringOrders {
@@ -92,8 +95,4 @@
       }
     }
   }
-}
-
-.rtl {
-  flex-direction: row-reverse;
 }
