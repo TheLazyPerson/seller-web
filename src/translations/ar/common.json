@@ -251,6 +251,27 @@
       "view": "رأي"
     }
   },
+  "product_details": {
+    "title": "تفاصيل المنتج",
+    "delete": "حذف",
+    "edit": "تصحيح"
+  },
+  "edit_product": {
+    "title": "تحرير المنتج",
+    "cancel": "إلغاء",
+    "save": "حفظ التفاصيل"
+  },
+  "add_product": {
+    "title": "أضف منتج",
+    "sku": "رمز الصنف",
+    "product_vertical": "المنتج العمودي",
+    "cancel": "إلغاء",
+    "save": "حفظ التفاصيل"
+  },
+  "image_selection_component": {
+    "title": "صور",
+    "help_text": "اسحب وأفلت بعض الملفات هنا ، أو انقر لتحديد الملفات"
+  },
   "sales_list": {
     "title": "المعاملات",
     "search": "بحث",

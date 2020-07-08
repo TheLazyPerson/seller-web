@@ -296,12 +296,34 @@
     "search": "Search",
     "table": {
       "id": "ID",
-      "sku": "SKU",
+      "sku": "ITEM CODE",
       "name": "NAME",
       "price": "PRICE",
       "quantity": "QUANTITY",
       "view": "View"
     }
+  },
+  "product_details": {
+    "title": "Product Detail",
+    "delete": "Delete",
+    "edit": "Edit"
+  },
+  "edit_product": {
+    "title": "Edit Product",
+    "cancel": "Cancel",
+    "save": "Save Details"
+  },
+
+  "image_selection_component": {
+    "title": "Images",
+    "help_text": "Drag 'n' drop some files here, or click to select files"
+  },
+  "add_product": {
+    "title": "Add Product",
+    "sku": "Item Code",
+    "product_vertical": "Product Vertical",
+    "cancel": "Cancel",
+    "save": "Save Details"
   },
   "sales_list": {
     "title": "Transactions",
@@ -371,7 +393,7 @@
     "comment": "Comment",
     "products_order": "PRODUCTS ORDERED",
     "table": {
-      "sku": "SKU",
+      "sku": "ITEM CODE",
       "name": "NAME",
       "exhibition_name": "EXHIBITION NAME",
       "price": "PRICE",

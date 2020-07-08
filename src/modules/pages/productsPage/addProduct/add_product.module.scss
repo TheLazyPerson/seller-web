@@ -95,3 +95,18 @@
     }
   }
 }
+
+.rtl {
+  .page_container {
+    padding: 17px 54px 9px 0px;
+    text-align: right;
+  }
+  .form_container {
+    padding: 17px 54px 9px 0px;
+    margin-left: auto;
+
+    button {
+      margin-left: 10px;
+    }
+  }
+}
