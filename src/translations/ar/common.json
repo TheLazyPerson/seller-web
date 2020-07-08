@@ -316,7 +316,16 @@
     "payment_method": " طريقة الدفع او السداد",
     "total": "مجموع",
     "comment": "تعليق",
-    "products_order": "المنتجات المطلوبة"
+    "products_order": "المنتجات المطلوبة",
+    "table": {
+      "sku": "رمز التخزين التعريفي",
+      "name": "اسم",
+      "exhibition_name": "اسم المعرض",
+      "price": "السعر",
+      "quantity": "كمية",
+      "commission": "عمولة",
+      "grand_total": "المبلغ الإجمالي"
+    }
   },
   "marketplace_profile_details": {
     "title": "تفاصيل ملف تعريف السوق",

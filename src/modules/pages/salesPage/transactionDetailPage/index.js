@@ -12,6 +12,7 @@ import DataTable from "react-data-table-component";
 import { getTransactionDetailsAction } from "Core/modules/transaction/transactionActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import translatorHoc from "Hoc/translatorHoc";
+import { formatUnixTimeStampToDateTime } from "Utils/formatHelper";
 
 class TransactionDetailsPage extends Component {
   state = {
@@ -53,44 +54,6 @@ class TransactionDetailsPage extends Component {
       fontSize: 12,
       color: "#19202c",
     };
-    const columns = [
-      {
-        name: "SKU",
-        selector: "sku",
-        style: rowStyle,
-      },
-      {
-        name: "NAME",
-        selector: "name",
-        style: rowStyle,
-      },
-      {
-        name: "EXHIBITION NAME",
-        selector: "exhibition.title",
-        grow: 2,
-        style: rowStyle,
-      },
-      {
-        name: "PRICE",
-        selector: "price",
-        style: rowStyle,
-      },
-      {
-        name: "QUANTITY",
-        selector: "qty_ordered",
-        style: rowStyle,
-      },
-      {
-        name: "COMMISSION",
-        selector: "commission",
-        style: rowStyle,
-      },
-      {
-        name: "GRAND TOTAL",
-        selector: "formated_base_total",
-        style: rowStyle,
-      },
-    ];
 
     const customStyles = {
       headRow: {
@@ -115,7 +78,49 @@ class TransactionDetailsPage extends Component {
       getTransactionDetailsAction,
       translate,
       isRTL,
+      languageReducer: { languageCode },
     } = this.props;
+
+    const columns = [
+      {
+        name: `${translate("transaction_details_page.table.sku")}`,
+        selector: "sku",
+        style: rowStyle,
+      },
+      {
+        name: `${translate("transaction_details_page.table.name")}`,
+        selector: "name",
+        style: rowStyle,
+        cell: (value) => value.product.translations[languageCode].name,
+      },
+      {
+        name: `${translate("transaction_details_page.table.exhibition_name")}`,
+        selector: "exhibition.title",
+        grow: 2,
+        style: rowStyle,
+        cell: (value) => value.exhibition.translations[languageCode].title,
+      },
+      {
+        name: `${translate("transaction_details_page.table.price")}`,
+        selector: "price",
+        style: rowStyle,
+      },
+      {
+        name: `${translate("transaction_details_page.table.quantity")}`,
+        selector: "qty_ordered",
+        style: rowStyle,
+      },
+      {
+        name: `${translate("transaction_details_page.table.commission")}`,
+        selector: "commission",
+        style: rowStyle,
+      },
+      {
+        name: `${translate("transaction_details_page.table.grand_total")}`,
+        selector: "formated_base_total",
+        style: rowStyle,
+      },
+    ];
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
@@ -140,12 +145,16 @@ class TransactionDetailsPage extends Component {
           >
             <DivColumn className={styles.order_container}>
               <div className={styles.order_id}>
-                {translate("transaction_details_page.transaction_id")} :{" "}
+                {isRTL ? ":" : ""}
+                {translate("transaction_details_page.transaction_id")}
+                {!isRTL ? ":" : ""}
                 <b>{transaction.transaction_id}</b>
               </div>
               <div className={styles.placed_on}>
-                {translate("transaction_details_page.created_on")} :{" "}
-                {transaction.created_on}{" "}
+                {isRTL ? ":" : ""}
+                {translate("transaction_details_page.created_on")}
+                {!isRTL ? ":" : ""}
+                {formatUnixTimeStampToDateTime(transaction.created_on)}
               </div>
               {/* <div className={styles.status}>SUCCESSFUL</div> */}
             </DivColumn>
@@ -157,15 +166,21 @@ class TransactionDetailsPage extends Component {
 
             <DivColumn className={styles.normal_container}>
               <DivRow className={styles.title}>
-                {translate("transaction_details_page.payment_method")} :{" "}
+                {isRTL ? ":" : ""}
+                {translate("transaction_details_page.payment_method")}
+                {!isRTL ? ":" : ""}
                 <div className={styles.value}>{transaction.payment_method}</div>
               </DivRow>
               <DivRow className={styles.title}>
-                {translate("transaction_details_page.total")} :{" "}
+                {isRTL ? ":" : ""}
+                {translate("transaction_details_page.total")}
+                {!isRTL ? ":" : ""}
                 <div className={styles.value}>{transaction.payout_amount}</div>
               </DivRow>
               <DivRow className={styles.title}>
-                {translate("transaction_details_page.comment")} :{" "}
+                {isRTL ? ":" : ""}
+                {translate("transaction_details_page.comment")}
+                {!isRTL ? ":" : ""}
                 <div className={styles.value}>{transaction.comment}</div>
               </DivRow>
             </DivColumn>
@@ -174,16 +189,18 @@ class TransactionDetailsPage extends Component {
               {" "}
               {translate("transaction_details_page.products_order")}
             </div>
-
-            {transaction.order && (
-              <DataTable
-                columns={columns}
-                customStyles={customStyles}
-                data={transaction.order.items}
-                style={{ minHeight: 200 }}
-                noHeader={true}
-              />
-            )}
+            <div className={styles.datatable_container}>
+              {transaction.order && (
+                <DataTable
+                  columns={columns}
+                  customStyles={customStyles}
+                  data={transaction.order.items}
+                  style={{ minHeight: 200 }}
+                  noHeader={true}
+                  direction={isRTL ? "rtl" : "ltr"}
+                />
+              )}
+            </div>
           </DivColumn>
         </InitialPageLoader>
       </SectionedContainer>
@@ -195,6 +212,7 @@ const mapStateToProps = (state) => {
   return {
     transactionReducer: state.transactionReducer,
     isRTL: state.languageReducer.isRTL,
+    languageReducer: state.languageReducer,
   };
 };
 

@@ -308,7 +308,7 @@
     "table": {
       "id": "ID",
       "transaction_id": "TRANSACTION ID",
-      "comment": "Comment",
+      "comment": "COMMENT",
       "grand_total": "GRAND TOTAL",
       "view_button": "View"
     }
@@ -368,7 +368,16 @@
     "payment_method": " Payment Method",
     "total": "Total",
     "comment": "Comment",
-    "products_order": "PRODUCTS ORDERED"
+    "products_order": "PRODUCTS ORDERED",
+    "table": {
+      "sku": "SKU",
+      "name": "NAME",
+      "exhibition_name": "EXHIBITION NAME",
+      "price": "PRICE",
+      "quantity": "QUANTITY",
+      "commission": "COMMISSION",
+      "grand_total": "GRAND TOTAL"
+    }
   },
   "marketplace_profile_details": {
     "title": "Marketplace Profile details",
