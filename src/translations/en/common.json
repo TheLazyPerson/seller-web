@@ -542,5 +542,10 @@
     "payment": "Payment Failed",
     "description": "There was problem while accepting your payment.",
     "retry": "retry"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "HELP",
+    "app_name": "Home Expo"
   }
 }
