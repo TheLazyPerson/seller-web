@@ -18,6 +18,7 @@ import InitialPageLoader from "CommonContainers/initialPageLoader";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import Button from "@material-ui/core/Button";
 import translatorHoc from "Hoc/translatorHoc";
+import isEmpty from "lodash/isEmpty";
 
 class ProductsPage extends Component {
   onClickNewProduct = () => {
@@ -45,9 +46,13 @@ class ProductsPage extends Component {
       },
       {
         name: `${translate("product_list.table.name")}`,
-        selector: `translations[${languageCode}].name`,
+        selector: `name`,
         sortable: true,
         grow: 2,
+        cell: (value) =>
+          !isEmpty(value.translations)
+            ? value.translations[languageCode].name
+            : " ",
       },
       {
         name: `${translate("product_list.table.price")}`,
@@ -58,6 +63,8 @@ class ProductsPage extends Component {
         name: `${translate("product_list.table.quantity")}`,
         selector: "inventory.qty",
         sortable: true,
+        cell: (value) =>
+          !isEmpty(value.inventory) ? value.inventory.qty : " ",
       },
       {
         cell: (value) => (
@@ -70,7 +77,7 @@ class ProductsPage extends Component {
               navigateTo("product-details", { productId: value.id });
             }}
           >
-            View
+            {translate("product_list.table.view")}
           </Button>
         ),
         button: true,

@@ -299,7 +299,8 @@
       "sku": "SKU",
       "name": "NAME",
       "price": "PRICE",
-      "quantity": "QUANTITY"
+      "quantity": "QUANTITY",
+      "view": "View"
     }
   },
   "sales_list": {
