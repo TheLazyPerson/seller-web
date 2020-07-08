@@ -169,8 +169,10 @@ class OrdersDetailsPage extends Component {
                 <b>{order.id}</b> {!isRTL ? ":" : ""}
               </div>
               <div className={styles.placed_on}>
-                {translate("order_details.places_on")} :
-                {formatUnixTimeStampToDateTime(order.created_at)}
+                {translate("order_details.places_on")}
+                {isRTL ? ":" : ""}
+                {formatUnixTimeStampToDateTime(order.created_at)}{" "}
+                {!isRTL ? ":" : ""}
               </div>
               <div className={styles.status}>
                 {translate("order_list.table." + order.status)}

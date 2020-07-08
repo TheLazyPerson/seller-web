@@ -327,7 +327,38 @@
     "shipping_methods": "SHIPPING METHOD",
     "payment_method": "PAYMENT METHOD",
     "email": "Email",
-    "products_order": "PRODUCTS ORDERED"
+    "products_order": "PRODUCTS ORDERED",
+    "table": {
+      "item_code": "ITEM CODE",
+      "name": "NAME",
+      "exhibition_name": "EXHIBITION NAME",
+      "quantity": "QUANTITY",
+      "quantity_to_ship": "QUANTITY TO SHIP"
+    }
+  },
+  "create_pickup_request": {
+    "title": "Create Shipping Request",
+    "order_id": "Order ID",
+    "places_on": " Placed On",
+    "customer_details": "CUSTOMER DETAILS",
+    "name": "Name",
+    "email": "Email",
+    "product_list": "PRODUCT LIST",
+    "shipping_address": "SHIPPING ADDRESS",
+    "billing_address": "BILLING ADDRESS",
+    "shipping_methods": "SHIPPING METHOD",
+    "payment_method": "PAYMENT METHOD",
+    "form_title": "FILL IN THESE DETAILS",
+    "select_pickup_date": "Select Pickup Date",
+
+    "create_request": "Create Request",
+    "table": {
+      "item_code": "ITEM CODE",
+      "name": "NAME",
+      "exhibition_name": "EXHIBITION NAME",
+      "quantity": "QUANTITY",
+      "quantity_to_ship": "QUANTITY TO SHIP"
+    }
   },
   "transaction_details_page": {
     "title": "TRASACTION DETAIL",

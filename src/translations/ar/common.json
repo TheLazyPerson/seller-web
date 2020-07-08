@@ -275,7 +275,38 @@
     "shipping_methods": "طريقة الشحن",
     "payment_method": "طريقة الدفع او السداد",
     "email": "البريد الإلكتروني",
-    "products_order": "المنتجات المطلوبة"
+    "products_order": "المنتجات المطلوبة",
+    "table": {
+      "item_code": "رمز الصنف",
+      "name": "اسم",
+      "exhibition_name": "اسم المعرض",
+      "quantity": "كمية",
+      "quantity_to_ship": "كمية الشحن"
+    }
+  },
+  "create_pickup_request": {
+    "title": "إنشاء طلب شحن",
+    "order_id": "رقم التعريف الخاص بالطلب",
+    "places_on": "موضوع على",
+    "customer_details": "تفاصيل العميل",
+    "name": "اسم",
+    "email": "البريد الإلكتروني",
+    "product_list": "قائمة المنتجات",
+    "shipping_address": "عنوان الشحن",
+    "billing_address": "عنوان وصول الفواتير",
+    "shipping_methods": "طريقة الشحن",
+    "payment_method": "طريقة الدفع او السداد",
+    "form_title": "املأ هذه التفاصيل",
+    "create_request": "إنشاء طلب",
+    "select_pickup_date": "حدد تاريخ الاستلام",
+
+    "table": {
+      "item_code": "رمز الصنف",
+      "name": "اسم",
+      "exhibition_name": "اسم المعرض",
+      "quantity": "كمية",
+      "quantity_to_ship": "كمية الشحن"
+    }
   },
   "transaction_details_page": {
     "title": "تفاصيل المعاملة",
