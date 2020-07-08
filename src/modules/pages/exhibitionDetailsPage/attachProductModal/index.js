@@ -14,6 +14,9 @@ class AttachProductModal extends Component {
       onClose,
       onClickAttachProduct,
       onClickRemoveProduct,
+      translate,
+      languageCode,
+      isRTL,
     } = this.props;
     const { productList, exhibitionId } = this.props;
     return (
@@ -30,11 +33,13 @@ class AttachProductModal extends Component {
           onClick={onClose}
         >
           <DivColumn
-            className={styles.modal_container}
+            className={` ${styles.modal_container} ${isRTL ? styles.rtl : ""}`}
             onClick={(event) => event.stopPropagation()}
           >
             <DivRow verticalCenter className={styles.header_container}>
-              <div className={styles.header_title}>ATTACH PRODUCTS</div>
+              <div className={styles.header_title}>
+                {translate("exhibition_details_page.attach_modal.title")}
+              </div>
               <SearchBarComponent />
             </DivRow>
 
@@ -47,6 +52,7 @@ class AttachProductModal extends Component {
                     exhibitionId={exhibitionId}
                     onClickAttachProduct={onClickAttachProduct}
                     onClickRemoveProduct={onClickRemoveProduct}
+                    languageCode={languageCode}
                   />
                 ))}
               </DivRow>

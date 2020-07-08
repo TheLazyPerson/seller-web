@@ -19,7 +19,7 @@ import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import { createProductAction } from "Core/modules/product/productActions";
 import { getAttributeFamilyAction } from "Core/modules/basic/basicActions";
 import map from "lodash/map";
-
+import translatorHoc from "Hoc/translatorHoc";
 import Select from "react-select";
 
 class AddProduct extends Component {
@@ -73,22 +73,13 @@ class AddProduct extends Component {
   };
 
   render() {
-    // const CustomRenderInput = ({ input, name, value, onClick, meta }) => {
-    //   return (
-    //     <InputTextComponent
-    //       {...input}
-    //       meta={meta}
-    //       placeholder={name}
-    //       value={value}
-    //       className={styles.input_text}
-    //       onClick={onClick}
-    //     />
-    //   );
-    // };
     const {
       onClickCancel,
       basicReducer: { attributeFamilies },
       getAttributeFamilyAction,
+      translate,
+      isRTL,
+      languageReducer: { languageCode },
     } = this.props;
 
     // const productTypes = [
@@ -108,10 +99,13 @@ class AddProduct extends Component {
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <NavHeader
-          title="Add Product"
+          title={translate("add_product.title")}
           onBackClick={this.onBackPress}
         ></NavHeader>
-        <DivColumn fillParent className={styles.page_container}>
+        <DivColumn
+          fillParent
+          className={` ${styles.page_container} ${isRTL ? styles.rtl : ""}`}
+        >
           <InitialPageLoader initialPageApi={getAttributeFamilyAction}>
             <Form
               onSubmit={this.onSubmit}
@@ -125,32 +119,12 @@ class AddProduct extends Component {
               }) => (
                 <form className={styles.form_container} onSubmit={handleSubmit}>
                   <DivColumn className={styles.text_input_container}>
-                    {/* <Field name="type">
-                      {({ input, meta }) => (
-                        <DivColumn className="input_select_container">
-                          <Select
-                            options={productTypes}
-                            onChange={(value) => {
-                              input.onChange(value.value);
-                            }}
-                            className="react-select-container"
-                            classNamePrefix="react-select"
-                            placeholder="Product Type"
-                            defaultValue={defaultProductType}
-                          />
-                          {meta.error && meta.touched && (
-                            <span className="error_text">{meta.error}</span>
-                          )}
-                        </DivColumn>
-                      )}
-                    </Field> */}
-
                     <Field name="sku">
                       {({ input, meta }) => (
                         <InputTextComponent
                           meta={meta}
                           {...input}
-                          placeholder="Item Code"
+                          placeholder={translate("add_product.sku")}
                           className={styles.input_text}
                         />
                       )}
@@ -166,7 +140,9 @@ class AddProduct extends Component {
                             }}
                             className="react-select-container"
                             classNamePrefix="react-select"
-                            placeholder="Product Vertical"
+                            placeholder={translate(
+                              "add_product.product_vertical"
+                            )}
                             defaultValue={defaultAttributeFamily}
                           />
                           {meta.error && meta.touched && (
@@ -179,10 +155,10 @@ class AddProduct extends Component {
 
                   <DivRow className={styles.form_button_container}>
                     <SecondaryCapsuleButton onClick={onClickCancel}>
-                      Cancel
+                      {translate("add_product.cancel")}
                     </SecondaryCapsuleButton>
                     <CapsuleButton type="submit" disabled={submitting}>
-                      Save Details
+                      {translate("add_product.save")}
                     </CapsuleButton>
                   </DivRow>
                 </form>
@@ -199,6 +175,8 @@ const mapStateToProps = (state) => {
   return {
     productReducer: state.productReducer,
     basicReducer: state.basicReducer,
+    languageReducer: state.languageReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 
@@ -219,4 +197,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(AddProduct));
+)(navigatorHoc(translatorHoc(AddProduct)));

@@ -165,12 +165,31 @@
     "ends_on": "ينتهي",
     "start_at": "يبدأ في",
     "category": "التصنيفات",
-    "add_to_products": "أضف منتجاتك"
+    "last": "الاخير",
+    "days": "أيام",
+    "add_to_products": "أضف منتجاتك",
+    "product_details": "تفاصيل المنتج",
+    "left_to_enroll": "الأيام المتبقية للتسجيل",
+    "left_to_submit_products": "الأيام المتبقية لتقديم المنتجات",
+    "live_now": "عش الآن: انتهى",
+    "attach_modal": {
+      "title": "إرفاق المنتجات"
+    },
+    "subscription_option": {
+      "free": "مجانا",
+      "free_subtitle": "الدخول مجاني",
+      "flat_fee": "رسم موحد",
+      "flat_fee_subtitle": "يجب على أوني أن يدفع مرة واحدة",
+      "commission": "عمولة",
+      "commission_subtitle": "على كل منتج تبيعه"
+    }
   },
   "your_exhibition_list_page": {
     "btn_title": "المعارض",
     "view_details": "عرض التفاصيل",
-    "left_to_enroll": "الأيام المتبقية للتسجيل",
+    "left_to_enroll": "الأيام المتبقية لتقديم المنتجات",
+    "live_now": "عش الآن: انتهى",
+    "days": "أيام",
     "last": "الاخير",
     "category": "الفئة",
     "starts_at": "يبدأ في",
@@ -191,7 +210,33 @@
     "shipping_methods": "طريقة الشحن",
     "payment_method": "طريقة الدفع او السداد",
     "email": "البريد الإلكتروني",
-    "print_invoice": "فاتورة طباعة"
+    "print_invoice": "فاتورة طباعة",
+    "table": {
+      "item_code": "رمز الصنف",
+      "name": "اسم",
+      "exhibition_name": "اسم المعرض",
+      "price": "السعر",
+      "quantity": "كمية",
+      "commission": "سمسرة",
+      "grand_total": "المبلغ الإجمالي"
+    }
+  },
+  "order_list": {
+    "table": {
+      "id": "هوية شخصية",
+      "order_date": "تاريخ الطلب",
+      "grand_total": "المبلغ الإجمالي",
+      "total_items": "البنود الإجمالية",
+      "status": "الحالة",
+      "view": "رأي",
+      "pending": "قيد الانتظار",
+      "pending_payment": "قيد الانتظار",
+      "processing": "معالجة",
+      "pickup_requested": "معالجة",
+      "shipped": "شحنها",
+      "out_for_delivery": "خارج للتوصيل",
+      "completed": "منجز"
+    }
   },
   "product_list": {
     "title": "منتجات",
@@ -202,8 +247,30 @@
       "sku": "وحدة حفظ الأوراق المالية",
       "name": "اسم",
       "price": "السعر",
-      "quantity": "كمية"
+      "quantity": "كمية",
+      "view": "رأي"
     }
+  },
+  "product_details": {
+    "title": "تفاصيل المنتج",
+    "delete": "حذف",
+    "edit": "تصحيح"
+  },
+  "edit_product": {
+    "title": "تحرير المنتج",
+    "cancel": "إلغاء",
+    "save": "حفظ التفاصيل"
+  },
+  "add_product": {
+    "title": "أضف منتج",
+    "sku": "رمز الصنف",
+    "product_vertical": "المنتج العمودي",
+    "cancel": "إلغاء",
+    "save": "حفظ التفاصيل"
+  },
+  "image_selection_component": {
+    "title": "صور",
+    "help_text": "اسحب وأفلت بعض الملفات هنا ، أو انقر لتحديد الملفات"
   },
   "sales_list": {
     "title": "المعاملات",
@@ -230,7 +297,38 @@
     "shipping_methods": "طريقة الشحن",
     "payment_method": "طريقة الدفع او السداد",
     "email": "البريد الإلكتروني",
-    "products_order": "المنتجات المطلوبة"
+    "products_order": "المنتجات المطلوبة",
+    "table": {
+      "item_code": "رمز الصنف",
+      "name": "اسم",
+      "exhibition_name": "اسم المعرض",
+      "quantity": "كمية",
+      "quantity_to_ship": "كمية الشحن"
+    }
+  },
+  "create_pickup_request": {
+    "title": "إنشاء طلب شحن",
+    "order_id": "رقم التعريف الخاص بالطلب",
+    "places_on": "موضوع على",
+    "customer_details": "تفاصيل العميل",
+    "name": "اسم",
+    "email": "البريد الإلكتروني",
+    "product_list": "قائمة المنتجات",
+    "shipping_address": "عنوان الشحن",
+    "billing_address": "عنوان وصول الفواتير",
+    "shipping_methods": "طريقة الشحن",
+    "payment_method": "طريقة الدفع او السداد",
+    "form_title": "املأ هذه التفاصيل",
+    "create_request": "إنشاء طلب",
+    "select_pickup_date": "حدد تاريخ الاستلام",
+
+    "table": {
+      "item_code": "رمز الصنف",
+      "name": "اسم",
+      "exhibition_name": "اسم المعرض",
+      "quantity": "كمية",
+      "quantity_to_ship": "كمية الشحن"
+    }
   },
   "transaction_details_page": {
     "title": "تفاصيل المعاملة",
@@ -240,7 +338,16 @@
     "payment_method": " طريقة الدفع او السداد",
     "total": "مجموع",
     "comment": "تعليق",
-    "products_order": "المنتجات المطلوبة"
+    "products_order": "المنتجات المطلوبة",
+    "table": {
+      "sku": "رمز التخزين التعريفي",
+      "name": "اسم",
+      "exhibition_name": "اسم المعرض",
+      "price": "السعر",
+      "quantity": "كمية",
+      "commission": "عمولة",
+      "grand_total": "المبلغ الإجمالي"
+    }
   },
   "marketplace_profile_details": {
     "title": "تفاصيل ملف تعريف السوق",

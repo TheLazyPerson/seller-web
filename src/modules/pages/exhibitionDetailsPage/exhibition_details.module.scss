@@ -39,11 +39,24 @@
         opacity: 0.9;
         font-size: 14px;
         margin: 10px 0px 15px;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .exhibition_date {
         font-size: 12px;
         color: $color-green-apple;
+      }
+
+      .exhibition_date::before {
+        content: "";
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+        background-color: #44d515;
       }
     }
   }
@@ -179,6 +192,9 @@
         margin-left: auto;
       }
     }
+    .full_description_container {
+      flex-direction: inherit !important;
+    }
   }
 }
 
@@ -231,5 +247,8 @@
     flex-direction: row-reverse;
     padding-left: 0px !important;
     padding-right: 15px;
+  }
+  .exhibition_date {
+    direction: rtl;
   }
 }

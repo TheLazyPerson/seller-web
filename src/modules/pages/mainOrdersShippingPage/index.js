@@ -28,30 +28,40 @@ class MainOrdersShippingPage extends Component {
       fontSize: 12,
       color: "#19202c",
     };
+    const {
+      orderReducer: { order },
+      match: { params },
+      getOrderDetailsAction,
+      translate,
+      isRTL,
+      languageReducer: { languageCode },
+    } = this.props;
     const columns = [
       {
-        name: "ITEM CODE",
+        name: `${translate("pickup_request_details.table.item_code")}`,
         selector: "sku",
         style: rowStyle,
       },
       {
-        name: "NAME",
+        name: `${translate("pickup_request_details.table.name")}`,
         selector: "name",
         style: rowStyle,
+        cell: (value) => value.product.translations[languageCode].name,
       },
       {
-        name: "EXHIBITION NAME",
+        name: `${translate("pickup_request_details.table.exhibition_name")}`,
         selector: "exhibition.title",
         grow: 2,
         style: rowStyle,
+        cell: (value) => value.exhibition.translations[languageCode].title,
       },
       {
-        name: "QUANTITY",
+        name: `${translate("pickup_request_details.table.quantity")}`,
         selector: "qty_ordered",
         style: rowStyle,
       },
       {
-        name: "QUANTITY TO SHIP",
+        name: `${translate("pickup_request_details.table.quantity_to_ship")}`,
         selector: "qty_ordered",
         style: rowStyle,
       },
@@ -73,13 +83,6 @@ class MainOrdersShippingPage extends Component {
         },
       },
     };
-    const {
-      orderReducer: { order },
-      match: { params },
-      getOrderDetailsAction,
-      translate,
-      isRTL,
-    } = this.props;
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
@@ -98,13 +101,16 @@ class MainOrdersShippingPage extends Component {
             <DivColumn className={styles.order_container}>
               <div className={styles.order_id}>
                 {translate("pickup_request_details.order_id")}
-                <b>{order.id}</b>
+                {isRTL ? ":" : ""}
+                <b>{order.id}</b> {!isRTL ? ":" : ""}
               </div>
               <div className={styles.placed_on}>
                 {translate("pickup_request_details.places_on")}
                 {formatUnixTimeStampToDateTime(order.created_at)}
               </div>
-              <div className={styles.status}>{order.status_label}</div>
+              <div className={styles.status}>
+                {translate("order_list.table." + order.status)}
+              </div>
             </DivColumn>
 
             <div className={styles.header}>
@@ -112,7 +118,10 @@ class MainOrdersShippingPage extends Component {
             </div>
             <DivColumn className={styles.normal_container}>
               <DivRow className={styles.title}>
-                {translate("pickup_request_details.req_pickup_on")}:{" "}
+                {isRTL ? ":" : ""}
+                {translate("pickup_request_details.req_pickup_on")}
+                {!isRTL ? ":" : ""}
+
                 <div className={styles.value}>
                   {!isEmpty(order.pickup_request)
                     ? order.pickup_request.requested_pickup_on
@@ -126,13 +135,17 @@ class MainOrdersShippingPage extends Component {
             </div>
             <DivColumn className={styles.normal_container}>
               <DivRow className={styles.title}>
-                {translate("pickup_request_details.name")}:{" "}
+                {isRTL ? ":" : ""}
+                {translate("pickup_request_details.name")}
+                {!isRTL ? ":" : ""}
+
                 <div className={styles.value}>
                   {order.customer_first_name} {order.customer_last_name}
                 </div>
               </DivRow>
               <DivRow className={styles.title}>
-                {translate("pickup_request_details.email")}:{" "}
+                {isRTL ? ":" : ""}
+                {translate("pickup_request_details.email")} {!isRTL ? ":" : ""}
                 <div className={styles.value}>{order.customer_email}</div>
               </DivRow>
             </DivColumn>
@@ -140,14 +153,16 @@ class MainOrdersShippingPage extends Component {
               {" "}
               {translate("pickup_request_details.products_order")}
             </div>
-            <DataTable
-              columns={columns}
-              customStyles={customStyles}
-              data={order.items}
-              style={{ minHeight: 200 }}
-              noHeader={true}
-              direction={isRTL ? "rtl" : "ltr"}
-            />
+            <div className={styles.datatable_container}>
+              <DataTable
+                columns={columns}
+                customStyles={customStyles}
+                data={order.items}
+                style={{ minHeight: 200 }}
+                noHeader={true}
+                direction={isRTL ? "rtl" : "ltr"}
+              />
+            </div>
             <HorizontalBorder />
             <DivRow className={styles.address_container}>
               <DivColumn className={styles.address_item_container}>
@@ -213,6 +228,7 @@ const mapStateToProps = (state) => {
   return {
     orderReducer: state.orderReducer,
     isRTL: state.languageReducer.isRTL,
+    languageReducer: state.languageReducer,
   };
 };
 

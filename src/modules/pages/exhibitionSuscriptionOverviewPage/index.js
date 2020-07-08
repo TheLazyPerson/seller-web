@@ -20,6 +20,8 @@ import HorizontalBorder from "CommonComponents/horizontalBorder";
 import SubscriptionOption from "CommonComponents/subscriptionOptionComponent";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import translatorHoc from "Hoc/translatorHoc";
+import isEmpty from "lodash/isEmpty";
+import { formatUnixTimeStampToDateTime } from "Utils/formatHelper";
 
 class ExhibitionSubscriptionOverviewPage extends Component {
   onBackPress = () => {
@@ -50,6 +52,7 @@ class ExhibitionSubscriptionOverviewPage extends Component {
       getExhibitionSubscriptionOverview,
       translate,
       isRTL,
+      languageReducer: { languageCode },
     } = this.props;
 
     return (
@@ -66,7 +69,10 @@ class ExhibitionSubscriptionOverviewPage extends Component {
             }
           >
             <NavHeader
-              title={subscriptionOverview.title}
+              title={
+                !isEmpty(subscriptionOverview) &&
+                subscriptionOverview.translations[languageCode].title
+              }
               onBackClick={this.onBackPress}
             ></NavHeader>
             <NavHeader
@@ -79,7 +85,8 @@ class ExhibitionSubscriptionOverviewPage extends Component {
                     {translate("exhibition_overview.name")}:
                   </div>
                   <div className={styles.description}>
-                    {subscriptionOverview.title}
+                    {!isEmpty(subscriptionOverview) &&
+                      subscriptionOverview.translations[languageCode].title}
                   </div>
                 </DivColumn>
               </DivRow>
@@ -89,7 +96,9 @@ class ExhibitionSubscriptionOverviewPage extends Component {
                     {translate("exhibition_overview.description")} :
                   </div>
                   <div className={styles.description}>
-                    {subscriptionOverview.short_description}
+                    {!isEmpty(subscriptionOverview) &&
+                      subscriptionOverview.translations[languageCode]
+                        .short_description}
                   </div>
                 </DivColumn>
               </DivRow>
@@ -103,13 +112,17 @@ class ExhibitionSubscriptionOverviewPage extends Component {
                     <span className={styles.title}>
                       {translate("exhibition_overview.starts_at")}:
                     </span>{" "}
-                    {subscriptionOverview.start_date}
+                    {formatUnixTimeStampToDateTime(
+                      subscriptionOverview.start_date
+                    )}
                   </div>
                   <div className={styles.description}>
                     <span className={styles.title}>
                       {translate("exhibition_overview.ends_on")}:
                     </span>{" "}
-                    {subscriptionOverview.end_date}
+                    {formatUnixTimeStampToDateTime(
+                      subscriptionOverview.end_date
+                    )}
                   </div>
                 </DivColumn>
               </DivRow>
@@ -152,6 +165,7 @@ const mapStateToProps = (state) => {
   return {
     exhibitionReducer: state.exhibitionReducer,
     isRTL: state.languageReducer.isRTL,
+    languageReducer: state.languageReducer,
   };
 };
 

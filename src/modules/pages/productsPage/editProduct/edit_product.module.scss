@@ -95,3 +95,37 @@
     }
   }
 }
+
+.rtl {
+  .page_container {
+    padding: 17px 54px 9px 0px;
+    text-align: right;
+  }
+
+  .header {
+    padding: 17px 54px 17px 0px;
+    text-align: right;
+  }
+
+  .normal_container {
+    padding: 17px 54px 9px 0px;
+
+    .title {
+      flex-direction: row-reverse;
+    }
+  }
+  .field_container {
+    padding: 17px 54px 9px 0px;
+    margin-left: auto;
+  }
+  .form_container {
+    .form_button_container {
+      padding: 17px 54px 9px 0px;
+
+      margin-left: auto;
+      button {
+        margin-left: 10px;
+      }
+    }
+  }
+}

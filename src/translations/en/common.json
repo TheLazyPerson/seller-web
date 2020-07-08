@@ -217,12 +217,31 @@
     "ends_on": "ENDS ON",
     "start_at": "STARTS AT:",
     "category": "CATEGORIES",
-    "add_to_products": "ADD YOUR PRODUCTS"
+    "last": "LAST",
+    "days": "DAYS",
+    "add_to_products": "ADD YOUR PRODUCTS",
+    "product_details": "PRODUCT DETAILS",
+    "left_to_enroll": "DAYS LEFT TO ENROLL",
+    "left_to_submit_products": "DAYS LEFT TO SUBMIT PRODUCTS",
+    "live_now": "LIVE NOW: ENDS IN ",
+    "attach_modal": {
+      "title": "ATTACH PRODUCTS"
+    },
+    "subscription_option": {
+      "free": "Free",
+      "free_subtitle": "Free to enter",
+      "flat_fee": "Flat Fee",
+      "flat_fee_subtitle": "Ony have to pay once",
+      "commission": "Commission",
+      "commission_subtitle": "On each product you sale"
+    }
   },
   "your_exhibition_list_page": {
     "btn_title": "EXHIBITIONS",
     "view_details": "View Details",
-    "left_to_enroll": "DAYS LEFT TO ENROLL",
+    "left_to_enroll": "DAYS LEFT TO SUBMIT PRODUCTS",
+    "live_now": "LIVE NOW: ENDS IN ",
+    "days": "DAYS",
     "last": "LAST",
     "category": "Category",
     "starts_at": "Starts At",
@@ -243,7 +262,33 @@
     "shipping_methods": "SHIPPING METHOD",
     "payment_method": "PAYMENT METHOD",
     "email": "Email",
-    "print_invoice": "Print Invoice"
+    "print_invoice": "Print Invoice",
+    "table": {
+      "item_code": "ITEM CODE",
+      "name": "NAME",
+      "exhibition_name": "EXHIBITION NAME",
+      "price": "PRICE",
+      "quantity": "QUANTITY",
+      "commission": "COMMISSION",
+      "grand_total": "GRAND TOTAL"
+    }
+  },
+  "order_list": {
+    "table": {
+      "id": "ID",
+      "order_date": "ORDER DATE",
+      "grand_total": "GRAND TOTAL",
+      "total_items": "TOTAL ITEMS",
+      "status": "STATUS",
+      "view": "View",
+      "pending": "Pending",
+      "pending_payment": "Pending",
+      "processing": "Processing",
+      "pickup_requested": "Processing",
+      "shipped": "Shipped",
+      "out_for_delivery": "Out For Delivery",
+      "completed": "Completed"
+    }
   },
   "product_list": {
     "title": "PRODUCTS",
@@ -251,11 +296,34 @@
     "search": "Search",
     "table": {
       "id": "ID",
-      "sku": "SKU",
+      "sku": "ITEM CODE",
       "name": "NAME",
       "price": "PRICE",
-      "quantity": "QUANTITY"
+      "quantity": "QUANTITY",
+      "view": "View"
     }
+  },
+  "product_details": {
+    "title": "Product Detail",
+    "delete": "Delete",
+    "edit": "Edit"
+  },
+  "edit_product": {
+    "title": "Edit Product",
+    "cancel": "Cancel",
+    "save": "Save Details"
+  },
+
+  "image_selection_component": {
+    "title": "Images",
+    "help_text": "Drag 'n' drop some files here, or click to select files"
+  },
+  "add_product": {
+    "title": "Add Product",
+    "sku": "Item Code",
+    "product_vertical": "Product Vertical",
+    "cancel": "Cancel",
+    "save": "Save Details"
   },
   "sales_list": {
     "title": "Transactions",
@@ -263,7 +331,7 @@
     "table": {
       "id": "ID",
       "transaction_id": "TRANSACTION ID",
-      "comment": "Comment",
+      "comment": "COMMENT",
       "grand_total": "GRAND TOTAL",
       "view_button": "View"
     }
@@ -282,7 +350,38 @@
     "shipping_methods": "SHIPPING METHOD",
     "payment_method": "PAYMENT METHOD",
     "email": "Email",
-    "products_order": "PRODUCTS ORDERED"
+    "products_order": "PRODUCTS ORDERED",
+    "table": {
+      "item_code": "ITEM CODE",
+      "name": "NAME",
+      "exhibition_name": "EXHIBITION NAME",
+      "quantity": "QUANTITY",
+      "quantity_to_ship": "QUANTITY TO SHIP"
+    }
+  },
+  "create_pickup_request": {
+    "title": "Create Shipping Request",
+    "order_id": "Order ID",
+    "places_on": " Placed On",
+    "customer_details": "CUSTOMER DETAILS",
+    "name": "Name",
+    "email": "Email",
+    "product_list": "PRODUCT LIST",
+    "shipping_address": "SHIPPING ADDRESS",
+    "billing_address": "BILLING ADDRESS",
+    "shipping_methods": "SHIPPING METHOD",
+    "payment_method": "PAYMENT METHOD",
+    "form_title": "FILL IN THESE DETAILS",
+    "select_pickup_date": "Select Pickup Date",
+
+    "create_request": "Create Request",
+    "table": {
+      "item_code": "ITEM CODE",
+      "name": "NAME",
+      "exhibition_name": "EXHIBITION NAME",
+      "quantity": "QUANTITY",
+      "quantity_to_ship": "QUANTITY TO SHIP"
+    }
   },
   "transaction_details_page": {
     "title": "TRASACTION DETAIL",
@@ -292,7 +391,16 @@
     "payment_method": " Payment Method",
     "total": "Total",
     "comment": "Comment",
-    "products_order": "PRODUCTS ORDERED"
+    "products_order": "PRODUCTS ORDERED",
+    "table": {
+      "sku": "ITEM CODE",
+      "name": "NAME",
+      "exhibition_name": "EXHIBITION NAME",
+      "price": "PRICE",
+      "quantity": "QUANTITY",
+      "commission": "COMMISSION",
+      "grand_total": "GRAND TOTAL"
+    }
   },
   "marketplace_profile_details": {
     "title": "Marketplace Profile details",

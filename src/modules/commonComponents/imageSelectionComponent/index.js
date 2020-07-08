@@ -10,7 +10,7 @@ import isEmpty from "lodash/isEmpty";
 
 class ImageSelectionComponent extends Component {
   render() {
-    const { onDrop, uploadedFiles } = this.props;
+    const { onDrop, uploadedFiles, translate } = this.props;
 
     return (
       <Dropzone onDrop={onDrop} accept={"image/*"} className={styles.dropzone}>
@@ -18,7 +18,7 @@ class ImageSelectionComponent extends Component {
           <section className={styles.container}>
             <div {...getRootProps({ className: "dropzone" })}>
               <aside className={styles.inner_dropzone_container}>
-                <h4>Images</h4>
+                <h4>{translate("image_selection_component.title")}</h4>
                 <DivRow className={styles.image_container}>
                   {map(uploadedFiles, (file) => {
                     if (isEmpty(file)) return null;
@@ -31,7 +31,7 @@ class ImageSelectionComponent extends Component {
                 </DivRow>
                 <DivRow>
                   <input {...getInputProps()} />
-                  <p>Drag 'n' drop some files here, or click to select files</p>
+                  <p>{translate("image_selection_component.help_text")}</p>
                 </DivRow>
               </aside>
             </div>
