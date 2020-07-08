@@ -8,8 +8,11 @@ import styles from "./faq_page.module.scss";
 import map from "lodash/map";
 import closeIcon from "Icons/close-icon-black.svg";
 import { faq } from "Constants/faqConstants";
+import { connect } from "react-redux";
+import navigatorHoc from "Hoc/navigatorHoc";
+import translatorHoc from "Hoc/translatorHoc";
 
-export default class FAQPage extends Component {
+class FAQPage extends Component {
   state = {
     faq,
   };
@@ -33,12 +36,18 @@ export default class FAQPage extends Component {
 
   render() {
     const { faq } = this.state;
-
+    const {
+      languageReducer: { languageCode },
+      translate,
+    } = this.props;
     return (
       <FullWidthContainer>
         <DivColumn fillParent className={styles.page_container}>
-          <StaticPageHeader subTitle="HELP" title="Frequenty Asked Questions" />
-          <div className={styles.page_title}>Home Expo</div>
+          <StaticPageHeader
+            subTitle={translate("faq.subtitle")}
+            title={translate("faq.title")}
+          />
+          <div className={styles.page_title}>{translate("faq.app_name")}</div>
           <DivColumn fillParent>
             {map(faq, (faqItem, index) => {
               return (
@@ -52,11 +61,13 @@ export default class FAQPage extends Component {
                     className={styles.faq_title_container}
                     onClick={() => this.onClickFaqItem(index)}
                   >
-                    <div className={styles.faq_title}>{faqItem.title}</div>
+                    <div className={styles.faq_title}>
+                      {faqItem[languageCode].title}
+                    </div>
                     <img src={closeIcon} className={styles.title_close_icon} />
                   </DivRow>
                   <div className={styles.faq_description}>
-                    {faqItem.description}
+                    {faqItem[languageCode].description}
                   </div>
                 </DivColumn>
               );
@@ -67,3 +78,14 @@ export default class FAQPage extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    languageReducer: state.languageReducer,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(navigatorHoc(translatorHoc(FAQPage)));
