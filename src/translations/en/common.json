@@ -458,7 +458,9 @@
     "email": "Email Address",
     "civil_id": "Civil Id",
     "cancel": "Cancel",
-    "save_details": "Save Details"
+    "save_details": "Save Details",
+    "male": "Male",
+    "female": "Female"
   },
   "change_password_page": {
     "title": "Change password",

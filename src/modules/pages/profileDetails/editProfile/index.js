@@ -102,10 +102,12 @@ class EditProfile extends Component {
     } else if (userDetails.birthday) {
       startDate = new Date(userDetails.birthday);
     }
+    const male = translate("edit_profile.male");
+    const female = translate("edit_profile.female");
 
     const genderOptions = [
-      { value: "male", label: "Male" },
-      { value: "female", label: "Female" },
+      { value: "male", label: male },
+      { value: "female", label: female },
     ];
     let defaultGender = null;
 
@@ -179,7 +181,11 @@ class EditProfile extends Component {
 
                 <Field name="gender">
                   {({ input, meta }) => (
-                    <DivColumn className="input_select_container">
+                    <DivColumn
+                      className={`input_select_container ${
+                        isRTL ? styles.rtl_input_select : ""
+                      }`}
+                    >
                       <Select
                         options={genderOptions}
                         onChange={(value) => {

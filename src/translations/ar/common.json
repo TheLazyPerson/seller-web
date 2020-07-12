@@ -405,7 +405,9 @@
     "email": "عنوان بريد الكتروني",
     "civil_id": "الهوية المدنية",
     "cancel": "إلغاء",
-    "save_details": "حفظ التفاصيل"
+    "save_details": "حفظ التفاصيل",
+    "male": "الذكر",
+    "female": "أنثى"
   },
   "change_password_page": {
     "title": "تغيير كلمة المرور",
