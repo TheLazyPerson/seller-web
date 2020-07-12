@@ -102,7 +102,7 @@ export const isIBANValid = (value) => {
   let error = "";
 
   if (!value) error = "Please fill in these details to continue";
-  else if (!IBAN.isValid(value)) error = "Please enter a valid civil Id";
+  else if (!IBAN.isValid(value)) error = "Please enter a valid IBAN";
 
   return error
     ? {
