@@ -547,5 +547,8 @@
     "title": "Frequently Asked Questions",
     "subtitle": "HELP",
     "app_name": "Home Expo"
+  },
+  "datatable": {
+    "rows_per_page": "Rows per page"
   }
 }

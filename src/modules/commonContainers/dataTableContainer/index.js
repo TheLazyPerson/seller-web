@@ -14,6 +14,7 @@ import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import Delete from "@material-ui/icons/Delete";
 import memoize from "memoize-one";
 import SearchBarComponent from "CommonComponents/searchBarComponent";
+import translatorHoc from "Hoc/translatorHoc";
 
 const sortIcon = <ArrowDownward />;
 const selectProps = { indeterminate: (isIndeterminate) => isIndeterminate };
@@ -50,7 +51,7 @@ class OrdersPage extends Component {
 
   render() {
     const { toggleCleared } = this.state;
-    const { data, columns, title, isRTL } = this.props;
+    const { data, columns, title, isRTL, translate } = this.props;
     return (
       <DivColumn className={styles.date_container}>
         <div style={{ marginBottom: 20 }}>
@@ -78,6 +79,9 @@ class OrdersPage extends Component {
             noHeader={true}
             direction={isRTL ? "rtl" : "ltr"}
             responsive={true}
+            paginationComponentOptions={{
+              rowsPerPageText: translate("datatable.rows_per_page"),
+            }}
             //TODO: Configure later
             // expandableRows
           />
@@ -90,6 +94,7 @@ class OrdersPage extends Component {
 const mapStateToProps = (state) => {
   return {
     isRTL: state.languageReducer.isRTL,
+    languageReducer: state.languageReducer,
   };
 };
 
@@ -102,4 +107,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(OrdersPage));
+)(navigatorHoc(translatorHoc(OrdersPage)));
