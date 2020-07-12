@@ -27,6 +27,7 @@ const contextActions = memoize((deleteHandler) => (
 
 class OrdersPage extends Component {
   state = {
+    searchText: "",
     selectedRows: [],
     toggleCleared: false,
   };
@@ -49,20 +50,32 @@ class OrdersPage extends Component {
     }
   };
 
+  onChangeSearchText = (event) => {
+    const text = event.target.value;
+    this.setState({
+      searchText: text,
+    });
+  };
+
   render() {
-    const { toggleCleared } = this.state;
+    const { toggleCleared, searchText } = this.state;
     const { data, columns, title, isRTL, translate } = this.props;
+
+    const filteredItems = data.filter(
+      (item) =>
+        item.name && item.name.toLowerCase().includes(searchText.toLowerCase())
+    );
     return (
       <DivColumn className={styles.date_container}>
         <div style={{ marginBottom: 20 }}>
-          <SearchBarComponent />
+          <SearchBarComponent onChangeSearchText={this.onChangeSearchText} />
         </div>
 
         <Card>
           <DataTable
             title={title ? title : "Orders"}
             columns={columns ? columns : columns()}
-            data={data}
+            data={filteredItems}
             //TODO: Configure later
             // selectableRows
             highlightOnHover

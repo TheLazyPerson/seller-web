@@ -19,17 +19,17 @@ class SearchBarComponent extends Component {
     // this.navigateToSearchPage(searchTypes.ALL);
   };
 
-  onChangeSearchText = (event) => {
-    const text = event.target.value;
+  // onChangeSearchText = (event) => {
+  //   const text = event.target.value;
 
-    this.setState({
-      searchText: text,
-    });
-  };
+  //   this.setState({
+  //     searchText: text,
+  //   });
+  // };
 
   render() {
     const { searchText, showSearchResult } = this.state;
-    const { translate, whiteColor, isRTL } = this.props;
+    const { translate, onChangeSearchText, whiteColor, isRTL } = this.props;
 
     return (
       <div className={`${isRTL ? styles.rtl : ""} ${styles.search_container}`}>
@@ -48,7 +48,7 @@ class SearchBarComponent extends Component {
                   ? styles.is_white
                   : ""
               }`}
-              onChange={this.onChangeSearchText}
+              onChange={onChangeSearchText}
               autoComplete="off"
             />
           </form>
