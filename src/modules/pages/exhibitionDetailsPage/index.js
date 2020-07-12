@@ -261,7 +261,11 @@ class ExhibitionDetailsPage extends Component {
                   ></NavHeader>
                   <DivRow fillParent className={styles.category_list_container}>
                     {map(exhibitionDetail.categories, (category) => (
-                      <CategoryListItem name={category.name} />
+                      <CategoryListItem
+                        category={category}
+                        languageCode={languageCode}
+                        isRTL={isRTL}
+                      />
                     ))}
                   </DivRow>
                 </Fragment>
