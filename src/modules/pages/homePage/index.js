@@ -55,10 +55,15 @@ class HomePage extends Component {
       signInReducer: { userDetails },
       getOverviewAction,
       translate,
+      isRTL,
     } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <DivColumn className={styles.profile_overview_container}>
+        <DivColumn
+          className={` ${styles.profile_overview_container} ${
+            isRTL ? styles.rtl : ""
+          }`}
+        >
           <DivColumn
             verticalCenter
             horizontalCenter
@@ -94,6 +99,7 @@ const mapStateToProps = (state) => {
     overviewReducer: state.overviewReducer,
     signInReducer: state.signInReducer,
     languageReducer: state.languageReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 
