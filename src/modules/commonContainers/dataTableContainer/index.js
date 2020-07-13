@@ -76,8 +76,6 @@ class OrdersPage extends Component {
             title={title ? title : "Orders"}
             columns={columns ? columns : columns()}
             data={filteredItems}
-            //TODO: Configure later
-            // selectableRows
             highlightOnHover
             overflowY={false}
             defaultSortField="name"
@@ -95,8 +93,6 @@ class OrdersPage extends Component {
             paginationComponentOptions={{
               rowsPerPageText: translate("datatable.rows_per_page"),
             }}
-            //TODO: Configure later
-            // expandableRows
           />
         </Card>
       </DivColumn>
