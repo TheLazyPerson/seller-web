@@ -34,12 +34,14 @@ class Pricing extends Component {
             );
           })}
         </DivRow>
-        <CapsuleButton
-          className={styles.capsule_button}
-          onClick={this.onSubmit}
-        >
-          Get Started
-        </CapsuleButton>
+        <DivColumn horizontalCenter className={styles.pricing_select_container}>
+          <CapsuleButton
+            className={styles.get_started_button}
+            onClick={this.onSubmit}
+          >
+            Get Started
+          </CapsuleButton>
+        </DivColumn>
       </DivColumn>
     );
   }
