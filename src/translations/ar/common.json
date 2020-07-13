@@ -508,5 +508,10 @@
   },
   "datatable": {
     "rows_per_page": "الصفوف في الصفحة"
+  },
+  "overlay": {
+    "subscription": "اشتراك",
+    "logout": "تسجيل خروج",
+    "usage": "الاستخدام"
   }
 }

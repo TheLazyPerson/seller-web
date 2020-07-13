@@ -552,5 +552,10 @@
   },
   "datatable": {
     "rows_per_page": "Rows per page"
+  },
+  "overlay": {
+    "subscription": "Subscription",
+    "logout": "Logout",
+    "usage": "USAGE"
   }
 }
