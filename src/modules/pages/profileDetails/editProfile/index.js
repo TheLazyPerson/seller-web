@@ -12,7 +12,7 @@ import navigatorHoc from "Hoc/navigatorHoc";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import {
   getProfileDetailsAction,
-  editProfileDetailsAction,
+  editProfileAction,
 } from "Core/modules/profiledetails/profileDetailsActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -39,12 +39,12 @@ class EditProfile extends Component {
 
   onSubmit = (form) => {
     const {
-      editProfileDetailsAction,
+      editProfileAction,
       navigateTo,
       showSuccessFlashMessage,
     } = this.props;
 
-    editProfileDetailsAction({
+    editProfileAction({
       first_name: form.firstName,
       last_name: form.lastName,
       gender: form.gender,
@@ -62,11 +62,11 @@ class EditProfile extends Component {
 
   componentDidMount() {
     // TODO: To add to check if reducer data is not available.
-    // this.props.getProfileDetailsAction().then(({ payload }) => {
-    //   if (payload.code === 200 || payload.code === 201) {
-    //     // code here
-    //   }
-    // });
+    this.props.getProfileDetailsAction().then(({ payload }) => {
+      if (payload.code === 200 || payload.code === 201) {
+        // code here
+      }
+    });
   }
 
   validate = (values) => {
@@ -282,10 +282,7 @@ const mapDispathToProps = (dispatch) => {
       getProfileDetailsAction,
       dispatch
     ),
-    editProfileDetailsAction: bindActionCreators(
-      editProfileDetailsAction,
-      dispatch
-    ),
+    editProfileAction: bindActionCreators(editProfileAction, dispatch),
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
