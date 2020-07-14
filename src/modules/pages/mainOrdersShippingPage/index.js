@@ -93,7 +93,7 @@ class MainOrdersShippingPage extends Component {
         <InitialPageLoader
           initialPageApi={() => getOrderDetailsAction(params.orderId)}
         >
-          <DivColumn
+          <div
             className={` ${styles.order_page_container} ${
               isRTL ? styles.rtl : ""
             }`}
@@ -102,7 +102,8 @@ class MainOrdersShippingPage extends Component {
               <div className={styles.order_id}>
                 {translate("pickup_request_details.order_id")}
                 {isRTL ? ":" : ""}
-                <b>{order.id}</b> {!isRTL ? ":" : ""}
+                <b>{order.id}</b>
+                {!isRTL ? ":" : ""}
               </div>
               <div className={styles.placed_on}>
                 {translate("pickup_request_details.places_on")}
@@ -217,7 +218,7 @@ class MainOrdersShippingPage extends Component {
                 <div className={styles.description}>{order.payment_title}</div>
               </DivColumn>
             </DivRow>
-          </DivColumn>
+          </div>
         </InitialPageLoader>
       </SectionedContainer>
     );
