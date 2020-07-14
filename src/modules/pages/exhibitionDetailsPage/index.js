@@ -110,7 +110,7 @@ class ExhibitionDetailsPage extends Component {
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <DivColumn fillParent className={styles.exhibition_page_container}>
+        <div fillParent className={styles.exhibition_page_container}>
           <NavHeader
             title={translate("exhibition_details_page.exhibition")}
             onBackClick={this.onBackPress}
@@ -323,7 +323,7 @@ class ExhibitionDetailsPage extends Component {
               />
             </InitialPageLoader>
           </InitialPageLoader>
-        </DivColumn>
+        </div>
       </SectionedContainer>
     );
   }
