@@ -89,16 +89,6 @@ class SignInPage extends Component {
                       />
                     )}
                   </Field>
-
-                  {/* <Field name="remeberMe">
-                    {({ input, meta }) => (
-                      <InputCheckbox
-                        meta={meta}
-                        {...input}
-                        text={translate("signin_page.remember_me")}
-                      />
-                    )}
-                  </Field> */}
                 </Fragment>
                 <input
                   type="submit"
