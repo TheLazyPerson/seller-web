@@ -557,5 +557,8 @@
     "subscription": "Subscription",
     "logout": "Logout",
     "usage": "USAGE"
+  },
+  "pricing": {
+    "get_started": "Get Started"
   }
 }

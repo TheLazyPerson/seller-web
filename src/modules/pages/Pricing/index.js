@@ -20,7 +20,7 @@ class Pricing extends Component {
   };
 
   render() {
-    const { subscriptionPlanList } = this.props;
+    const { subscriptionPlanList, translate } = this.props;
 
     return (
       <DivColumn>
@@ -39,7 +39,7 @@ class Pricing extends Component {
             className={styles.get_started_button}
             onClick={this.onSubmit}
           >
-            Get Started
+            {translate("pricing.get_started")}
           </CapsuleButton>
         </DivColumn>
       </DivColumn>

@@ -513,5 +513,8 @@
     "subscription": "اشتراك",
     "logout": "تسجيل خروج",
     "usage": "الاستخدام"
+  },
+  "pricing": {
+    "get_started": "البدء"
   }
 }
