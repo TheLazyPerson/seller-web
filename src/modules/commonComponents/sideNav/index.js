@@ -147,7 +147,7 @@ class SideNav extends Component {
       isRTL,
     } = this.props;
     return (
-      <DivColumn
+      <div
         verticalCenter
         className={`${styles.side_nav_container}  ${isRTL ? styles.rtl : ""}`}
       >
@@ -175,7 +175,7 @@ class SideNav extends Component {
             </DivColumn>
           );
         })}
-      </DivColumn>
+      </div>
     );
   }
 }
