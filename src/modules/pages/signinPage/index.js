@@ -110,7 +110,7 @@ class SignInPage extends Component {
             )}
           />
           <a className={styles.hyper_link} href="/forgot-password">
-            Forgot password
+            {translate("signin_page.forget_password")}
           </a>
           <div className={styles.create_account_container}>
             <span className={styles.new_description_text}>

@@ -103,7 +103,8 @@
     "password": "Password",
     "remember_me": "Remember Me",
     "sign_in_button": "Sign In",
-    "username": "Email"
+    "username": "Email",
+    "forget_password": "Forgot password?"
   },
   "signup_page": {
     "confirm_password": "Confirm Password",
