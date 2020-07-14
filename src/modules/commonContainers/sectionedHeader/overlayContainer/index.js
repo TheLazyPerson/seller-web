@@ -18,6 +18,7 @@ class OverlayContainer extends Component {
         isSubscriptionError,
         featuresData,
       },
+      languageReducer: { languageCode },
       translate,
     } = this.props;
     const ProgressItem = ({ title, value, progress }) => (
@@ -52,7 +53,7 @@ class OverlayContainer extends Component {
           map(featuresData, (feature) => (
             <Fragment>
               <ProgressItem
-                title={feature.title}
+                title={languageCode === "ar" ? feature.title_ar : feature.title}
                 value={`${feature.used}/${feature.total}`}
                 progress={feature.percentage}
               />
@@ -84,6 +85,7 @@ const mapStateToProps = (state) => {
   return {
     subscriptionReducer: state.subscriptionReducer,
     isRTL: state.languageReducer.isRTL,
+    languageReducer: state.languageReducer,
   };
 };
 
