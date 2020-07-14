@@ -70,6 +70,7 @@ class SalesPage extends Component {
                 data={transactionList}
                 title={translate("sales_list.title")}
                 columns={columns()}
+                searchable="id"
               />
             </DivColumn>
           </InitialPageLoader>

@@ -59,11 +59,15 @@ class OrdersPage extends Component {
 
   render() {
     const { toggleCleared, searchText } = this.state;
-    const { data, columns, title, isRTL, translate } = this.props;
-
+    const { data, columns, title, isRTL, translate, searchable } = this.props;
+    console.log("Searchable:", searchable);
     const filteredItems = data.filter(
       (item) =>
-        item.name && item.name.toLowerCase().includes(searchText.toLowerCase())
+        item[searchable] &&
+        item[searchable]
+          .toString()
+          .toLowerCase()
+          .includes(searchText.toLowerCase())
     );
     return (
       <DivColumn className={styles.date_container}>

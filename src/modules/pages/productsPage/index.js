@@ -97,6 +97,7 @@ class ProductsPage extends Component {
                 data={productList}
                 title="Products"
                 columns={columns()}
+                searchable="name"
               />
             </InitialPageLoader>
           </DivColumn>

@@ -40,7 +40,6 @@ class OrdersPage extends Component {
       isRTL,
       translate,
     } = this.props;
-
     const columns = memoize(() => [
       {
         name: `${translate("order_list.table.id")}`,
@@ -109,6 +108,7 @@ class OrdersPage extends Component {
               data={orderList}
               title="Orders"
               columns={columns()}
+              searchable="id"
             />
           </InitialPageLoader>
         </DivColumn>
