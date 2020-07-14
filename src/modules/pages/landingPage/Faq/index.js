@@ -34,9 +34,15 @@ class FAQ extends Component {
     const { faq } = this.state;
     const {
       languageReducer: { languageCode },
+      isRTL,
     } = this.props;
     return (
-      <DivColumn fillParent className={styles.faq_landing_container}>
+      <DivColumn
+        fillParent
+        className={` ${styles.faq_landing_container} ${
+          isRTL ? styles.rtl : ""
+        }`}
+      >
         {map(faq, (faqItem, index) => {
           return (
             <DivColumn
@@ -68,6 +74,7 @@ class FAQ extends Component {
 const mapStateToProps = (state) => {
   return {
     languageReducer: state.languageReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 

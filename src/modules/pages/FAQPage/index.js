@@ -39,10 +39,14 @@ class FAQPage extends Component {
     const {
       languageReducer: { languageCode },
       translate,
+      isRTL,
     } = this.props;
     return (
       <FullWidthContainer>
-        <DivColumn fillParent className={styles.page_container}>
+        <DivColumn
+          fillParent
+          className={` ${styles.page_container} ${isRTL ? styles.rtl : ""}`}
+        >
           <StaticPageHeader
             subTitle={translate("faq.subtitle")}
             title={translate("faq.title")}
@@ -82,6 +86,7 @@ class FAQPage extends Component {
 const mapStateToProps = (state) => {
   return {
     languageReducer: state.languageReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 
