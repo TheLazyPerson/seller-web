@@ -234,7 +234,10 @@
     "left_to_submit_products": "DAYS LEFT TO SUBMIT PRODUCTS",
     "live_now": "LIVE NOW: ENDS IN ",
     "attach_modal": {
-      "title": "ATTACH PRODUCTS"
+      "title": "ATTACH PRODUCTS",
+      "empty_screen_title": "No Products Available",
+      "empty_screen_description": "There are no complete products to show.",
+      "button_text": "Add/Complete Products"
     },
     "subscription_option": {
       "free": "Free",

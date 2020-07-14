@@ -97,6 +97,7 @@ class ExhibitionDetailsPage extends Component {
       translate,
       isRTL,
       languageReducer: { languageCode },
+      navigateTo,
     } = this.props;
     const { showModal } = this.state;
 
@@ -320,6 +321,7 @@ class ExhibitionDetailsPage extends Component {
                 languageCode={languageCode}
                 translate={translate}
                 isRTL={isRTL}
+                navigateTo={navigateTo}
               />
             </InitialPageLoader>
           </InitialPageLoader>

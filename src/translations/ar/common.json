@@ -182,7 +182,10 @@
     "left_to_submit_products": "الأيام المتبقية لتقديم المنتجات",
     "live_now": "عش الآن: انتهى",
     "attach_modal": {
-      "title": "إرفاق المنتجات"
+      "title": "إرفاق المنتجات",
+      "empty_screen_title": "لا توجد منتجات متاحة",
+      "empty_screen_description": "لا توجد منتجات كاملة للعرض.",
+      "button_text": "إضافة / استكمال المنتج"
     },
     "subscription_option": {
       "free": "مجانا",
