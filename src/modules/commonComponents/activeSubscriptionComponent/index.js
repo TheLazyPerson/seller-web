@@ -44,12 +44,15 @@ class ActiveSubscription extends Component {
       isRTL,
       translate,
       subscriptionReducer: { selectedSubscription, featuresData },
+      languageReducer: { languageCode },
     } = this.props;
 
-    const ProgressItem = ({ title, value, progress }) => (
+    const ProgressItem = ({ title, title_ar, value, progress }) => (
       <DivColumn className={`${styles.item_container} ${styles.click}`}>
         <DivRow className={styles.display_container}>
-          <div className={styles.title}>{title}</div>
+          <div className={styles.title}>
+            {languageCode === "ar" ? title_ar : title}
+          </div>
           <div className={styles.value}>{value}</div>
         </DivRow>
         <DivRow className={styles.progress_bar_container}>
@@ -144,6 +147,7 @@ class ActiveSubscription extends Component {
             <Fragment>
               <ProgressItem
                 title={feature.title}
+                title_ar={feature.title_ar}
                 value={`${feature.used}/${feature.total}`}
                 progress={feature.percentage}
               />
