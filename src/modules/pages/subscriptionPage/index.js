@@ -102,8 +102,8 @@ class SubscriptionPage extends Component {
             subscriptionReducer: { activeSubscription },
             activatePlanAction,
           } = this.props;
-          if (value.plan.id === activeSubscription.plan.id) {
-            return <span> Active</span>;
+          if (value.id === activeSubscription.id) {
+            return <span> {translate("subscription_page.table.active")} </span>;
           } else {
             return (
               <Button
@@ -114,7 +114,7 @@ class SubscriptionPage extends Component {
                   activatePlanAction(value.id);
                 }}
               >
-                Activate
+                {translate("subscription_page.table.activate")}
               </Button>
             );
           }

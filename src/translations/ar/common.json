@@ -436,7 +436,9 @@
       "plan_name": "اسم الخطة",
       "plan_description": "وصف الخطة",
       "no_of_products": "عدد المنتجات",
-      "no_of_exhibitions": "عدد المعارض"
+      "no_of_exhibitions": "عدد المعارض",
+      "activate": "تفعيل",
+      "active": "نشيط"
     }
   },
   "setting_page": {

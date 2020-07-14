@@ -489,7 +489,9 @@
       "plan_name": "PLAN NAME",
       "plan_description": "PLAN DESCRIPTION",
       "no_of_products": "NO OF PRODUCTS",
-      "no_of_exhibitions": "NO OF EXHIBITIONS"
+      "no_of_exhibitions": "NO OF EXHIBITIONS",
+      "activate": "Activate",
+      "active": "Active"
     }
   },
   "setting_page": {
