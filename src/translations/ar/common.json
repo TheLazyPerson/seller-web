@@ -115,7 +115,15 @@
     "lastname": "الكنية",
     "page_title": "سجل",
     "password": "كلمه السر",
-    "sign_in": "تسجيل الدخول"
+    "sign_in": "تسجيل الدخول",
+    "steps": {
+      "sign_up": "سجل",
+      "personal_details": "تفاصيل شخصية",
+      "marketplace_details": "تفاصيل السوق",
+      "location_details": "تفاصيل الموقع",
+      "bank_details": "التفاصيل المصرفية",
+      "select_subscription": "حدد اشتراك"
+    }
   },
   "wishlist_page": {
     "empty_message": "يا سناب! ليس لديك منتج في قائمة أمنياتك.",
@@ -517,5 +525,32 @@
   },
   "pricing": {
     "get_started": "البدء"
+  },
+  "personal_detail_page": {
+    "create": "التالى",
+    "page_title": "تفاصيل شخصية",
+    "civil_id": "البطاقة المدنية ",
+    "phone_number": "رقم الاتصال",
+    "birthday": "عيد الميلاد"
+  },
+  "location_detail_page": {
+    "create": "التالى",
+    "page_title": "تفاصيل الموقع",
+    "area": "منطقة",
+    "block_number": "حظر الرقم",
+    "house_number": "رقم الدار",
+    "street_number": "رقم الشارع",
+    "avenue": "السبيل",
+    "landmark": "معلم معروف",
+    "home_office": "مكتب البيت",
+    "city": "مدينة"
+  },
+
+  "bank_detail_page": {
+    "create": "التالى",
+    "page_title": "التفاصيل المصرفية",
+    "acount_holder": "صاحب الحساب",
+    "bank_name": "اسم البنك",
+    "iban": "رقم الحساب المصرفي الدولي"
   }
 }

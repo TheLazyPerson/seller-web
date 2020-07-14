@@ -115,7 +115,15 @@
     "lastname": "Last Name",
     "page_title": "Sign Up",
     "password": "Password",
-    "sign_in": "Sign In"
+    "sign_in": "Sign In",
+    "steps": {
+      "sign_up": "Sign Up",
+      "personal_details": "Personal Details",
+      "marketplace_details": "Marketplace Details",
+      "location_details": "Location Details",
+      "bank_details": "Bank Details",
+      "select_subscription": "Select Subscription"
+    }
   },
   "wishlist_page": {
     "empty_message": "Oh Snap! You have no product in your wishlist.",
