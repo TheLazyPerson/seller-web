@@ -74,6 +74,7 @@
     "react-checkbox-tree": "^1.6.0",
     "react-data-table-component": "^6.9.3",
     "react-datepicker": "^2.10.1",
+    "react-day-picker": "^7.4.8",
     "react-dev-utils": "^9.1.0",
     "react-dom": "^16.10.2",
     "react-dropzone": "^10.2.1",

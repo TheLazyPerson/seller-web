@@ -165,31 +165,6 @@ class SubscriptionPage extends Component {
                 </DivColumn>
               </DivColumn>
 
-              {/* <DivColumn fillParent className={styles.additional_plans}>
-                <DivColumn className={styles.additional_plans_title}>
-                  Add Additional Plans:
-                </DivColumn>
-                <DivColumn className={styles.additional_plans_container}>
-                  <InitialPageLoader initialPageApi={getPlanListAction}>
-                    <DivRow>
-                      {map(subscriptionPlanList, (subscription, index) => {
-                        if (
-                          activeSubscription.id !== subscription.id &&
-                          subscription.price !== 0
-                        ) {
-                          return (
-                            <Subscription
-                              subscription={subscription}
-                              features={subscription.features}
-                            />
-                          );
-                        }
-                      })}
-                    </DivRow>
-                  </InitialPageLoader>
-                </DivColumn>
-              </DivColumn> */}
-
               <InitialPageLoader initialPageApi={getPlanListAction}>
                 <BuyPlanModal
                   open={showModal}
