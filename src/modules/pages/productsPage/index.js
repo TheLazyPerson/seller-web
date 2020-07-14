@@ -85,7 +85,7 @@ class ProductsPage extends Component {
     ]);
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <DivColumn fillParent className={styles.products_page_container}>
+        <div fillParent className={styles.products_page_container}>
           <NavHeader title={translate("product_list.title")}>
             <CapsuleButton onClick={() => this.onClickNewProduct()}>
               {translate("product_list.add_new_product")}
@@ -101,7 +101,7 @@ class ProductsPage extends Component {
               />
             </InitialPageLoader>
           </DivColumn>
-        </DivColumn>
+        </div>
       </SectionedContainer>
     );
   }

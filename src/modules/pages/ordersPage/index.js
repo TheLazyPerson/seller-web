@@ -89,7 +89,7 @@ class OrdersPage extends Component {
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <DivColumn
+        <div
           fillParent
           className={` ${styles.orders_page_container} ${
             isRTL ? styles.rtl : ""
@@ -111,7 +111,7 @@ class OrdersPage extends Component {
               searchable="id"
             />
           </InitialPageLoader>
-        </DivColumn>
+        </div>
       </SectionedContainer>
     );
   }

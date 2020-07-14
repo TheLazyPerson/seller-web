@@ -62,7 +62,7 @@ class SalesPage extends Component {
     ]);
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <DivColumn fillParent className={styles.sales_page_container}>
+        <div fillParent className={styles.sales_page_container}>
           <NavHeader title={translate("sales_list.title")}></NavHeader>
           <InitialPageLoader initialPageApi={getTransactionListAction}>
             <DivColumn fillParent className={styles.content_container}>
@@ -74,7 +74,7 @@ class SalesPage extends Component {
               />
             </DivColumn>
           </InitialPageLoader>
-        </DivColumn>
+        </div>
       </SectionedContainer>
     );
   }
