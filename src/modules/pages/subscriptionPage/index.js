@@ -124,7 +124,7 @@ class SubscriptionPage extends Component {
     ]);
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <DivColumn fillParent className={styles.subscription_page_container}>
+        <div fillParent className={styles.subscription_page_container}>
           <NavHeader title={translate("subscription_page.title")}>
             <CapsuleButton onClick={() => this.onClickBuyAdditionalPlan()}>
               {translate("subscription_page.buy_additional_plan")}
@@ -157,6 +157,7 @@ class SubscriptionPage extends Component {
                             "subscription_page.subscription_lost"
                           )}
                           columns={columns()}
+                          searchable="id"
                         />
                       </DivRow>
                     )}
@@ -200,7 +201,7 @@ class SubscriptionPage extends Component {
               </InitialPageLoader>
             </DivColumn>
           </DivColumn>
-        </DivColumn>
+        </div>
       </SectionedContainer>
     );
   }
