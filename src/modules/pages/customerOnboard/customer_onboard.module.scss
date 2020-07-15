@@ -6,3 +6,25 @@ $submit-button-background: $color-gold;
   padding-top: 30px;
   padding-bottom: 5%;
 }
+
+.rtl {
+  direction: rtl;
+  div {
+    div {
+      div:first-child {
+        div {
+          left: 0 !important;
+          right: 50% !important;
+          margin-right: 18px;
+        }
+      }
+      div:last-child {
+        div {
+          right: 0 !important;
+          left: 50% !important;
+          margin-left: 18px;
+        }
+      }
+    }
+  }
+}

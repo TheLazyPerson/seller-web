@@ -251,4 +251,8 @@
   .exhibition_date {
     direction: rtl;
   }
+  .category_list_container {
+    justify-content: flex-end;
+    padding-right: 35px;
+  }
 }

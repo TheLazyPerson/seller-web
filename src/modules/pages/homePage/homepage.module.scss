@@ -47,6 +47,7 @@
     align-self: stretch;
     background: rgba($color-very-light-blue, 0.9);
     border: solid 0.5px rgba($primary-text-color, 0.1);
+    direction: ltr;
 
     .header_title {
       opacity: 0.5;
@@ -144,5 +145,11 @@
         }
       }
     }
+  }
+}
+
+.rtl {
+  .header_container {
+    direction: rtl;
   }
 }

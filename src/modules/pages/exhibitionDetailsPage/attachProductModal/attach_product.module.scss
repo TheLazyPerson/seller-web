@@ -28,6 +28,10 @@
   .product_loader {
     overflow: auto;
   }
+
+  .empty_page_container {
+    margin-top: 24px;
+  }
 }
 
 @include small {

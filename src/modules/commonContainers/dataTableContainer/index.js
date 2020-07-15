@@ -14,6 +14,7 @@ import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import Delete from "@material-ui/icons/Delete";
 import memoize from "memoize-one";
 import SearchBarComponent from "CommonComponents/searchBarComponent";
+import translatorHoc from "Hoc/translatorHoc";
 
 const sortIcon = <ArrowDownward />;
 const selectProps = { indeterminate: (isIndeterminate) => isIndeterminate };
@@ -26,6 +27,7 @@ const contextActions = memoize((deleteHandler) => (
 
 class OrdersPage extends Component {
   state = {
+    searchText: "",
     selectedRows: [],
     toggleCleared: false,
   };
@@ -48,22 +50,36 @@ class OrdersPage extends Component {
     }
   };
 
+  onChangeSearchText = (event) => {
+    const text = event.target.value;
+    this.setState({
+      searchText: text,
+    });
+  };
+
   render() {
-    const { toggleCleared } = this.state;
-    const { data, columns, title, isRTL } = this.props;
+    const { toggleCleared, searchText } = this.state;
+    const { data, columns, title, isRTL, translate, searchable } = this.props;
+    console.log("Searchable:", searchable);
+    const filteredItems = data.filter(
+      (item) =>
+        item[searchable] &&
+        item[searchable]
+          .toString()
+          .toLowerCase()
+          .includes(searchText.toLowerCase())
+    );
     return (
       <DivColumn className={styles.date_container}>
         <div style={{ marginBottom: 20 }}>
-          <SearchBarComponent />
+          <SearchBarComponent onChangeSearchText={this.onChangeSearchText} />
         </div>
 
         <Card>
           <DataTable
             title={title ? title : "Orders"}
             columns={columns ? columns : columns()}
-            data={data}
-            //TODO: Configure later
-            // selectableRows
+            data={filteredItems}
             highlightOnHover
             overflowY={false}
             defaultSortField="name"
@@ -78,8 +94,9 @@ class OrdersPage extends Component {
             noHeader={true}
             direction={isRTL ? "rtl" : "ltr"}
             responsive={true}
-            //TODO: Configure later
-            // expandableRows
+            paginationComponentOptions={{
+              rowsPerPageText: translate("datatable.rows_per_page"),
+            }}
           />
         </Card>
       </DivColumn>
@@ -90,6 +107,7 @@ class OrdersPage extends Component {
 const mapStateToProps = (state) => {
   return {
     isRTL: state.languageReducer.isRTL,
+    languageReducer: state.languageReducer,
   };
 };
 
@@ -102,4 +120,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(OrdersPage));
+)(navigatorHoc(translatorHoc(OrdersPage)));

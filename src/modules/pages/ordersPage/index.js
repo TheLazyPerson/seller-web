@@ -40,7 +40,6 @@ class OrdersPage extends Component {
       isRTL,
       translate,
     } = this.props;
-
     const columns = memoize(() => [
       {
         name: `${translate("order_list.table.id")}`,
@@ -90,7 +89,7 @@ class OrdersPage extends Component {
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <DivColumn
+        <div
           fillParent
           className={` ${styles.orders_page_container} ${
             isRTL ? styles.rtl : ""
@@ -109,9 +108,10 @@ class OrdersPage extends Component {
               data={orderList}
               title="Orders"
               columns={columns()}
+              searchable="id"
             />
           </InitialPageLoader>
-        </DivColumn>
+        </div>
       </SectionedContainer>
     );
   }

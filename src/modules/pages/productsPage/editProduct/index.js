@@ -71,7 +71,8 @@ class EditProduct extends Component {
   };
 
   onClickCancel = () => {
-    this.onBackPress();
+    const { navigateTo } = this.props;
+    navigateTo("products");
   };
 
   onSelectCategory = (data) => {
@@ -390,13 +391,13 @@ class EditProduct extends Component {
     } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <DivColumn fillParent className={styles.page_container}>
+        <div fillParent className={styles.page_container}>
           <NavHeader
             title={translate("edit_product.title")}
             onBackClick={this.onBackPress}
           ></NavHeader>
-        </DivColumn>
-        <DivColumn
+        </div>
+        <div
           fillParent
           className={` ${styles.page_container} ${isRTL ? styles.rtl : ""}`}
         >
@@ -442,7 +443,7 @@ class EditProduct extends Component {
                       );
                     })}
                     <DivRow className={styles.form_button_container}>
-                      <SecondaryCapsuleButton onClick={onClickCancel}>
+                      <SecondaryCapsuleButton onClick={this.onClickCancel}>
                         {translate("edit_product.cancel")}
                       </SecondaryCapsuleButton>
                       <CapsuleButton type="submit" disabled={submitting}>
@@ -455,7 +456,7 @@ class EditProduct extends Component {
             )}
             ;
           </InitialPageLoader>
-        </DivColumn>
+        </div>
       </SectionedContainer>
     );
   }

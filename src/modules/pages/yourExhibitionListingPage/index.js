@@ -44,7 +44,7 @@ class YourExhibitionListingPage extends Component {
       <DivRow className={` ${styles.item} ${isRTL ? styles.rtl : ""}`}>
         <img className={styles.image} src={listItem.base_image} />
 
-        <DivColumn className={styles.item_content}>
+        <div className={styles.item_content}>
           <div className={styles.title}>
             {listItem.translations[languageCode].title}
           </div>
@@ -63,29 +63,30 @@ class YourExhibitionListingPage extends Component {
             </div>
           </DivRow>
 
-          <DivRow className={styles.date_container}>
-            <div className={styles.date_title}>
-              {isRTL ? ":" : ""}
-              {translate("your_exhibition_list_page.starts_at")}
-              {!isRTL ? ":" : ""}
-            </div>
-            <div className={styles.date_value}>
-              &nbsp; {formatUnixTimeStampToDateTime(listItem.starts_from)}{" "}
-              &nbsp;
-            </div>
-          </DivRow>
-
-          <DivRow className={styles.date_container}>
-            <div className={styles.date_title}>
-              {isRTL ? ":" : ""}
-              {translate("your_exhibition_list_page.ends_on")}
-              {!isRTL ? ":" : ""}
-            </div>
-            <div className={styles.date_value}>
-              &nbsp;
-              {formatUnixTimeStampToDateTime(listItem.ends_till)} &nbsp;
-            </div>
-          </DivRow>
+          <DivColumn className={styles.date_container}>
+            <DivRow>
+              <div className={styles.date_title}>
+                {isRTL ? ":" : ""}
+                {translate("your_exhibition_list_page.starts_at")}
+                {!isRTL ? ":" : ""}
+              </div>
+              <div className={styles.date_value}>
+                &nbsp;
+                {formatUnixTimeStampToDateTime(listItem.starts_from)} &nbsp;
+              </div>
+            </DivRow>
+            <DivRow>
+              <div className={styles.date_title}>
+                {isRTL ? ":" : ""}
+                {translate("your_exhibition_list_page.ends_on")}
+                {!isRTL ? ":" : ""}
+              </div>
+              <div className={styles.date_value}>
+                &nbsp;
+                {formatUnixTimeStampToDateTime(listItem.ends_till)} &nbsp;
+              </div>
+            </DivRow>
+          </DivColumn>
 
           <DivRow className={styles.action_container}>
             <div className={styles.last_date}>
@@ -117,7 +118,7 @@ class YourExhibitionListingPage extends Component {
               {translate("exhibition_list_page.view_details")}
             </CapsuleButton>
           </DivRow>
-        </DivColumn>
+        </div>
       </DivRow>
     );
   };
@@ -134,7 +135,7 @@ class YourExhibitionListingPage extends Component {
             title={translate("your_exhibition_list_page.your_exhibition")}
             onBackClick={this.onBackPress}
           ></NavHeader>
-          <DivColumn fillParent className={styles.content_container}>
+          <div fillParent className={styles.content_container}>
             <InitialPageLoader
               initialPageApi={getEnrolledExhibitionAction}
               isEmpty={isEmpty(subscribedExhibitionList)}
@@ -143,7 +144,7 @@ class YourExhibitionListingPage extends Component {
                 return this.getListItem(exhibition);
               })}
             </InitialPageLoader>
-          </DivColumn>
+          </div>
         </DivColumn>
       </SectionedContainer>
     );

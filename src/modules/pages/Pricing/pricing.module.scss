@@ -3,14 +3,52 @@
 .subscription_container {
   padding: 5% 15%;
 }
+.pricing_select_container {
+  .get_started_button {
+    width: 185px;
+    height: 41px;
+    border-radius: 28px;
+    background-color: $color-gold;
 
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: 900;
+    color: white;
+    margin-top: 20px;
+    text-transform: uppercase;
+
+    @include on_click_button;
+  }
+}
 @include small {
   .subscription_container {
     padding: 30px;
     flex-direction: column;
   }
+  .get_started_button {
+    width: 185px;
+    height: 41px;
+    font-size: 12px;
+    margin-right: auto;
+    margin-left: auto;
+  }
 }
 
+@include medium {
+  .get_started_button {
+    width: 185px;
+    height: 41px;
+    font-size: 12px;
+  }
+}
+
+@include large {
+  .get_started_button {
+    width: 185px;
+    height: 41px;
+    font-size: 12px;
+  }
+}
 .rtl {
   flex-direction: row-reverse;
 }

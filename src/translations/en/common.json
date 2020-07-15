@@ -103,7 +103,8 @@
     "password": "Password",
     "remember_me": "Remember Me",
     "sign_in_button": "Sign In",
-    "username": "Email"
+    "username": "Email",
+    "forget_password": "Forgot password?"
   },
   "signup_page": {
     "confirm_password": "Confirm Password",
@@ -114,7 +115,15 @@
     "lastname": "Last Name",
     "page_title": "Sign Up",
     "password": "Password",
-    "sign_in": "Sign In"
+    "sign_in": "Sign In",
+    "steps": {
+      "sign_up": "Sign Up",
+      "personal_details": "Personal Details",
+      "marketplace_details": "Marketplace Details",
+      "location_details": "Location Details",
+      "bank_details": "Bank Details",
+      "select_subscription": "Select Subscription"
+    }
   },
   "wishlist_page": {
     "empty_message": "Oh Snap! You have no product in your wishlist.",
@@ -225,7 +234,10 @@
     "left_to_submit_products": "DAYS LEFT TO SUBMIT PRODUCTS",
     "live_now": "LIVE NOW: ENDS IN ",
     "attach_modal": {
-      "title": "ATTACH PRODUCTS"
+      "title": "ATTACH PRODUCTS",
+      "empty_screen_title": "No Products Available",
+      "empty_screen_description": "There are no complete products to show.",
+      "button_text": "Add/Complete Products"
     },
     "subscription_option": {
       "free": "Free",
@@ -458,7 +470,9 @@
     "email": "Email Address",
     "civil_id": "Civil Id",
     "cancel": "Cancel",
-    "save_details": "Save Details"
+    "save_details": "Save Details",
+    "male": "Male",
+    "female": "Female"
   },
   "change_password_page": {
     "title": "Change password",
@@ -478,7 +492,9 @@
       "plan_name": "PLAN NAME",
       "plan_description": "PLAN DESCRIPTION",
       "no_of_products": "NO OF PRODUCTS",
-      "no_of_exhibitions": "NO OF EXHIBITIONS"
+      "no_of_exhibitions": "NO OF EXHIBITIONS",
+      "activate": "Activate",
+      "active": "Active"
     }
   },
   "setting_page": {
@@ -547,5 +563,16 @@
     "title": "Frequently Asked Questions",
     "subtitle": "HELP",
     "app_name": "Home Expo"
+  },
+  "datatable": {
+    "rows_per_page": "Rows per page"
+  },
+  "overlay": {
+    "subscription": "Subscription",
+    "logout": "Logout",
+    "usage": "USAGE"
+  },
+  "pricing": {
+    "get_started": "Get Started"
   }
 }

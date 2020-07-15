@@ -144,7 +144,7 @@ class ProductDetailsPage extends Component {
         <InitialPageLoader
           initialPageApi={() => editProductAction({ id: params.productId })}
         >
-          <DivColumn
+          <div
             fillParent
             className={` ${styles.product_page_container} ${
               isRTL ? styles.rtl : ""
@@ -172,7 +172,7 @@ class ProductDetailsPage extends Component {
                   </DivColumn>
                 );
               })}
-          </DivColumn>
+          </div>
         </InitialPageLoader>
       </SectionedContainer>
     );

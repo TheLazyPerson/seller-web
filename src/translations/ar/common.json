@@ -103,7 +103,8 @@
     "password": "كلمه السر",
     "remember_me": "تذكرنى",
     "sign_in_button": "تسجيل الدخول",
-    "username": "البريد الإلكتروني"
+    "username": "البريد الإلكتروني",
+    "forget_password": "هل نسيت كلمة المرور؟"
   },
   "signup_page": {
     "confirm_password": "تأكيد كلمة المرور",
@@ -114,7 +115,15 @@
     "lastname": "الكنية",
     "page_title": "سجل",
     "password": "كلمه السر",
-    "sign_in": "تسجيل الدخول"
+    "sign_in": "تسجيل الدخول",
+    "steps": {
+      "sign_up": "سجل",
+      "personal_details": "تفاصيل شخصية",
+      "marketplace_details": "تفاصيل السوق",
+      "location_details": "تفاصيل الموقع",
+      "bank_details": "التفاصيل المصرفية",
+      "select_subscription": "حدد اشتراك"
+    }
   },
   "wishlist_page": {
     "empty_message": "يا سناب! ليس لديك منتج في قائمة أمنياتك.",
@@ -173,7 +182,10 @@
     "left_to_submit_products": "الأيام المتبقية لتقديم المنتجات",
     "live_now": "عش الآن: انتهى",
     "attach_modal": {
-      "title": "إرفاق المنتجات"
+      "title": "إرفاق المنتجات",
+      "empty_screen_title": "لا توجد منتجات متاحة",
+      "empty_screen_description": "لا توجد منتجات كاملة للعرض.",
+      "button_text": "إضافة / استكمال المنتج"
     },
     "subscription_option": {
       "free": "مجانا",
@@ -405,7 +417,9 @@
     "email": "عنوان بريد الكتروني",
     "civil_id": "الهوية المدنية",
     "cancel": "إلغاء",
-    "save_details": "حفظ التفاصيل"
+    "save_details": "حفظ التفاصيل",
+    "male": "الذكر",
+    "female": "أنثى"
   },
   "change_password_page": {
     "title": "تغيير كلمة المرور",
@@ -425,7 +439,9 @@
       "plan_name": "اسم الخطة",
       "plan_description": "وصف الخطة",
       "no_of_products": "عدد المنتجات",
-      "no_of_exhibitions": "عدد المعارض"
+      "no_of_exhibitions": "عدد المعارض",
+      "activate": "تفعيل",
+      "active": "نشيط"
     }
   },
   "setting_page": {
@@ -503,5 +519,43 @@
     "title": "أسئلة متكررة",
     "subtitle": "مساعدة",
     "app_name": "Home Expo"
+  },
+  "datatable": {
+    "rows_per_page": "الصفوف في الصفحة"
+  },
+  "overlay": {
+    "subscription": "اشتراك",
+    "logout": "تسجيل خروج",
+    "usage": "الاستخدام"
+  },
+  "pricing": {
+    "get_started": "البدء"
+  },
+  "personal_detail_page": {
+    "create": "التالى",
+    "page_title": "تفاصيل شخصية",
+    "civil_id": "البطاقة المدنية ",
+    "phone_number": "رقم الاتصال",
+    "birthday": "عيد الميلاد"
+  },
+  "location_detail_page": {
+    "create": "التالى",
+    "page_title": "تفاصيل الموقع",
+    "area": "منطقة",
+    "block_number": "حظر الرقم",
+    "house_number": "رقم الدار",
+    "street_number": "رقم الشارع",
+    "avenue": "السبيل",
+    "landmark": "معلم معروف",
+    "home_office": "مكتب البيت",
+    "city": "مدينة"
+  },
+
+  "bank_detail_page": {
+    "create": "التالى",
+    "page_title": "التفاصيل المصرفية",
+    "acount_holder": "صاحب الحساب",
+    "bank_name": "اسم البنك",
+    "iban": "رقم الحساب المصرفي الدولي"
   }
 }

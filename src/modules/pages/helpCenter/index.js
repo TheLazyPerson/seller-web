@@ -18,6 +18,7 @@ import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import map from "lodash/map";
 import navigatorHoc from "Hoc/navigatorHoc";
 import translatorHoc from "Hoc/translatorHoc";
+import InputTextareaComponent from "CommonComponents/InputTextareaComponent";
 
 class HelpCenter extends Component {
   state = {
@@ -52,7 +53,7 @@ class HelpCenter extends Component {
   validate = (values) => {
     const errors = {};
     const validators = {
-      feedback: isEmptyValidator(values.oldPassword),
+      feedback: isEmptyValidator(values.feedback),
     };
 
     Object.keys(validators).forEach((key) => {
@@ -139,7 +140,7 @@ class HelpCenter extends Component {
                 <form onSubmit={handleSubmit} className={styles.form}>
                   <Field name="feedback">
                     {({ input, meta }) => (
-                      <textarea
+                      <InputTextareaComponent
                         meta={meta}
                         {...input}
                         placeholder={translate("help_center.your_concern")}
@@ -148,11 +149,7 @@ class HelpCenter extends Component {
                     )}
                   </Field>
                   <DivRow>
-                    <CapsuleButton
-                      type="submit"
-                      disabled={submitting}
-                      onClick={() => this.onSubmit(values)}
-                    >
+                    <CapsuleButton type="submit" disabled={submitting}>
                       {translate("help_center.callback")}
                     </CapsuleButton>
                   </DivRow>

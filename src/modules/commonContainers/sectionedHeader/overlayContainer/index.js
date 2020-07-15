@@ -5,6 +5,7 @@ import DivColumn from "CommonComponents/divColumn";
 import DivRow from "CommonComponents/divRow";
 import { connect } from "react-redux";
 import map from "lodash/map";
+import translatorHoc from "Hoc/translatorHoc";
 
 class OverlayContainer extends Component {
   render() {
@@ -17,6 +18,8 @@ class OverlayContainer extends Component {
         isSubscriptionError,
         featuresData,
       },
+      languageReducer: { languageCode },
+      translate,
     } = this.props;
     const ProgressItem = ({ title, value, progress }) => (
       <DivColumn className={`${styles.item_container} ${styles.click}`}>
@@ -41,7 +44,7 @@ class OverlayContainer extends Component {
           className={`${styles.item_container} ${styles.title}`}
           style={{ cursor: "default" }}
         >
-          USAGE
+          {translate("overlay.usage")}
         </div>
         <HorizontalBorder />
 
@@ -50,7 +53,7 @@ class OverlayContainer extends Component {
           map(featuresData, (feature) => (
             <Fragment>
               <ProgressItem
-                title={feature.title}
+                title={languageCode === "ar" ? feature.title_ar : feature.title}
                 value={`${feature.used}/${feature.total}`}
                 progress={feature.percentage}
               />
@@ -62,7 +65,7 @@ class OverlayContainer extends Component {
           className={`${styles.item_container} ${styles.click}`}
           onClick={onClickBilling}
         >
-          Billing
+          {translate("overlay.subscription")}
         </div>
         <HorizontalBorder />
 
@@ -70,7 +73,7 @@ class OverlayContainer extends Component {
           className={`${styles.item_container} ${styles.click}`}
           onClick={onClickLogout}
         >
-          Logout
+          {translate("overlay.logout")}
         </div>
         <HorizontalBorder />
       </DivColumn>
@@ -82,7 +85,8 @@ const mapStateToProps = (state) => {
   return {
     subscriptionReducer: state.subscriptionReducer,
     isRTL: state.languageReducer.isRTL,
+    languageReducer: state.languageReducer,
   };
 };
 
-export default connect(mapStateToProps, null)(OverlayContainer);
+export default connect(mapStateToProps, null)(translatorHoc(OverlayContainer));

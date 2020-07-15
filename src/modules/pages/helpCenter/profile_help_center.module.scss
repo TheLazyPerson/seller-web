@@ -51,13 +51,15 @@
     padding: 22px 35px;
 
     .text_area {
-      width: 393px;
-      height: 180px;
-      resize: none;
-      border: none;
-      background: rgba($color-very-light-blue, 0.4);
-      padding: 14px 31px;
-      margin-bottom: 10px;
+      textarea {
+        width: 393px;
+        height: 180px;
+        resize: none;
+        border: none;
+        background: rgba($color-very-light-blue, 0.4);
+        padding: 14px 31px;
+        margin-bottom: 10px;
+      }
     }
   }
 }
@@ -126,10 +128,12 @@
       }
 
       .text_area {
-        width: unset;
-        height: 180px;
-        padding: 10px 20px;
-        font-size: 12px;
+        textarea {
+          width: unset;
+          height: 180px;
+          padding: 10px 20px;
+          font-size: 12px;
+        }
       }
     }
     .box_container {

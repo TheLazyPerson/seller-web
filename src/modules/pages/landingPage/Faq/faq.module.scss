@@ -53,3 +53,23 @@
     }
   }
 }
+
+.rtl {
+  .page_title {
+    text-align: right;
+    direction: rtl;
+  }
+  .faq_container {
+    .faq_title_container {
+      flex-direction: row-reverse;
+      .faq_title {
+        direction: rtl;
+        text-align: right;
+      }
+    }
+    .faq_description {
+      direction: rtl;
+      text-align: right;
+    }
+  }
+}

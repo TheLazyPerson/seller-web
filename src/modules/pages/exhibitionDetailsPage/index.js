@@ -97,6 +97,7 @@ class ExhibitionDetailsPage extends Component {
       translate,
       isRTL,
       languageReducer: { languageCode },
+      navigateTo,
     } = this.props;
     const { showModal } = this.state;
 
@@ -110,7 +111,7 @@ class ExhibitionDetailsPage extends Component {
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <DivColumn fillParent className={styles.exhibition_page_container}>
+        <div fillParent className={styles.exhibition_page_container}>
           <NavHeader
             title={translate("exhibition_details_page.exhibition")}
             onBackClick={this.onBackPress}
@@ -261,7 +262,11 @@ class ExhibitionDetailsPage extends Component {
                   ></NavHeader>
                   <DivRow fillParent className={styles.category_list_container}>
                     {map(exhibitionDetail.categories, (category) => (
-                      <CategoryListItem name={category.name} />
+                      <CategoryListItem
+                        category={category}
+                        languageCode={languageCode}
+                        isRTL={isRTL}
+                      />
                     ))}
                   </DivRow>
                 </Fragment>
@@ -316,10 +321,11 @@ class ExhibitionDetailsPage extends Component {
                 languageCode={languageCode}
                 translate={translate}
                 isRTL={isRTL}
+                navigateTo={navigateTo}
               />
             </InitialPageLoader>
           </InitialPageLoader>
-        </DivColumn>
+        </div>
       </SectionedContainer>
     );
   }

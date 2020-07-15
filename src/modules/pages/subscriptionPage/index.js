@@ -102,8 +102,8 @@ class SubscriptionPage extends Component {
             subscriptionReducer: { activeSubscription },
             activatePlanAction,
           } = this.props;
-          if (value.plan.id === activeSubscription.plan.id) {
-            return <span> Active</span>;
+          if (value.id === activeSubscription.id) {
+            return <span> {translate("subscription_page.table.active")} </span>;
           } else {
             return (
               <Button
@@ -114,7 +114,7 @@ class SubscriptionPage extends Component {
                   activatePlanAction(value.id);
                 }}
               >
-                Activate
+                {translate("subscription_page.table.activate")}
               </Button>
             );
           }
@@ -124,7 +124,7 @@ class SubscriptionPage extends Component {
     ]);
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <DivColumn fillParent className={styles.subscription_page_container}>
+        <div fillParent className={styles.subscription_page_container}>
           <NavHeader title={translate("subscription_page.title")}>
             <CapsuleButton onClick={() => this.onClickBuyAdditionalPlan()}>
               {translate("subscription_page.buy_additional_plan")}
@@ -157,37 +157,13 @@ class SubscriptionPage extends Component {
                             "subscription_page.subscription_lost"
                           )}
                           columns={columns()}
+                          searchable="id"
                         />
                       </DivRow>
                     )}
                   </InitialPageLoader>
                 </DivColumn>
               </DivColumn>
-
-              {/* <DivColumn fillParent className={styles.additional_plans}>
-                <DivColumn className={styles.additional_plans_title}>
-                  Add Additional Plans:
-                </DivColumn>
-                <DivColumn className={styles.additional_plans_container}>
-                  <InitialPageLoader initialPageApi={getPlanListAction}>
-                    <DivRow>
-                      {map(subscriptionPlanList, (subscription, index) => {
-                        if (
-                          activeSubscription.id !== subscription.id &&
-                          subscription.price !== 0
-                        ) {
-                          return (
-                            <Subscription
-                              subscription={subscription}
-                              features={subscription.features}
-                            />
-                          );
-                        }
-                      })}
-                    </DivRow>
-                  </InitialPageLoader>
-                </DivColumn>
-              </DivColumn> */}
 
               <InitialPageLoader initialPageApi={getPlanListAction}>
                 <BuyPlanModal
@@ -200,7 +176,7 @@ class SubscriptionPage extends Component {
               </InitialPageLoader>
             </DivColumn>
           </DivColumn>
-        </DivColumn>
+        </div>
       </SectionedContainer>
     );
   }

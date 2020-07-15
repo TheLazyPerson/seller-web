@@ -12,7 +12,7 @@ import navigatorHoc from "Hoc/navigatorHoc";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import {
   getProfileDetailsAction,
-  editProfileDetailsAction,
+  editProfileAction,
 } from "Core/modules/profiledetails/profileDetailsActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -39,12 +39,12 @@ class EditProfile extends Component {
 
   onSubmit = (form) => {
     const {
-      editProfileDetailsAction,
+      editProfileAction,
       navigateTo,
       showSuccessFlashMessage,
     } = this.props;
 
-    editProfileDetailsAction({
+    editProfileAction({
       first_name: form.firstName,
       last_name: form.lastName,
       gender: form.gender,
@@ -62,11 +62,11 @@ class EditProfile extends Component {
 
   componentDidMount() {
     // TODO: To add to check if reducer data is not available.
-    // this.props.getProfileDetailsAction().then(({ payload }) => {
-    //   if (payload.code === 200 || payload.code === 201) {
-    //     // code here
-    //   }
-    // });
+    this.props.getProfileDetailsAction().then(({ payload }) => {
+      if (payload.code === 200 || payload.code === 201) {
+        // code here
+      }
+    });
   }
 
   validate = (values) => {
@@ -102,10 +102,12 @@ class EditProfile extends Component {
     } else if (userDetails.birthday) {
       startDate = new Date(userDetails.birthday);
     }
+    const male = translate("edit_profile.male");
+    const female = translate("edit_profile.female");
 
     const genderOptions = [
-      { value: "male", label: "Male" },
-      { value: "female", label: "Female" },
+      { value: "male", label: male },
+      { value: "female", label: female },
     ];
     let defaultGender = null;
 
@@ -179,7 +181,11 @@ class EditProfile extends Component {
 
                 <Field name="gender">
                   {({ input, meta }) => (
-                    <DivColumn className="input_select_container">
+                    <DivColumn
+                      className={`input_select_container ${
+                        isRTL ? styles.rtl_input_select : ""
+                      }`}
+                    >
                       <Select
                         options={genderOptions}
                         onChange={(value) => {
@@ -276,10 +282,7 @@ const mapDispathToProps = (dispatch) => {
       getProfileDetailsAction,
       dispatch
     ),
-    editProfileDetailsAction: bindActionCreators(
-      editProfileDetailsAction,
-      dispatch
-    ),
+    editProfileAction: bindActionCreators(editProfileAction, dispatch),
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
       dispatch
