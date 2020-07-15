@@ -71,7 +71,8 @@ class EditProduct extends Component {
   };
 
   onClickCancel = () => {
-    this.onBackPress();
+    const { navigateTo } = this.props;
+    navigateTo("products");
   };
 
   onSelectCategory = (data) => {
@@ -442,7 +443,7 @@ class EditProduct extends Component {
                       );
                     })}
                     <DivRow className={styles.form_button_container}>
-                      <SecondaryCapsuleButton onClick={onClickCancel}>
+                      <SecondaryCapsuleButton onClick={this.onClickCancel}>
                         {translate("edit_product.cancel")}
                       </SecondaryCapsuleButton>
                       <CapsuleButton type="submit" disabled={submitting}>
