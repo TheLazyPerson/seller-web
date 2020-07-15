@@ -465,6 +465,15 @@
     "reset_password_button": "إعادة تعيين كلمة المرور",
     "username": "البريد الإلكتروني"
   },
+  "update_password_page": {
+    "create": "تسجيل الدخول",
+    "page_title": "إعادة تعيين كلمة المرور",
+    "sub_title": "أدخل كلمة المرور للتحديث.",
+    "password": "كلمه السر",
+    "confirmed_password": "تأكيد كلمة المرور",
+    "reset_password_button": "إعادة تعيين كلمة المرور",
+    "sub_title1": "انتهت صلاحية الرمز المميز الخاص بك أو تم تحديث كلمة المرور بالفعل "
+  },
   "subscription_item": {
     "active_plan": "الخطة النشطة",
     "kd": "دينار كويتي",
