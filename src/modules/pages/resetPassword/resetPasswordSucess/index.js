@@ -23,7 +23,7 @@ class ResetPasswordSuccess extends Component {
             <img className={styles.image} src={Checked} />
           </div>
           <div className={styles.signin_title_text}>
-            Password Change Successful!
+            {translate("reset_password_page.successful")}
           </div>
           <input
             type="submit"
