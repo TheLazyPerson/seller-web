@@ -14,61 +14,21 @@ import DataTableContainer from "CommonContainers/dataTableContainer";
 import { getOrderListAction } from "Core/modules/order/orderActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import isEmpty from "lodash/isEmpty";
+import translatorHoc from "Hoc/translatorHoc";
+import { formatUnixTimeStampToDateTime } from "Utils/formatHelper";
 
 class OrdersPage extends Component {
-  columns = memoize(() => [
-    {
-      name: "ID",
-      selector: "id",
-      sortable: true,
-    },
-    {
-      name: "ORDER DATE",
-      //TODO: fix the date format
-      selector: "created_at",
-      sortable: true,
-    },
-    {
-      name: "GRAND TOTAL",
-      selector: "grand_total",
-      sortable: false,
-    },
-    {
-      name: "TOTAL ITEMS",
-      selector: "total_item_count",
-      sortable: false,
-    },
-    {
-      name: "STATUS",
-      selector: "status_label",
-      sortable: true,
-    },
-    {
-      cell: (value) => (
-        <Button
-          variant="contained"
-          color="primary"
-          className={styles.custom_button}
-          onClick={() => {
-            const { navigateTo } = this.props;
-            navigateTo("order-details", { orderId: value.id });
-          }}
-        >
-          View
-        </Button>
-      ),
-      button: true,
-    },
-  ]);
-
   getListItem = (listItem) => {
+    const {
+      languageReducer: { languageCode },
+    } = this.props;
     return (
       <DivColumn verticalCenter horizontalCenter className={styles.box}>
         <div className={styles.title}>
           {listItem.card_type === "price-card" ? "KD " : ""}
           {listItem.value}
         </div>
-        <div className={styles.description}>{listItem.title}</div>
+        <div className={styles.description}>{listItem.title[languageCode]}</div>
       </DivColumn>
     );
   };
@@ -78,11 +38,58 @@ class OrdersPage extends Component {
       orderReducer: { overview, orderList },
       getOrderListAction,
       isRTL,
+      translate,
     } = this.props;
+    const columns = memoize(() => [
+      {
+        name: `${translate("order_list.table.id")}`,
+        selector: "id",
+        sortable: true,
+      },
+      {
+        name: `${translate("order_list.table.order_date")}`,
+        //TODO: fix the date format
+        selector: "created_at",
+        sortable: true,
+        cell: (value) => formatUnixTimeStampToDateTime(value.created_at),
+      },
+      {
+        name: `${translate("order_list.table.grand_total")}`,
+        selector: "grand_total",
+        sortable: false,
+      },
+      {
+        name: `${translate("order_list.table.total_items")}`,
+        selector: "total_item_count",
+        sortable: false,
+      },
+      {
+        name: `${translate("order_list.table.status")}`,
+        selector: "status_label",
+        sortable: true,
+        cell: (value) => translate("order_list.table." + value.status),
+      },
+      {
+        cell: (value) => (
+          <Button
+            variant="contained"
+            color="primary"
+            className={styles.custom_button}
+            onClick={() => {
+              const { navigateTo } = this.props;
+              navigateTo("order-details", { orderId: value.id });
+            }}
+          >
+            {translate("order_list.table.view")}
+          </Button>
+        ),
+        button: true,
+      },
+    ]);
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <DivColumn
+        <div
           fillParent
           className={` ${styles.orders_page_container} ${
             isRTL ? styles.rtl : ""
@@ -100,10 +107,11 @@ class OrdersPage extends Component {
             <DataTableContainer
               data={orderList}
               title="Orders"
-              columns={this.columns()}
+              columns={columns()}
+              searchable="id"
             />
           </InitialPageLoader>
-        </DivColumn>
+        </div>
       </SectionedContainer>
     );
   }
@@ -112,6 +120,7 @@ class OrdersPage extends Component {
 const mapStateToProps = (state) => {
   return {
     orderReducer: state.orderReducer,
+    languageReducer: state.languageReducer,
     isRTL: state.languageReducer.isRTL,
   };
 };
@@ -125,4 +134,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(OrdersPage));
+)(navigatorHoc(translatorHoc(OrdersPage)));

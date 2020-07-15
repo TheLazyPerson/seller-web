@@ -35,3 +35,16 @@
     }
   }
 }
+
+.rtl {
+  .overview_container {
+    direction: rtl;
+    text-align: right;
+  }
+  .text_wrapper {
+    direction: rtl;
+  }
+  .options_wrapper {
+    direction: rtl;
+  }
+}

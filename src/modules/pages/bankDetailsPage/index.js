@@ -9,7 +9,7 @@ import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import navigatorHoc from "Hoc/navigatorHoc";
 
 import translatorHoc from "Hoc/translatorHoc";
-import { isEmptyValidator } from "Utils/validators";
+import { isEmptyValidator, isIBANValid } from "Utils/validators";
 
 class BankDetails extends Component {
   onSubmit = (form) => {
@@ -29,7 +29,7 @@ class BankDetails extends Component {
     const validators = {
       account_holder: isEmptyValidator(values.account_holder),
       bank_name: isEmptyValidator(values.bank_name),
-      iban: isEmptyValidator(values.iban),
+      iban: isIBANValid(values.iban),
     };
 
     Object.keys(validators).forEach((key) => {

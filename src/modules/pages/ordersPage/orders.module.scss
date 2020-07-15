@@ -50,7 +50,19 @@
 
 @include small {
   .orders_page_container {
-    width: 50%;
+    .box_container {
+      .box {
+        width: 38vw;
+        height: 130px;
+        .title {
+          font-size: 32px;
+        }
+
+        .description {
+          font-size: 14px;
+        }
+      }
+    }
   }
 }
 

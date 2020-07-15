@@ -103,7 +103,8 @@
     "password": "كلمه السر",
     "remember_me": "تذكرنى",
     "sign_in_button": "تسجيل الدخول",
-    "username": "البريد الإلكتروني"
+    "username": "البريد الإلكتروني",
+    "forget_password": "هل نسيت كلمة المرور؟"
   },
   "signup_page": {
     "confirm_password": "تأكيد كلمة المرور",
@@ -114,7 +115,15 @@
     "lastname": "الكنية",
     "page_title": "سجل",
     "password": "كلمه السر",
-    "sign_in": "تسجيل الدخول"
+    "sign_in": "تسجيل الدخول",
+    "steps": {
+      "sign_up": "سجل",
+      "personal_details": "تفاصيل شخصية",
+      "marketplace_details": "تفاصيل السوق",
+      "location_details": "تفاصيل الموقع",
+      "bank_details": "التفاصيل المصرفية",
+      "select_subscription": "حدد اشتراك"
+    }
   },
   "wishlist_page": {
     "empty_message": "يا سناب! ليس لديك منتج في قائمة أمنياتك.",
@@ -165,12 +174,34 @@
     "ends_on": "ينتهي",
     "start_at": "يبدأ في",
     "category": "التصنيفات",
-    "add_to_products": "أضف منتجاتك"
+    "last": "الاخير",
+    "days": "أيام",
+    "add_to_products": "أضف منتجاتك",
+    "product_details": "تفاصيل المنتج",
+    "left_to_enroll": "الأيام المتبقية للتسجيل",
+    "left_to_submit_products": "الأيام المتبقية لتقديم المنتجات",
+    "live_now": "عش الآن: انتهى",
+    "attach_modal": {
+      "title": "إرفاق المنتجات",
+      "empty_screen_title": "لا توجد منتجات متاحة",
+      "empty_screen_description": "لا توجد منتجات كاملة للعرض.",
+      "button_text": "إضافة / استكمال المنتج"
+    },
+    "subscription_option": {
+      "free": "مجانا",
+      "free_subtitle": "الدخول مجاني",
+      "flat_fee": "رسم موحد",
+      "flat_fee_subtitle": "يجب على أوني أن يدفع مرة واحدة",
+      "commission": "عمولة",
+      "commission_subtitle": "على كل منتج تبيعه"
+    }
   },
   "your_exhibition_list_page": {
     "btn_title": "المعارض",
     "view_details": "عرض التفاصيل",
-    "left_to_enroll": "الأيام المتبقية للتسجيل",
+    "left_to_enroll": "الأيام المتبقية لتقديم المنتجات",
+    "live_now": "عش الآن: انتهى",
+    "days": "أيام",
     "last": "الاخير",
     "category": "الفئة",
     "starts_at": "يبدأ في",
@@ -191,7 +222,78 @@
     "shipping_methods": "طريقة الشحن",
     "payment_method": "طريقة الدفع او السداد",
     "email": "البريد الإلكتروني",
-    "print_invoice": "فاتورة طباعة"
+    "print_invoice": "فاتورة طباعة",
+    "table": {
+      "item_code": "رمز الصنف",
+      "name": "اسم",
+      "exhibition_name": "اسم المعرض",
+      "price": "السعر",
+      "quantity": "كمية",
+      "commission": "سمسرة",
+      "grand_total": "المبلغ الإجمالي"
+    }
+  },
+  "order_list": {
+    "table": {
+      "id": "هوية شخصية",
+      "order_date": "تاريخ الطلب",
+      "grand_total": "المبلغ الإجمالي",
+      "total_items": "البنود الإجمالية",
+      "status": "الحالة",
+      "view": "رأي",
+      "pending": "قيد الانتظار",
+      "pending_payment": "قيد الانتظار",
+      "processing": "معالجة",
+      "pickup_requested": "معالجة",
+      "shipped": "شحنها",
+      "out_for_delivery": "خارج للتوصيل",
+      "completed": "منجز"
+    }
+  },
+  "product_list": {
+    "title": "منتجات",
+    "add_new_product": "إضافة منتج جديد",
+    "search": "بحث",
+    "table": {
+      "id": "هوية شخصية",
+      "sku": "وحدة حفظ الأوراق المالية",
+      "name": "اسم",
+      "price": "السعر",
+      "quantity": "كمية",
+      "view": "رأي"
+    }
+  },
+  "product_details": {
+    "title": "تفاصيل المنتج",
+    "delete": "حذف",
+    "edit": "تصحيح"
+  },
+  "edit_product": {
+    "title": "تحرير المنتج",
+    "cancel": "إلغاء",
+    "save": "حفظ التفاصيل"
+  },
+  "add_product": {
+    "title": "أضف منتج",
+    "sku": "رمز الصنف",
+    "product_vertical": "المنتج العمودي",
+    "cancel": "إلغاء",
+    "save": "حفظ التفاصيل"
+  },
+  "image_selection_component": {
+    "title": "صور",
+    "help_text": "اسحب وأفلت بعض الملفات هنا ، أو انقر لتحديد الملفات"
+  },
+  "sales_list": {
+    "title": "المعاملات",
+    "search": "بحث",
+    "table": {
+      "id": "هوية شخصية",
+      "transaction_id": "رقم المعاملة",
+      "comment": "تعليق",
+      "grand_total": "المبلغ الإجمالي",
+      "view_button": "رأي"
+    }
   },
   "pickup_request_details": {
     "title": "تفاصيل الطلب",
@@ -207,7 +309,38 @@
     "shipping_methods": "طريقة الشحن",
     "payment_method": "طريقة الدفع او السداد",
     "email": "البريد الإلكتروني",
-    "products_order": "المنتجات المطلوبة"
+    "products_order": "المنتجات المطلوبة",
+    "table": {
+      "item_code": "رمز الصنف",
+      "name": "اسم",
+      "exhibition_name": "اسم المعرض",
+      "quantity": "كمية",
+      "quantity_to_ship": "كمية الشحن"
+    }
+  },
+  "create_pickup_request": {
+    "title": "إنشاء طلب شحن",
+    "order_id": "رقم التعريف الخاص بالطلب",
+    "places_on": "موضوع على",
+    "customer_details": "تفاصيل العميل",
+    "name": "اسم",
+    "email": "البريد الإلكتروني",
+    "product_list": "قائمة المنتجات",
+    "shipping_address": "عنوان الشحن",
+    "billing_address": "عنوان وصول الفواتير",
+    "shipping_methods": "طريقة الشحن",
+    "payment_method": "طريقة الدفع او السداد",
+    "form_title": "املأ هذه التفاصيل",
+    "create_request": "إنشاء طلب",
+    "select_pickup_date": "حدد تاريخ الاستلام",
+
+    "table": {
+      "item_code": "رمز الصنف",
+      "name": "اسم",
+      "exhibition_name": "اسم المعرض",
+      "quantity": "كمية",
+      "quantity_to_ship": "كمية الشحن"
+    }
   },
   "transaction_details_page": {
     "title": "تفاصيل المعاملة",
@@ -217,7 +350,16 @@
     "payment_method": " طريقة الدفع او السداد",
     "total": "مجموع",
     "comment": "تعليق",
-    "products_order": "المنتجات المطلوبة"
+    "products_order": "المنتجات المطلوبة",
+    "table": {
+      "sku": "رمز التخزين التعريفي",
+      "name": "اسم",
+      "exhibition_name": "اسم المعرض",
+      "price": "السعر",
+      "quantity": "كمية",
+      "commission": "عمولة",
+      "grand_total": "المبلغ الإجمالي"
+    }
   },
   "marketplace_profile_details": {
     "title": "تفاصيل ملف تعريف السوق",
@@ -275,7 +417,9 @@
     "email": "عنوان بريد الكتروني",
     "civil_id": "الهوية المدنية",
     "cancel": "إلغاء",
-    "save_details": "حفظ التفاصيل"
+    "save_details": "حفظ التفاصيل",
+    "male": "الذكر",
+    "female": "أنثى"
   },
   "change_password_page": {
     "title": "تغيير كلمة المرور",
@@ -289,7 +433,16 @@
     "title": "تفاصيل الاشتراك",
     "buy_additional_plan": "شراء خطة إضافية ",
     "plan": " الخطط المكتتبة",
-    "subscription_lost": "الاشتراك"
+    "subscription_lost": "الاشتراك",
+    "table": {
+      "id": "هوية شخصية",
+      "plan_name": "اسم الخطة",
+      "plan_description": "وصف الخطة",
+      "no_of_products": "عدد المنتجات",
+      "no_of_exhibitions": "عدد المعارض",
+      "activate": "تفعيل",
+      "active": "نشيط"
+    }
   },
   "setting_page": {
     "header_title": "الإعدادات",
@@ -342,5 +495,67 @@
   "additional_plan": {
     "title": "شراء خطة إضافية",
     "buy": "يشترى"
+  },
+  "exhibition_overview": {
+    "name": "اسم",
+    "description": "وصف قصير",
+    "dates": "تواريخ",
+    "starts_at": "يبدأ في",
+    "ends_on": "ينتهي",
+    "enroll": "يتسجل، يلتحق",
+    "overview": "نظرة عامة"
+  },
+  "subscription_success": {
+    "retry": "أعد المحاولة",
+    "payment": "تم الدفع بنجاح",
+    "description": "اهلا بك في العائلة"
+  },
+  "subscription_failure": {
+    "payment": "عملية الدفع فشلت",
+    "description": "حدثت مشكلة أثناء قبول دفعتك.",
+    "retry": "أعد المحاولة"
+  },
+  "faq": {
+    "title": "أسئلة متكررة",
+    "subtitle": "مساعدة",
+    "app_name": "Home Expo"
+  },
+  "datatable": {
+    "rows_per_page": "الصفوف في الصفحة"
+  },
+  "overlay": {
+    "subscription": "اشتراك",
+    "logout": "تسجيل خروج",
+    "usage": "الاستخدام"
+  },
+  "pricing": {
+    "get_started": "البدء"
+  },
+  "personal_detail_page": {
+    "create": "التالى",
+    "page_title": "تفاصيل شخصية",
+    "civil_id": "البطاقة المدنية ",
+    "phone_number": "رقم الاتصال",
+    "birthday": "عيد الميلاد"
+  },
+  "location_detail_page": {
+    "create": "التالى",
+    "page_title": "تفاصيل الموقع",
+    "area": "منطقة",
+    "block_number": "حظر الرقم",
+    "house_number": "رقم الدار",
+    "street_number": "رقم الشارع",
+    "avenue": "السبيل",
+    "landmark": "معلم معروف",
+    "home_office": "مكتب البيت",
+    "city": "مدينة"
+  },
+
+  "bank_detail_page": {
+    "create": "التالى",
+    "page_title": "التفاصيل المصرفية",
+    "acount_holder": "صاحب الحساب",
+    "bank_name": "اسم البنك",
+    "iban": "رقم الحساب المصرفي الدولي"
   }
 }

@@ -23,11 +23,11 @@ import { getProductFormAction } from "Core/modules/product/productActions";
 import ImageSelectionComponent from "CommonComponents/imageSelectionComponent";
 import { getBase64 } from "Utils/generalUtils";
 import { getCategoryTreeAction } from "Core/modules/category/categoryActions";
-
 import map from "lodash/map";
 import isEmpty from "lodash/isEmpty";
-
+import translatorHoc from "Hoc/translatorHoc";
 import Select from "react-select";
+import filter from "lodash/filter";
 
 class EditProduct extends Component {
   state = {
@@ -71,7 +71,8 @@ class EditProduct extends Component {
   };
 
   onClickCancel = () => {
-    this.onBackPress();
+    const { navigateTo } = this.props;
+    navigateTo("products");
   };
 
   onSelectCategory = (data) => {
@@ -182,8 +183,9 @@ class EditProduct extends Component {
     });
   };
 
-  getFormItem = (attribute) => {
-    const { type, slug, name, is_translatable } = attribute;
+  getFormItem = (attribute, languageCode) => {
+    const { type, slug, name, translations, is_translatable } = attribute;
+    var translation = filter(translations, { locale: languageCode })[0];
 
     if (type === "text") {
       return (
@@ -193,7 +195,7 @@ class EditProduct extends Component {
               <InputTextComponent
                 meta={meta}
                 {...input}
-                placeholder={name}
+                placeholder={translation.name}
                 className={styles.input_text}
               />
             )}
@@ -205,7 +207,7 @@ class EditProduct extends Component {
                 <InputTextComponent
                   meta={meta}
                   {...input}
-                  placeholder={name.concat(" - Arabic")}
+                  placeholder={translation.name.concat(" - Arabic")}
                   className={styles.input_text}
                 />
               )}
@@ -228,7 +230,7 @@ class EditProduct extends Component {
                   }}
                   className="react-select-container"
                   classNamePrefix="react-select"
-                  placeholder={name}
+                  placeholder={translation.name}
                   defaultValue={null}
                 />
                 {meta.error && meta.touched && (
@@ -256,7 +258,7 @@ class EditProduct extends Component {
                   }}
                   className="react-select-container"
                   classNamePrefix="react-select"
-                  placeholder={name}
+                  placeholder={translation.name}
                   defaultValue={null}
                 />
                 {meta.error && meta.touched && (
@@ -275,7 +277,7 @@ class EditProduct extends Component {
               <InputTextareaComponent
                 meta={meta}
                 {...input}
-                placeholder={name}
+                placeholder={translation.name}
                 className={styles.input_text_area}
               />
             )}
@@ -287,7 +289,7 @@ class EditProduct extends Component {
                 <InputTextareaComponent
                   meta={meta}
                   {...input}
-                  placeholder={name.concat(" - Arabic")}
+                  placeholder={translation.name.concat(" - Arabic")}
                   className={styles.input_text_area}
                 />
               )}
@@ -303,7 +305,7 @@ class EditProduct extends Component {
               <InputTextComponent
                 meta={meta}
                 {...input}
-                placeholder={name}
+                placeholder={translation.name}
                 className={styles.input_text}
               />
             )}
@@ -378,33 +380,27 @@ class EditProduct extends Component {
   };
 
   render() {
-    // const CustomRenderInput = ({ input, name, value, onClick, meta }) => {
-    //   return (
-    //     <InputTextComponent
-    //       {...input}
-    //       meta={meta}
-    //       placeholder={name}
-    //       value={value}
-    //       className={styles.input_text}
-    //       onClick={onClick}
-    //     />
-    //   );
-    // };
     const {
       onClickCancel,
       productReducer: { prouctForm },
       match: { params },
       getProductFormAction,
+      isRTL,
+      translate,
+      languageReducer: { languageCode },
     } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <DivColumn fillParent className={styles.page_container}>
+        <div fillParent className={styles.page_container}>
           <NavHeader
-            title="Edit Product"
+            title={translate("edit_product.title")}
             onBackClick={this.onBackPress}
           ></NavHeader>
-        </DivColumn>
-        <DivColumn fillParent className={styles.page_container}>
+        </div>
+        <div
+          fillParent
+          className={` ${styles.page_container} ${isRTL ? styles.rtl : ""}`}
+        >
           <InitialPageLoader
             initialPageApi={() => getProductFormAction(params.productId)}
           >
@@ -428,24 +424,30 @@ class EditProduct extends Component {
                       className={styles.text_input_container}
                     ></DivColumn>
                     {map(prouctForm, (attributeGroup) => {
-                      const { name, attributes: fieldList } = attributeGroup;
+                      const {
+                        name,
+                        name_ar,
+                        attributes: fieldList,
+                      } = attributeGroup;
                       return (
                         <DivColumn>
-                          <div className={styles.header}>{name}</div>
-                          <div>
+                          <div className={styles.header}>
+                            {languageCode === "ar" ? name_ar : name}
+                          </div>
+                          <div className={styles.field_container}>
                             {map(fieldList, (attribute) => {
-                              return this.getFormItem(attribute);
+                              return this.getFormItem(attribute, languageCode);
                             })}
                           </div>
                         </DivColumn>
                       );
                     })}
                     <DivRow className={styles.form_button_container}>
-                      <SecondaryCapsuleButton onClick={onClickCancel}>
-                        Cancel
+                      <SecondaryCapsuleButton onClick={this.onClickCancel}>
+                        {translate("edit_product.cancel")}
                       </SecondaryCapsuleButton>
                       <CapsuleButton type="submit" disabled={submitting}>
-                        Save Details
+                        {translate("edit_product.save")}
                       </CapsuleButton>
                     </DivRow>
                   </form>
@@ -454,7 +456,7 @@ class EditProduct extends Component {
             )}
             ;
           </InitialPageLoader>
-        </DivColumn>
+        </div>
       </SectionedContainer>
     );
   }
@@ -465,6 +467,8 @@ const mapStateToProps = (state) => {
     productReducer: state.productReducer,
     basicReducer: state.basicReducer,
     categoryReducer: state.categoryReducer,
+    languageReducer: state.languageReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 
@@ -484,4 +488,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(EditProduct));
+)(navigatorHoc(translatorHoc(EditProduct)));

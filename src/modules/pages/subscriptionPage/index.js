@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SectionedContainer from "CommonContainers/sectionedContainer";
 import DivColumn from "CommonComponents/divColumn";
+import DivRow from "CommonComponents/divRow";
 import NavHeader from "CommonComponents/navHeader";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import styles from "./subscription.module.scss";
@@ -28,61 +29,6 @@ class SubscriptionPage extends Component {
   state = {
     showModal: false,
   };
-
-  columns = memoize(() => [
-    {
-      name: "ID",
-      selector: "id",
-      sortable: true,
-    },
-    {
-      name: "PLAN NAME",
-      selector: "name",
-      sortable: true,
-      grow: 2,
-    },
-    {
-      name: "PLAN DESCRIPTION",
-      selector: "description",
-      sortable: true,
-      grow: 2,
-    },
-    {
-      name: "NO OF PRODUCTS",
-      selector: "plan.no_of_products",
-      sortable: true,
-    },
-    {
-      name: "NO OF EXHIBITIONS",
-      selector: "plan.no_of_exhibitions",
-      sortable: true,
-    },
-    {
-      cell: (value) => {
-        const {
-          subscriptionReducer: { activeSubscription },
-          activatePlanAction,
-        } = this.props;
-        if (value.plan.id === activeSubscription.plan.id) {
-          return <span> Active</span>;
-        } else {
-          return (
-            <Button
-              variant="contained"
-              color="primary"
-              className={styles.custom_button}
-              onClick={() => {
-                activatePlanAction(value.id);
-              }}
-            >
-              Activate
-            </Button>
-          );
-        }
-      },
-      button: true,
-    },
-  ]);
 
   onClickBuyPlan = (planId) => {
     const { buyAdditionalPlanAction } = this.props;
@@ -122,10 +68,63 @@ class SubscriptionPage extends Component {
       translate,
     } = this.props;
     const { showModal } = this.state;
-
+    const columns = memoize(() => [
+      {
+        name: `${translate("subscription_page.table.id")}`,
+        selector: "id",
+        sortable: true,
+      },
+      {
+        name: `${translate("subscription_page.table.plan_name")}`,
+        selector: "name",
+        sortable: true,
+        grow: 2,
+      },
+      {
+        name: `${translate("subscription_page.table.plan_description")}`,
+        selector: "description",
+        sortable: true,
+        grow: 2,
+      },
+      {
+        name: `${translate("subscription_page.table.no_of_products")}`,
+        selector: "plan.no_of_products",
+        sortable: true,
+      },
+      {
+        name: `${translate("subscription_page.table.no_of_exhibitions")}`,
+        selector: "plan.no_of_exhibitions",
+        sortable: true,
+      },
+      {
+        cell: (value) => {
+          const {
+            subscriptionReducer: { activeSubscription },
+            activatePlanAction,
+          } = this.props;
+          if (value.id === activeSubscription.id) {
+            return <span> {translate("subscription_page.table.active")} </span>;
+          } else {
+            return (
+              <Button
+                variant="contained"
+                color="primary"
+                className={styles.custom_button}
+                onClick={() => {
+                  activatePlanAction(value.id);
+                }}
+              >
+                {translate("subscription_page.table.activate")}
+              </Button>
+            );
+          }
+        },
+        button: true,
+      },
+    ]);
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <DivColumn fillParent className={styles.subscription_page_container}>
+        <div fillParent className={styles.subscription_page_container}>
           <NavHeader title={translate("subscription_page.title")}>
             <CapsuleButton onClick={() => this.onClickBuyAdditionalPlan()}>
               {translate("subscription_page.buy_additional_plan")}
@@ -149,7 +148,7 @@ class SubscriptionPage extends Component {
                   fillParent
                   className={styles.additional_plans_container}
                 >
-                  {/* <InitialPageLoader initialPageApi={getSubscriptionListAction}>
+                  <InitialPageLoader initialPageApi={getSubscriptionListAction}>
                     {!isEmpty(activeSubscription) && (
                       <DivRow>
                         <DataTableContainer
@@ -157,38 +156,14 @@ class SubscriptionPage extends Component {
                           title={translate(
                             "subscription_page.subscription_lost"
                           )}
-                          columns={this.columns()}
+                          columns={columns()}
+                          searchable="id"
                         />
                       </DivRow>
                     )}
-                  </InitialPageLoader> */}
-                </DivColumn>
-              </DivColumn>
-
-              {/* <DivColumn fillParent className={styles.additional_plans}>
-                <DivColumn className={styles.additional_plans_title}>
-                  Add Additional Plans:
-                </DivColumn>
-                <DivColumn className={styles.additional_plans_container}>
-                  <InitialPageLoader initialPageApi={getPlanListAction}>
-                    <DivRow>
-                      {map(subscriptionPlanList, (subscription, index) => {
-                        if (
-                          activeSubscription.id !== subscription.id &&
-                          subscription.price !== 0
-                        ) {
-                          return (
-                            <Subscription
-                              subscription={subscription}
-                              features={subscription.features}
-                            />
-                          );
-                        }
-                      })}
-                    </DivRow>
                   </InitialPageLoader>
                 </DivColumn>
-              </DivColumn> */}
+              </DivColumn>
 
               <InitialPageLoader initialPageApi={getPlanListAction}>
                 <BuyPlanModal
@@ -201,7 +176,7 @@ class SubscriptionPage extends Component {
               </InitialPageLoader>
             </DivColumn>
           </DivColumn>
-        </DivColumn>
+        </div>
       </SectionedContainer>
     );
   }

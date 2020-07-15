@@ -1,0 +1,16 @@
+@import "~Styles/colors.module";
+@import "~Styles/mixins.module";
+.subscription_container {
+  padding: 5% 15%;
+}
+
+@include small {
+  .subscription_container {
+    padding: 30px;
+    flex-direction: column;
+  }
+}
+
+.rtl {
+  flex-direction: row-reverse;
+}

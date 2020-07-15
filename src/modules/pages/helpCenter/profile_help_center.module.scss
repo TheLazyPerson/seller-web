@@ -51,13 +51,15 @@
     padding: 22px 35px;
 
     .text_area {
-      width: 393px;
-      height: 180px;
-      resize: none;
-      border: none;
-      background: rgba($color-very-light-blue, 0.4);
-      padding: 14px 31px;
-      margin-bottom: 10px;
+      textarea {
+        width: 393px;
+        height: 180px;
+        resize: none;
+        border: none;
+        background: rgba($color-very-light-blue, 0.4);
+        padding: 14px 31px;
+        margin-bottom: 10px;
+      }
     }
   }
 }
@@ -74,17 +76,12 @@
         height: 207px;
         margin-right: 20px;
 
-        .item_icon {
-          height: 38px;
+        .title {
+          font-size: 32px;
         }
 
-        .item_title {
-          font-size: 12px;
-          margin: 18px 0px 9px;
-        }
-
-        .item_description {
-          font-size: 11px;
+        .description {
+          font-size: 14px;
         }
       }
     }
@@ -99,10 +96,8 @@
       flex-direction: row;
 
       .item_container {
-        width: 155px;
-        height: 180px;
-        margin-right: 0px;
-        margin-top: 20px;
+        width: 38vw;
+        height: 130px;
 
         .item_icon {
           height: 32px;
@@ -133,10 +128,25 @@
       }
 
       .text_area {
-        width: unset;
-        height: 180px;
-        padding: 10px 20px;
-        font-size: 12px;
+        textarea {
+          width: unset;
+          height: 180px;
+          padding: 10px 20px;
+          font-size: 12px;
+        }
+      }
+    }
+    .box_container {
+      .box {
+        width: 38vw;
+        height: 130px;
+        .title {
+          font-size: 32px;
+        }
+
+        .description {
+          font-size: 14px;
+        }
       }
     }
   }

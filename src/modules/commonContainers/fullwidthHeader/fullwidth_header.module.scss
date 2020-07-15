@@ -57,6 +57,19 @@
   }
 }
 
+.rtl {
+  flex-direction: row-reverse;
+  .header_icon_container {
+    justify-content: right;
+    flex-direction: row-reverse;
+
+    .app_name {
+      margin-left: 32px;
+      margin-right: 4px;
+    }
+  }
+}
+
 @include small {
   .top_header {
     padding: 8px 10px 12px;
@@ -82,12 +95,5 @@
 
   .search_bar_container {
     display: flex;
-  }
-}
-
-.rtl {
-  flex-direction: row-reverse;
-  .header_icon_container {
-    justify-content: flex-end;
   }
 }

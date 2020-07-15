@@ -20,7 +20,11 @@ class NavHeader extends Component {
           className={styles.header_title}
         >
           {onBackClick ? (
-            <img src={arrowLeftIcon} className={styles.back_icon} />
+            <img
+              alt="Arrow Left"
+              src={arrowLeftIcon}
+              className={styles.back_icon}
+            />
           ) : null}
 
           {title}

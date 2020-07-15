@@ -44,7 +44,7 @@ class ProfileDetails extends Component {
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <DivColumn
+        <div
           className={`${styles.details_container} ${isRTL ? styles.rtl : ""}`}
         >
           <DivColumn fillParent>
@@ -168,7 +168,7 @@ class ProfileDetails extends Component {
               </div>
             </DivColumn>
           </InitialPageLoader>
-        </DivColumn>
+        </div>
       </SectionedContainer>
     );
   }

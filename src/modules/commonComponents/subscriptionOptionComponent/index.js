@@ -16,6 +16,7 @@ class SubscriptionOption extends Component {
     const {
       option,
       exhibitionReducer: { selectedSubscriptionOption },
+      translate,
     } = this.props;
 
     return (
@@ -35,14 +36,26 @@ class SubscriptionOption extends Component {
           {option.type === "flat_type" || option.type === "free" ? "" : "%"}
         </div>
         <div className={styles.subscription_option_title}>
-          {option.type === "flat_type" && "Flat Fee"}
-          {option.type === "commission" && "Commission"}
-          {option.type === "free" && "Free"}
+          {option.type === "flat_type" &&
+            translate("exhibition_details_page.subscription_option.flat_fee")}
+          {option.type === "commission" &&
+            translate("exhibition_details_page.subscription_option.commission")}
+          {option.type === "free" &&
+            translate("exhibition_details_page.subscription_option.free")}
         </div>
         <div className={styles.subscription_option_subtitle}>
-          {option.type === "flat_type" && "Ony have to pay once"}
-          {option.type === "commission" && "On each product you sale"}
-          {option.type === "free" && "Free to enter"}
+          {option.type === "flat_type" &&
+            translate(
+              "exhibition_details_page.subscription_option.flat_fee_subtitle"
+            )}
+          {option.type === "commission" &&
+            translate(
+              "exhibition_details_page.subscription_option.commission_subtitle"
+            )}
+          {option.type === "free" &&
+            translate(
+              "exhibition_details_page.subscription_option.free_subtitle"
+            )}
         </div>
       </DivColumn>
     );

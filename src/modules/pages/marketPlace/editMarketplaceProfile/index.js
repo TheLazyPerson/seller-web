@@ -19,7 +19,11 @@ import {
 import { getAddressListAction } from "Core/modules/address/addressActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { isPhoneNumber, nameValidator, emailValidator } from "Utils/validators";
+import {
+  isPhoneNumber,
+  isEmptyValidator,
+  emailValidator,
+} from "Utils/validators";
 import "react-datepicker/dist/react-datepicker.css";
 import translatorHoc from "Hoc/translatorHoc";
 
@@ -34,7 +38,6 @@ class EditMarketplaceProfile extends Component {
       editMarketplaceProfileAction,
       navigateTo,
       showSuccessFlashMessage,
-      marketplaceProfileReducer: { marketplaceAddress },
     } = this.props;
     editMarketplaceProfileAction({
       shop_name: form.shopName,
@@ -57,20 +60,26 @@ class EditMarketplaceProfile extends Component {
   };
 
   componentDidMount() {
-    // TODO: To add to check if reducer data is not available.
-    // this.props.getProfileDetailsAction().then(({ payload }) => {
-    //   if (payload.code === 200 || payload.code === 201) {
-    //     // code here
-    //   }
-    // });
+    this.props.getMarketplaceProfileAction().then(({ payload }) => {
+      if (payload.code === 200 || payload.code === 201) {
+        // code here
+      }
+    });
   }
 
   validate = (values) => {
     const errors = {};
     const validators = {
-      shopName: nameValidator(values.shopName),
+      shopName: isEmptyValidator(values.shopName),
       contactNumber: isPhoneNumber(values.contactNumber),
       shopEmail: emailValidator(values.shopEmail),
+      area: isEmptyValidator(values.area),
+      blockNumber: isEmptyValidator(values.blockNumber),
+      houseNumber: isEmptyValidator(values.houseNumber),
+      streetNumber: isEmptyValidator(values.streetNumber),
+      landmark: isEmptyValidator(values.landmark),
+      addressType: isEmptyValidator(values.addressType),
+      city: isEmptyValidator(values.city),
     };
 
     Object.keys(validators).forEach((key) => {
@@ -86,10 +95,7 @@ class EditMarketplaceProfile extends Component {
 
   render() {
     const {
-      getAddressListAction,
-      selectMarketplaceAddress,
-      marketplaceProfileReducer: { profile, marketplaceAddress },
-      addressReducer: { addressList },
+      marketplaceProfileReducer: { profile },
       translate,
       isRTL,
     } = this.props;

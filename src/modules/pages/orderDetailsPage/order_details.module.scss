@@ -135,7 +135,9 @@
       }
     }
   }
-
+  .datatable_container {
+    width: 100vw;
+  }
   .rtl {
     .address_container {
       flex-direction: row-reverse;
@@ -160,8 +162,9 @@
 
   .normal_container {
     padding: 17px 54px 9px 0px;
-    title {
-      text-align: right;
+
+    .title {
+      flex-direction: row-reverse;
     }
   }
 

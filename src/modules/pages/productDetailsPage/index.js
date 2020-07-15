@@ -18,10 +18,12 @@ import {
   getProductFormAction,
   editProductAction,
 } from "Core/modules/product/productActions";
+import translatorHoc from "Hoc/translatorHoc";
 
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
+import filter from "lodash/filter";
 
 class ProductDetailsPage extends Component {
   onBackPress = () => {
@@ -57,8 +59,9 @@ class ProductDetailsPage extends Component {
     });
   };
 
-  getViewItem = (attribute, product) => {
-    const { type, slug, name, is_translatable } = attribute;
+  getViewItem = (attribute, product, languageCode) => {
+    const { type, slug, name, translations, is_translatable } = attribute;
+    var translation = filter(translations, { locale: languageCode })[0];
     if (type === "file") {
       return (
         <DivRow className={styles.image_container}>
@@ -77,7 +80,7 @@ class ProductDetailsPage extends Component {
     if (type === "tree-checkbox") {
       return (
         <DivRow className={styles.title}>
-          {name}:
+          {translation.name}:
           {map(product.category, (item) => {
             return (
               <DivRow className={styles.title}>
@@ -92,10 +95,11 @@ class ProductDetailsPage extends Component {
       return (
         <DivColumn>
           <DivRow className={styles.title}>
-            {name}: <div className={styles.value}>{product[slug].en}</div>
+            {translation.name}:
+            <div className={styles.value}>{product[slug].en}</div>
           </DivRow>
           <DivRow className={styles.title}>
-            {name.concat(" - Arabic")}:{" "}
+            {translation.name.concat(" - Arabic")}:{" "}
             <div className={styles.value}>{product[slug].ar}</div>
           </DivRow>
         </DivColumn>
@@ -103,7 +107,7 @@ class ProductDetailsPage extends Component {
     }
     return (
       <DivRow className={styles.title}>
-        {name}: <div className={styles.value}>{product[slug]}</div>
+        {translation.name}: <div className={styles.value}>{product[slug]}</div>
       </DivRow>
     );
   };
@@ -113,62 +117,54 @@ class ProductDetailsPage extends Component {
       productReducer: { prouctForm, editProduct },
       match: { params },
       editProductAction,
+      isRTL,
+      translate,
+      languageReducer: { languageCode },
     } = this.props;
-
-    // const rowStyle = {
-    //   fontSize: 12,
-    //   color: "#19202c",
-    // };
-
-    // const customStyles = {
-    //   headRow: {
-    //     style: {
-    //       borderTop: "1px solid #ededed",
-    //       borderBottom: "1px solid #ededed",
-    //       backgroundColor: "#f4f7fa",
-    //     },
-    //   },
-    //   headCells: {
-    //     style: {
-    //       fontSize: 12,
-    //       fontWeight: "bold",
-    //       color: "#7c858e",
-    //     },
-    //   },
-    // };
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <NavHeader title="Product Detail" onBackClick={this.onBackPress}>
-          <DivRow>
+        <NavHeader
+          title={translate("product_details.title")}
+          onBackClick={this.onBackPress}
+        >
+          <DivRow className={styles.capsule_button_container}>
             <SecondaryCapsuleButton
               onClick={() => this.handleRemove(params.productId)}
               className={styles.cancel_button}
             >
-              Delete
+              {translate("product_details.delete")}
             </SecondaryCapsuleButton>
 
             <CapsuleButton onClick={() => this.handleUpdate(params.productId)}>
-              Edit
+              {translate("product_details.edit")}
             </CapsuleButton>
           </DivRow>
         </NavHeader>
         <InitialPageLoader
           initialPageApi={() => editProductAction({ id: params.productId })}
         >
-          <DivColumn fillParent className={styles.product_page_container}>
+          <div
+            fillParent
+            className={` ${styles.product_page_container} ${
+              isRTL ? styles.rtl : ""
+            }`}
+          >
             {!isEmpty(editProduct) &&
               map(prouctForm, (attributeGroup) => {
-                const { name, attributes: fieldList } = attributeGroup;
+                const { name, name_ar, attributes: fieldList } = attributeGroup;
                 return (
                   <DivColumn>
-                    <div className={styles.header}>{name}</div>
+                    <div className={styles.header}>
+                      {languageCode === "ar" ? name_ar : name}
+                    </div>
                     <div>
                       <DivColumn className={styles.normal_container}>
                         {map(fieldList, (attribute) => {
                           return this.getViewItem(
                             attribute,
-                            editProduct.product
+                            editProduct.product,
+                            languageCode
                           );
                         })}
                       </DivColumn>
@@ -176,129 +172,7 @@ class ProductDetailsPage extends Component {
                   </DivColumn>
                 );
               })}
-            {/* <DivColumn className={styles.order_container}>
-              <div className={styles.order_id}>
-                Product Name: <b>{product.name}</b>
-              </div>
-            </DivColumn>
-
-            <div className={styles.header}>BASIC DETAILS</div>
-            <DivColumn className={styles.normal_container}>
-              <DivRow className={styles.title}>
-                Name: <div className={styles.value}>{product.name}</div>
-              </DivRow>
-              <DivRow className={styles.title}>
-                SKU: <div className={styles.value}>{product.sku}</div>
-              </DivRow>
-            </DivColumn>
-            <DivRow className={styles.normal_container}>
-              <DivColumn>
-                <div className={styles.title}>SHORT DESCRIPTION:</div>
-                <div className={styles.description}>
-                  {product.short_description}
-                </div>
-              </DivColumn>
-            </DivRow>
-            <DivRow className={styles.normal_container}>
-              <DivColumn>
-                <div className={styles.title}>DESCRIPTION:</div>
-                <div className={styles.description}>{product.description}</div>
-              </DivColumn>
-            </DivRow>
-
-            <div className={styles.header}>PRICING DETAILS</div>
-            <DivColumn className={styles.normal_container}>
-              <DivRow className={styles.title}>
-                Price:{" "}
-                <div className={styles.value}>{product.formatted_price}</div>
-              </DivRow>
-              <DivRow className={styles.title}>
-                Cost:{" "}
-                <div className={styles.value}>{product.formatted_cost}</div>
-              </DivRow>
-            </DivColumn>
-
-            <div className={styles.header}>PRODUCT IMAGES</div>
-            <DivRow className={styles.image_container}>
-              {!isEmpty(product.images) &&
-                map(product.images, (image) => {
-                  return (
-                    <DivColumn className={styles.image_contain}>
-                      <img src={image.path} className={styles.image} />
-                    </DivColumn>
-                  );
-                })}
-            </DivRow>
-
-            <div className={styles.header}>THUMBNAIL</div>
-            <DivRow className={styles.normal_container}>
-              <DivColumn className={styles.image_contain}>
-                <img src={product.thumbnail} className={styles.image} />
-              </DivColumn>
-            </DivRow>
-
-            <div className={styles.header}>INVENTORY</div>
-            <DivRow className={styles.normal_container}>
-              <DivColumn>
-                <div className={styles.title}>Quantity Available:</div>
-                <div className={styles.description}>
-                  {!isEmpty(product.inventory) && product.inventory.qty}
-                </div>
-              </DivColumn>
-            </DivRow>
-
-            <div className={styles.header}>SHIPPING DETAILS</div>
-            <DivColumn className={styles.normal_container}>
-              <DivRow className={styles.title}>
-                Weight:{" "}
-                <div className={styles.value}>
-                  {!isEmpty(product.shipping) && product.shipping.weight}
-                </div>
-              </DivRow>
-              <DivRow className={styles.title}>
-                Height:{" "}
-                <div className={styles.value}>
-                  {!isEmpty(product.shipping) && product.shipping.height}
-                </div>
-              </DivRow>
-              <DivRow className={styles.title}>
-                Depth:{" "}
-                <div className={styles.value}>
-                  {!isEmpty(product.shipping) && product.shipping.depth}
-                </div>
-              </DivRow>
-              <DivRow className={styles.title}>
-                Width:{" "}
-                <div className={styles.value}>
-                  {!isEmpty(product.shipping) && product.shipping.width}
-                </div>
-              </DivRow>
-            </DivColumn>
-
-            <div className={styles.header}>META DATA</div>
-            <DivColumn className={styles.normal_container}>
-              <DivRow className={styles.title}>
-                Meta Title:{" "}
-                <div className={styles.value}>
-                  {!isEmpty(product.meta) && product.meta.meta_title}
-                </div>
-              </DivRow>
-              <DivRow className={styles.title}>
-                Meta Keywords:{" "}
-                <div className={styles.value}>
-                  {!isEmpty(product.meta) && product.meta.meta_keywords}
-                </div>
-              </DivRow>
-            </DivColumn>
-            <DivRow className={styles.normal_container}>
-              <DivColumn>
-                <div className={styles.title}>META DESCRIPTION:</div>
-                <div className={styles.description}>
-                  {!isEmpty(product.meta) && product.meta.meta_description}
-                </div>
-              </DivColumn>
-            </DivRow> */}
-          </DivColumn>
+          </div>
         </InitialPageLoader>
       </SectionedContainer>
     );
@@ -308,6 +182,8 @@ class ProductDetailsPage extends Component {
 const mapStateToProps = (state) => {
   return {
     productReducer: state.productReducer,
+    languageReducer: state.languageReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 
@@ -330,4 +206,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(ProductDetailsPage));
+)(navigatorHoc(translatorHoc(ProductDetailsPage)));

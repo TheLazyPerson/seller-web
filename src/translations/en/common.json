@@ -103,7 +103,8 @@
     "password": "Password",
     "remember_me": "Remember Me",
     "sign_in_button": "Sign In",
-    "username": "Email"
+    "username": "Email",
+    "forget_password": "Forgot password?"
   },
   "signup_page": {
     "confirm_password": "Confirm Password",
@@ -114,7 +115,15 @@
     "lastname": "Last Name",
     "page_title": "Sign Up",
     "password": "Password",
-    "sign_in": "Sign In"
+    "sign_in": "Sign In",
+    "steps": {
+      "sign_up": "Sign Up",
+      "personal_details": "Personal Details",
+      "marketplace_details": "Marketplace Details",
+      "location_details": "Location Details",
+      "bank_details": "Bank Details",
+      "select_subscription": "Select Subscription"
+    }
   },
   "wishlist_page": {
     "empty_message": "Oh Snap! You have no product in your wishlist.",
@@ -217,12 +226,34 @@
     "ends_on": "ENDS ON",
     "start_at": "STARTS AT:",
     "category": "CATEGORIES",
-    "add_to_products": "ADD YOUR PRODUCTS"
+    "last": "LAST",
+    "days": "DAYS",
+    "add_to_products": "ADD YOUR PRODUCTS",
+    "product_details": "PRODUCT DETAILS",
+    "left_to_enroll": "DAYS LEFT TO ENROLL",
+    "left_to_submit_products": "DAYS LEFT TO SUBMIT PRODUCTS",
+    "live_now": "LIVE NOW: ENDS IN ",
+    "attach_modal": {
+      "title": "ATTACH PRODUCTS",
+      "empty_screen_title": "No Products Available",
+      "empty_screen_description": "There are no complete products to show.",
+      "button_text": "Add/Complete Products"
+    },
+    "subscription_option": {
+      "free": "Free",
+      "free_subtitle": "Free to enter",
+      "flat_fee": "Flat Fee",
+      "flat_fee_subtitle": "Ony have to pay once",
+      "commission": "Commission",
+      "commission_subtitle": "On each product you sale"
+    }
   },
   "your_exhibition_list_page": {
     "btn_title": "EXHIBITIONS",
     "view_details": "View Details",
-    "left_to_enroll": "DAYS LEFT TO ENROLL",
+    "left_to_enroll": "DAYS LEFT TO SUBMIT PRODUCTS",
+    "live_now": "LIVE NOW: ENDS IN ",
+    "days": "DAYS",
     "last": "LAST",
     "category": "Category",
     "starts_at": "Starts At",
@@ -243,7 +274,79 @@
     "shipping_methods": "SHIPPING METHOD",
     "payment_method": "PAYMENT METHOD",
     "email": "Email",
-    "print_invoice": "Print Invoice"
+    "print_invoice": "Print Invoice",
+    "table": {
+      "item_code": "ITEM CODE",
+      "name": "NAME",
+      "exhibition_name": "EXHIBITION NAME",
+      "price": "PRICE",
+      "quantity": "QUANTITY",
+      "commission": "COMMISSION",
+      "grand_total": "GRAND TOTAL"
+    }
+  },
+  "order_list": {
+    "table": {
+      "id": "ID",
+      "order_date": "ORDER DATE",
+      "grand_total": "GRAND TOTAL",
+      "total_items": "TOTAL ITEMS",
+      "status": "STATUS",
+      "view": "View",
+      "pending": "Pending",
+      "pending_payment": "Pending",
+      "processing": "Processing",
+      "pickup_requested": "Processing",
+      "shipped": "Shipped",
+      "out_for_delivery": "Out For Delivery",
+      "completed": "Completed"
+    }
+  },
+  "product_list": {
+    "title": "PRODUCTS",
+    "add_new_product": "ADD NEW PRODUCT",
+    "search": "Search",
+    "table": {
+      "id": "ID",
+      "sku": "ITEM CODE",
+      "name": "NAME",
+      "price": "PRICE",
+      "quantity": "QUANTITY",
+      "view": "View"
+    }
+  },
+  "product_details": {
+    "title": "Product Detail",
+    "delete": "Delete",
+    "edit": "Edit"
+  },
+  "edit_product": {
+    "title": "Edit Product",
+    "cancel": "Cancel",
+    "save": "Save Details"
+  },
+
+  "image_selection_component": {
+    "title": "Images",
+    "help_text": "Drag 'n' drop some files here, or click to select files"
+  },
+  "add_product": {
+    "title": "Add Product",
+    "sku": "Item Code",
+    "product_vertical": "Product Vertical",
+    "cancel": "Cancel",
+    "save": "Save Details"
+  },
+  "sales_list": {
+    "title": "Transactions",
+    "search": "Search",
+    "table": {
+      "id": "ID",
+      "transaction_id": "TRANSACTION ID",
+      "comment": "COMMENT",
+      "grand_total": "GRAND TOTAL",
+      "view_button": "View"
+    }
   },
   "pickup_request_details": {
     "title": "Pickup Request Details",
@@ -259,7 +362,38 @@
     "shipping_methods": "SHIPPING METHOD",
     "payment_method": "PAYMENT METHOD",
     "email": "Email",
-    "products_order": "PRODUCTS ORDERED"
+    "products_order": "PRODUCTS ORDERED",
+    "table": {
+      "item_code": "ITEM CODE",
+      "name": "NAME",
+      "exhibition_name": "EXHIBITION NAME",
+      "quantity": "QUANTITY",
+      "quantity_to_ship": "QUANTITY TO SHIP"
+    }
+  },
+  "create_pickup_request": {
+    "title": "Create Shipping Request",
+    "order_id": "Order ID",
+    "places_on": " Placed On",
+    "customer_details": "CUSTOMER DETAILS",
+    "name": "Name",
+    "email": "Email",
+    "product_list": "PRODUCT LIST",
+    "shipping_address": "SHIPPING ADDRESS",
+    "billing_address": "BILLING ADDRESS",
+    "shipping_methods": "SHIPPING METHOD",
+    "payment_method": "PAYMENT METHOD",
+    "form_title": "FILL IN THESE DETAILS",
+    "select_pickup_date": "Select Pickup Date",
+
+    "create_request": "Create Request",
+    "table": {
+      "item_code": "ITEM CODE",
+      "name": "NAME",
+      "exhibition_name": "EXHIBITION NAME",
+      "quantity": "QUANTITY",
+      "quantity_to_ship": "QUANTITY TO SHIP"
+    }
   },
   "transaction_details_page": {
     "title": "TRASACTION DETAIL",
@@ -269,7 +403,16 @@
     "payment_method": " Payment Method",
     "total": "Total",
     "comment": "Comment",
-    "products_order": "PRODUCTS ORDERED"
+    "products_order": "PRODUCTS ORDERED",
+    "table": {
+      "sku": "ITEM CODE",
+      "name": "NAME",
+      "exhibition_name": "EXHIBITION NAME",
+      "price": "PRICE",
+      "quantity": "QUANTITY",
+      "commission": "COMMISSION",
+      "grand_total": "GRAND TOTAL"
+    }
   },
   "marketplace_profile_details": {
     "title": "Marketplace Profile details",
@@ -327,7 +470,9 @@
     "email": "Email Address",
     "civil_id": "Civil Id",
     "cancel": "Cancel",
-    "save_details": "Save Details"
+    "save_details": "Save Details",
+    "male": "Male",
+    "female": "Female"
   },
   "change_password_page": {
     "title": "Change password",
@@ -341,7 +486,16 @@
     "title": "Subscription Details",
     "buy_additional_plan": "BUY ADDITIONAL PLAN ",
     "plan": " Subscribed Plans",
-    "subscription_lost": "SubscriptionLost"
+    "subscription_lost": "SubscriptionLost",
+    "table": {
+      "id": "ID",
+      "plan_name": "PLAN NAME",
+      "plan_description": "PLAN DESCRIPTION",
+      "no_of_products": "NO OF PRODUCTS",
+      "no_of_exhibitions": "NO OF EXHIBITIONS",
+      "activate": "Activate",
+      "active": "Active"
+    }
   },
   "setting_page": {
     "header_title": "Settings",
@@ -385,5 +539,40 @@
   "additional_plan": {
     "title": "BUY ADDITIONAL PLAN",
     "buy": "BUY"
+  },
+  "exhibition_overview": {
+    "name": "NAME",
+    "description": "SHORT DESCRIPTION",
+    "dates": "DATES",
+    "starts_at": "Starts At",
+    "ends_on": "ENDS ON",
+    "enroll": "ENROLL",
+    "overview": "Overview"
+  },
+  "subscription_success": {
+    "retry": "retry",
+    "payment": "Payment Successful",
+    "description": "Welcome to the family"
+  },
+  "subscription_failure": {
+    "payment": "Payment Failed",
+    "description": "There was problem while accepting your payment.",
+    "retry": "retry"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "HELP",
+    "app_name": "Home Expo"
+  },
+  "datatable": {
+    "rows_per_page": "Rows per page"
+  },
+  "overlay": {
+    "subscription": "Subscription",
+    "logout": "Logout",
+    "usage": "USAGE"
+  },
+  "pricing": {
+    "get_started": "Get Started"
   }
 }

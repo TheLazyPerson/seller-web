@@ -89,16 +89,6 @@ class SignInPage extends Component {
                       />
                     )}
                   </Field>
-
-                  <Field name="remeberMe">
-                    {({ input, meta }) => (
-                      <InputCheckbox
-                        meta={meta}
-                        {...input}
-                        text={translate("signin_page.remember_me")}
-                      />
-                    )}
-                  </Field>
                 </Fragment>
                 <input
                   type="submit"
@@ -110,7 +100,7 @@ class SignInPage extends Component {
             )}
           />
           <a className={styles.hyper_link} href="/forgot-password">
-            Forgot password
+            {translate("signin_page.forget_password")}
           </a>
           <div className={styles.create_account_container}>
             <span className={styles.new_description_text}>

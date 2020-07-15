@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withTranslation, Trans } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 
 const translatorHoc = (WrappedComponent) => {
@@ -19,7 +19,7 @@ const translatorHoc = (WrappedComponent) => {
         <WrappedComponent
           {...this.props}
           translate={this.translate}
-          isRTL={languageCode == "ar"}
+          isRTL={languageCode === "ar"}
         />
       );
     }

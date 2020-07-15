@@ -17,8 +17,6 @@ class FullwidthSecondaryHeader extends Component {
 
   render() {
     const {
-      children,
-      whiteColor,
       className,
       navItems,
       onClickNavItem,

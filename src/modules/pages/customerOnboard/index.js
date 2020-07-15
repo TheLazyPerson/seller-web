@@ -19,7 +19,8 @@ import Stepper from "react-stepper-horizontal";
 import FullWidthContainer from "CommonContainers/fullwidthContainer";
 import { editProfileDetailsAction } from "Core/modules/profiledetails/profileDetailsActions";
 import { setSubscriptionPlanToUser } from "Core/modules/subscription/subscriptionActions";
-
+import { CookieService } from "Utils/cookieService";
+import { USER_DATA_COOKIE } from "Constants/cookieConstants";
 class CustomerOnboard extends Component {
   state = {
     step: 0,
@@ -82,6 +83,7 @@ class CustomerOnboard extends Component {
     if (postData) {
       postSignupAction(postData).then(({ payload }) => {
         if (payload.code === 200 || payload.code === 201) {
+          CookieService.set(USER_DATA_COOKIE, payload.data);
           this.nextStep();
         }
       });
@@ -128,22 +130,28 @@ class CustomerOnboard extends Component {
     const {
       subscriptionReducer: { subscriptionPlanList },
       getPlanListAction,
+      translate,
+      isRTL,
     } = this.props;
     const { step } = this.state;
     return (
       <FullWidthContainer>
         <DivColumn>
-          <div className={styles.stepper_container}>
+          <div
+            className={`${styles.stepper_container}  ${
+              isRTL ? styles.rtl : ""
+            }`}
+          >
             <Stepper
               activeColor="#d59d15"
               completeColor="#d59d15"
               steps={[
-                { title: "Sign Up" },
-                { title: "Personal Details" },
-                { title: "Marketplace Details" },
-                { title: "Location Details" },
-                { title: "Bank Details" },
-                { title: "Pricing" },
+                { title: translate("signup_page.steps.sign_up") },
+                { title: translate("signup_page.steps.personal_details") },
+                { title: translate("signup_page.steps.marketplace_details") },
+                { title: translate("signup_page.steps.location_details") },
+                { title: translate("signup_page.steps.bank_details") },
+                { title: translate("signup_page.steps.select_subscription") },
               ]}
               activeStep={this.state.step}
             />
@@ -175,6 +183,7 @@ const mapStateToProps = (state) => {
     signInReducer: state.signInReducer,
     subscriptionReducer: state.subscriptionReducer,
     profileDetailsReducer: state.profileDetailsReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 

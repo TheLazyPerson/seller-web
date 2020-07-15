@@ -31,7 +31,7 @@ class Subscription extends Component {
       <DivColumn
         fillParent
         className={`${styles.subscription} ${isRTL ? styles.rtl : ""} ${
-          selectedSubscription.id == subscription.id ? styles.is_selected : ""
+          selectedSubscription.id === subscription.id ? styles.is_selected : ""
         }  `}
         onClick={this.selectSubscription}
       >

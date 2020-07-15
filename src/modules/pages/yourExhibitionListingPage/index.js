@@ -14,7 +14,10 @@ import { bindActionCreators } from "redux";
 import { getEnrolledExhibitionAction } from "Core/modules/exhibition/exhibitionActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import isEmpty from "lodash/isEmpty";
-import { formatUnixTimeStampToDateTime } from "Utils/formatHelper";
+import {
+  formatUnixTimeStampToDateTime,
+  calculateDateDiff,
+} from "Utils/formatHelper";
 import translatorHoc from "Hoc/translatorHoc";
 
 class YourExhibitionListingPage extends Component {
@@ -29,55 +32,93 @@ class YourExhibitionListingPage extends Component {
   };
 
   getListItem = (listItem) => {
-    const { translate, isRTL } = this.props;
+    const {
+      translate,
+      isRTL,
+      languageReducer: { languageCode },
+    } = this.props;
+    const daysLeft = calculateDateDiff(listItem.starts_from);
+    const daysLeftToEnd = calculateDateDiff(listItem.ends_till);
 
     return (
       <DivRow className={` ${styles.item} ${isRTL ? styles.rtl : ""}`}>
         <img className={styles.image} src={listItem.base_image} />
 
-        <DivColumn className={styles.item_content}>
-          <div className={styles.title}>{listItem.title}</div>
-          <div className={styles.description}>{listItem.short_description}</div>
+        <div className={styles.item_content}>
+          <div className={styles.title}>
+            {listItem.translations[languageCode].title}
+          </div>
+          <div className={styles.description}>
+            {listItem.translations[languageCode].short_description}
+          </div>
 
           <DivRow className={styles.category_header_container}>
             <div className={styles.category_header}>
+              {isRTL ? ":" : ""}
               {translate("your_exhibition_list_page.category")}
+              {!isRTL ? ":" : ""}
             </div>
-            <div className={styles.category_value}>{listItem.categories}</div>
-          </DivRow>
-
-          <DivRow className={styles.date_container}>
-            <div className={styles.date_title}>
-              {translate("your_exhibition_list_page.starts_at")}:
-            </div>
-            <div className={styles.date_value}>
-              {formatUnixTimeStampToDateTime(listItem.starts_from)}
+            <div className={styles.category_value}>
+              &nbsp; {listItem.categories[languageCode]} &nbsp;
             </div>
           </DivRow>
 
-          <DivRow className={styles.date_container}>
-            <div className={styles.date_title}>
-              {translate("your_exhibition_list_page.ends_on")}:
-            </div>
-            <div className={styles.date_value}>
-              {" "}
-              {formatUnixTimeStampToDateTime(listItem.ends_till)}
-            </div>
-          </DivRow>
+          <DivColumn className={styles.date_container}>
+            <DivRow>
+              <div className={styles.date_title}>
+                {isRTL ? ":" : ""}
+                {translate("your_exhibition_list_page.starts_at")}
+                {!isRTL ? ":" : ""}
+              </div>
+              <div className={styles.date_value}>
+                &nbsp;
+                {formatUnixTimeStampToDateTime(listItem.starts_from)} &nbsp;
+              </div>
+            </DivRow>
+            <DivRow>
+              <div className={styles.date_title}>
+                {isRTL ? ":" : ""}
+                {translate("your_exhibition_list_page.ends_on")}
+                {!isRTL ? ":" : ""}
+              </div>
+              <div className={styles.date_value}>
+                &nbsp;
+                {formatUnixTimeStampToDateTime(listItem.ends_till)} &nbsp;
+              </div>
+            </DivRow>
+          </DivColumn>
 
           <DivRow className={styles.action_container}>
             <div className={styles.last_date}>
-              {translate("your_exhibition_list_page.last")}
-              {listItem.last_date_of_enrollment}
-              {translate("your_exhibition_list_page.left_to_enroll")}
+              &nbsp;{" "}
+              {daysLeft > 0 &&
+                `${translate("your_exhibition_list_page.last")}
+               
+              ${daysLeft} 
+              
+              ${translate("your_exhibition_list_page.left_to_enroll")}
+              `}
+              {daysLeft < 0 &&
+                `${translate("your_exhibition_list_page.live_now")}
+                 ${daysLeftToEnd} 
+                ${translate("your_exhibition_list_page.days")}
+              `}
             </div>
             <CapsuleButton
+              className={styles.action_button}
               onClick={() => this.onClickViewExhibitionDetail(listItem)}
             >
               {translate("your_exhibition_list_page.view_details")}
             </CapsuleButton>
           </DivRow>
-        </DivColumn>
+          <DivRow className={styles.mobile_action_button}>
+            <CapsuleButton
+              onClick={() => this.onClickViewExhibitionDetail(listItem)}
+            >
+              {translate("exhibition_list_page.view_details")}
+            </CapsuleButton>
+          </DivRow>
+        </div>
       </DivRow>
     );
   };
@@ -94,7 +135,7 @@ class YourExhibitionListingPage extends Component {
             title={translate("your_exhibition_list_page.your_exhibition")}
             onBackClick={this.onBackPress}
           ></NavHeader>
-          <DivColumn fillParent className={styles.content_container}>
+          <div fillParent className={styles.content_container}>
             <InitialPageLoader
               initialPageApi={getEnrolledExhibitionAction}
               isEmpty={isEmpty(subscribedExhibitionList)}
@@ -103,7 +144,7 @@ class YourExhibitionListingPage extends Component {
                 return this.getListItem(exhibition);
               })}
             </InitialPageLoader>
-          </DivColumn>
+          </div>
         </DivColumn>
       </SectionedContainer>
     );
@@ -114,6 +155,7 @@ const mapStateToProps = (state) => {
   return {
     exhibitionReducer: state.exhibitionReducer,
     isRTL: state.languageReducer.isRTL,
+    languageReducer: state.languageReducer,
   };
 };
 

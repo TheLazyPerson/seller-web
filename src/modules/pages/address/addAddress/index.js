@@ -10,7 +10,7 @@ import { bindActionCreators } from "redux";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import { createAddressAction } from "Core/modules/address/addressActions";
 import AddAddressForm from "CommonContainers/addAddressForm";
-import translatorHoc from 'Hoc/translatorHoc';
+import translatorHoc from "Hoc/translatorHoc";
 
 class AddAddress extends Component {
   onSubmitComplete = () => {
@@ -27,7 +27,6 @@ class AddAddress extends Component {
   };
 
   render() {
-    const { translate } = this.pros
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <DivColumn fillParent className={styles.page_container}>

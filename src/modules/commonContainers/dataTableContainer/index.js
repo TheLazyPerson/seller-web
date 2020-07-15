@@ -14,6 +14,7 @@ import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import Delete from "@material-ui/icons/Delete";
 import memoize from "memoize-one";
 import SearchBarComponent from "CommonComponents/searchBarComponent";
+import translatorHoc from "Hoc/translatorHoc";
 
 const sortIcon = <ArrowDownward />;
 const selectProps = { indeterminate: (isIndeterminate) => isIndeterminate };
@@ -24,42 +25,9 @@ const contextActions = memoize((deleteHandler) => (
   </IconButton>
 ));
 
-// const columns = memoize(() => [
-//   {
-//     name: "ID",
-//     selector: "id",
-//     sortable: true,
-//   },
-//   {
-//     name: "ORDER DATE",
-//     selector: "order_date",
-//     sortable: true,
-//   },
-//   {
-//     name: "EXHIBITION NAME",
-//     selector: "exhibition_name",
-//     sortable: true,
-//     grow: 2,
-//   },
-//   {
-//     name: "GRAND TOTAL",
-//     selector: "grand_total",
-//     sortable: true,
-//   },
-//   {
-//     name: "TOTAL ITEMS",
-//     selector: "total_items",
-//     sortable: true,
-//   },
-//   {
-//     name: "STATUS",
-//     selector: "status",
-//     sortable: true,
-//   },
-// ]);
-
 class OrdersPage extends Component {
   state = {
+    searchText: "",
     selectedRows: [],
     toggleCleared: false,
   };
@@ -82,23 +50,36 @@ class OrdersPage extends Component {
     }
   };
 
-  render() {
-    const { toggleCleared } = this.state;
-    const { data, columns, title } = this.props;
+  onChangeSearchText = (event) => {
+    const text = event.target.value;
+    this.setState({
+      searchText: text,
+    });
+  };
 
+  render() {
+    const { toggleCleared, searchText } = this.state;
+    const { data, columns, title, isRTL, translate, searchable } = this.props;
+    console.log("Searchable:", searchable);
+    const filteredItems = data.filter(
+      (item) =>
+        item[searchable] &&
+        item[searchable]
+          .toString()
+          .toLowerCase()
+          .includes(searchText.toLowerCase())
+    );
     return (
       <DivColumn className={styles.date_container}>
         <div style={{ marginBottom: 20 }}>
-          <SearchBarComponent />
+          <SearchBarComponent onChangeSearchText={this.onChangeSearchText} />
         </div>
 
         <Card>
           <DataTable
             title={title ? title : "Orders"}
             columns={columns ? columns : columns()}
-            data={data}
-            //TODO: Configure later
-            // selectableRows
+            data={filteredItems}
             highlightOnHover
             overflowY={false}
             defaultSortField="name"
@@ -111,8 +92,11 @@ class OrdersPage extends Component {
             onRowClicked={this.handleRowClicked}
             pagination
             noHeader={true}
-            //TODO: Configure later
-            // expandableRows
+            direction={isRTL ? "rtl" : "ltr"}
+            responsive={true}
+            paginationComponentOptions={{
+              rowsPerPageText: translate("datatable.rows_per_page"),
+            }}
           />
         </Card>
       </DivColumn>
@@ -120,10 +104,20 @@ class OrdersPage extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    isRTL: state.languageReducer.isRTL,
+    languageReducer: state.languageReducer,
+  };
+};
+
 const mapDispathToProps = (dispatch) => {
   return {
     logoutAction: bindActionCreators(logoutAction, dispatch),
   };
 };
 
-export default connect(null, mapDispathToProps)(navigatorHoc(OrdersPage));
+export default connect(
+  mapStateToProps,
+  mapDispathToProps
+)(navigatorHoc(translatorHoc(OrdersPage)));

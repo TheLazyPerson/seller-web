@@ -17,52 +17,10 @@ import {
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import Button from "@material-ui/core/Button";
+import translatorHoc from "Hoc/translatorHoc";
+import isEmpty from "lodash/isEmpty";
 
 class ProductsPage extends Component {
-  columns = memoize(() => [
-    {
-      name: "ID",
-      selector: "id",
-      sortable: true,
-    },
-    {
-      name: "SKU",
-      selector: "sku",
-      sortable: true,
-    },
-    {
-      name: "NAME",
-      selector: "translations.en.name",
-      sortable: true,
-      grow: 2,
-    },
-    {
-      name: "PRICE",
-      selector: "price",
-      sortable: true,
-    },
-    {
-      name: "QUANTITY",
-      selector: "inventory.qty",
-      sortable: true,
-    },
-    {
-      cell: (value) => (
-        <Button
-          variant="contained"
-          color="primary"
-          className={styles.custom_button}
-          onClick={() => {
-            const { navigateTo } = this.props;
-            navigateTo("product-details", { productId: value.id });
-          }}
-        >
-          View
-        </Button>
-      ),
-      button: true,
-    },
-  ]);
   onClickNewProduct = () => {
     const { navigateTo } = this.props;
     navigateTo("add-product");
@@ -72,13 +30,65 @@ class ProductsPage extends Component {
     const {
       productReducer: { productList },
       getProductListAction,
+      languageReducer: { languageCode },
+      translate,
     } = this.props;
+    const columns = memoize(() => [
+      {
+        name: `${translate("product_list.table.id")}`,
+        selector: "id",
+        sortable: true,
+      },
+      {
+        name: `${translate("product_list.table.sku")}`,
+        selector: "sku",
+        sortable: true,
+      },
+      {
+        name: `${translate("product_list.table.name")}`,
+        selector: `name`,
+        sortable: true,
+        grow: 2,
+        cell: (value) =>
+          !isEmpty(value.translations)
+            ? value.translations[languageCode].name
+            : " ",
+      },
+      {
+        name: `${translate("product_list.table.price")}`,
+        selector: "price",
+        sortable: true,
+      },
+      {
+        name: `${translate("product_list.table.quantity")}`,
+        selector: "inventory.qty",
+        sortable: true,
+        cell: (value) =>
+          !isEmpty(value.inventory) ? value.inventory.qty : " ",
+      },
+      {
+        cell: (value) => (
+          <Button
+            variant="contained"
+            color="primary"
+            className={styles.custom_button}
+            onClick={() => {
+              const { navigateTo } = this.props;
+              navigateTo("product-details", { productId: value.id });
+            }}
+          >
+            {translate("product_list.table.view")}
+          </Button>
+        ),
+        button: true,
+      },
+    ]);
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <DivColumn fillParent className={styles.products_page_container}>
-          <NavHeader title="Products">
+        <div fillParent className={styles.products_page_container}>
+          <NavHeader title={translate("product_list.title")}>
             <CapsuleButton onClick={() => this.onClickNewProduct()}>
-              ADD NEW PRODUCT
+              {translate("product_list.add_new_product")}
             </CapsuleButton>
           </NavHeader>
           <DivColumn fillParent className={styles.content_container}>
@@ -86,11 +96,12 @@ class ProductsPage extends Component {
               <DataTableContainer
                 data={productList}
                 title="Products"
-                columns={this.columns()}
+                columns={columns()}
+                searchable="name"
               />
             </InitialPageLoader>
           </DivColumn>
-        </DivColumn>
+        </div>
       </SectionedContainer>
     );
   }
@@ -98,6 +109,7 @@ class ProductsPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    languageReducer: state.languageReducer,
     productReducer: state.productReducer,
   };
 };
@@ -116,4 +128,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(ProductsPage));
+)(translatorHoc(navigatorHoc(ProductsPage)));

@@ -25,6 +25,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import isEmpty from "lodash/isEmpty";
 import { formatUnixTimeStampToDateTime } from "Utils/formatHelper";
+import translatorHoc from "Hoc/translatorHoc";
 
 class OrderShippingInformationPage extends Component {
   state = {
@@ -71,30 +72,41 @@ class OrderShippingInformationPage extends Component {
       fontSize: 12,
       color: "#19202c",
     };
+    const {
+      orderReducer: { order },
+      match: { params },
+      getOrderDetailsAction,
+      translate,
+      isRTL,
+      languageReducer: { languageCode },
+    } = this.props;
+
     const columns = [
       {
-        name: "ITEM CODE",
+        name: `${translate("create_pickup_request.table.item_code")}`,
         selector: "sku",
         style: rowStyle,
       },
       {
-        name: "NAME",
+        name: `${translate("create_pickup_request.table.name")}`,
         selector: "name",
         style: rowStyle,
+        cell: (value) => value.product.translations[languageCode].name,
       },
       {
-        name: "EXHIBITION NAME",
+        name: `${translate("create_pickup_request.table.exhibition_name")}`,
         selector: "exhibition.title",
         grow: 2,
         style: rowStyle,
+        cell: (value) => value.exhibition.translations[languageCode].title,
       },
       {
-        name: "QUANTITY",
+        name: `${translate("create_pickup_request.table.quantity")}`,
         selector: "qty_ordered",
         style: rowStyle,
       },
       {
-        name: "QUANTITY TO SHIP",
+        name: `${translate("create_pickup_request.table.quantity_to_ship")}`,
         selector: "qty_ordered",
         style: rowStyle,
       },
@@ -120,18 +132,13 @@ class OrderShippingInformationPage extends Component {
     if (this.state.startDate) {
       startDate = this.state.startDate;
     }
-    const {
-      orderReducer: { order },
-      match: { params },
-      getOrderDetailsAction,
-    } = this.props;
 
     const CustomRenderInput = ({ input, value, onClick, meta }) => {
       return (
         <InputTextComponent
           {...input}
           meta={meta}
-          placeholder="Select Pickup Date"
+          placeholder={translate("create_pickup_request.select_pickup_date")}
           value={value}
           className={styles.input_text}
           onClick={onClick}
@@ -142,124 +149,167 @@ class OrderShippingInformationPage extends Component {
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
         <NavHeader
-          title="Create Shipping Request"
+          title={translate("create_pickup_request.title")}
           onBackClick={this.onBackPress}
         ></NavHeader>
         <InitialPageLoader
           initialPageApi={() => getOrderDetailsAction(params.orderId)}
         >
-          <DivColumn className={styles.order_page_container}>
+          <div
+            className={` ${styles.order_page_container} ${
+              isRTL ? styles.rtl : ""
+            }`}
+          >
             <DivColumn className={styles.order_container}>
               <div className={styles.order_id}>
-                Order ID: <b>{order.id}</b>
+                {translate("create_pickup_request.order_id")} {isRTL ? ":" : ""}
+                <b>{order.id}</b> {!isRTL ? ":" : ""}
               </div>
               <div className={styles.placed_on}>
-                Placed On: {formatUnixTimeStampToDateTime(order.created_at)}
+                {translate("create_pickup_request.places_on")}
+                {isRTL ? ":" : ""}{" "}
+                {formatUnixTimeStampToDateTime(order.created_at)}
+                {!isRTL ? ":" : ""}
               </div>
-              <div className={styles.status}>{order.status_label}</div>
+              <div className={styles.status}>
+                {" "}
+                {translate("order_list.table." + order.status)}
+              </div>
             </DivColumn>
-          </DivColumn>
-          <div className={styles.header}>FILL IN THESE DETAILS</div>
-          <Form
-            onSubmit={this.onSubmit}
-            validate={this.validate}
-            // initialValues={{
-            //   iban: bankDetails.iban ? bankDetails.iban : "",
-            // }}
-            //TODO: add time
 
-            render={({ handleSubmit, form, submitting, pristine, values }) => (
-              <form className={styles.form_container} onSubmit={handleSubmit}>
-                <Field name="pickupDate">
-                  {({ input, meta }) => (
-                    <DatePicker
-                      dateFormat="dd/MM/yyyy"
-                      selected={startDate}
-                      onChange={(date) => {
-                        this.setState({ startDate: date });
-                        input.onChange(date);
-                      }}
-                      minDate={new Date()}
-                      customInput={
-                        <CustomRenderInput meta={meta} input={input} />
-                      }
-                    />
+            <div className={styles.header}>
+              {" "}
+              {translate("create_pickup_request.form_title")}
+            </div>
+            <div className={styles.form_wrapper}>
+              <Form
+                onSubmit={this.onSubmit}
+                validate={this.validate}
+                render={({
+                  handleSubmit,
+                  form,
+                  submitting,
+                  pristine,
+                  values,
+                }) => (
+                  <form
+                    className={styles.form_container}
+                    onSubmit={handleSubmit}
+                  >
+                    <Field name="pickupDate">
+                      {({ input, meta }) => (
+                        <DatePicker
+                          dateFormat="dd/MM/yyyy"
+                          selected={startDate}
+                          onChange={(date) => {
+                            this.setState({ startDate: date });
+                            input.onChange(date);
+                          }}
+                          minDate={new Date()}
+                          customInput={
+                            <CustomRenderInput meta={meta} input={input} />
+                          }
+                        />
+                      )}
+                    </Field>
+                    <DivRow className={styles.form_button_container}>
+                      <CapsuleButton type="submit" disabled={submitting}>
+                        {translate("create_pickup_request.create_request")}
+                      </CapsuleButton>
+                    </DivRow>
+                  </form>
+                )}
+              />
+            </div>
+            <div className={styles.header}>
+              {translate("create_pickup_request.customer_details")}
+            </div>
+            <DivColumn className={styles.normal_container}>
+              <DivRow className={styles.title}>
+                {isRTL ? ":" : ""}
+                {translate("create_pickup_request.name")}
+                {!isRTL ? ":" : ""}
+
+                <div className={styles.value}>
+                  {order.customer_first_name} {order.customer_last_name}
+                </div>
+              </DivRow>
+              <DivRow className={styles.title}>
+                {isRTL ? ":" : ""}
+
+                {translate("create_pickup_request.email")}
+                {!isRTL ? ":" : ""}
+                <div className={styles.value}>{order.customer_email}</div>
+              </DivRow>
+            </DivColumn>
+            <div className={styles.header}>
+              {translate("create_pickup_request.product_list")}
+            </div>
+            <div className={styles.datatable_container}>
+              <DataTable
+                columns={columns}
+                customStyles={customStyles}
+                data={order.items}
+                style={{ minHeight: 200 }}
+                noHeader={true}
+                direction={isRTL ? "rtl" : "ltr"}
+              />
+            </div>
+            <HorizontalBorder />
+            <DivRow className={styles.address_container}>
+              <DivColumn className={styles.address_item_container}>
+                <div className={styles.title}>
+                  {translate("create_pickup_request.shipping_address")}
+                </div>
+                <div className={styles.description}>
+                  {!isEmpty(order.shipping_address) && (
+                    <span>
+                      {order.shipping_address.area},{" "}
+                      {order.shipping_address.block_number},{" "}
+                      {order.shipping_address.house_number},{" "}
+                      {order.shipping_address.street_number},{" "}
+                      {order.shipping_address.avenue} ,{" "}
+                      {order.shipping_address.landmark}-{" "}
+                      {order.shipping_address.city}
+                    </span>
                   )}
-                </Field>
-                <DivRow className={styles.form_button_container}>
-                  <CapsuleButton type="submit" disabled={submitting}>
-                    Create Request
-                  </CapsuleButton>
-                </DivRow>
-              </form>
-            )}
-          />
-          <div className={styles.header}>CUSTOMER DETAILS</div>
-          <DivColumn className={styles.normal_container}>
-            <DivRow className={styles.title}>
-              Name:{" "}
-              <div className={styles.value}>
-                {order.customer_first_name} {order.customer_last_name}
-              </div>
+                </div>
+              </DivColumn>
+
+              <DivColumn className={styles.address_item_container}>
+                <div className={styles.title}>
+                  {translate("create_pickup_request.billing_address")}
+                </div>
+                <div className={styles.description}>
+                  {!isEmpty(order.billing_address) && (
+                    <span>
+                      {order.shipping_address.area},{" "}
+                      {order.shipping_address.block_number},{" "}
+                      {order.shipping_address.house_number},{" "}
+                      {order.shipping_address.street_number},{" "}
+                      {order.shipping_address.avenue} ,{" "}
+                      {order.shipping_address.landmark}-{" "}
+                      {order.shipping_address.city}
+                    </span>
+                  )}
+                </div>
+              </DivColumn>
+
+              <DivColumn className={styles.address_item_container}>
+                <div className={styles.title}>
+                  {translate("create_pickup_request.shipping_methods")}
+                </div>
+                <div className={styles.description}>{order.shipping_title}</div>
+              </DivColumn>
+
+              <DivColumn className={styles.address_item_container}>
+                <div className={styles.title}>
+                  {translate("create_pickup_request.payment_method")}
+                </div>
+                <div className={styles.description}>{order.payment_title}</div>
+              </DivColumn>
             </DivRow>
-            <DivRow className={styles.title}>
-              Email: <div className={styles.value}>{order.customer_email}</div>
-            </DivRow>
-          </DivColumn>
-          <div className={styles.header}>PRODUCTS ORDERED</div>
-          <DataTable
-            columns={columns}
-            customStyles={customStyles}
-            data={order.items}
-            style={{ minHeight: 200 }}
-            noHeader={true}
-          />
-          <HorizontalBorder />
-          <DivRow className={styles.address_container}>
-            <DivColumn className={styles.address_item_container}>
-              <div className={styles.title}>SHIPPING ADDRESS</div>
-              <div className={styles.description}>
-                {!isEmpty(order.shipping_address) && (
-                  <span>
-                    {order.shipping_address.area},{" "}
-                    {order.shipping_address.block_number},{" "}
-                    {order.shipping_address.house_number},{" "}
-                    {order.shipping_address.street_number},{" "}
-                    {order.shipping_address.avenue} ,{" "}
-                    {order.shipping_address.landmark}-{" "}
-                    {order.shipping_address.city}
-                  </span>
-                )}
-              </div>
-            </DivColumn>
-
-            <DivColumn className={styles.address_item_container}>
-              <div className={styles.title}>BILLING ADDRESS</div>
-              <div className={styles.description}>
-                {!isEmpty(order.billing_address) && (
-                  <span>
-                    {order.shipping_address.area},{" "}
-                    {order.shipping_address.block_number},{" "}
-                    {order.shipping_address.house_number},{" "}
-                    {order.shipping_address.street_number},{" "}
-                    {order.shipping_address.avenue} ,{" "}
-                    {order.shipping_address.landmark}-{" "}
-                    {order.shipping_address.city}
-                  </span>
-                )}
-              </div>
-            </DivColumn>
-
-            <DivColumn className={styles.address_item_container}>
-              <div className={styles.title}>SHIPPING METHOD</div>
-              <div className={styles.description}>{order.shipping_title}</div>
-            </DivColumn>
-
-            <DivColumn className={styles.address_item_container}>
-              <div className={styles.title}>PAYMENT METHOD</div>
-              <div className={styles.description}>{order.payment_title}</div>
-            </DivColumn>
-          </DivRow>
+          </div>
         </InitialPageLoader>
       </SectionedContainer>
     );
@@ -269,6 +319,8 @@ class OrderShippingInformationPage extends Component {
 const mapStateToProps = (state) => {
   return {
     orderReducer: state.orderReducer,
+    isRTL: state.languageReducer.isRTL,
+    languageReducer: state.languageReducer,
   };
 };
 
@@ -289,4 +341,4 @@ const mapDispathToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(navigatorHoc(OrderShippingInformationPage));
+)(navigatorHoc(translatorHoc(OrderShippingInformationPage)));

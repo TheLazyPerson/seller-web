@@ -1,4 +1,5 @@
 @import "~Styles/colors.module";
+@import "~Styles/mixins.module";
 
 .product_page_container {
   overflow-y: auto;
@@ -13,6 +14,9 @@
   padding-left: 8px;
   padding-right: 8px;
   margin-right: 5px;
+}
+.capsule_button_container {
+  flex-direction: row;
 }
 
 .print_invoice_button {
@@ -94,5 +98,38 @@
       margin-top: 14px;
       max-width: 250px;
     }
+  }
+}
+
+@include small {
+  .capsule_button_container {
+    flex-direction: column;
+    .cancel_button {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.rtl {
+  .product_page_container {
+    padding: 17px 54px 9px 0px;
+    text-align: right;
+  }
+
+  .header {
+    padding: 17px 54px 17px 0px;
+    text-align: right;
+  }
+
+  .normal_container {
+    padding: 17px 54px 9px 0px;
+
+    .title {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .image_container {
+    flex-direction: row-reverse;
   }
 }

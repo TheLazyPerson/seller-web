@@ -1,3 +1,5 @@
+import IBAN from "iban";
+
 export const nameValidator = (value) => {
   const nameRegex = /^[A-Za-z]+$/;
   let error = "";
@@ -87,6 +89,20 @@ export const isCivilIdValid = (value) => {
 
   if (!value) error = "Please fill in these details to continue";
   else if (!civilIdRegex.test(value)) error = "Please enter a valid civil Id";
+
+  return error
+    ? {
+        result: false,
+        error,
+      }
+    : { result: true };
+};
+
+export const isIBANValid = (value) => {
+  let error = "";
+
+  if (!value) error = "Please fill in these details to continue";
+  else if (!IBAN.isValid(value)) error = "Please enter a valid IBAN";
 
   return error
     ? {

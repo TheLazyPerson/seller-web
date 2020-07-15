@@ -87,6 +87,9 @@
   .normal_container {
     padding: 18px 0px 18px 25px;
   }
+  .datatable_container {
+    width: 100vw;
+  }
 }
 
 .rtl {
@@ -106,8 +109,9 @@
 
   .normal_container {
     padding: 17px 54px 9px 0px;
-    title {
+    .title {
       text-align: right;
+      flex-direction: row-reverse;
     }
   }
 }

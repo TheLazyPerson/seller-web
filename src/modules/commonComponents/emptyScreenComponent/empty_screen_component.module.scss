@@ -1,0 +1,34 @@
+@import '~Styles/colors.module';
+@import '~Styles/mixins.module';
+
+.component_container {
+  color: $primary-text-color;
+  padding: 46px 20px 57px;
+  background: rgba($color-very-light-blue, 0.9);
+
+  .title {
+    opacity: 0.7;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .description {
+    margin-top: 6px;
+    opacity: 0.7;
+    font-size: 16px;
+    font-weight: 300;
+  }
+  
+  .capsule_button {
+    margin-top: 30px;
+    padding: 19px 24px;
+    border-radius: 100px;
+    background-color: $color-gold;
+
+    font-size: 14px;
+    font-weight: 900;
+    color: white;
+
+    @include on_click_button;
+  }
+}

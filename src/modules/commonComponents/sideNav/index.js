@@ -116,10 +116,8 @@ class SideNav extends Component {
   };
 
   getListItem = (isSelected, listItem) => {
-    console.log(isSelected);
     const {
       languageReducer: { languageCode },
-      isRTL,
     } = this.props;
     return (
       <DivRow
@@ -149,12 +147,12 @@ class SideNav extends Component {
       isRTL,
     } = this.props;
     return (
-      <DivColumn
+      <div
         verticalCenter
         className={`${styles.side_nav_container}  ${isRTL ? styles.rtl : ""}`}
       >
         {map(profileListItem, (listItem) => {
-          const { type, name, items: subProfileList } = listItem;
+          const { type, items: subProfileList } = listItem;
 
           if (type === "no-header") {
             return map(subProfileList, (subProfileListItem) => {
@@ -177,7 +175,7 @@ class SideNav extends Component {
             </DivColumn>
           );
         })}
-      </DivColumn>
+      </div>
     );
   }
 }

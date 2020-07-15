@@ -27,7 +27,6 @@ class HomePage extends Component {
     } else if (slug === "logout") {
       logoutAction().then(() => {
         CookieService.delete(USER_DATA_COOKIE);
-        CookieService.delete("BAG_COUNT");
         navigateTo(""); // ToHomePage
       });
     } else {
@@ -36,13 +35,16 @@ class HomePage extends Component {
   };
 
   getListItem = (listItem) => {
+    const {
+      languageReducer: { languageCode },
+    } = this.props;
     return (
       <DivColumn verticalCenter horizontalCenter className={styles.box}>
         <div className={styles.title}>
-          <span>{listItem.card_type == "price-card" ? "KD " : ""}</span>
+          <span>{listItem.card_type === "price-card" ? "KD " : ""}</span>
           {listItem.value}
         </div>
-        <div className={styles.description}>{listItem.title}</div>
+        <div className={styles.description}>{listItem.title[languageCode]}</div>
       </DivColumn>
     );
   };
@@ -53,10 +55,15 @@ class HomePage extends Component {
       signInReducer: { userDetails },
       getOverviewAction,
       translate,
+      isRTL,
     } = this.props;
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
-        <DivColumn className={styles.profile_overview_container}>
+        <DivColumn
+          className={` ${styles.profile_overview_container} ${
+            isRTL ? styles.rtl : ""
+          }`}
+        >
           <DivColumn
             verticalCenter
             horizontalCenter
@@ -91,6 +98,8 @@ const mapStateToProps = (state) => {
   return {
     overviewReducer: state.overviewReducer,
     signInReducer: state.signInReducer,
+    languageReducer: state.languageReducer,
+    isRTL: state.languageReducer.isRTL,
   };
 };
 
