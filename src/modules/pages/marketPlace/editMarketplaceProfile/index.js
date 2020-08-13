@@ -50,7 +50,6 @@ class EditMarketplaceProfile extends Component {
       street_number: form.streetNumber,
       avenue: form.avenue,
       landmark: form.landmark,
-      address_type: form.addressType,
       city: form.city,
     }).then(({ payload }) => {
       if (payload.code === 200 || payload.code === 201) {
@@ -78,9 +77,6 @@ class EditMarketplaceProfile extends Component {
       blockNumber: isEmptyValidator(values.blockNumber),
       houseNumber: isEmptyValidator(values.houseNumber),
       streetNumber: isEmptyValidator(values.streetNumber),
-      landmark: isEmptyValidator(values.landmark),
-      addressType: isEmptyValidator(values.addressType),
-      city: isEmptyValidator(values.city),
     };
 
     Object.keys(validators).forEach((key) => {
@@ -258,18 +254,6 @@ class EditMarketplaceProfile extends Component {
                     )}
                   </Field>
 
-                  <Field name="addressType">
-                    {({ input, meta }) => (
-                      <InputTextComponent
-                        meta={meta}
-                        {...input}
-                        placeholder={translate(
-                          "edit_marketplace_detail_page.home"
-                        )}
-                        className={styles.input_text}
-                      />
-                    )}
-                  </Field>
                   <Field name="city">
                     {({ input, meta }) => (
                       <InputTextComponent

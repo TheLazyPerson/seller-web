@@ -34,8 +34,6 @@ class LocationDetails extends Component {
       block_number: isEmptyValidator(values.block_number),
       house_number: isEmptyValidator(values.house_number),
       street_number: isEmptyValidator(values.street_number),
-      landmark: isEmptyValidator(values.landmark),
-      city: isEmptyValidator(values.city),
     };
 
     Object.keys(validators).forEach((key) => {
