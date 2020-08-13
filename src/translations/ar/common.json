@@ -488,7 +488,8 @@
     "products1": "منتجات",
     "usage": "الاستخدام",
     "seller_fetures": "جميع ميزات البائع",
-    "access": "الوصول إلى جميع ميزات البائع."
+    "access": "الوصول إلى جميع ميزات البائع.",
+    "commssion_additional_text": "على كل عنصر مباع % "
   },
   "product_list_item": {
     "attach": "يربط",
