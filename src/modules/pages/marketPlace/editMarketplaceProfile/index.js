@@ -9,6 +9,7 @@ import { Form, Field } from "react-final-form";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
 import InputTextComponent from "CommonComponents/InputTextComponent";
+import InputPhoneComponent from "CommonComponents/InputPhoneComponent";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import {
@@ -41,7 +42,7 @@ class EditMarketplaceProfile extends Component {
     } = this.props;
     editMarketplaceProfileAction({
       shop_name: form.shopName,
-      contact_number: form.contactNumber,
+      contact_number: "+965" + form.contactNumber,
       shop_email: form.shopEmail,
       area: form.area,
       block_number: form.blockNumber,
@@ -71,7 +72,7 @@ class EditMarketplaceProfile extends Component {
     const errors = {};
     const validators = {
       shopName: isEmptyValidator(values.shopName),
-      contactNumber: isPhoneNumber(values.contactNumber),
+      contactNumber: isPhoneNumber("+965" + values.contactNumber),
       shopEmail: emailValidator(values.shopEmail),
       area: isEmptyValidator(values.area),
       blockNumber: isEmptyValidator(values.blockNumber),
@@ -113,7 +114,7 @@ class EditMarketplaceProfile extends Component {
             initialValues={{
               shopName: profile.shop_name ? profile.shop_name : "",
               contactNumber: profile.contact_number
-                ? profile.contact_number
+                ? profile.contact_number.replace("+965", "")
                 : "",
               shopEmail: profile.shop_email ? profile.shop_email : "",
               area: profile.area ? profile.area : "",
@@ -150,7 +151,7 @@ class EditMarketplaceProfile extends Component {
                   </Field>
                   <Field name="contactNumber">
                     {({ input, meta }) => (
-                      <InputTextComponent
+                      <InputPhoneComponent
                         meta={meta}
                         {...input}
                         placeholder={translate(

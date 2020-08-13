@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import styles from "./marketplace_details.module.scss";
 import InputTextComponent from "CommonComponents/InputTextComponent";
+import InputPhoneComponent from "CommonComponents/InputPhoneComponent";
+
 import { Form, Field } from "react-final-form";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import navigatorHoc from "Hoc/navigatorHoc";
@@ -20,7 +22,7 @@ class MarketplaceDetail extends Component {
       marketplace_profile: {
         shop_name: form.shop_name,
         shop_email_address: form.shop_email,
-        shop_contact_number: form.contact_number,
+        shop_contact_number: "+965" + form.contact_number,
       },
     };
 
@@ -32,7 +34,7 @@ class MarketplaceDetail extends Component {
     const validators = {
       shop_name: isEmptyValidator(values.shop_name),
       shop_email: emailValidator(values.shop_email),
-      contact_number: isPhoneNumber(values.contact_number),
+      contact_number: isPhoneNumber("+965" + values.contact_number),
     };
 
     Object.keys(validators).forEach((key) => {
@@ -72,7 +74,7 @@ class MarketplaceDetail extends Component {
 
               <Field name="contact_number">
                 {({ input, meta }) => (
-                  <InputTextComponent
+                  <InputPhoneComponent
                     meta={meta}
                     type="text"
                     {...input}

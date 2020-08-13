@@ -16,6 +16,7 @@ import {
 } from "Utils/validators";
 import DatePicker from "react-datepicker";
 import { subtractFromDate } from "Utils/formatHelper";
+import InputPhoneComponent from "CommonComponents/InputPhoneComponent";
 
 class PersonalDetails extends Component {
   state = {
@@ -25,7 +26,7 @@ class PersonalDetails extends Component {
   onSubmit = (form) => {
     const updatedPostData = {
       civil_id: form.civil_id,
-      phone_number: form.phone_number,
+      phone_number: "+965" + form.phone_number,
       birthday: form.birthday,
     };
 
@@ -36,7 +37,7 @@ class PersonalDetails extends Component {
     const errors = {};
     const validators = {
       civil_id: isCivilIdValid(values.civil_id),
-      phone_number: isPhoneNumber(values.phone_number),
+      phone_number: isPhoneNumber("+965" + values.phone_number),
       birthday: isEmptyValidator(values.birthday),
     };
 
@@ -88,7 +89,7 @@ class PersonalDetails extends Component {
 
               <Field name="phone_number">
                 {({ input, meta }) => (
-                  <InputTextComponent
+                  <InputPhoneComponent
                     meta={meta}
                     type="text"
                     {...input}

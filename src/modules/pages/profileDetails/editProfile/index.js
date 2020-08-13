@@ -8,6 +8,7 @@ import { Form, Field } from "react-final-form";
 import CapsuleButton from "CommonComponents/capsuleButton";
 import SecondaryCapsuleButton from "CommonComponents/secondaryCapsuleButton";
 import InputTextComponent from "CommonComponents/InputTextComponent";
+import InputPhoneComponent from "CommonComponents/InputPhoneComponent";
 import navigatorHoc from "Hoc/navigatorHoc";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import {
@@ -20,6 +21,7 @@ import {
   nameValidator,
   isEmptyValidator,
   emailValidator,
+  isPhoneNumber,
 } from "Utils/validators";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -48,7 +50,7 @@ class EditProfile extends Component {
       first_name: form.firstName,
       last_name: form.lastName,
       gender: form.gender,
-      phone: form.mobileNumber,
+      phone: "+965" + form.mobileNumber,
       email: form.email,
       birthday: form.birthday,
       civil_id: form.civilId,
@@ -76,6 +78,7 @@ class EditProfile extends Component {
       lastName: nameValidator(values.lastName),
       email: emailValidator(values.email),
       civilId: isEmptyValidator(values.civilId),
+      mobileNumber: isPhoneNumber("+965" + values.mobileNumber),
     };
 
     Object.keys(validators).forEach((key) => {
@@ -143,7 +146,9 @@ class EditProfile extends Component {
               firstName: userDetails.first_name ? userDetails.first_name : "",
               lastName: userDetails.last_name ? userDetails.last_name : "",
               gender: userDetails.gender ? userDetails.gender : "",
-              mobileNumber: userDetails.phone ? userDetails.phone : "",
+              mobileNumber: userDetails.phone
+                ? userDetails.phone.replace("+965", "")
+                : "",
               email: userDetails.email ? userDetails.email : "",
               civilId: userDetails.civil_id ? userDetails.civil_id : "",
               birthday: userDetails.birthday ? userDetails.birthday : "",
@@ -205,7 +210,7 @@ class EditProfile extends Component {
 
                 <Field name="mobileNumber">
                   {({ input, meta }) => (
-                    <InputTextComponent
+                    <InputPhoneComponent
                       meta={meta}
                       {...input}
                       placeholder={translate("edit_profile.mobile_number")}
