@@ -36,7 +36,7 @@ class SubscribedComponent extends Component {
         onClick={this.selectSubscription}
       >
         <div className={styles.subscription_title}>
-          {subscription.plan_name}
+          {subscription.translations[languageCode].plan_name}
         </div>
         <div className={styles.subscription_price}>
           {translate("subscription_item.kd")} {subscription.price}
@@ -117,6 +117,7 @@ class SubscribedComponent extends Component {
 const mapStateToProps = (state) => {
   return {
     subscriptionReducer: state.subscriptionReducer,
+    languageReducer: state.languageReducer,
   };
 };
 
