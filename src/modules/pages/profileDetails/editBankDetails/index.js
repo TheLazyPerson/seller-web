@@ -15,6 +15,7 @@ import { bindActionCreators } from "redux";
 import { editBankDetailsAction } from "Core/modules/bankDetails/bankDetailsActions";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import translatorHoc from "Hoc/translatorHoc";
+import { getBankDetailsAction } from "Core/modules/bankDetails/bankDetailsActions";
 
 class EditBankDetails extends Component {
   validate = (values) => {
@@ -50,6 +51,15 @@ class EditBankDetails extends Component {
       }
     });
   };
+
+  componentDidMount() {
+    // TODO: To add to check if reducer data is not available.
+    this.props.getBankDetailsAction().then(({ payload }) => {
+      if (payload.code === 200 || payload.code === 201) {
+        // code here
+      }
+    });
+  }
 
   onBackPress = () => {
     const { pop } = this.props;
@@ -150,6 +160,7 @@ const mapDispathToProps = (dispatch) => {
       showSuccessFlashMessage,
       dispatch
     ),
+    getBankDetailsAction: bindActionCreators(getBankDetailsAction, dispatch),
   };
 };
 
