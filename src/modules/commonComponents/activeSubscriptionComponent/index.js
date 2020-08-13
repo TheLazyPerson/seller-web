@@ -72,7 +72,7 @@ class ActiveSubscription extends Component {
         <DivColumn fillParent center className={`${styles.subscription}`}>
           <div className={styles.subscription_title}>
             <span>{translate("subscription_item.active_plan")}:</span>
-            {subscription.plan_name}
+            {subscription.translations[languageCode].plan_name}
           </div>
           <div className={styles.subscription_price}>
             {translate("subscription_item.kd")} {subscription.price}

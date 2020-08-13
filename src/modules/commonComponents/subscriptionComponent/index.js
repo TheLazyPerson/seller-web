@@ -25,6 +25,7 @@ class Subscription extends Component {
       isRTL,
       translate,
       subscriptionReducer: { selectedSubscription },
+      languageReducer: { languageCode },
     } = this.props;
 
     return (
@@ -36,11 +37,16 @@ class Subscription extends Component {
         onClick={this.selectSubscription}
       >
         <div className={styles.subscription_title}>
-          {subscription.plan_name}
+          {subscription.translations[languageCode].plan_name}
         </div>
         <div className={styles.subscription_price}>
           {" "}
           {translate("subscription_item.kd")} {subscription.price}
+        </div>
+        {}
+        <div className={styles.commission}>
+          {translate("subscription_item.commission")}: {subscription.commission}
+          {translate("subscription_item.commssion_additional_text")}
         </div>
         <div className={styles.subtitle}>
           {translate("subscription_item.benefits")}:
@@ -118,6 +124,7 @@ const mapStateToProps = (state) => {
   return {
     subscriptionReducer: state.subscriptionReducer,
     isRTL: state.languageReducer.isRTL,
+    languageReducer: state.languageReducer,
   };
 };
 

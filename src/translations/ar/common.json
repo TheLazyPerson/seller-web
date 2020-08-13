@@ -463,7 +463,17 @@
     "sub_title": "سنرسل لك بريدًا إلكترونيًا لإعادة تعيين كلمة المرور الخاصة بك.",
     "password": "كلمه السر",
     "reset_password_button": "إعادة تعيين كلمة المرور",
-    "username": "البريد الإلكتروني"
+    "username": "البريد الإلكتروني",
+    "successful": "تم تغيير كلمة المرور بنجاح!"
+  },
+  "update_password_page": {
+    "create": "تسجيل الدخول",
+    "page_title": "إعادة تعيين كلمة المرور",
+    "sub_title": "أدخل كلمة المرور للتحديث.",
+    "password": "كلمه السر",
+    "confirmed_password": "تأكيد كلمة المرور",
+    "reset_password_button": "إعادة تعيين كلمة المرور",
+    "sub_title1": "انتهت صلاحية الرمز المميز الخاص بك أو تم تحديث كلمة المرور بالفعل "
   },
   "subscription_item": {
     "active_plan": "الخطة النشطة",
@@ -478,7 +488,8 @@
     "products1": "منتجات",
     "usage": "الاستخدام",
     "seller_fetures": "جميع ميزات البائع",
-    "access": "الوصول إلى جميع ميزات البائع."
+    "access": "الوصول إلى جميع ميزات البائع.",
+    "commssion_additional_text": "على كل عنصر مباع % "
   },
   "product_list_item": {
     "attach": "يربط",

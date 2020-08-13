@@ -139,7 +139,8 @@
     "sub_title": "We will send you an email to reset your password.",
     "password": "Password",
     "reset_password_button": "Reset Password",
-    "username": "Email"
+    "username": "Email",
+    "successful": "Password Change Successful!"
   },
   "update_password_page": {
     "create": "SignIn",
@@ -520,6 +521,8 @@
     "products": "Products",
     "maintain": " You can maintain",
     "products1": "products",
+    "commssion_additional_text": "% on each item sold",
+
     "usage": "Usage",
     "seller_fetures": "All Seller Features",
     "access": "Have access to all seller features."

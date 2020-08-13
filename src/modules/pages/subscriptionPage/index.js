@@ -66,6 +66,7 @@ class SubscriptionPage extends Component {
       getActivePlan,
       getSubscriptionListAction,
       translate,
+      languageReducer: { languageCode },
     } = this.props;
     const { showModal } = this.state;
     const columns = memoize(() => [
@@ -78,12 +79,15 @@ class SubscriptionPage extends Component {
         name: `${translate("subscription_page.table.plan_name")}`,
         selector: "name",
         sortable: true,
+        cell: (value) => value.plan.translations[languageCode].plan_name,
         grow: 2,
       },
       {
         name: `${translate("subscription_page.table.plan_description")}`,
         selector: "description",
         sortable: true,
+        cell: (value) => value.plan.translations[languageCode].plan_description,
+
         grow: 2,
       },
       {
@@ -185,6 +189,7 @@ class SubscriptionPage extends Component {
 const mapStateToProps = (state) => {
   return {
     subscriptionReducer: state.subscriptionReducer,
+    languageReducer: state.languageReducer,
   };
 };
 
