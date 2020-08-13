@@ -74,7 +74,7 @@ class SideNav extends Component {
         break;
       case "/marketplace":
       case "/marketplace/edit-marketplace-profile":
-        setRoute = "marketplace-profile";
+        setRoute = "profile-details";
         break;
       case "/profile/details":
       case "/profile/details/change-password":
