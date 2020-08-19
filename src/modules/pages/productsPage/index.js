@@ -13,6 +13,7 @@ import DataTableContainer from "CommonContainers/dataTableContainer";
 import {
   getProductListAction,
   removeProductAction,
+  getProductAddAllowed,
 } from "Core/modules/product/productActions";
 import InitialPageLoader from "CommonContainers/initialPageLoader";
 import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
@@ -22,8 +23,17 @@ import isEmpty from "lodash/isEmpty";
 
 class ProductsPage extends Component {
   onClickNewProduct = () => {
-    const { navigateTo } = this.props;
-    navigateTo("add-product");
+    const { navigateTo, getProductAddAllowed } = this.props;
+
+    getProductAddAllowed().then(({ payload }) => {
+      if (payload.code === 200 || payload.code === 201) {
+        navigateTo("add-product");
+      } else if (payload.code == 500 && payload.data.code == 1001) {
+        showSuccessFlashMessage(
+          "Sorry! You need to enroll in exhibition to add product."
+        );
+      }
+    });
   };
 
   render() {
@@ -117,6 +127,7 @@ const mapStateToProps = (state) => {
 const mapDispathToProps = (dispatch) => {
   return {
     getProductListAction: bindActionCreators(getProductListAction, dispatch),
+    getProductAddAllowed: bindActionCreators(getProductAddAllowed, dispatch),
     removeProductAction: bindActionCreators(removeProductAction, dispatch),
     showSuccessFlashMessage: bindActionCreators(
       showSuccessFlashMessage,
