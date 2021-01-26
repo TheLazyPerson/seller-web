@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 
 class SubscriptionPaymentFailurePage extends Component {
   componentDidMount() {
-    const { navigateTo, showSuccessFlashMessage } = this.props;
+    const { navigateTo } = this.props;
     setTimeout(() => {
       navigateTo("customer-onboard");
     }, 10000);
