@@ -32,6 +32,10 @@ class ProductsPage extends Component {
         showSuccessFlashMessage(
           "Sorry! You need to enroll in exhibition to add product."
         );
+      } else if (payload.code == 500 && payload.data.code == 1002) {
+        showSuccessFlashMessage(
+          "Sorry! You need to have an active exhibition to add product."
+        );
       }
     });
   };
