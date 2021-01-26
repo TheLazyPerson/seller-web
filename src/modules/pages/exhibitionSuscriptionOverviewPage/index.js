@@ -22,8 +22,26 @@ import { showSuccessFlashMessage } from "Redux/actions/flashMessageActions";
 import translatorHoc from "Hoc/translatorHoc";
 import isEmpty from "lodash/isEmpty";
 import { formatUnixTimeStampToDateTime } from "Utils/formatHelper";
-
+import {
+  getActivePlan,
+  getSubscriptionListAction,
+  activatePlanAction,
+} from "Core/modules/subscription/subscriptionActions";
+import ChangePlanModal from "./changePlanModal";
 class ExhibitionSubscriptionOverviewPage extends Component {
+  state = {
+    showModal: false,
+  };
+
+  componentDidMount() {
+    const {
+      getActivePlan,
+      getSubscriptionListAction
+    } = this.props;
+    getActivePlan();
+    getSubscriptionListAction();
+  }
+
   onBackPress = () => {
     const { pop } = this.props;
     pop();
@@ -45,6 +63,39 @@ class ExhibitionSubscriptionOverviewPage extends Component {
       }
     });
   };
+
+  onCloseModal = () => {
+    this.setState({
+      showModal: false,
+    });
+  };
+
+  onOpenModal = () => {
+    this.setState({
+      showModal: true,
+    });
+  };
+
+  onClickChangePlan = (id) => {
+    const {
+      activatePlanAction,
+      match: { params },
+      getExhibitionSubscriptionOverview
+    } = this.props;
+
+    activatePlanAction(id).then(function ({ payload }) {
+      if (payload.code === 200 || payload.code === 201) {
+        showSuccessFlashMessage("Plan Activated");
+        getExhibitionSubscriptionOverview(params.exhibitionId);
+
+      }
+    });
+
+    this.setState({
+      showModal: false,
+    });
+  };
+
   render() {
     const {
       exhibitionReducer: { subscriptionOverview, selectedSubscriptionOption },
@@ -52,8 +103,10 @@ class ExhibitionSubscriptionOverviewPage extends Component {
       getExhibitionSubscriptionOverview,
       translate,
       isRTL,
+      subscriptionReducer: { activeSubscription, sellerSubscriptionList },
       languageReducer: { languageCode },
     } = this.props;
+    const { showModal } = this.state;
 
     return (
       <SectionedContainer sideBarContainer={<SideNav />}>
@@ -128,6 +181,31 @@ class ExhibitionSubscriptionOverviewPage extends Component {
               </DivRow>
             </div>
             <HorizontalBorder />
+
+            <NavHeader title="Subscription Information"></NavHeader>
+            
+              <div className={styles.overview_container}>
+                <DivRow className={styles.text_wrapper}>
+                  <DivColumn>
+                    <div className={styles.title}>
+                      {translate("subscription_item.active_plan")}:
+                    </div>
+                    <div className={styles.description}>
+                      {!isEmpty(activeSubscription.plan) &&
+                        activeSubscription.plan.translations[languageCode]
+                          .plan_name}
+                      &nbsp;&nbsp;&nbsp;
+                      <button
+                        className={styles.change_plan_button}
+                        onClick={() => this.onOpenModal()}
+                      >
+                        {translate("subscription_item.change_plan")}
+                      </button>
+                    </div>
+                  </DivColumn>
+                </DivRow>
+              </div>
+            <HorizontalBorder />
             <DivRow className={styles.text_wrapper}>
               <DivColumn>
                 <div className={styles.description}>
@@ -135,7 +213,6 @@ class ExhibitionSubscriptionOverviewPage extends Component {
                 </div>
               </DivColumn>
             </DivRow>
-
             <DivRow className={styles.options_wrapper}>
               {map(subscriptionOverview.subscription_options, (option) => {
                 return <SubscriptionOption option={option} />;
@@ -154,6 +231,14 @@ class ExhibitionSubscriptionOverviewPage extends Component {
                 {translate("exhibition_overview.enroll")}
               </CapsuleButton>
             </DivRow>
+         
+            <ChangePlanModal
+              open={showModal}
+              onClose={this.onCloseModal}
+              onClickChangePlan={this.onClickChangePlan}
+              sellerSubscriptionList={sellerSubscriptionList}
+              activeSubscription={activeSubscription}
+            />
           </InitialPageLoader>
         </DivColumn>
       </SectionedContainer>
@@ -166,6 +251,7 @@ const mapStateToProps = (state) => {
     exhibitionReducer: state.exhibitionReducer,
     isRTL: state.languageReducer.isRTL,
     languageReducer: state.languageReducer,
+    subscriptionReducer: state.subscriptionReducer,
   };
 };
 
@@ -175,6 +261,11 @@ const mapDispathToProps = (dispatch) => {
       getExhibitionSubscriptionOverview,
       dispatch
     ),
+    getActivePlan: bindActionCreators(getActivePlan, dispatch),
+    getSubscriptionListAction: bindActionCreators(
+      getSubscriptionListAction,
+      dispatch
+    ),
     subscribeToExhibition: bindActionCreators(subscribeToExhibition, dispatch),
 
     showSuccessFlashMessage: bindActionCreators(
@@ -182,6 +273,7 @@ const mapDispathToProps = (dispatch) => {
       dispatch
     ),
     logoutAction: bindActionCreators(logoutAction, dispatch),
+    activatePlanAction: bindActionCreators(activatePlanAction, dispatch),
   };
 };
 
