@@ -128,7 +128,10 @@ class EditProduct extends Component {
             prev[attribute.slug] = this.state.selectedCategories;
           } else if (attribute.slug === "image") {
             prev[attribute.slug] = this.state.productImagesObj;
-          } else {
+          } else if (attribute.slug === "price") { 
+            let price = form[attribute.slug];
+            prev[attribute.slug] = parseFloat(price.replace(/[^0-9\.]/g, ''), 10);
+          }else {
             if (attribute.is_translatable === 1) {
               prev[attribute.slug] = {
                 ar: form[attribute.slug.concat("_ar")],
