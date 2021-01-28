@@ -30,6 +30,7 @@ const exhibitionState = {
   UPCOMING: "upcoming",
   UPCOMING_ENROLLED: "subscribed",
   ENROLLED_LIVE: "live",
+  EXPIRED: "expired"
 };
 
 const ProductDescription = ({ exhibitionDetail, translate, languageCode }) => (
@@ -171,6 +172,10 @@ class ExhibitionDetailsPage extends Component {
                       )} ${calculateDateDiff(
                         exhibitionDetail.ends_till
                       )} ${translate("exhibition_details_page.days")}`}
+                      {exhibitionState.EXPIRED === exhibitionDetail.state &&
+                      ` ${translate(
+                        "your_exhibition_list_page.expired"
+                      )}`}
                   </div>
                 </DivColumn>
                 {exhibitionState.UPCOMING === exhibitionDetail.state && (
@@ -187,7 +192,7 @@ class ExhibitionDetailsPage extends Component {
               ></NavHeader>
               <DivRow className={styles.full_description_container}>
                 <DivColumn className={styles.left_container}>
-                  {exhibitionState.ENROLLED_LIVE === exhibitionDetail.state ? (
+                  {(exhibitionState.ENROLLED_LIVE === exhibitionDetail.state )? (
                     <Fragment>
                       <div className={styles.overview}>
                         {translate("exhibition_details_page.overview")} :

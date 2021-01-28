@@ -93,15 +93,17 @@ class YourExhibitionListingPage extends Component {
               &nbsp;{" "}
               {daysLeft > 0 &&
                 `${translate("your_exhibition_list_page.last")}
-               
-              ${daysLeft} 
-              
-              ${translate("your_exhibition_list_page.left_to_enroll")}
-              `}
-              {daysLeft < 0 &&
+                ${daysLeft} 
+                ${translate("your_exhibition_list_page.left_to_enroll")}
+                `}
+              {daysLeft < 0 && daysLeftToEnd > 0 &&
                 `${translate("your_exhibition_list_page.live_now")}
                  ${daysLeftToEnd} 
                 ${translate("your_exhibition_list_page.days")}
+              `}
+              {daysLeft < 0 && daysLeftToEnd < 0 &&
+                `${translate("your_exhibition_list_page.expired")}
+              
               `}
             </div>
             <CapsuleButton

@@ -48,7 +48,7 @@
   },
   "footer": {
     "experience": "EXPERIENCE Home Expo APP ON MOBILE",
-    "faq": "Faq",
+    "faq": "Frequently Asked Questions",
     "helpcenter": "HelpCenter",
     "home": "Home",
     "keep_in_touch": "KEEP IN TOUCH",
@@ -254,6 +254,7 @@
     "view_details": "View Details",
     "left_to_enroll": "DAYS LEFT TO SUBMIT PRODUCTS",
     "live_now": "LIVE NOW: ENDS IN ",
+    "expired": "EXPIRED",
     "days": "DAYS",
     "last": "LAST",
     "category": "Category",
@@ -522,7 +523,7 @@
     "maintain": " You can maintain",
     "products1": "products",
     "commssion_additional_text": "% on each item sold",
-
+    "change_plan": "Change Plan",
     "usage": "Usage",
     "seller_fetures": "All Seller Features",
     "access": "Have access to all seller features."
@@ -533,8 +534,8 @@
     "out_of_stock": "MARK PRODUCT OUT OF STOCK"
   },
   "page_not_found": {
-    "number": "أربعة مائة و أربعة",
-    "subtitle": "الصفحة المطلوبة غير موجودة. انقر هنا لمتابعة التسوق."
+    "number": "404",
+    "subtitle": "The page you requested does not exist."
   },
   "host_your_exhibition": {
     "call_us": " CALL US AT"
@@ -543,11 +544,15 @@
     "title": "BUY ADDITIONAL PLAN",
     "buy": "BUY"
   },
+  "change_plan": {
+    "title": "CHANGE PLAN",
+    "activate": "Activate"
+  },
   "exhibition_overview": {
     "name": "NAME",
     "description": "SHORT DESCRIPTION",
     "dates": "DATES",
-    "starts_at": "Starts At",
+    "starts_at": "STARTS AT",
     "ends_on": "ENDS ON",
     "enroll": "ENROLL",
     "overview": "Overview"

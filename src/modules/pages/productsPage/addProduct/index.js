@@ -64,6 +64,10 @@ class AddProduct extends Component {
       if (payload.code === 200 || payload.code === 201) {
         const productId = payload.data.product.id;
         navigateTo("edit-product", { productId });
+      } else if (payload.code == 500 && payload.data.code == 1001) {
+        showSuccessFlashMessage(
+          "Sorry! You need to enroll in exhibition to add product."
+        );
       }
     });
   };

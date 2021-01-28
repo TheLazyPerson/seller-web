@@ -184,7 +184,7 @@ class EditProduct extends Component {
   };
 
   getFormItem = (attribute, languageCode) => {
-    const { type, slug, name, translations, is_translatable } = attribute;
+    const { type, slug, translations, is_translatable } = attribute;
     var translation = filter(translations, { locale: languageCode })[0];
 
     if (type === "text") {

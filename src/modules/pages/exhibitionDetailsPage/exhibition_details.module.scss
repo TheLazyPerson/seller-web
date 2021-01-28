@@ -112,6 +112,7 @@
   font-size: 12px;
   font-weight: bold;
   color: $color-dark;
+  text-transform: uppercase;
 }
 
 @include small {
@@ -229,6 +230,7 @@
     }
     .overview_box_container {
       flex-direction: row-reverse;
+      text-transform: uppercase;
     }
 
     .right_container {
