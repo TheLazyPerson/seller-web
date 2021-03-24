@@ -27,7 +27,6 @@ class Subscription extends Component {
       subscriptionReducer: { selectedSubscription },
       languageReducer: { languageCode },
     } = this.props;
-
     return (
       <DivColumn
         fillParent

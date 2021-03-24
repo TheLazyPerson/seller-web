@@ -30,7 +30,7 @@ export const configureStore = initialState => {
           apiErrorHandler,
           loaderMiddleware,
           userErrorMiddleware,
-          createLogger()
+          // createLogger()
         ),
         window.__REDUX_DEVTOOLS_EXTENSION__() 
       )
@@ -45,7 +45,7 @@ export const configureStore = initialState => {
           apiErrorHandler,
           loaderMiddleware,
           userErrorMiddleware,
-          createLogger()
+          // createLogger()
         )
       )
     );  

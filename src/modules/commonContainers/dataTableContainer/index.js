@@ -60,7 +60,6 @@ class OrdersPage extends Component {
   render() {
     const { toggleCleared, searchText } = this.state;
     const { data, columns, title, isRTL, translate, searchable } = this.props;
-    console.log("Searchable:", searchable);
     const filteredItems = data.filter(
       (item) =>
         item[searchable] &&
